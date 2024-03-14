@@ -1,0 +1,56 @@
+extends CharacterBody2D
+
+var motion = Vector2()
+var stunned_timer = 0 # TODO we can make a stun  also random to make thing more interesting=
+var health_points = 4 #TODO we cane make it random (within the specific range) to make things more interesting
+var dying_timer = 0
+
+func _physics_process(delta):
+	if dying_timer > 0:
+		play_death()
+		dying_timer -= delta
+	elif dying_timer < 0:
+		die()	
+	elif stunned_timer > 0:		
+		stunned_timer -= delta
+		play_stunned()
+	else:
+		hunt_player()
+		
+func hunt_player():
+	var player = get_parent().get_node("Surbi") #FIXME very unclean solution
+	position += (player.position - position)/50
+	play_walk()
+	look_at(player.position)
+	move_and_collide(motion)
+
+func play_stunned():
+	$AnimatedSprite2D.play("stunned")
+
+func play_walk():
+	$AnimatedSprite2D.play("walk")
+
+func play_death():
+	$AnimatedSprite2D.play("death")
+
+func on_hurtbox_entered(body):
+	if body.is_in_group("projectiles"):
+		body.queue_free()
+		stun()		
+		take_dmg()
+
+func stun():
+	if (stunned_timer <= 0):
+		stunned_timer =  0.3
+
+func take_dmg():
+	health_points -= 1
+	print(health_points)
+	if health_points <= 0:
+		dying()
+
+func dying():
+	dying_timer = 0.7
+
+func die():
+	queue_free()

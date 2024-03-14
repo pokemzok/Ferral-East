@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://clysw1qytpyii"]
+
+[ext_resource type="Script" path="res://characters/surbi/surbi.gd" id="1_cmf2m"]
+[ext_resource type="Texture2D" uid="uid://d2wovlajv5oxs" path="res://characters/surbi/walk-1.png" id="1_qaqia"]
+[ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://characters/surbi/idle-1.png" id="1_vahcy"]
+[ext_resource type="Texture2D" uid="uid://cubik354hvdd1" path="res://characters/surbi/hurt-1.png" id="2_k6g4k"]
+[ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://characters/surbi/walk-2.png" id="2_vbfls"]
+[ext_resource type="Texture2D" uid="uid://dbo47lxh6qe6q" path="res://characters/surbi/hurt-2.png" id="3_jylud"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dp80f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vahcy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k6g4k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jylud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_k6g4k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jylud")
+}],
+"loop": true,
+"name": &"stunned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qaqia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vbfls")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nr0wd"]
+radius = 28.0
+height = 58.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7iiwe"]
+radius = 34.4384
+
+[node name="Surbi" type="CharacterBody2D"]
+script = ExtResource("1_cmf2m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dp80f")
+animation = &"stunned"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nr0wd")
+
+[node name="HurtboxArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
+shape = SubResource("CircleShape2D_7iiwe")
+
+[connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
