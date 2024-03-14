@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfunv24aep358"]
+[gd_scene load_steps=4 format=3 uid="uid://bfunv24aep358"]
 
 [ext_resource type="PackedScene" uid="uid://clysw1qytpyii" path="res://characters/surbi/surbi.tscn" id="1_2plap"]
+[ext_resource type="Script" path="res://levels/hometown/hometown.gd" id="1_n7mml"]
 [ext_resource type="PackedScene" uid="uid://b2tfu8bbgndoa" path="res://characters/enemies/default-zombie/default_zombie.tscn" id="2_25y0t"]
 
 [node name="Hometown" type="Node2D"]
+script = ExtResource("1_n7mml")
 
 [node name="Surbi" parent="." instance=ExtResource("1_2plap")]
 position = Vector2(594, 326)

@@ -62,7 +62,7 @@ func fire():
 	bullet_instance.rotation = bullet_direction
 	bullet_instance.apply_impulse(Vector2(bullet_speed,  0).rotated(bullet_direction), Vector2()) 
 	get_tree().get_root().call_deferred("add_child", bullet_instance)
-	
+
 func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):
 		stunned()
