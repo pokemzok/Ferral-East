@@ -53,7 +53,7 @@ height = 58.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7iiwe"]
 radius = 34.4384
 
-[node name="Surbi" type="CharacterBody2D"]
+[node name="Surbi" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cmf2m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

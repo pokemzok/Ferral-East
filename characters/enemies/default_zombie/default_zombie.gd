@@ -4,6 +4,15 @@ var motion = Vector2()
 var stunned_timer = 0 # TODO we can make a stun  also random to make thing more interesting=
 var health_points = 4 #TODO we cane make it random (within the specific range) to make things more interesting
 var dying_timer = 0
+var player =  null
+var min_speed = 100
+var speed_increase_factor = 0.5
+var max_speed = min_speed * 3
+
+func _ready():
+	var players = get_tree().get_nodes_in_group("player")
+	if !players.is_empty():
+		player = players[0] #FIXME future support for coop
 
 func _physics_process(delta):
 	if dying_timer > 0:
@@ -15,14 +24,19 @@ func _physics_process(delta):
 		stunned_timer -= delta
 		play_stunned()
 	else:
-		hunt_player()
+		hunt_player(delta)
 		
-func hunt_player():
-	var player = get_parent().get_node("Surbi") #FIXME very unclean solution
-	position += (player.position - position)/50
-	play_walk()
-	look_at(player.position)
-	move_and_collide(motion)
+func hunt_player(delta):
+	if player != null:
+		var direction = (player.position - position).normalized()
+		var distance = position.distance_to(player.position)
+		var speed = min_speed + (distance * speed_increase_factor)
+		speed = min(speed, max_speed)
+		var velocity = direction * speed * delta
+		position += velocity
+		play_walk()
+		look_at(player.position)
+		move_and_collide(motion)
 
 func play_stunned():
 	$AnimatedSprite2D.play("stunned")
@@ -51,7 +65,7 @@ func take_dmg():
 	
 func dying():
 	if (dying_timer <= 0):
-		dying_timer = 1
+		dying_timer = 100
 		$CollisionShape2D.set_deferred("disabled",  true)
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
 

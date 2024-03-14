@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbsa4kg12nfnm"
-path="res://.godot/imported/zombie-dying-3.png-81547dfdf10a88383b9540c88daab225.ctex"
+uid="uid://bphy8bstbcrwx"
+path="res://.godot/imported/zombie-dying-1.png-1692ae4df698125d4ec6c8e172bdef05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/enemies/default-zombie/zombie-dying-3.png"
-dest_files=["res://.godot/imported/zombie-dying-3.png-81547dfdf10a88383b9540c88daab225.ctex"]
+source_file="res://characters/enemies/default_zombie/zombie-dying-1.png"
+dest_files=["res://.godot/imported/zombie-dying-1.png-1692ae4df698125d4ec6c8e172bdef05.ctex"]
 
 [params]
 

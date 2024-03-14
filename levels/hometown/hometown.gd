@@ -17,3 +17,7 @@ extends Node2D
 	# Surbi otrzymuje drugi rewolwer i większą prędkość  strzelania
 	# Aneta wpada w  panikę, więc biega jeszcze szybciej a  jej strzały zadają więcej obrażeń.
 	# Halina dostaje  większe klapki i god mode na  kilka sekund i zabija wszystkich na hita
+
+# Potenial enemy behaviours:
+	# Fake death (this can  be saw by enemy not lowering opacity,but staying at 100), zombie will  get up after a while
+		#  - I can add this behaviour for some zombies for variety

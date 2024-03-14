@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var bullet_speed = 2000
-var bullet = preload("res://projectiles/bullet/bullet.tscn") #FIXME doesn't look ideal, try to fix it maybe?
+var bullet = preload("res://projectiles/bullet/bullet.tscn")
 var hurt_timer = 0
 var invincible_frames = 10
 var stunned_timer = 0 

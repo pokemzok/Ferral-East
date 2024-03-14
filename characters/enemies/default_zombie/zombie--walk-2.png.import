@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uv7bnnegq6iv"
-path="res://.godot/imported/zombie--hurt-1.png-6756c136661dafe00369f87c5d829b33.ctex"
+uid="uid://bu60mg2gmv2vs"
+path="res://.godot/imported/zombie--walk-2.png-3e888593c1e7e2d29de15f59614e3d8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/enemies/default-zombie/zombie--hurt-1.png"
-dest_files=["res://.godot/imported/zombie--hurt-1.png-6756c136661dafe00369f87c5d829b33.ctex"]
+source_file="res://characters/enemies/default_zombie/zombie--walk-2.png"
+dest_files=["res://.godot/imported/zombie--walk-2.png-3e888593c1e7e2d29de15f59614e3d8e.ctex"]
 
 [params]
 
