@@ -48,9 +48,12 @@ func take_dmg():
 	print(health_points)
 	if health_points <= 0:
 		dying()
-
+	
 func dying():
-	dying_timer = 0.7
+	if (dying_timer <= 0):
+		dying_timer = 1
+		$CollisionShape2D.set_deferred("disabled",  true)
+		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
 
 func die():
 	queue_free()
