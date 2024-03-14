@@ -6,17 +6,33 @@ var hurt_timer = 0
 var invincible_frames = 10
 var stunned_timer = 0 
 var health_points = 3
+var enemies_in_player_collision_area =  []
 
 func _physics_process(delta):
+	on_dmg()
 	if stunned_timer > 0:
-		stunned_timer -= delta
-		play_stunned()
-		invincible_frames = 10
+		on_stun(delta)
+		invincible_frames = 10		
 	else:
-		invincible_frames -= 1
-		process_player_actions(delta)	
+		if (invincible_frames > 0):
+			invincible_frames -= 1	
+		on_player_actions(delta)	
+
+func on_dmg():
+	if (invincible_frames < 1 && enemies_in_player_collision_area.size() > 0):
+		stun()
+		health_points -= 1
+		print(health_points) #  FIXME more here, for now we just decrement health and that's it	take_dmg()
+
+func stun():
+	if (stunned_timer <= 0):
+		stunned_timer = 0.5
+
+func on_stun(delta):
+	stunned_timer -= delta
+	play_stunned()				
 		
-func process_player_actions(delta):
+func on_player_actions(delta):
 	look_at(get_global_mouse_position())	
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = direction * 600
@@ -65,14 +81,10 @@ func fire():
 
 func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):
-		stunned()
-		take_dmg()
+		if not enemies_in_player_collision_area.has(body):
+			enemies_in_player_collision_area.append(body)
 
-func stunned():
-	if (stunned_timer <= 0):
-		stunned_timer =  0.5
+func on_hurtbox_leave(body):
+	if enemies_in_player_collision_area.has(body):
+		enemies_in_player_collision_area.erase(body)
 
-func take_dmg():
-	if (invincible_frames < 1):
-		health_points -= 1
-		print(health_points) #  FIXME more here, for now we just decrement health and that's it
