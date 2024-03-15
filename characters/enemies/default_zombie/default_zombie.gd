@@ -8,6 +8,7 @@ var player =  null
 var min_speed = 100
 var speed_increase_factor = 0.5
 var max_speed = min_speed * 3
+var projectiles_dmg_velocity = 100
 
 func _ready():
 	var players = get_tree().get_nodes_in_group("player")
@@ -49,9 +50,10 @@ func play_death():
 
 func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):
-		body.queue_free()
-		stun()		
-		take_dmg()
+		if (body.linear_velocity.length() >= projectiles_dmg_velocity):
+			body.queue_free()
+			stun()		
+			take_dmg()				
 
 func stun():
 	if (stunned_timer <= 0):
@@ -59,7 +61,6 @@ func stun():
 
 func take_dmg():
 	health_points -= 1
-	print(health_points)
 	if health_points <= 0:
 		dying()
 	

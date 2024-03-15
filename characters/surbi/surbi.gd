@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal hp_changed(current_hp)
+
 var bullet_speed = 2000
 var bullet = preload("res://projectiles/bullet/bullet.tscn")
 var hurt_timer = 0
@@ -7,6 +9,9 @@ var invincible_frames = 10
 var stunned_timer = 0 
 var health_points = 3
 var enemies_in_player_collision_area =  []
+
+func after_external_init():
+	emit_signal("hp_changed", health_points)	
 
 func _physics_process(delta):
 	on_dmg()
@@ -22,7 +27,7 @@ func on_dmg():
 	if (invincible_frames < 1 && enemies_in_player_collision_area.size() > 0):
 		stun()
 		health_points -= 1
-		print(health_points) #  FIXME more here, for now we just decrement health and that's it	take_dmg()
+		emit_signal("hp_changed", health_points)
 
 func stun():
 	if (stunned_timer <= 0):
