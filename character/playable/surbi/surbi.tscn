@@ -1,17 +1,17 @@
 [gd_scene load_steps=10 format=3 uid="uid://clysw1qytpyii"]
 
-[ext_resource type="Script" path="res://characters/surbi/surbi.gd" id="1_cmf2m"]
-[ext_resource type="Texture2D" uid="uid://d2wovlajv5oxs" path="res://characters/surbi/walk-1.png" id="1_qaqia"]
-[ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://characters/surbi/idle-1.png" id="1_vahcy"]
-[ext_resource type="Texture2D" uid="uid://cubik354hvdd1" path="res://characters/surbi/hurt-1.png" id="2_k6g4k"]
-[ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://characters/surbi/walk-2.png" id="2_vbfls"]
-[ext_resource type="Texture2D" uid="uid://dbo47lxh6qe6q" path="res://characters/surbi/hurt-2.png" id="3_jylud"]
+[ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
+[ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
+[ext_resource type="Texture2D" uid="uid://cubik354hvdd1" path="res://character/playable/surbi/hurt-1.png" id="3_iqhs7"]
+[ext_resource type="Texture2D" uid="uid://dbo47lxh6qe6q" path="res://character/playable/surbi/hurt-2.png" id="4_rsxhd"]
+[ext_resource type="Texture2D" uid="uid://d2wovlajv5oxs" path="res://character/playable/surbi/walk-1.png" id="5_bkton"]
+[ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://character/playable/surbi/walk-2.png" id="6_ow20m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dp80f"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_vahcy")
+"texture": ExtResource("2_ahcha")
 }],
 "loop": true,
 "name": &"idle",
@@ -19,16 +19,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_k6g4k")
+"texture": ExtResource("3_iqhs7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_jylud")
+"texture": ExtResource("4_rsxhd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_k6g4k")
+"texture": ExtResource("3_iqhs7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_jylud")
+"texture": ExtResource("4_rsxhd")
 }],
 "loop": true,
 "name": &"stunned",
@@ -36,10 +36,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_qaqia")
+"texture": ExtResource("5_bkton")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_vbfls")
+"texture": ExtResource("6_ow20m")
 }],
 "loop": true,
 "name": &"walk",
@@ -54,7 +54,7 @@ height = 58.0
 radius = 34.4384
 
 [node name="Surbi" type="CharacterBody2D" groups=["player"]]
-script = ExtResource("1_cmf2m")
+script = ExtResource("1_v6b7d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")

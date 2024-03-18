@@ -3,7 +3,6 @@ extends CanvasLayer
 var health_point_res = preload("res://player/Health.png")
 
 func on_hp_changed(hp):
-	print(hp)
 	clear_hearts()
 	for i in range(hp):
 		add_hp()

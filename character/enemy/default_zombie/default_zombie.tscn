@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://b2tfu8bbgndoa"]
+
+[ext_resource type="Script" path="res://character/enemy/default_zombie/default_zombie.gd" id="1_deosn"]
+[ext_resource type="Texture2D" uid="uid://bphy8bstbcrwx" path="res://character/enemy/default_zombie/zombie-dying-1.png" id="2_6ula0"]
+[ext_resource type="Texture2D" uid="uid://cspj8gvc28g54" path="res://character/enemy/default_zombie/zombie-dying-2.png" id="3_owwiv"]
+[ext_resource type="Texture2D" uid="uid://bbsa4kg12nfnm" path="res://character/enemy/default_zombie/zombie-dying-3.png" id="4_hk8fx"]
+[ext_resource type="Texture2D" uid="uid://wi28nmg0513v" path="res://character/enemy/default_zombie/zombie--idle-1.png" id="5_l4htm"]
+[ext_resource type="Texture2D" uid="uid://uv7bnnegq6iv" path="res://character/enemy/default_zombie/zombie--hurt-1.png" id="6_l85vg"]
+[ext_resource type="Texture2D" uid="uid://kbmm2h5tm4a0" path="res://character/enemy/default_zombie/zombie-hurt-2.png" id="7_7pu1u"]
+[ext_resource type="Texture2D" uid="uid://b1wwfvj7elxi6" path="res://character/enemy/default_zombie/zombie--walk-1.png" id="8_jh0ly"]
+[ext_resource type="Texture2D" uid="uid://bu60mg2gmv2vs" path="res://character/enemy/default_zombie/zombie--walk-2.png" id="9_fushc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0nct2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6ula0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_owwiv")
+}, {
+"duration": 500.0,
+"texture": ExtResource("4_hk8fx")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_l4htm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_l85vg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7pu1u")
+}],
+"loop": true,
+"name": &"stunned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_jh0ly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fushc")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1py7y"]
+size = Vector2(77, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c12mq"]
+size = Vector2(78, 75)
+
+[node name="DefaultZombie" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_deosn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0nct2")
+animation = &"death"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 0
+position = Vector2(13.5, -4)
+shape = SubResource("RectangleShape2D_1py7y")
+
+[node name="HurtboxArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
+position = Vector2(12, -4.5)
+shape = SubResource("RectangleShape2D_c12mq")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 2000.0
+debug_enabled = true
+
+[connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]

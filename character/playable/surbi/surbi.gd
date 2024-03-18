@@ -1,40 +1,38 @@
 extends CharacterBody2D
 
 signal hp_changed(current_hp)
-
 var bullet_speed = 2000
 var bullet = preload("res://projectiles/bullet/bullet.tscn")
-var hurt_timer = 0
-var invincible_frames = 10
-var stunned_timer = 0 
-var health_points = 3
+var invincible_frames = NumericAttribute.new(0, 10)
+var stunned_timer = NumericAttribute.new(0, 0.5) 
+var health_points = NumericAttribute.new(3, 10)
 var enemies_in_player_collision_area =  []
 
 func after_external_init():
-	emit_signal("hp_changed", health_points)	
+	emit_signal("hp_changed", health_points.value)	
 
 func _physics_process(delta):
 	on_dmg()
-	if stunned_timer > 0:
+	if stunned_timer.value > 0:
 		on_stun(delta)
-		invincible_frames = 10		
+		invincible_frames.assign_max_value()		
 	else:
-		if (invincible_frames > 0):
-			invincible_frames -= 1	
+		if (invincible_frames.value > 0):
+			invincible_frames.decrement_by()
 		on_player_actions(delta)	
 
 func on_dmg():
-	if (invincible_frames < 1 && enemies_in_player_collision_area.size() > 0):
+	if (invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
 		stun()
-		health_points -= 1
-		emit_signal("hp_changed", health_points)
+		health_points.decrement_by()
+		emit_signal("hp_changed", health_points.value)
 
 func stun():
-	if (stunned_timer <= 0):
-		stunned_timer = 0.5
+	if (stunned_timer.value <= 0):
+		stunned_timer.assign_max_value()
 
 func on_stun(delta):
-	stunned_timer -= delta
+	stunned_timer.decrement_by(delta)
 	play_stunned()				
 		
 func on_player_actions(delta):
@@ -50,7 +48,7 @@ func on_player_actions(delta):
 		fire()	
 
 func knockback():
-	if (invincible_frames < 1):
+	if (invincible_frames.value < 1):
 		velocity = -velocity.normalized() * 5000
 		move_and_slide()
 	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu60mg2gmv2vs"
-path="res://.godot/imported/zombie--walk-2.png-3e888593c1e7e2d29de15f59614e3d8e.ctex"
+uid="uid://bmashr2yck3gv"
+path="res://.godot/imported/idle-1.png-3f8b03d3e67dd2732fc6ef3597bcd03e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/enemies/default_zombie/zombie--walk-2.png"
-dest_files=["res://.godot/imported/zombie--walk-2.png-3e888593c1e7e2d29de15f59614e3d8e.ctex"]
+source_file="res://character/playable/surbi/idle-1.png"
+dest_files=["res://.godot/imported/idle-1.png-3f8b03d3e67dd2732fc6ef3597bcd03e.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 extends Node
 
-var player = preload("res://characters/surbi/surbi.tscn")  #Hardcoded for now
+var player = preload("res://character/playable/surbi/surbi.tscn")  #Hardcoded for now
 
 func _ready():
 	var parent  = get_parent()  #asumes that player has a Node2D parent
