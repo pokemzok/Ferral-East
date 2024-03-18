@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
 signal hp_changed(current_hp)
-var bullet_speed = 2000
-var bullet = preload("res://projectiles/bullet/bullet.tscn")
+var weapon = Revolver.new()
 var invincible_frames = NumericAttribute.new(0, 10)
 var stunned_timer = NumericAttribute.new(0, 0.5) 
 var health_points = NumericAttribute.new(3, 10)
@@ -45,7 +44,7 @@ func on_player_actions(delta):
 	else:
 		play_idle()	
 	if Input.is_action_just_pressed("fire"):
-		fire()	
+		attack()	
 
 func knockback():
 	if (invincible_frames.value < 1):
@@ -63,24 +62,8 @@ func play_walk():
 func play_stunned():
 	$AnimatedSprite2D.play("stunned")
 
-func fire():
-	var bullet_instance  = bullet.instantiate()
-	var offset = Vector2(40, 33) 
-	var mouse_position = get_global_mouse_position()
-	var character_position = global_position
-	bullet_instance.position = character_position + offset.rotated(rotation)
-	bullet_instance.rotation_degrees = rotation_degrees
-	
-	var innacurracy_radious = 200	
-	var direction_to_mouse = (mouse_position - bullet_instance.position).angle()
-	var distance_to_mouse = character_position.distance_to(mouse_position)
-	var bullet_direction = rotation
-	if distance_to_mouse > innacurracy_radious:
-		bullet_direction = direction_to_mouse
-	
-	bullet_instance.rotation = bullet_direction
-	bullet_instance.apply_impulse(Vector2(bullet_speed,  0).rotated(bullet_direction), Vector2()) 
-	get_tree().get_root().call_deferred("add_child", bullet_instance)
+func attack():
+	weapon.attack(self, get_global_mouse_position())
 
 func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):
