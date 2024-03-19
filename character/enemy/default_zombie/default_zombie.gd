@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var motion = Vector2()
 var stunned_timer = NumericAttribute.new(0, NumericAttribute.new(0.1, 0.3).randomize_value().value)
-var health_points = NumericAttribute.new(4, 6)
+var health_points = NumericAttribute.new(2, 6)
 var dying_timer = NumericAttribute.new(0, 100)
 var player =  null
 var speed = NumericAttribute.new(100, 300) 

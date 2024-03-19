@@ -27,3 +27,17 @@ func randomize_value() -> NumericAttribute:
 func new_value(value:  float) -> NumericAttribute:
 	self.value = value
 	return self
+
+func assign_zero() -> NumericAttribute:
+	self.value  = 0
+	return self
+
+func assign_max_on_less_or_zero() -> NumericAttribute:
+	if (value <= 0):
+		assign_max_value()
+	return self
+
+func assign_max_on_more_then_zero() -> NumericAttribute:
+	if (value > 0):
+		assign_max_value()
+	return self		

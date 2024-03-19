@@ -6,7 +6,7 @@ var spawn_time = NumericAttribute.new(3, 3)
 func _process(delta):
 	spawn_enemies(delta)
 
-func spawn_enemies(delta):
+func spawn_enemies(delta):    
 	spawn_time.decrement_by(delta)
 	if  (spawn_time.value <= 0):
 		spawn_time.assign_max_value()

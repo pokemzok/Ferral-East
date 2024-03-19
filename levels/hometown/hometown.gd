@@ -1,7 +1,15 @@
 extends Node2D
 
 # TODO 1
-# 1. reload after 6 shots
+# 1. Reload animation, HUD for bullets (how many are in cylinder)
+# 2. Basic sound design:
+#	2.1 Character steps
+#	2.2 Zombie moans (multiple)
+#   2.3 Zombie hurt sound
+#	2.4 Shooting
+#	2.5 Surbi hurt sound
+#   2.6 Surbi reload sound
+#	2.7 Background music for level
 # 2. better enemy pathfinding
 
 # TODO 2
