@@ -1,7 +1,7 @@
 extends Node2D
 
 # TODO 1
-# 1. Reload animation, HUD for bullets (how many are in cylinder)
+# 1. HUD for bullets (how many are in cylinder)
 # 2. Basic sound design:
 #	2.1 Character steps
 #	2.2 Zombie moans (multiple)

@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=14 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
+[ext_resource type="Texture2D" uid="uid://dkj37rtok7t7t" path="res://character/playable/surbi/idle-reload-1.png" id="3_6c5iq"]
 [ext_resource type="Texture2D" uid="uid://cubik354hvdd1" path="res://character/playable/surbi/hurt-1.png" id="3_iqhs7"]
 [ext_resource type="Texture2D" uid="uid://dbo47lxh6qe6q" path="res://character/playable/surbi/hurt-2.png" id="4_rsxhd"]
+[ext_resource type="Texture2D" uid="uid://cululvox111ia" path="res://character/playable/surbi/idle-reload-2.png" id="4_y3xry"]
 [ext_resource type="Texture2D" uid="uid://d2wovlajv5oxs" path="res://character/playable/surbi/walk-1.png" id="5_bkton"]
 [ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://character/playable/surbi/walk-2.png" id="6_ow20m"]
+[ext_resource type="Texture2D" uid="uid://b13b425x3ihry" path="res://character/playable/surbi/walk-reload-1.png" id="7_opaai"]
+[ext_resource type="Texture2D" uid="uid://fvjd84dr0m5x" path="res://character/playable/surbi/walk-reload-2.png" id="8_d0rxc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dp80f"]
 animations = [{
@@ -15,6 +19,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6c5iq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y3xry")
+}],
+"loop": true,
+"name": &"idle_reload",
 "speed": 5.0
 }, {
 "frames": [{
@@ -44,6 +59,17 @@ animations = [{
 "loop": true,
 "name": &"walk",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_opaai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_d0rxc")
+}],
+"loop": true,
+"name": &"walk_reload",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nr0wd"]
@@ -58,7 +84,7 @@ script = ExtResource("1_v6b7d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
-animation = &"idle"
+animation = &"idle_reload"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

@@ -64,13 +64,13 @@ func knockback():
 # Try different approach for animation for  Halina or Aneta (animation tree + animation player setup)
 func play_idle():
 	if(reload_timer.value > 0 ):
-		pass #TODO: reload idle animation
+		$AnimatedSprite2D.play("idle_reload")	
 	else:
 		$AnimatedSprite2D.play("idle")	
 
 func play_walk():
 	if(reload_timer.value > 0 ):
-		pass #TODO: reload walk animation
+		$AnimatedSprite2D.play("walk_reload")
 	else:	
 		$AnimatedSprite2D.play("walk")
 
