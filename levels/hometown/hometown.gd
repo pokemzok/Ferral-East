@@ -1,16 +1,15 @@
 extends Node2D
 
 # TODO 1
-# 1. HUD for bullets (how many are in cylinder)
 # 2. Basic sound design:
 #	2.1 Character steps
 #	2.2 Zombie moans (multiple)
 #   2.3 Zombie hurt sound
-#	2.4 Shooting
 #	2.5 Surbi hurt sound
-#   2.6 Surbi reload sound
 #	2.7 Background music for level
-# 2. better enemy pathfinding
+# 2. better enemy pathfinding  -> this would corelate with a better map design
+#	possible idea:  leave default zombies without changes but introduce new enemy with new  path-finding behaviour.
+
 
 # TODO 2
 # 1. Arcade login on test map: dynamically add enemies in some sort of a wave logic. 
@@ -26,6 +25,8 @@ extends Node2D
 # next I might want some hud for showing my  characters Health points
 # next: some nice level  design
 # last some score calculation logic (based on time, damage taken and kills).
+# HUD for bullets (how many are in cylinder)
+# shit-talking dialogue lines for Surbi, when he performes good.
 # after all that I can try to release this game somewhere to see how difficult it is.
 
 # For future

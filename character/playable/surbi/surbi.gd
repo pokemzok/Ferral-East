@@ -7,6 +7,9 @@ var stunned_timer = NumericAttribute.new(0, 0.5)
 var reload_timer = NumericAttribute.new(0, 1) 
 var health_points = NumericAttribute.new(3, 10)
 var enemies_in_player_collision_area =  []
+@onready var animations = $AnimatedSprite2D
+@onready var audio_pool = $AudioPool
+var sound_manager = GameSoundManager.new() #FIXME turn this into singleton
 
 func after_external_init():
 	emit_signal("hp_changed", health_points.value)	
@@ -64,27 +67,30 @@ func knockback():
 # Try different approach for animation for  Halina or Aneta (animation tree + animation player setup)
 func play_idle():
 	if(reload_timer.value > 0 ):
-		$AnimatedSprite2D.play("idle_reload")	
+		animations.play("idle_reload")	
 	else:
-		$AnimatedSprite2D.play("idle")	
+		animations.play("idle")	
 
 func play_walk():
 	if(reload_timer.value > 0 ):
-		$AnimatedSprite2D.play("walk_reload")
+		animations.play("walk_reload")
 	else:	
-		$AnimatedSprite2D.play("walk")
+		animations.play("walk")
 
 func play_stunned():
-	$AnimatedSprite2D.play("stunned")
+	animations.play("stunned")
 
 func attack():
 	var success = weapon.attack_with(self, get_global_mouse_position())
+	if (success):
+		sound_manager.play_sound_effect(weapon.get_shoot_audio(), get_idle_audio_player())
 	if (!success):
 		start_reloading()
 		
 
 func start_reloading():
 	reload_timer.assign_max_value()
+	sound_manager.play_sound_effect(weapon.get_reload_audio(), get_idle_audio_player())
 
 func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):
@@ -95,3 +101,9 @@ func on_hurtbox_leave(body):
 	if enemies_in_player_collision_area.has(body):
 		enemies_in_player_collision_area.erase(body)
 
+func get_idle_audio_player():
+	for child in audio_pool.get_children():
+		var audio_player = child as AudioStreamPlayer
+		if not audio_player.is_playing():
+			return audio_player
+	return audio_pool.get_children()[0]

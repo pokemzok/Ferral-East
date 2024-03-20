@@ -4,6 +4,14 @@ extends Node
 var bullet_speed = NumericAttribute.new(1500, 2500)
 var bullets_in_cylinder = NumericAttribute.new(6, 6)
 var bullet = preload("res://weapon/projectile/bullet/bullet.tscn")
+var reload_audio = GameSoundManager.Sounds.REVOLVER_RELOAD
+var shoot_audio = GameSoundManager.Sounds.REVOLVER_SHOOT
+
+func get_reload_audio() -> GameSoundManager.Sounds:
+		return reload_audio
+		
+func get_shoot_audio() -> GameSoundManager.Sounds:
+		return shoot_audio
 
 func attack_with(character: Node2D, target_position: Vector2) -> bool:
 	return shoot_with(character, target_position)
