@@ -1,3 +1,5 @@
+extends Node
+
 class_name GameSoundManager
 
 enum Sounds {
@@ -10,10 +12,11 @@ var sound_files = {
 	Sounds.REVOLVER_SHOOT: preload("res://audio/weapons/revolver-shot.mp3")
 }
 
-func play_sound_effect(sound_type: Sounds, player: AudioStreamPlayer):
-	if  (sound_files.has(sound_type)):
-		player.stream = sound_files[sound_type]
-		player.play()
-	else:
-		print("Sound type not found: ", sound_type)	
+static var instance = null
 
+static func get_instance():
+	if instance == null:
+		instance = GameSoundManager.new()
+		instance.name = "GameAudioManager"
+		instance.add_to_group("singleton")
+	return instance	

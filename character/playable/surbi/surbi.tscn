@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=15 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://character/playable/surbi/walk-2.png" id="6_ow20m"]
 [ext_resource type="Texture2D" uid="uid://b13b425x3ihry" path="res://character/playable/surbi/walk-reload-1.png" id="7_opaai"]
 [ext_resource type="Texture2D" uid="uid://fvjd84dr0m5x" path="res://character/playable/surbi/walk-reload-2.png" id="8_d0rxc"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_audio_pool.tscn" id="11_is72b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dp80f"]
 animations = [{
@@ -95,17 +96,7 @@ shape = SubResource("CapsuleShape2D_nr0wd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
 shape = SubResource("CircleShape2D_7iiwe")
 
-[node name="AudioPool" type="Node" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioPool"]
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="AudioPool"]
-
-[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="AudioPool"]
-
-[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="AudioPool"]
-
-[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="AudioPool"]
+[node name="GameAudioPool" parent="." instance=ExtResource("11_is72b")]
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
 [connection signal="body_exited" from="HurtboxArea2D" to="." method="on_hurtbox_leave"]

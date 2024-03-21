@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2h0ghjruw1gg"]
+
+[ext_resource type="Script" path="res://audio/game_audio_pool.gd" id="1_qxrww"]
+
+[node name="GameAudioPool" type="Node"]
+script = ExtResource("1_qxrww")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="."]
