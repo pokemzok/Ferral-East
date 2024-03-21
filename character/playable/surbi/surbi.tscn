@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://character/playable/surbi/walk-2.png" id="6_ow20m"]
 [ext_resource type="Texture2D" uid="uid://b13b425x3ihry" path="res://character/playable/surbi/walk-reload-1.png" id="7_opaai"]
 [ext_resource type="Texture2D" uid="uid://fvjd84dr0m5x" path="res://character/playable/surbi/walk-reload-2.png" id="8_d0rxc"]
-[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_audio_pool.tscn" id="11_is72b"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="11_ewde7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dp80f"]
 animations = [{
@@ -91,12 +91,12 @@ animation = &"idle_reload"
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_nr0wd")
 
+[node name="GameAmbientAudioPool" parent="." instance=ExtResource("11_ewde7")]
+
 [node name="HurtboxArea2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
 shape = SubResource("CircleShape2D_7iiwe")
-
-[node name="GameAudioPool" parent="." instance=ExtResource("11_is72b")]
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
 [connection signal="body_exited" from="HurtboxArea2D" to="." method="on_hurtbox_leave"]

@@ -6,13 +6,20 @@ var health_points = NumericAttribute.new(2, 6)
 var dying_timer = NumericAttribute.new(0, 100)
 var player =  null
 var speed = NumericAttribute.new(100, 300) 
+var vocal_timer_max_range = NumericAttribute.new(1,6)
+var vocal_timer = NumericAttribute.new(1, 3)
 var speed_increase_factor = 0.5
 var projectiles_dmg_velocity = 100
 var stategy = preload("res://character/enemy/path_finding/path_finding_strategy.gd")
 var path_finding_stategy = stategy.random_strategy()
+var voices = ArrayCollection.new([GameSoundManager.Sounds.ZOMBIE_VOICE_1, GameSoundManager.Sounds.ZOMBIE_VOICE_2, GameSoundManager.Sounds.ZOMBIE_VOICE_3])
+var death_sounds = ArrayCollection.new([GameSoundManager.Sounds.ZOMBIE_DEATH_1, GameSoundManager.Sounds.ZOMBIE_DEATH_2, GameSoundManager.Sounds.ZOMBIE_DEATH_3, GameSoundManager.Sounds.ZOMBIE_DEATH_4])
+var sound_manager = GameSoundManager.get_instance()
+@onready var audio_player = $AudioStreamPlayer
 
 func _ready():
 	randomize_stats()
+	vocal_timer.randomize_value()
 	var players = get_tree().get_nodes_in_group("player")
 	if !players.is_empty():
 		player = players[0] #FIXME future support for coop
@@ -20,6 +27,9 @@ func _ready():
 func randomize_stats():
 	health_points.randomize_value()
 	speed.randomize_value()
+
+func _process(delta):
+	growl_on(delta)
 	
 func _physics_process(delta):
 	if dying_timer.value > 0:
@@ -32,6 +42,17 @@ func _physics_process(delta):
 		play_stunned()
 	else:
 		hunt_player(delta)
+# TODO: make it common, so every enemy  could use similar logic. Maybe some new node?
+func growl_on(delta):
+	if dying_timer.value > 0:
+		return
+	if (vocal_timer.value <= 0):
+		sound_manager.play_sound(voices.random_element(), audio_player)
+		vocal_timer.randomize_max_value_in_range(vocal_timer_max_range.value, vocal_timer_max_range.max_value)
+		vocal_timer.assign_max_value()
+	else:
+		vocal_timer.decrement_by(delta)
+			
 		
 func hunt_player(delta):
 	if player != null:
@@ -85,9 +106,14 @@ func take_dmg():
 	
 func dying():
 	if (dying_timer.value <= 0):
+		play_death_sound()	
 		dying_timer.assign_max_value()
 		$CollisionShape2D.set_deferred("disabled",  true)
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
+
+func play_death_sound():
+	audio_player.stop()
+	sound_manager.play_sound(death_sounds.random_element(), audio_player)
 
 func die():
 	queue_free()

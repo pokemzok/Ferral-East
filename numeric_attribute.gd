@@ -41,3 +41,6 @@ func assign_max_on_more_then_zero() -> NumericAttribute:
 	if (value > 0):
 		assign_max_value()
 	return self		
+
+func randomize_max_value_in_range(min_value: float, max_value: float):
+	return randf_range(min_value, max_value)

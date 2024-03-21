@@ -8,7 +8,7 @@ var reload_timer = NumericAttribute.new(0, 1)
 var health_points = NumericAttribute.new(3, 10)
 var enemies_in_player_collision_area =  []
 @onready var animations = $AnimatedSprite2D
-@onready var audio_pool = $GameAudioPool
+@onready var audio_pool = $GameAmbientAudioPool
 
 
 func after_external_init():

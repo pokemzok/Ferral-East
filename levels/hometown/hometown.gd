@@ -3,10 +3,11 @@ extends Node2D
 # TODO 1
 # 2. Basic sound design:
 #	2.1 Character steps
-#	2.2 Zombie moans (multiple)
-#   2.3 Zombie hurt sound
+#   2.3 Zombie hurt sound  (like bullet penetrating skin)
 #	2.5 Surbi hurt sound
 #	2.7 Background music for level
+#	2.8 sound volume normalization
+#	2.9 multiple sound buses (ambient, voices, music), i want an ability for player  to change those
 # 2. better enemy pathfinding  -> this would corelate with a better map design
 #	possible idea:  leave default zombies without changes but introduce new enemy with new  path-finding behaviour.
 
