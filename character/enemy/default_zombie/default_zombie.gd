@@ -15,7 +15,9 @@ var path_finding_stategy = stategy.random_strategy()
 var voices = ArrayCollection.new([GameSoundManager.Sounds.ZOMBIE_VOICE_1, GameSoundManager.Sounds.ZOMBIE_VOICE_2, GameSoundManager.Sounds.ZOMBIE_VOICE_3])
 var death_sounds = ArrayCollection.new([GameSoundManager.Sounds.ZOMBIE_DEATH_1, GameSoundManager.Sounds.ZOMBIE_DEATH_2, GameSoundManager.Sounds.ZOMBIE_DEATH_3, GameSoundManager.Sounds.ZOMBIE_DEATH_4])
 var sound_manager = GameSoundManager.get_instance()
-@onready var audio_player = $AudioStreamPlayer
+var run_audio = GameSoundManager.Sounds.PLAYER_RUN
+@onready var audio_player = $VoiceAudioStreamPlayer
+@onready var walking_audio_player = $WalkingAudioStreamPlayer
 
 func _ready():
 	randomize_stats()
@@ -33,15 +35,24 @@ func _process(delta):
 	
 func _physics_process(delta):
 	if dying_timer.value > 0:
-		play_death()
-		dying_timer.decrement_by(delta)
+		on_dying(delta)
 	elif dying_timer.value < 0:
 		die()	
 	elif stunned_timer.value > 0:		
-		stunned_timer.decrement_by(delta)
-		play_stunned()
+		on_stun(delta)
 	else:
 		hunt_player(delta)
+
+func on_dying(delta):
+	walking_audio_player.stop()
+	$AnimatedSprite2D.play("death")
+	dying_timer.decrement_by(delta)
+		
+func on_stun(delta):
+	walking_audio_player.stop()
+	stunned_timer.decrement_by(delta)
+	$AnimatedSprite2D.play("stunned")
+			
 # TODO: make it common, so every enemy  could use similar logic. Maybe some new node?
 func growl_on(delta):
 	if dying_timer.value > 0:
@@ -56,13 +67,17 @@ func growl_on(delta):
 		
 func hunt_player(delta):
 	if player != null:
-		play_walk()
+		on_walk()
 		look_at(player.position)
 		match path_finding_stategy:
 			stategy.PathFindingAlgorithm.DUMB_COLLIDE:
 				dumb_path_finding_collide(player, delta)
 			stategy.PathFindingAlgorithm.DUMB_SLIDE:	
 				dumb_path_finding_slide(player, delta)
+
+func on_walk():
+	$AnimatedSprite2D.play("walk")
+	sound_manager.play_sound(run_audio, walking_audio_player)
 
 func dumb_path_finding_collide(player, delta):
 	position += dumb_path_finding(player, delta)
@@ -78,15 +93,6 @@ func dumb_path_finding(player, delta) -> Vector2:
 	speed.new_value(speed.value + (distance * speed_increase_factor))
 	speed.new_value(min(speed.value, speed.max_value))
 	return direction * speed.value * delta
-
-func play_stunned():
-	$AnimatedSprite2D.play("stunned")
-
-func play_walk():
-	$AnimatedSprite2D.play("walk")
-
-func play_death():
-	$AnimatedSprite2D.play("death")
 
 func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):

@@ -81,6 +81,10 @@ shape = SubResource("RectangleShape2D_1py7y")
 position = Vector2(12, -4.5)
 shape = SubResource("RectangleShape2D_c12mq")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="VoiceAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Voices"
+
+[node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Ambient"
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]

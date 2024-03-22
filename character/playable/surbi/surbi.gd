@@ -7,6 +7,9 @@ var stunned_timer = NumericAttribute.new(0, 0.5)
 var reload_timer = NumericAttribute.new(0, 1) 
 var health_points = NumericAttribute.new(3, 10)
 var enemies_in_player_collision_area =  []
+var run_audio = GameSoundManager.Sounds.PLAYER_RUN
+var sound_manager = GameSoundManager.get_instance()
+@onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
 
@@ -37,6 +40,7 @@ func stun():
 func on_stun(delta):
 	stunned_timer.decrement_by(delta)
 	play_stunned()
+	walking_audio_player.stop()
 	invincible_frames.assign_max_value()	
 	reload_timer.assign_max_on_more_then_zero()
 	
@@ -52,9 +56,9 @@ func on_player_actions(delta):
 	velocity = direction * 600
 	move_and_slide()	
 	if velocity.length() > 0:
-		play_walk()
+		on_walk()
 	else:
-		play_idle()	
+		on_idle()	
 	if Input.is_action_just_pressed("fire") && reload_timer.value <= 0:
 		attack()
 
@@ -65,13 +69,15 @@ func knockback():
 	
 			
 # Try different approach for animation for  Halina or Aneta (animation tree + animation player setup)
-func play_idle():
+func on_idle():
+	walking_audio_player.stop()
 	if(reload_timer.value > 0 ):
 		animations.play("idle_reload")	
 	else:
 		animations.play("idle")	
 
-func play_walk():
+func on_walk():
+	sound_manager.play_sound(run_audio, walking_audio_player)
 	if(reload_timer.value > 0 ):
 		animations.play("walk_reload")
 	else:	
