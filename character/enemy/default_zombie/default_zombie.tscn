@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2tfu8bbgndoa"]
+[gd_scene load_steps=14 format=3 uid="uid://b2tfu8bbgndoa"]
 
 [ext_resource type="Script" path="res://character/enemy/default_zombie/default_zombie.gd" id="1_deosn"]
 [ext_resource type="Texture2D" uid="uid://bphy8bstbcrwx" path="res://character/enemy/default_zombie/zombie-dying-1.png" id="2_6ula0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://kbmm2h5tm4a0" path="res://character/enemy/default_zombie/zombie-hurt-2.png" id="7_7pu1u"]
 [ext_resource type="Texture2D" uid="uid://b1wwfvj7elxi6" path="res://character/enemy/default_zombie/zombie--walk-1.png" id="8_jh0ly"]
 [ext_resource type="Texture2D" uid="uid://bu60mg2gmv2vs" path="res://character/enemy/default_zombie/zombie--walk-2.png" id="9_fushc"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="10_qiyc7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nct2"]
 animations = [{
@@ -86,5 +87,7 @@ bus = &"Voices"
 
 [node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Ambient"
+
+[node name="GameAmbientAudioPool" parent="." instance=ExtResource("10_qiyc7")]
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]

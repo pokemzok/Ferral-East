@@ -4,45 +4,77 @@ signal hp_changed(current_hp)
 var weapon = Revolver.new()
 var invincible_frames = NumericAttribute.new(0, 10)
 var stunned_timer = NumericAttribute.new(0, 0.5) 
+var dying_timer = NumericAttribute.new(0, 1) 
 var reload_timer = NumericAttribute.new(0, 1) 
 var health_points = NumericAttribute.new(3, 10)
 var enemies_in_player_collision_area =  []
-var run_audio = GameSoundManager.Sounds.PLAYER_RUN
+var is_dead = false
+
 var sound_manager = GameSoundManager.get_instance()
+var grunts_audio = sound_manager.surbi_grunts
+var death_audio = GameSoundManager.Sounds.SURBI_DEATH
+var run_audio = GameSoundManager.Sounds.PLAYER_RUN
+
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
-
 
 func after_external_init():
 	emit_signal("hp_changed", health_points.value)	
 
 func _physics_process(delta):
-	on_dmg()
-	on_reload(delta)
-	if stunned_timer.value > 0:
-		on_stun(delta)	
-	else:
-		if (invincible_frames.value > 0):
-			invincible_frames.decrement_by()
-		on_player_actions(delta)	
+	if (!is_dead):
+		on_dmg()
+		on_reload(delta)
+		if (dying_timer.value > 0):
+			on_dying(delta)
+		elif stunned_timer.value > 0:
+			on_stun(delta)	
+		else:
+			if (invincible_frames.value > 0):
+				invincible_frames.decrement_by()
+			on_player_actions(delta)	
 
 func on_dmg():
 	if (invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
-		stun()
 		health_points.decrement_by()
 		emit_signal("hp_changed", health_points.value)
+		if (health_points.value < 1):
+			dying()
+		else:
+			stun()	
 
 func stun():
 	if (stunned_timer.value <= 0):
 		stunned_timer.assign_max_value()
+		audio_pool.play_sound_effect(grunts_audio.random_element())
 
+func dying():
+	if (dying_timer.value <= 0):
+		dying_timer.assign_max_value()
+		audio_pool.play_sound_effect(death_audio)
+	#TODO: dying timer plus dying animation
+	
 func on_stun(delta):
 	stunned_timer.decrement_by(delta)
 	play_stunned()
 	walking_audio_player.stop()
 	invincible_frames.assign_max_value()	
 	reload_timer.assign_max_on_more_then_zero()
+
+func on_dying(delta):
+	dying_timer.decrement_by(delta)
+	play_stunned() #FIXME play dying animation instead, so falling down plus lying on a floor
+	if (dying_timer.value <= 0):
+		die()
+
+
+func die():
+	is_dead = true
+	# TODO: play dead animation  (basically the guy lying on a floor without moving)
+	#FIXME event  to the game that the player is dead
+	# TODO: show game over message
+	# TODO: allow player to restart the game, go back to menu or quit
 	
 func on_reload(delta):
 	if(reload_timer.value > 0 ):
@@ -91,7 +123,6 @@ func attack():
 	audio_pool.play_sound_effect(weapon.get_shoot_audio())
 	if(!success):
 		start_reloading()
-		
 
 func start_reloading():
 	reload_timer.assign_max_value()

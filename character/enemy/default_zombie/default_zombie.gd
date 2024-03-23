@@ -1,23 +1,30 @@
 extends CharacterBody2D
 
-var motion = Vector2()
-var stunned_timer = NumericAttribute.new(0, NumericAttribute.new(0.1, 0.3).randomize_value().value)
-var health_points = NumericAttribute.new(2, 6)
-var dying_timer = NumericAttribute.new(0, 100)
 var player =  null
-var speed = NumericAttribute.new(100, 300) 
+var motion = Vector2()
+
+var stunned_timer = NumericAttribute.new(0, NumericAttribute.new(0.1, 0.3).randomize_value().value)
 var vocal_timer_max_range = NumericAttribute.new(1,6)
 var vocal_timer = NumericAttribute.new(1, 3)
+var dying_timer = NumericAttribute.new(0, 100)
+
+var health_points = NumericAttribute.new(2, 6)
+var speed = NumericAttribute.new(100, 300) 
 var speed_increase_factor = 0.5
 var projectiles_dmg_velocity = 100
+
 var stategy = preload("res://character/enemy/path_finding/path_finding_strategy.gd")
 var path_finding_stategy = stategy.random_strategy()
-var voices = ArrayCollection.new([GameSoundManager.Sounds.ZOMBIE_VOICE_1, GameSoundManager.Sounds.ZOMBIE_VOICE_2, GameSoundManager.Sounds.ZOMBIE_VOICE_3])
-var death_sounds = ArrayCollection.new([GameSoundManager.Sounds.ZOMBIE_DEATH_1, GameSoundManager.Sounds.ZOMBIE_DEATH_2, GameSoundManager.Sounds.ZOMBIE_DEATH_3, GameSoundManager.Sounds.ZOMBIE_DEATH_4])
+
 var sound_manager = GameSoundManager.get_instance()
+var voices = sound_manager.zombie_voices
+var death_sounds = sound_manager.zombie_death
 var run_audio = GameSoundManager.Sounds.PLAYER_RUN
-@onready var audio_player = $VoiceAudioStreamPlayer
+var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
+
+@onready var voice_audio_player = $VoiceAudioStreamPlayer
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
+@onready var audio_pool = $GameAmbientAudioPool
 
 func _ready():
 	randomize_stats()
@@ -58,7 +65,7 @@ func growl_on(delta):
 	if dying_timer.value > 0:
 		return
 	if (vocal_timer.value <= 0):
-		sound_manager.play_sound(voices.random_element(), audio_player)
+		sound_manager.play_sound(voices.random_element(), voice_audio_player)
 		vocal_timer.randomize_max_value_in_range(vocal_timer_max_range.value, vocal_timer_max_range.max_value)
 		vocal_timer.assign_max_value()
 	else:
@@ -106,6 +113,7 @@ func stun():
 		stunned_timer.assign_max_value()
 
 func take_dmg():
+	audio_pool.play_sound_effect(bullet_hit_audio)	
 	health_points.decrement_by()
 	if health_points.value <= 0:
 		dying()
@@ -118,8 +126,8 @@ func dying():
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
 
 func play_death_sound():
-	audio_player.stop()
-	sound_manager.play_sound(death_sounds.random_element(), audio_player)
+	voice_audio_player.stop()
+	sound_manager.play_sound(death_sounds.random_element(), voice_audio_player)
 
 func die():
 	queue_free()
