@@ -98,8 +98,8 @@ shape = SubResource("CapsuleShape2D_nr0wd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
 shape = SubResource("CircleShape2D_7iiwe")
 
-[node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
 [connection signal="body_exited" from="HurtboxArea2D" to="." method="on_hurtbox_leave"]

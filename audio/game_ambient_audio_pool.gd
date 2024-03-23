@@ -8,7 +8,7 @@ func play_sound_effect(sound_type: GameSoundManager.Sounds):
 
 func get_idle_audio_player():
 	for child in get_children():
-		var audio_player = child as AudioStreamPlayer
+		var audio_player = child as AudioStreamPlayer2D
 		if not audio_player.is_playing():
 			return audio_player
 	return get_children()[0]

@@ -19,7 +19,8 @@ enum Sounds {
 	SURBI_GRUNT_3,
 	SURBI_GRUNT_4,
 	SURBI_DEATH,
-	BULLET_HIT_BODY
+	BULLET_HIT_BODY,
+	MUSIC_DRUMS
 }
 
 var zombie_voices = ArrayCollection.new([Sounds.ZOMBIE_VOICE_1, Sounds.ZOMBIE_VOICE_2, Sounds.ZOMBIE_VOICE_3, Sounds.ZOMBIE_VOICE_4])
@@ -44,6 +45,7 @@ var sound_files = {
 	Sounds.SURBI_GRUNT_3: preload("res://audio/player/surbi/grunt-3.wav"),
 	Sounds.SURBI_GRUNT_4: preload("res://audio/player/surbi/grunt-4.wav"),
 	Sounds.SURBI_DEATH: preload("res://audio/player/surbi/death.wav"),
+	Sounds.MUSIC_DRUMS: preload("res://audio/background_music/drum-hit.wav")
 }
 
 static var instance = null

@@ -5,23 +5,23 @@
 [node name="GameAmbientAudioPool" type="Node"]
 script = ExtResource("1_ns3rh")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
-[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
-[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
-[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
-[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
-[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"

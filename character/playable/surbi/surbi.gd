@@ -91,7 +91,7 @@ func on_player_actions(delta):
 		on_walk()
 	else:
 		on_idle()	
-	if Input.is_action_just_pressed("fire") && reload_timer.value <= 0:
+	if Input.is_action_just_pressed("attack") && reload_timer.value <= 0:
 		attack()
 
 func knockback():

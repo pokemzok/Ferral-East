@@ -1,9 +1,5 @@
 extends Node2D
 
-# TODO 1
-# 2. Basic sound design:
-#   2.3 Pick If I should use AudioStreamPlayer or AudioStreamPlayer2D
-
 # TODO 
 # 1. Start screen (start,  options, audio, sterowanie postacią)
 # 2. Surbi death animation

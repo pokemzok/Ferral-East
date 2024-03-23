@@ -1,4 +1,16 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://cg1vlcrvmwe05"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://cg1vlcrvmwe05"]
+
+[sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_1qm1y"]
+resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_kf4od"]
+resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_ntape"]
+resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_r3irg"]
+resource_name = "Compressor"
 
 [resource]
 bus/1/name = &"Music"
@@ -7,15 +19,23 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
-bus/2/name = &"Ambient"
+bus/1/effect/0/effect = SubResource("AudioEffectStereoEnhance_1qm1y")
+bus/1/effect/0/enabled = true
+bus/2/name = &"SFX"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = 0.0
+bus/2/volume_db = -0.130497
 bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectStereoEnhance_kf4od")
+bus/2/effect/0/enabled = true
 bus/3/name = &"Voices"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 0.0
+bus/3/volume_db = -0.130497
 bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectStereoEnhance_ntape")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectCompressor_r3irg")
+bus/3/effect/1/enabled = true

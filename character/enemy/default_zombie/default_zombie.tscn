@@ -82,11 +82,11 @@ shape = SubResource("RectangleShape2D_1py7y")
 position = Vector2(12, -4.5)
 shape = SubResource("RectangleShape2D_c12mq")
 
-[node name="VoiceAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="VoiceAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 bus = &"Voices"
 
-[node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"Ambient"
+[node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [node name="GameAmbientAudioPool" parent="." instance=ExtResource("10_qiyc7")]
 

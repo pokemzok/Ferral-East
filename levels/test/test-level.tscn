@@ -9176,4 +9176,6 @@ polygon = PackedVector2Array(1660, 657, 1661, 757, 1356, 755, 1343, 724, 1337, 4
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_t3sf6")
+volume_db = -10.0
+autoplay = true
 bus = &"Music"
