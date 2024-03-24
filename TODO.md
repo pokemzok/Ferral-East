@@ -1,5 +1,6 @@
 
 # TODO 1
+# -1. Fix audio bug (when the game starts sound is triggered)
 # 0. Escape button  should pause game and take user back to menu (probably need to allow user mapping this button  as well)
 # 1. Resume -> should continue game where the user left it (if he clicked escape previously).
 # 2. Surbi death animation
@@ -17,6 +18,8 @@
 # 2.6 I would raise difficulty by adding more zombies and nudging their stats up till the threshold.
 
 # TODO 3
+# -1. Find out about loading screens and how to do it in optimized way (to not preload everything to RAM)
+# 0. Find and fix all TODO's in code.
 # 1. better enemy pathfinding + new arcade level (non  test) -> this would corelate with a better map design
 #	possible idea: add new pathfinding as an algorithm which can  be picked, but leave my previous for dumber zombies.
 # 2. Arcade logic on test map: dynamically add enemies in some sort of a wave logic. 
@@ -38,7 +41,8 @@
 # 6. Level design improvements?
 # 7. Totems logic? -  the idea is that Surbi would find item, which would on right click do something (like for example teleport  or second revolver)
 # 8. Shit-talking dialogue lines for Surbi, when he performes good (score is high)
-# 9. Start release process to see how difficult it is.
+# 9. Multiplayer (local PC hosting a server for the other who knows the ID and password)
+# 10. Start release process to see how difficult it is.
 
 # For future
 # Halina is a melee (higher damage, more health, ability to regenerate between waves)
