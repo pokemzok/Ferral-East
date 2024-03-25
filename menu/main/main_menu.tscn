@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://djcsnso72bwod"]
+[gd_scene load_steps=6 format=3 uid="uid://djcsnso72bwod"]
 
+[ext_resource type="Script" path="res://menu/main/menu.gd" id="1_qdchn"]
 [ext_resource type="Script" path="res://menu/main/video.gd" id="1_rn1fe"]
-[ext_resource type="Script" path="res://menu/main/start.gd" id="1_yrogw"]
-[ext_resource type="Script" path="res://menu/main/options.gd" id="1_yxq2s"]
-[ext_resource type="Script" path="res://menu/main/quit.gd" id="2_do7mn"]
 [ext_resource type="Script" path="res://menu/main/audio.gd" id="2_gryrn"]
 [ext_resource type="PackedScene" uid="uid://lsnxhkvoumvj" path="res://menu/main/action_button.tscn" id="3_i1hiv"]
 [ext_resource type="Script" path="res://menu/main/back.gd" id="3_t6l44"]
@@ -27,21 +25,19 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
 pivot_offset = Vector2(25, 50)
+script = ExtResource("1_qdchn")
 
 [node name="Start" type="Button" parent="UI/Menu"]
 layout_mode = 2
 text = "Start"
-script = ExtResource("1_yrogw")
 
 [node name="Options" type="Button" parent="UI/Menu"]
 layout_mode = 2
 text = "Options"
-script = ExtResource("1_yxq2s")
 
 [node name="Quit" type="Button" parent="UI/Menu"]
 layout_mode = 2
 text = "Quit"
-script = ExtResource("2_do7mn")
 
 [node name="Settings" type="TabContainer" parent="UI"]
 unique_name_in_owner = true
@@ -317,9 +313,9 @@ pivot_offset = Vector2(47, 32)
 text = "Back"
 script = ExtResource("3_t6l44")
 
-[connection signal="pressed" from="UI/Menu/Start" to="UI/Menu/Start" method="_on_pressed"]
-[connection signal="pressed" from="UI/Menu/Options" to="UI/Menu/Options" method="_on_pressed"]
-[connection signal="pressed" from="UI/Menu/Quit" to="UI/Menu/Quit" method="_on_pressed"]
+[connection signal="pressed" from="UI/Menu/Start" to="UI/Menu" method="_on_start_pressed"]
+[connection signal="pressed" from="UI/Menu/Options" to="UI/Menu" method="_on_options_pressed"]
+[connection signal="pressed" from="UI/Menu/Quit" to="UI/Menu" method="_on_quit_pressed"]
 [connection signal="toggled" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/FullScreen" to="UI/Settings/Video" method="_on_full_screen_toggled"]
 [connection signal="toggled" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/Borderless" to="UI/Settings/Video" method="_on_borderless_toggled"]
 [connection signal="item_selected" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/Vsync" to="UI/Settings/Video" method="_on_vsync_item_selected"]
