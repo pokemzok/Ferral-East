@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://o2x8w13lasm1"]
 
-[ext_resource type="Script" path="res://levels/test/test-level.gd" id="1_085m1"]
+[ext_resource type="Script" path="res://level/test/test-level.gd" id="1_085m1"]
 [ext_resource type="Texture2D" uid="uid://bqmifa0j6hwwm" path="res://tiles/free-2d-rpg-desert-tileset/PNG/bg.png" id="2_0wx2i"]
 [ext_resource type="Texture2D" uid="uid://kbr4omdedmay" path="res://tiles/free-2d-rpg-desert-tileset/PNG/land_9.png" id="3_w0yl7"]
 [ext_resource type="Texture2D" uid="uid://h1dv16o5cgu0" path="res://tiles/free-2d-rpg-desert-tileset/PNG/land_15.png" id="5_svk7u"]

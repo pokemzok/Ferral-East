@@ -1,10 +1,11 @@
 extends VBoxContainer
 
 @onready var settings = %Settings
-var scene_path = "res://levels/test/test-level.tscn"
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file(scene_path)
+	get_tree().change_scene_to_file(
+		LevelManager.get_instance().get_level(LevelManager.Levels.TEST)
+	)
 
 func _on_options_pressed():
 	print("working")

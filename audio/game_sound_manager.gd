@@ -50,7 +50,7 @@ var sound_files = {
 
 static var instance = null
 
-static func get_instance():
+static func get_instance() -> GameSoundManager:
 	if instance == null:
 		instance = GameSoundManager.new()
 		instance.name = "GameAudioManager"

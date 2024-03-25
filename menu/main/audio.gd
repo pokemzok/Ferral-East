@@ -9,7 +9,6 @@ var music_example = GameSoundManager.Sounds.MUSIC_DRUMS
 var sfx_example = GameSoundManager.Sounds.REVOLVER_SHOOT
 var voices_example = GameSoundManager.Sounds.ZOMBIE_DEATH_1
 
-# FIXME an error here ( this triggers my event processing which result in all  sounds  playing).
 func _ready():
 	disconnect_signals()
 	%Master.value = Persistence.config.get_value("Audio", '0')
