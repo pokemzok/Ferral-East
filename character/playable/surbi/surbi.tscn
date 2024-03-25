@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=17 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
+[ext_resource type="Texture2D" uid="uid://bqrg6upk1dat0" path="res://character/playable/surbi/death-2.png" id="2_n2k2p"]
 [ext_resource type="Texture2D" uid="uid://dkj37rtok7t7t" path="res://character/playable/surbi/idle-reload-1.png" id="3_6c5iq"]
 [ext_resource type="Texture2D" uid="uid://cubik354hvdd1" path="res://character/playable/surbi/hurt-1.png" id="3_iqhs7"]
 [ext_resource type="Texture2D" uid="uid://dbo47lxh6qe6q" path="res://character/playable/surbi/hurt-2.png" id="4_rsxhd"]
+[ext_resource type="Texture2D" uid="uid://juea6336pf36" path="res://character/playable/surbi/death-1.png" id="4_w300t"]
 [ext_resource type="Texture2D" uid="uid://cululvox111ia" path="res://character/playable/surbi/idle-reload-2.png" id="4_y3xry"]
 [ext_resource type="Texture2D" uid="uid://d2wovlajv5oxs" path="res://character/playable/surbi/walk-1.png" id="5_bkton"]
 [ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://character/playable/surbi/walk-2.png" id="6_ow20m"]
@@ -14,6 +16,28 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dp80f"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n2k2p")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6c5iq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w300t")
+}, {
+"duration": 5.0,
+"texture": ExtResource("2_n2k2p")
+}],
+"loop": true,
+"name": &"dying",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_ahcha")
@@ -85,7 +109,7 @@ script = ExtResource("1_v6b7d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
-animation = &"idle_reload"
+animation = &"dying"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

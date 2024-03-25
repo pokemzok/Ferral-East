@@ -27,6 +27,7 @@ var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 @onready var audio_pool = $GameAmbientAudioPool
 
 func _ready():
+	self.z_index = 1
 	randomize_stats()
 	vocal_timer.randomize_value()
 	var players = get_tree().get_nodes_in_group("player")
@@ -51,6 +52,7 @@ func _physics_process(delta):
 		hunt_player(delta)
 
 func on_dying(delta):
+	self.z_index = 0
 	walking_audio_player.stop()
 	$AnimatedSprite2D.play("death")
 	dying_timer.decrement_by(delta)

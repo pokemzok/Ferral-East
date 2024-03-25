@@ -64,14 +64,14 @@ func on_stun(delta):
 
 func on_dying(delta):
 	dying_timer.decrement_by(delta)
-	play_stunned() #FIXME play dying animation instead, so falling down plus lying on a floor
+	animations.play("dying")
 	if (dying_timer.value <= 0):
 		die()
 
 
 func die():
 	is_dead = true
-	# TODO: play dead animation  (basically the guy lying on a floor without moving)
+	animations.play("death")	
 	#FIXME event  to the game that the player is dead
 	# TODO: show game over message
 	# TODO: allow player to restart the game, go back to menu or quit

@@ -2,8 +2,7 @@
 # TODO 1
 # 0. Escape button  should pause game and take user back to menu (probably need to allow user mapping this button  as well)
 # 1. Resume -> should continue game where the user left it (if he clicked escape previously).
-# 2. Surbi death animation
-# 3. Surbi death processing (show death screen plus restart,  go back to menu or quit)
+# 2. Surbi death processing (show death screen plus restart,  go back to menu or quit)
 
 # TODO 2
 # 1. Arcade logic on test map:
