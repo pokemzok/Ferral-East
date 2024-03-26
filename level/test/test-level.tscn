@@ -9136,7 +9136,7 @@ sources/28 = SubResource("TileSetAtlasSource_phiig")
 sources/29 = SubResource("TileSetAtlasSource_kldvo")
 sources/30 = SubResource("TileSetAtlasSource_umb7k")
 
-[node name="Test-level" type="Node2D"]
+[node name="TestLevel" type="Node2D"]
 position = Vector2(-2, 0)
 script = ExtResource("1_085m1")
 

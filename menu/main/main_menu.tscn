@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://menu/main/back.gd" id="3_t6l44"]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_qdchn")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -25,7 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
 pivot_offset = Vector2(25, 50)
-script = ExtResource("1_qdchn")
 
 [node name="Start" type="Button" parent="UI/Menu"]
 layout_mode = 2
@@ -313,9 +313,9 @@ pivot_offset = Vector2(47, 32)
 text = "Back"
 script = ExtResource("3_t6l44")
 
-[connection signal="pressed" from="UI/Menu/Start" to="UI/Menu" method="_on_start_pressed"]
-[connection signal="pressed" from="UI/Menu/Options" to="UI/Menu" method="_on_options_pressed"]
-[connection signal="pressed" from="UI/Menu/Quit" to="UI/Menu" method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Menu/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/Menu/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="UI/Menu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="toggled" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/FullScreen" to="UI/Settings/Video" method="_on_full_screen_toggled"]
 [connection signal="toggled" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/Borderless" to="UI/Settings/Video" method="_on_borderless_toggled"]
 [connection signal="item_selected" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/Vsync" to="UI/Settings/Video" method="_on_vsync_item_selected"]

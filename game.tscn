@@ -1,14 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp4uapunwa8i1"]
+[gd_scene load_steps=3 format=3 uid="uid://cp4uapunwa8i1"]
+
+[ext_resource type="PackedScene" uid="uid://djcsnso72bwod" path="res://menu/main/main_menu.tscn" id="1_wcqhf"]
 
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node
 
+var current_level_instance
+@onready var menu = $MainMenu
+
 func _ready():
-	var level_path = LevelManager.get_instance().get_level(LevelManager.Levels.TEST)
-	var result = get_tree().change_scene_to_file(level_path)
-	print (result)
+	menu.connect(\"start_button_pressed\", on_start)
 	
+func _process(delta):
+	if Input.is_action_just_pressed(\"show_or_hide_menu\"):
+		on_menu_toggle()
+
+func on_menu_toggle():
+	var is_menu_visible = menu.toggle()
+	get_tree().paused = is_menu_visible
+	
+func on_start():
+	menu.hide()
+	var level_path = LevelManager.get_instance().get_level(LevelManager.Levels.TEST)
+	var level = load(level_path)
+	current_level_instance = level.instantiate()
+	add_child(current_level_instance)
 "
 
 [node name="Game" type="Node"]
 script = SubResource("GDScript_3slsy")
+
+[node name="MainMenu" parent="." instance=ExtResource("1_wcqhf")]
