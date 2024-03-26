@@ -1,8 +1,10 @@
 
 # TODO 1
-# 0. Escape button  should pause game and take user back to menu (probably need to allow user mapping this button  as well)
-# 1. Resume -> should continue game where the user left it (if he clicked escape previously).
+# 0. Resume button on menu, which should only be showed when game is paused. Start button also shouldn't be showed when the game is paused. 
+# 0.1 Pressing Resume button should resume the game.
+# 1. Allow user to map escape button to pause/unpause the game.
 # 2. Surbi death processing (show death screen plus restart,  go back to menu or quit)
+# 3. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
 
 # TODO 2
 # 1. Arcade logic on test map:
