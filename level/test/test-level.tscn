@@ -9137,6 +9137,7 @@ sources/29 = SubResource("TileSetAtlasSource_kldvo")
 sources/30 = SubResource("TileSetAtlasSource_umb7k")
 
 [node name="TestLevel" type="Node2D"]
+process_mode = 1
 position = Vector2(-2, 0)
 script = ExtResource("1_085m1")
 

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2tfu8bbgndoa" path="res://character/enemy/default_zombie/default_zombie.tscn" id="2_25y0t"]
 
 [node name="Hometown" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_n7mml")
 
 [node name="EnemiesSpawn" type="Node2D" parent="."]
