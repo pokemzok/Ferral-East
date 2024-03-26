@@ -12,6 +12,12 @@ script = ExtResource("1_qdchn")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="ColorRect" type="ColorRect" parent="UI"]
+modulate = Color(1, 1, 1, 0.478431)
+offset_right = 1923.0
+offset_bottom = 1083.0
+color = Color(0, 0, 0, 1)
+
 [node name="Menu" type="VBoxContainer" parent="UI"]
 unique_name_in_owner = true
 anchors_preset = 8
