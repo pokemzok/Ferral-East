@@ -2,6 +2,9 @@ extends CanvasLayer
 
 var health_point_res = preload("res://player/Health.png")
 
+func _ready():
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_HP_CHANGED, on_hp_changed)
+
 func on_hp_changed(hp):
 	clear_hearts()
 	for i in range(hp):

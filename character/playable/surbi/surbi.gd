@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-signal hp_changed(current_hp)
 var weapon = Revolver.new()
 var invincible_frames = NumericAttribute.new(0, 10)
 var stunned_timer = NumericAttribute.new(0, 0.5) 
@@ -20,7 +19,7 @@ var run_audio = GameSoundManager.Sounds.PLAYER_RUN
 @onready var audio_pool = $GameAmbientAudioPool
 
 func after_external_init():
-	emit_signal("hp_changed", health_points.value)	
+	GlobalEventBus.player_hp_changed.emit(health_points.value)
 
 func _physics_process(delta):
 	if (!is_dead):
@@ -38,7 +37,7 @@ func _physics_process(delta):
 func on_dmg():
 	if (invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
 		health_points.decrement_by()
-		emit_signal("hp_changed", health_points.value)
+		GlobalEventBus.player_hp_changed.emit(health_points.value)
 		if (health_points.value < 1):
 			dying()
 		else:
@@ -68,13 +67,10 @@ func on_dying(delta):
 	if (dying_timer.value <= 0):
 		die()
 
-
 func die():
 	is_dead = true
 	animations.play("death")	
-	#FIXME event  to the game that the player is dead
-	# TODO: show game over message
-	# TODO: allow player to restart the game, go back to menu or quit
+	GlobalEventBus.player_death.emit()
 	
 func on_reload(delta):
 	if(reload_timer.value > 0 ):

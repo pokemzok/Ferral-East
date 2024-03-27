@@ -1,8 +1,7 @@
 
 # TODO 1
-# 1. Allow user to map escape button to pause/unpause the game.
-# 2. Surbi death processing (show death screen plus restart,  go back to menu or quit)
-# 3. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
+# 1. Surbi death processing (show death screen plus restart, go back to menu or quit)
+# 2. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
 
 # TODO 2
 # 1. Arcade logic on test map:

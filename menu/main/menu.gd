@@ -1,8 +1,5 @@
 extends Node
 
-signal start_button_pressed
-signal resume_button_pressed
-
 @onready var settings = %Settings
 @onready var menu = %Menu
 @onready var menu_ui = $UI
@@ -10,12 +7,12 @@ signal resume_button_pressed
 @onready var start_button = %Start
 
 func _on_start_pressed():
-	emit_signal("start_button_pressed")
+	GlobalEventBus.start_button_pressed.emit()
 	start_button.hide()
 	resume_button.show()
 
 func _on_resume_pressed():
-	emit_signal("resume_button_pressed")
+	GlobalEventBus.resume_button_pressed.emit()
 
 func _on_options_pressed():
 	settings.show()
