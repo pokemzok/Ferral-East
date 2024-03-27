@@ -1,7 +1,7 @@
 
 # TODO 1
-# 1. Surbi death processing (show death screen plus restart, go back to menu or quit)
-# 2. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
+# 2. Create a theme for menus so I can peek font and sizes and eliminate scaling
+# 3. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
 
 # TODO 2
 # 1. Arcade logic on test map:

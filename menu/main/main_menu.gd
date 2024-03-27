@@ -35,3 +35,8 @@ func toggle() -> bool:
 			back_to_main_menu()
 		return menu_ui.visible
 	return menu_ui.visible
+
+func reset():
+	start_button.show()
+	resume_button.hide()
+	menu_ui.visible = true

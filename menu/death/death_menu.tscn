@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4jon5ago286d"]
+
+[ext_resource type="Script" path="res://menu/death/death_menu.gd" id="1_ex6ql"]
+
+[node name="DeathMenu" type="Node"]
+script = ExtResource("1_ex6ql")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+modulate = Color(1, 1, 1, 0.478431)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -961.5
+offset_top = -1083.0
+offset_right = 961.5
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -79.0
+offset_right = 111.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Restart" type="Button" parent="UI/ColorRect/HBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Menu" type="Button" parent="UI/ColorRect/HBoxContainer"]
+layout_mode = 2
+text = "Quit to menu
+"
+
+[node name="Quit" type="Button" parent="UI/ColorRect/HBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[connection signal="pressed" from="UI/ColorRect/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UI/ColorRect/HBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="UI/ColorRect/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
