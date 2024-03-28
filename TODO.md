@@ -1,6 +1,6 @@
 
 # TODO 1
-# 2. Create a theme for menus so I can peek font and sizes and eliminate scaling
+# 2. Checkboxes are now too small. I probably need to provide some custom big checkboxes.
 # 3. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
 
 # TODO 2

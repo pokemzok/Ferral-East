@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dvy7di712gwwf"]
+
+[ext_resource type="Texture2D" uid="uid://bwygo5yy1lsjo" path="res://theme/checkbox.png" id="1_g8hi7"]
+[ext_resource type="FontFile" uid="uid://b5u74goscklhm" path="res://font/Rye-Regular.ttf" id="1_jy1tr"]
+[ext_resource type="Texture2D" uid="uid://3ypl651snbyt" path="res://theme/checkbox-unchecked.png" id="2_4i41e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mgc4s"]
+
+[resource]
+default_font = ExtResource("1_jy1tr")
+default_font_size = 40
+CheckBox/icons/checked = ExtResource("1_g8hi7")
+CheckBox/icons/unchecked = ExtResource("2_4i41e")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_mgc4s")
+HBoxContainer/constants/separation = 40
+VBoxContainer/constants/separation = 40
