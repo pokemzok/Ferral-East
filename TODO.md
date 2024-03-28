@@ -1,7 +1,6 @@
 
 # TODO 1
-# 2. Checkboxes are now too small. I probably need to provide some custom big checkboxes.
-# 3. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
+# 1. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
 
 # TODO 2
 # 1. Arcade logic on test map:

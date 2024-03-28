@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dmbwdxk51kkvc" path="res://tiles/my-own/house.png" id="9_uv2e1"]
 [ext_resource type="Texture2D" uid="uid://cpfiqo1br6bxt" path="res://tiles/free-2d-rpg-desert-tileset/PNG/land_5.png" id="10_8y3gr"]
 [ext_resource type="PackedScene" uid="uid://cf2bnf2wtv7ep" path="res://player/player.tscn" id="13_rh5vn"]
-[ext_resource type="AudioStream" uid="uid://dxsoval4shdrc" path="res://audio/background_music/zombie-boogy.mp3" id="14_c5t87"]
+[ext_resource type="AudioStream" uid="uid://ci7nagtqeh8xm" path="res://audio/background_music/Halina-drum-and-bass.mp3" id="14_frb14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ebigg"]
 texture = ExtResource("2_0wx2i")
@@ -9176,6 +9176,6 @@ polygon = PackedVector2Array(162, 1029, 164, 1022, 363, 1025, 596, 1022, 702, 10
 polygon = PackedVector2Array(1660, 657, 1661, 757, 1356, 755, 1343, 724, 1337, 474, 1334, 370, 1326, 248, 1657, 251, 1669, 263, 1666, 510)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("14_c5t87")
+stream = ExtResource("14_frb14")
 autoplay = true
 bus = &"Music"
