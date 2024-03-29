@@ -4,11 +4,19 @@ var health_point_res = preload("res://player/Health.png")
 
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_HP_CHANGED, on_hp_changed)
+	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_DISPLAYED, on_menu_displayed)
+	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, on_menu_hidden)
 
 func on_hp_changed(hp):
 	clear_hearts()
 	for i in range(hp):
 		add_hp()
+
+func on_menu_displayed():
+	hide()
+
+func on_menu_hidden():
+	show()
 
 func clear_hearts():
 	var health_container = $HealthContainer

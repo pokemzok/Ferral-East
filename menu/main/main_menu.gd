@@ -24,19 +24,22 @@ func _on_options_pressed():
 	settings.show()
 	menu.hide()
 
-func back_to_main_menu():
+func show_main_menu():
 	menu.show()
 	settings.hide()
+	GlobalEventBus.main_menu_displayed.emit()	
 
 func _on_quit_pressed():
 	get_tree().quit()
 
 func toggle() -> bool:
-	if (!start_button.visible):
-		if(!settings.visible):
-			visible = !visible 
-		if (visible):
-			back_to_main_menu()
+	if (!start_button.visible && !settings.visible):
+		visible = !visible 
+	
+	if (visible):
+		show_main_menu()
+	else:
+		GlobalEventBus.main_menu_hidden.emit()			
 	return visible
 
 func reset():

@@ -1,7 +1,3 @@
-# FIXME
-# 1. When I change spawn point location my zombies can't locate player. 
-# 1.1 Should I fix what I have or dig deeper into a proper pathfinding?
-
 # TODO 2
 # 1. Arcade logic on test map:
 # 1.1 Multiple spawn points

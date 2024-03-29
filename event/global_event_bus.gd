@@ -5,6 +5,8 @@ signal start_button_pressed
 signal resume_button_pressed
 signal restart_button_pressed
 signal quit_to_menu_button_pressed
+signal main_menu_displayed
+signal main_menu_hidden
 
 #player
 signal player_death
@@ -15,7 +17,8 @@ const START_BUTTON_PRESSED = "start_button_pressed"
 const RESUME_BUTTON_PRESSED = "resume_button_pressed"
 const RESTART_BUTTON_PRESSED = "restart_button_pressed"
 const QUIT_TO_MENU_BUTTON_PRESSED = "quit_to_menu_button_pressed"
-
+const MAIN_MENU_DISPLAYED = "main_menu_displayed"
+const MAIN_MENU_HIDDEN =  "main_menu_hidden"
 const PLAYER_DEATH = "player_death"
 const PLAYER_HP_CHANGED = "player_hp_changed"
 
