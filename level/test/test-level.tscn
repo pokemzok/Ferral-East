@@ -9150,6 +9150,18 @@ layer_1/tile_data = PackedInt32Array()
 [node name="EnemiesSpawn" type="Node2D" parent="."]
 position = Vector2(33, 39)
 
+[node name="EnemiesSpawn2" type="Node2D" parent="."]
+position = Vector2(1875, 1040)
+
+[node name="EnemiesSpawn3" type="Node2D" parent="."]
+position = Vector2(40, 1026)
+
+[node name="EnemiesSpawn4" type="Node2D" parent="."]
+position = Vector2(1900, 39)
+
+[node name="EnemiesSpawn5" type="Node2D" parent="."]
+position = Vector2(1334, 497)
+
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(897, 457)
 

@@ -1,14 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp4uapunwa8i1"]
+[gd_scene load_steps=5 format=3 uid="uid://cp4uapunwa8i1"]
 
 [ext_resource type="PackedScene" uid="uid://djcsnso72bwod" path="res://menu/main/main_menu.tscn" id="1_wcqhf"]
 [ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="2_tx34t"]
+[ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="3_4ol11"]
 
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node
 
 var current_level_instance
+var current_level_path
+
 @onready var menu = $MainMenu
 @onready var death_menu = $DeathMenu
+@onready var loading_screen = $LoadingScreen
+
 func _ready():
 	death_menu.hide()
 	GlobalEventBus.connect(GlobalEventBus.START_BUTTON_PRESSED, on_start)
@@ -18,6 +23,19 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.QUIT_TO_MENU_BUTTON_PRESSED, on_quit_to_menu)
 	
 func _process(delta):
+	if (loading_screen.visible):
+		on_resource_loading()
+	else:	
+		on_keyboard_pressed()
+
+func on_resource_loading():
+	if (ResourceLoader.load_threaded_get_status(current_level_path) == ResourceLoader.THREAD_LOAD_LOADED):
+		var level = ResourceLoader.load_threaded_get(current_level_path)
+		current_level_instance = level.instantiate()
+		add_child(current_level_instance)
+		loading_screen.visible = false
+
+func on_keyboard_pressed():
 	if Input.is_action_just_pressed(\"show_or_hide_menu\"):
 		on_menu_toggle()
 
@@ -27,10 +45,9 @@ func on_menu_toggle():
 	
 func on_start():
 	menu.hide()
-	var level_path = LevelManager.get_instance().get_level(LevelManager.Levels.TEST)
-	var level = load(level_path)
-	current_level_instance = level.instantiate()
-	add_child(current_level_instance)
+	current_level_path = LevelManager.get_instance().get_level(LevelManager.Levels.TEST)
+	ResourceLoader.load_threaded_request(current_level_path)
+	loading_screen.visible = true
 
 func on_restart():
 	clean_up_after_player_death()
@@ -58,3 +75,6 @@ script = SubResource("GDScript_3slsy")
 [node name="MainMenu" parent="." instance=ExtResource("1_wcqhf")]
 
 [node name="DeathMenu" parent="." instance=ExtResource("2_tx34t")]
+
+[node name="LoadingScreen" parent="." instance=ExtResource("3_4ol11")]
+visible = false

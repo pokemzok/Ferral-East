@@ -1,6 +1,6 @@
-
-# TODO 1
-# 1. Optimize level loading so it could be async  (see your conversation with  AI "Best practices for level management in GODOT")
+# FIXME
+# 1. When I change spawn point location my zombies can't locate player. 
+# 1.1 Should I fix what I have or dig deeper into a proper pathfinding?
 
 # TODO 2
 # 1. Arcade logic on test map:
@@ -16,7 +16,6 @@
 # 2.8 Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.
 
 # TODO 3
-# -1. Find out about loading screens and how to do it in optimized way (to not preload everything to RAM)
 # 0. Find and fix all TODO's in code.
 # 1. better enemy pathfinding + new arcade level (non  test) -> this would corelate with a better map design
 #	possible idea: add new pathfinding as an algorithm which can  be picked, but leave my previous for dumber zombies. 
@@ -26,11 +25,10 @@
 
 # TODO  4: improvements
 # 0. Resolution scaling (I  want for the player to  be able to pick a resolution)
-# 1. Nicer menu 
-# 1.1 Less pixels
-# 1.2 Some interesting background as well
-# 1.3 Sounds on clicking on the main menu (not on options since that would be just annoying)
-# 2. Sound design - currently it is uneveen and a bit  quiet.
+# 1. Nicer menu and loading screens
+# 1.1 Some interesting background as well
+# 1.2 Sounds on clicking on the main menu (not on options since that would be just annoying)
+# 2. Sound design
 # 2.1 Sound volume normalization (i  want same level of audio for all of my samples)
 # 2.2 More custome made songs for my game ( find or create so i  can swap my  first choices)
 # 3. More enemy types.

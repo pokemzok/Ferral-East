@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgjvc8fmlnolf"]
+
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://theme/base_theme.tres" id="1_om3q8"]
+
+[node name="LoadingScreen" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1916.0
+offset_bottom = 1074.0
+color = Color(0.415686, 0.415686, 0.415686, 1)
+
+[node name="ThemeControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1918.0
+offset_bottom = 1064.0
+theme = ExtResource("1_om3q8")
+
+[node name="Label" type="Label" parent="ThemeControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.5
+offset_top = -25.5
+offset_right = 97.5
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "LOADING"
