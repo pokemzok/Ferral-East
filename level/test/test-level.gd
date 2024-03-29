@@ -1,7 +1,7 @@
 extends Node
 
 var zombie = preload("res://character/enemy/default_zombie/default_zombie.tscn")
-var spawn_time = NumericAttribute.new(3, 3)
+var spawn_time = NumericAttribute.new(3, 4)
 var spawn_points 
 
 func _ready():

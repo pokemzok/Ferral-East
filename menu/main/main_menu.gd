@@ -1,19 +1,25 @@
-extends Node
+extends CanvasLayer
 
 @onready var settings = %Settings
 @onready var menu = %Menu
-@onready var menu_ui = $UI
 @onready var resume_button = %Resume
 @onready var start_button = %Start
+@onready var restart_button = %Restart
+@onready var quit_to_menu_button = %QuitToMenu
 
 func _on_start_pressed():
 	GlobalEventBus.start_button_pressed.emit()
 	start_button.hide()
+	restart_button.show()
 	resume_button.show()
+	quit_to_menu_button.show()
 
 func _on_resume_pressed():
 	GlobalEventBus.resume_button_pressed.emit()
 
+func _on_restart_pressed():
+	GlobalEventBus.restart_button_pressed.emit()
+	
 func _on_options_pressed():
 	settings.show()
 	menu.hide()
@@ -25,18 +31,19 @@ func back_to_main_menu():
 func _on_quit_pressed():
 	get_tree().quit()
 
-func hide():
-	menu_ui.hide()
-
 func toggle() -> bool:
-	if (!settings.visible && !start_button.visible):
-		menu_ui.visible = !menu_ui.visible 
-		if (menu_ui.visible):
+	if (!start_button.visible):
+		if(!settings.visible):
+			visible = !visible 
+		if (visible):
 			back_to_main_menu()
-		return menu_ui.visible
-	return menu_ui.visible
+	return visible
 
 func reset():
 	start_button.show()
 	resume_button.hide()
-	menu_ui.visible = true
+	restart_button.hide()
+	quit_to_menu_button.hide()
+
+func _on_quit_to_main_menu_pressed():
+	GlobalEventBus.quit_to_menu_button_pressed.emit()

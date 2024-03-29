@@ -3,12 +3,10 @@
 [ext_resource type="Script" path="res://menu/death/death_menu.gd" id="1_ex6ql"]
 [ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://theme/base_theme.tres" id="2_xbv2g"]
 
-[node name="DeathMenu" type="Node"]
+[node name="DeathMenu" type="CanvasLayer"]
 script = ExtResource("1_ex6ql")
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="UI"]
+[node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0.478431)
 anchors_preset = 7
 anchor_left = 0.5
@@ -22,14 +20,14 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0, 0, 0, 1)
 
-[node name="ThemeControl" type="Control" parent="UI"]
+[node name="ThemeControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1921.0
 offset_bottom = 1084.0
 theme = ExtResource("2_xbv2g")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ThemeControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -43,20 +41,20 @@ offset_bottom = 29.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Restart" type="Button" parent="UI/ThemeControl/HBoxContainer"]
+[node name="Restart" type="Button" parent="ThemeControl/HBoxContainer"]
 layout_mode = 2
 text = "Restart"
 
-[node name="Menu" type="Button" parent="UI/ThemeControl/HBoxContainer"]
+[node name="Menu" type="Button" parent="ThemeControl/HBoxContainer"]
 layout_mode = 2
-text = "Quit to menu
+text = "Quit to main menu
 "
 
-[node name="Quit" type="Button" parent="UI/ThemeControl/HBoxContainer"]
+[node name="Quit" type="Button" parent="ThemeControl/HBoxContainer"]
 layout_mode = 2
 text = "Quit
 "
 
-[connection signal="pressed" from="UI/ThemeControl/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="UI/ThemeControl/HBoxContainer/Menu" to="." method="_on_menu_pressed"]
-[connection signal="pressed" from="UI/ThemeControl/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="ThemeControl/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="ThemeControl/HBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="ThemeControl/HBoxContainer/Quit" to="." method="_on_quit_pressed"]

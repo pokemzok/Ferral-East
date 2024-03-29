@@ -1,6 +1,5 @@
-extends Node
+extends CanvasLayer
 
-@onready var ui = $UI
 
 func _on_restart_pressed():
 	GlobalEventBus.restart_button_pressed.emit()
@@ -10,9 +9,3 @@ func _on_menu_pressed():
 
 func _on_quit_pressed():
 	get_tree().quit()
-
-func show():
-	ui.show()
-	
-func hide():
-	ui.hide()	

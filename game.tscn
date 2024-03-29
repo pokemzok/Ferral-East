@@ -25,7 +25,7 @@ func _ready():
 func _process(delta):
 	if (loading_screen.visible):
 		on_resource_loading()
-	else:	
+	elif(!death_menu.visible):	
 		on_keyboard_pressed()
 
 func on_resource_loading():
@@ -33,7 +33,7 @@ func on_resource_loading():
 		var level = ResourceLoader.load_threaded_get(current_level_path)
 		current_level_instance = level.instantiate()
 		add_child(current_level_instance)
-		loading_screen.visible = false
+		loading_screen.hide()
 
 func on_keyboard_pressed():
 	if Input.is_action_just_pressed(\"show_or_hide_menu\"):
@@ -47,7 +47,7 @@ func on_start():
 	menu.hide()
 	current_level_path = LevelManager.get_instance().get_level(LevelManager.Levels.TEST)
 	ResourceLoader.load_threaded_request(current_level_path)
-	loading_screen.visible = true
+	loading_screen.show()
 
 func on_restart():
 	clean_up_after_player_death()
@@ -75,6 +75,7 @@ script = SubResource("GDScript_3slsy")
 [node name="MainMenu" parent="." instance=ExtResource("1_wcqhf")]
 
 [node name="DeathMenu" parent="." instance=ExtResource("2_tx34t")]
+visible = false
 
 [node name="LoadingScreen" parent="." instance=ExtResource("3_4ol11")]
 visible = false
