@@ -89,16 +89,16 @@ func on_walk():
 	sound_manager.play_sound(run_audio, walking_audio_player)
 
 func dumb_path_finding_collide(player, delta):
-	position += dumb_path_finding(player, delta)
+	global_position += dumb_path_finding(player, delta)
 	move_and_collide(motion)
 
 func dumb_path_finding_slide(player, delta):
-	position += dumb_path_finding(player, delta)
+	global_position += dumb_path_finding(player, delta)
 	move_and_slide()
 
 func dumb_path_finding(player, delta) -> Vector2:
-	var direction = (player.position - position).normalized()
-	var distance = position.distance_to(player.position)
+	var direction = (player.global_position - global_position).normalized()
+	var distance = global_position.distance_to(player.global_position)
 	speed.new_value(speed.value + (distance * speed_increase_factor))
 	speed.new_value(min(speed.value, speed.max_value))
 	return direction * speed.value * delta
