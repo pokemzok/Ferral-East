@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var player =  null
 var motion = Vector2()
-
+var type = Enemy.EnemyType.DEFAULT_ZOMBIE
 var stunned_timer = NumericAttribute.new(0, NumericAttribute.new(0.1, 0.3).randomize_value().value)
 var vocal_timer_max_range = NumericAttribute.new(1,6)
 var vocal_timer = NumericAttribute.new(1, 3)
@@ -117,11 +117,13 @@ func stun():
 func take_dmg():
 	audio_pool.play_sound_effect(bullet_hit_audio)	
 	health_points.decrement_by()
+	GlobalEventBus.enemy_damaged.emit(type)
 	if health_points.value <= 0:
 		dying()
 	
 func dying():
 	if (dying_timer.value <= 0):
+		GlobalEventBus.enemy_death.emit(type)
 		play_death_sound()	
 		dying_timer.assign_max_value()
 		$CollisionShape2D.set_deferred("disabled",  true)

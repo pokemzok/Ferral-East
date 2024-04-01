@@ -1,4 +1,8 @@
 # TODO 2
+# 0. Where should I implement arcade logic? Should i be on the map itself? 
+#  Or should it be separate logic extracted so it could be reused on multiple maps?
+#  I guess I can start by displaying player his score (so connecting a score to a player HUD).
+#  I also think that I can send whole score object on eny score update.	 
 # 1. Arcade logic on test map:
 # 1.1 Multiple spawn points
 # 2.2 Introduce zombie waves, each wave will be started manually by player by shooting 

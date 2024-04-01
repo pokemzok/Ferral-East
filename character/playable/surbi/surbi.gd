@@ -38,6 +38,7 @@ func on_dmg():
 	if (invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
 		health_points.decrement_by()
 		GlobalEventBus.player_hp_changed.emit(health_points.value)
+		GlobalEventBus.player_damaged.emit()
 		if (health_points.value < 1):
 			dying()
 		else:

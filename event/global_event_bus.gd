@@ -11,6 +11,10 @@ signal main_menu_hidden
 #player
 signal player_death
 signal player_hp_changed
+signal player_damaged
+#enemy
+signal enemy_damaged
+signal enemy_death 
 
 #signal_names so I wouldn't have to change it everywhere
 const START_BUTTON_PRESSED = "start_button_pressed"
@@ -21,4 +25,6 @@ const MAIN_MENU_DISPLAYED = "main_menu_displayed"
 const MAIN_MENU_HIDDEN =  "main_menu_hidden"
 const PLAYER_DEATH = "player_death"
 const PLAYER_HP_CHANGED = "player_hp_changed"
-
+const PLAYER_DAMAGED = "player_damaged"
+const ENEMY_DAMAGED = "enemy_damaged"
+const ENEMY_DEATH = "enemy_death"
