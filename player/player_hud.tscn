@@ -22,9 +22,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -249.0
-offset_top = 1.0
-offset_bottom = 397.0
+offset_left = -275.0
+offset_top = 6.0
+offset_right = -26.0
+offset_bottom = 402.0
 grow_horizontal = 0
 
 [node name="LevelScore" type="RichTextLabel" parent="ThemeControl/ScoreContainer"]
@@ -38,7 +39,6 @@ autowrap_mode = 0
 
 [node name="LastEnemyPoints" type="RichTextLabel" parent="ThemeControl/ScoreContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
