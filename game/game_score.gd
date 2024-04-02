@@ -3,6 +3,7 @@ extends Node
 
 var global_score = 0
 var level_score = 0
+var level_score_max = 1000000000
 var global_kills = 0
 var perfect_kills = 0
 var score_multiplier = 1
@@ -16,8 +17,7 @@ func _init():
 func on_player_damaged():
 	perfect_kills = 0
 	score_multiplier = 1
-	if (level_score > 0):
-		increment_score(-20)
+	increment_score(-20)
 	
 func on_enemy_damaged(type):
 	var enemy_value = 0
@@ -45,9 +45,14 @@ func select_score_multiplier() -> int:
 			break
 	return multiplier			
 
-func increment_score(enemy_value):
-	level_score += (enemy_value * score_multiplier)
-	GlobalEventBus.score_changed.emit(ScoreDetails.new(level_score, enemy_value, score_multiplier))
+func increment_score(score_delta):
+	if (score_delta > 0 && level_score >= level_score_max):
+		level_score = level_score_max
+	elif (score_delta < 0 && level_score <= 0):
+		level_score = 0			
+	else:	
+		level_score += (score_delta * score_multiplier)
+	GlobalEventBus.score_changed.emit(ScoreDetails.new(level_score, score_delta, score_multiplier))
 
 func on_level_end():
 	global_score += level_score

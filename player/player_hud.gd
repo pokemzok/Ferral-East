@@ -2,8 +2,8 @@ extends CanvasLayer
 
 var health_point_res = preload("res://player/Health.png")
 
-@onready var level_score_label = %LevelScore
-@onready var last_enemy_points_label = %LastEnemyPoints
+@onready var level_score_label: RichTextLabel = %LevelScore
+@onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
 var enemy_points_colors = {
 	1: Color("#ffffff", 0),
 	2: Color("#00ff00", 0), 
@@ -49,9 +49,7 @@ func add_hp():
 	health_point_icon.texture = health_point_res
 	$HealthContainer.add_child(health_point_icon)
 
-# TODO: push outline color?
-# TODO: red color for when use was damaged
-# TODO: different colors for the LastEnemyPoints if multiplier is bigger then 1
+# TODO: outline color or other way to see better the score
 func on_score_changed(details: ScoreDetails):
 	level_score_update(details)
 	enemy_points_update(details)

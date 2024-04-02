@@ -38,10 +38,10 @@ func on_dmg():
 	if (invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
 		health_points.decrement_by()
 		GlobalEventBus.player_hp_changed.emit(health_points.value)
-		GlobalEventBus.player_damaged.emit()
 		if (health_points.value < 1):
 			dying()
 		else:
+			GlobalEventBus.player_damaged.emit()
 			stun()	
 
 func stun():
@@ -53,7 +53,6 @@ func dying():
 	if (dying_timer.value <= 0):
 		dying_timer.assign_max_value()
 		audio_pool.play_sound_effect(death_audio)
-	#TODO: dying timer plus dying animation
 	
 func on_stun(delta):
 	stunned_timer.decrement_by(delta)
