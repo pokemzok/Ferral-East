@@ -1,12 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd62e5rcq0nxm"]
+[gd_scene load_steps=3 format=3 uid="uid://bd62e5rcq0nxm"]
 
 [ext_resource type="Script" path="res://player/player_hud.gd" id="1_y8eoh"]
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://theme/base_theme.tres" id="2_ndj7i"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_y8eoh")
 
-[node name="HealthContainer" type="VBoxContainer" parent="."]
-offset_left = 1829.0
-offset_top = 10.0
-offset_right = 1869.0
-offset_bottom = 50.0
+[node name="HealthContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 38.0
+
+[node name="ThemeControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1880.0
+offset_right = 1920.0
+theme = ExtResource("2_ndj7i")
+
+[node name="ScoreContainer" type="VBoxContainer" parent="ThemeControl"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -249.0
+offset_top = 1.0
+offset_bottom = 397.0
+grow_horizontal = 0
+
+[node name="LevelScore" type="RichTextLabel" parent="ThemeControl/ScoreContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Score: 0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="LastEnemyPoints" type="RichTextLabel" parent="ThemeControl/ScoreContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0"
+fit_content = true
+autowrap_mode = 0

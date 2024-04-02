@@ -14,23 +14,28 @@ func _init():
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 
 func on_player_damaged():
+	perfect_kills = 0
+	score_multiplier = 1
 	if (level_score > 0):
-		level_score -= 20
-	perfect_kills = 0	
+		increment_score(-20)
 	
 func on_enemy_damaged(type):
+	var enemy_value = 0
 	match(type):
 		Enemy.EnemyType.DEFAULT_ZOMBIE:
-			level_score += (10 * score_multiplier)
+			enemy_value = 10
+	increment_score(enemy_value)
 
 func on_enemy_death(type):
 	perfect_kills += 1
 	global_kills += 1
-	score_multiplier = select_score_multiplier()
+	var enemy_value = 0
 	match(type):
 		Enemy.EnemyType.DEFAULT_ZOMBIE:
-			level_score += (50 * score_multiplier)	
-
+			enemy_value = 50
+	score_multiplier = select_score_multiplier()
+	increment_score(enemy_value)
+			
 func select_score_multiplier() -> int:
 	var multiplier = 1 
 	for i in multiplier_thresholds.size():
@@ -39,6 +44,10 @@ func select_score_multiplier() -> int:
 		else:
 			break
 	return multiplier			
+
+func increment_score(enemy_value):
+	level_score += (enemy_value * score_multiplier)
+	GlobalEventBus.score_changed.emit(ScoreDetails.new(level_score, enemy_value, score_multiplier))
 
 func on_level_end():
 	global_score += level_score
