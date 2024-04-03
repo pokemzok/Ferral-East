@@ -10,5 +10,5 @@ func _ready():
 	game_mode = SurvivalGameMode.new(spawn_points)
 	
 func _process(delta):
-	game_mode.spawn_enemies(delta)
+	game_mode._process(delta)
 

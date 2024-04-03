@@ -4,6 +4,8 @@ var health_point_res = preload("res://player/Health.png")
 
 @onready var level_score_label: RichTextLabel = %LevelScore
 @onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
+@onready var wave_info_label: RichTextLabel = %WaveInfo
+
 var outline_prefix="[outline_color=black][outline_size=10]"
 var outline_suffix= "[/outline_size][/outline_color]"
 
@@ -18,17 +20,23 @@ var enemy_points_colors = {
 	8: Color("#9c4af3",0)
 }
 
+var original_color: Color
 var original_color_transparent: Color
 var enemy_points_tween: Tween
 var level_score_tween: Tween
+var wave_info_tween: Tween
 
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_HP_CHANGED, on_hp_changed)
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_DISPLAYED, on_menu_displayed)
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, on_menu_hidden)
 	GlobalEventBus.connect(GlobalEventBus.SCORE_CHANGED, on_score_changed)
+	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
+	GlobalEventBus.connect(GlobalEventBus.WAVE_ENDED, on_wave_ended)
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
+	original_color = Color(last_enemy_points_label.modulate, 1)
 	last_enemy_points_label.modulate.a = 0
+	wave_info_label.modulate.a = 0
 
 func on_hp_changed(hp):
 	clear_hearts()
@@ -77,3 +85,25 @@ func enemy_points_update(details: ScoreDetails):
 	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1.25, 1.25), 0.15)
 	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1, 1), 0.15)
 	enemy_points_tween.tween_property(last_enemy_points_label, "modulate", color, 2)
+
+func on_wave_started(wave_nr):
+	if(wave_info_tween != null):
+		wave_info_tween.kill()
+	wave_info_label.text = outline_prefix+"Wave "+str(wave_nr)+outline_suffix
+	wave_info_tween = create_tween()
+	fade_in_out_component(wave_info_label, wave_info_tween)
+	#wave_info_label.text = outline_prefix+"Get Ready!"+outline_suffix
+	#fade_in_out_component(wave_info_label, wave_info_tween, 1)
+
+func on_wave_ended(wave_nr):
+	print("Wave ended "+str(wave_nr))
+	if(wave_info_tween != null):
+		wave_info_tween.kill()
+	wave_info_label.text = outline_prefix+"Wave "+str(wave_nr)+" Completed!"+outline_suffix
+	wave_info_tween = create_tween()
+	fade_in_out_component(wave_info_label, wave_info_tween)
+	
+func fade_in_out_component(component: Node, component_tween: Tween):
+	component_tween.tween_property(component, "modulate", original_color, 1)
+	component_tween.tween_property(component, "modulate", original_color, 1)
+	component_tween.tween_property(component, "modulate", original_color_transparent, 2)
