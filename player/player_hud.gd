@@ -4,10 +4,13 @@ var health_point_res = preload("res://player/Health.png")
 
 @onready var level_score_label: RichTextLabel = %LevelScore
 @onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
+var outline_prefix="[outline_color=black][outline_size=10]"
+var outline_suffix= "[/outline_size][/outline_color]"
+
 var enemy_points_colors = {
 	1: Color("#ffffff", 0),
 	2: Color("#00ff00", 0), 
-	3: Color("#0421a2", 0),
+	3: Color("#6bc3fe", 0),
 	4: Color("#833e19", 0),
 	5: Color("#b22727",0),
 	6: Color("#9c0000",0),
@@ -49,7 +52,6 @@ func add_hp():
 	health_point_icon.texture = health_point_res
 	$HealthContainer.add_child(health_point_icon)
 
-# TODO: outline color or other way to see better the score
 func on_score_changed(details: ScoreDetails):
 	level_score_update(details)
 	enemy_points_update(details)
@@ -57,7 +59,7 @@ func on_score_changed(details: ScoreDetails):
 func level_score_update(details: ScoreDetails):
 	if (level_score_tween != null):
 		level_score_tween.kill()
-	level_score_label.text = "Score: " + str(details.score)	
+	level_score_label.text = outline_prefix+"Score: " + str(details.score)+outline_suffix	
 	level_score_tween = create_tween()
 	level_score_tween.tween_property(level_score_label, "scale", Vector2(1.1, 1.1), 0.15)
 	level_score_tween.tween_property(level_score_label, "scale", Vector2(1, 1), 0.15)
@@ -70,7 +72,7 @@ func enemy_points_update(details: ScoreDetails):
 	if (enemy_points_colors.has(details.score_multiplier)):
 		color = enemy_points_colors[details.score_multiplier]
 	last_enemy_points_label.modulate = Color(color,1)
-	last_enemy_points_label.text  = str(details.enemy_value)+" x "+str(details.score_multiplier)
+	last_enemy_points_label.text  = outline_prefix+str(details.enemy_value)+" x "+str(details.score_multiplier)+outline_suffix
 	enemy_points_tween = create_tween()
 	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1.25, 1.25), 0.15)
 	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1, 1), 0.15)
