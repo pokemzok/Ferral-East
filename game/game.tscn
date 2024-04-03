@@ -46,7 +46,6 @@ func on_menu_toggle():
 	
 func on_start():
 	menu.hide()
-	score = GameScore.new()
 	current_level_path = LevelManager.get_instance().get_level(LevelManager.Levels.TEST)
 	ResourceLoader.load_threaded_request(current_level_path)
 	loading_screen.show()
