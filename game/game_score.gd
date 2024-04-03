@@ -17,24 +17,16 @@ func _init():
 func on_player_damaged():
 	perfect_kills = 0
 	score_multiplier = 1
-	increment_score(-20)
-	
-func on_enemy_damaged(type):
-	var enemy_value = 0
-	match(type):
-		Enemy.EnemyType.DEFAULT_ZOMBIE:
-			enemy_value = 10
-	increment_score(enemy_value)
+	increment_score(-40)
 
-func on_enemy_death(type):
+func on_enemy_damaged(type, score):
+	increment_score(score)
+
+func on_enemy_death(type, score):
 	perfect_kills += 1
 	global_kills += 1
-	var enemy_value = 0
-	match(type):
-		Enemy.EnemyType.DEFAULT_ZOMBIE:
-			enemy_value = 50
 	score_multiplier = select_score_multiplier()
-	increment_score(enemy_value)
+	increment_score(score)
 			
 func select_score_multiplier() -> int:
 	var multiplier = 1 

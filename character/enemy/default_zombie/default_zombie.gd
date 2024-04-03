@@ -107,13 +107,13 @@ func stun():
 func take_dmg():
 	audio_pool.play_sound_effect(bullet_hit_audio)	
 	stats.health_points.decrement_by()
-	GlobalEventBus.enemy_damaged.emit(stats.type)
+	GlobalEventBus.enemy_damaged.emit(stats.type, stats.dmg_score)
 	if stats.health_points.value <= 0:
 		dying()
 	
 func dying():
 	if (dying_timer.value <= 0):
-		GlobalEventBus.enemy_death.emit(stats.type)
+		GlobalEventBus.enemy_death.emit(stats.type, stats.death_score)
 		play_death_sound()	
 		dying_timer.assign_max_value()
 		$CollisionShape2D.set_deferred("disabled",  true)
