@@ -11,11 +11,11 @@ var enemy_points_colors = {
 	1: Color("#ffffff", 0),
 	2: Color("#00ff00", 0), 
 	3: Color("#6bc3fe", 0),
-	4: Color("#833e19", 0),
-	5: Color("#b22727",0),
-	6: Color("#9c0000",0),
-	7: Color("#430805",0), 
-	8: Color("#000000",0) 
+	4: Color("#f25932", 0),
+	5: Color("#833e19",0),
+	6: Color("#b22727",0),
+	7: Color("#9c0000",0),
+	8: Color("#9c4af3",0)
 }
 
 var original_color_transparent: Color

@@ -2,16 +2,11 @@ extends CharacterBody2D
 
 var player =  null
 var motion = Vector2()
-var type = Enemy.EnemyType.DEFAULT_ZOMBIE
-var stunned_timer = NumericAttribute.new(0, NumericAttribute.new(0.1, 0.3).randomize_value().value)
 var vocal_timer_max_range = NumericAttribute.new(1,6)
 var vocal_timer = NumericAttribute.new(1, 3)
 var dying_timer = NumericAttribute.new(0, 100)
 
-var health_points = NumericAttribute.new(2, 6)
-var speed = NumericAttribute.new(100, 300) 
-var speed_increase_factor = 0.5
-var projectiles_dmg_velocity = 100
+var stats: EnemyStats = ZombieStatsFactory.create()
 
 var stategy = preload("res://character/enemy/path_finding/path_finding_strategy.gd")
 var path_finding_stategy = stategy.random_strategy()
@@ -28,15 +23,10 @@ var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 
 func _ready():
 	self.z_index = 1
-	randomize_stats()
 	vocal_timer.randomize_value()
 	var players = get_tree().get_nodes_in_group("player")
 	if !players.is_empty():
 		player = players[0] #FIXME future support for coop
-
-func randomize_stats():
-	health_points.randomize_value()
-	speed.randomize_value()
 
 func _process(delta):
 	growl_on(delta)
@@ -46,7 +36,7 @@ func _physics_process(delta):
 		on_dying(delta)
 	elif dying_timer.value < 0:
 		die()	
-	elif stunned_timer.value > 0:		
+	elif stats.stunned_timer.value > 0:		
 		on_stun(delta)
 	else:
 		hunt_player(delta)
@@ -59,7 +49,7 @@ func on_dying(delta):
 		
 func on_stun(delta):
 	walking_audio_player.stop()
-	stunned_timer.decrement_by(delta)
+	stats.stunned_timer.decrement_by(delta)
 	$AnimatedSprite2D.play("stunned")
 			
 # TODO: make it common, so every enemy  could use similar logic. Maybe some new node?
@@ -99,31 +89,31 @@ func dumb_path_finding_slide(player, delta):
 func dumb_path_finding(player, delta) -> Vector2:
 	var direction = (player.global_position - global_position).normalized()
 	var distance = global_position.distance_to(player.global_position)
-	speed.new_value(speed.value + (distance * speed_increase_factor))
-	speed.new_value(min(speed.value, speed.max_value))
-	return direction * speed.value * delta
+	stats.speed.new_value(stats.speed.value + (distance * stats.speed_increase_factor))
+	stats.speed.new_value(min(stats.speed.value, stats.speed.max_value))
+	return direction * stats.speed.value * delta
 
 func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):
-		if (body.linear_velocity.length() >= projectiles_dmg_velocity):
+		if (body.linear_velocity.length() >= stats.projectiles_dmg_velocity):
 			body.queue_free()
 			stun()		
 			take_dmg()				
 
 func stun():
-	if (stunned_timer.value <= 0):
-		stunned_timer.assign_max_value()
+	if (stats.stunned_timer.value <= 0):
+		stats.stunned_timer.assign_max_value()
 
 func take_dmg():
 	audio_pool.play_sound_effect(bullet_hit_audio)	
-	health_points.decrement_by()
-	GlobalEventBus.enemy_damaged.emit(type)
-	if health_points.value <= 0:
+	stats.health_points.decrement_by()
+	GlobalEventBus.enemy_damaged.emit(stats.type)
+	if stats.health_points.value <= 0:
 		dying()
 	
 func dying():
 	if (dying_timer.value <= 0):
-		GlobalEventBus.enemy_death.emit(type)
+		GlobalEventBus.enemy_death.emit(stats.type)
 		play_death_sound()	
 		dying_timer.assign_max_value()
 		$CollisionShape2D.set_deferred("disabled",  true)
