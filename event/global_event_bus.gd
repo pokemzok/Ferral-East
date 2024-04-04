@@ -38,7 +38,5 @@ const SCORE_CHANGED = "score_changed"
 
 #surival
 signal wave_started
-signal wave_ended
 #signal_names
 const WAVE_STARTED = "wave_started"
-const WAVE_ENDED = "wave_ended"

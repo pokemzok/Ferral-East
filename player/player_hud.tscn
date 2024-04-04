@@ -68,5 +68,31 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 bbcode_enabled = true
+text = "Wave"
+fit_content = true
+autowrap_mode = 0
+
+[node name="EnemiesLeftContainer" type="VBoxContainer" parent="ThemeControl"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1920.0
+offset_top = 6.0
+offset_right = 1.0
+offset_bottom = 162.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="EnemiesLeft" type="RichTextLabel" parent="ThemeControl/EnemiesLeftContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Enemies Left: 0"
 fit_content = true
 autowrap_mode = 0

@@ -1,14 +1,8 @@
 # TODO 2
-# 0. Where should I implement arcade logic? Should i be on the map itself? 
-#  Or should it be separate logic extracted so it could be reused on multiple maps?
-# 1. Arcade logic on test map:
-# 1.1 Multiple spawn points
-# 2.2 Introduce zombie waves, each wave will be started manually by player by shooting 
-# 	Like: "shoot to attrack the horde"
+# 0. Fix multi-spawn
+# 1. I18n (it looks like it is simple thing to do)
 # 2.3 Score should take into consideration time it took player to complete level. On first shoot we should send event which would start the timer.
 # 2.4 Each wave should should trigger differnt music (maybe 10th wave would be a Payback song?)
-# 2.5 Arcade HUD - the wave number on screen, player score + how many enemies are left to defeat
-# 2.5 Waves should scale up to 10 wave, after that difficulty stays the same
 # 2.6 I would raise difficulty by adding more zombies and nudging their stats up till the threshold.
 # 2.7 Make cactus hurt player
 # 2.8 Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.

@@ -5,6 +5,7 @@ var health_point_res = preload("res://player/Health.png")
 @onready var level_score_label: RichTextLabel = %LevelScore
 @onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
 @onready var wave_info_label: RichTextLabel = %WaveInfo
+@onready var enemies_left_label: RichTextLabel = %EnemiesLeft
 
 var outline_prefix="[outline_color=black][outline_size=10]"
 var outline_suffix= "[/outline_size][/outline_color]"
@@ -19,7 +20,7 @@ var enemy_points_colors = {
 	7: Color("#9c0000",0),
 	8: Color("#9c4af3",0)
 }
-
+var enemies_left = 0
 var original_color: Color
 var original_color_transparent: Color
 var enemy_points_tween: Tween
@@ -32,7 +33,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, on_menu_hidden)
 	GlobalEventBus.connect(GlobalEventBus.SCORE_CHANGED, on_score_changed)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
-	GlobalEventBus.connect(GlobalEventBus.WAVE_ENDED, on_wave_ended)
+	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
 	original_color = Color(last_enemy_points_label.modulate, 1)
 	last_enemy_points_label.modulate.a = 0
@@ -86,24 +87,45 @@ func enemy_points_update(details: ScoreDetails):
 	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1, 1), 0.15)
 	enemy_points_tween.tween_property(last_enemy_points_label, "modulate", color, 2)
 
-func on_wave_started(wave_nr):
+func on_wave_started(wave_nr, enemies_left):
 	if(wave_info_tween != null):
 		wave_info_tween.kill()
-	wave_info_label.text = outline_prefix+"Wave "+str(wave_nr)+outline_suffix
-	wave_info_tween = create_tween()
-	fade_in_out_component(wave_info_label, wave_info_tween)
-	#wave_info_label.text = outline_prefix+"Get Ready!"+outline_suffix
-	#fade_in_out_component(wave_info_label, wave_info_tween, 1)
+	self.enemies_left = enemies_left
+	enemies_left_label.show()
+	update_enemies_left_label_text()	
+	if (wave_nr == 1):
+		show_wave_started_message(wave_nr)
+		wave_info_tween.tween_callback(show_get_ready_message.bind(wave_nr))
+	elif (wave_nr > 1):
+		show_wave_completed_message(wave_nr-1)
+		wave_info_tween.tween_callback(show_wave_started_message.bind(wave_nr))
 
-func on_wave_ended(wave_nr):
-	print("Wave ended "+str(wave_nr))
-	if(wave_info_tween != null):
-		wave_info_tween.kill()
+func show_wave_completed_message(wave_nr):
 	wave_info_label.text = outline_prefix+"Wave "+str(wave_nr)+" Completed!"+outline_suffix
 	wave_info_tween = create_tween()
 	fade_in_out_component(wave_info_label, wave_info_tween)
 	
+func show_wave_started_message(wave_nr):
+	wave_info_label.text = outline_prefix+"Wave "+str(wave_nr)+outline_suffix
+	wave_info_tween = create_tween()
+	fade_in_out_component(wave_info_label, wave_info_tween)
+
+func show_get_ready_message(wave_nr):
+	wave_info_tween = create_tween()
+	if (wave_nr == 1):
+		wave_info_label.text = outline_prefix+"Get Ready!"+outline_suffix
+	fade_in_out_component(wave_info_label, wave_info_tween)
+	
 func fade_in_out_component(component: Node, component_tween: Tween):
 	component_tween.tween_property(component, "modulate", original_color, 1)
-	component_tween.tween_property(component, "modulate", original_color, 1)
+	component_tween.tween_property(component, "modulate", original_color, 2)
 	component_tween.tween_property(component, "modulate", original_color_transparent, 2)
+
+func on_enemy_death(type, score):
+	if (enemies_left  > 0 ): 
+		enemies_left -= 1
+		update_enemies_left_label_text()
+	
+func update_enemies_left_label_text():
+	enemies_left_label.text = outline_prefix+"Enemies Left: "+str(enemies_left)+outline_suffix
+	
