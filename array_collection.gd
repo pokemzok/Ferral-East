@@ -4,6 +4,7 @@ extends Node
 var collection: Array
 
 func _init(collection: Array):
+	randomize()	
 	self.collection = collection
 
 func random_element():
@@ -12,10 +13,11 @@ func random_element():
 
 func random_elements(nr: int) -> Array:
 	var result = []
+	var indices = Array(range(collection.size()))
+	indices.shuffle()
 	for i in range(nr):
-		result.append(collection[random_index()])
+		result.append(collection[indices[i]])
 	return result
 
 func random_index():
-	randomize()
 	return randi() % collection.size()	

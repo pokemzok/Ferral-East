@@ -3,10 +3,9 @@ extends GameMode
 
 var zombie = preload("res://character/enemy/default_zombie/default_zombie.tscn")
 var spawn_points: ArrayCollection
-var spawn_time = NumericAttribute.new(3, 4)
+var spawn_time = NumericAttribute.new(3, 3)
 var rest_time = NumericAttribute.new(5,5)
-#var wave_enemies  = [10, 15, 20, 25, 30, 40, 50, 60, 80, 100]
-var wave_enemies  = [2, 2, 2, 2, 2, 3, 3, 3, 3, 3]
+var wave_enemies  = [5, 10, 15, 25, 30, 40, 50, 60, 80, 100]
 var wave_index = 0
 var enemies_to_kill = wave_enemies[wave_index]
 var enemies_to_spawn = wave_enemies[wave_index]
@@ -49,11 +48,14 @@ func on_enemy_death(type, score):
 		rest_time.assign_max_value()
 
 # TODO more difficulty settings
+# TODO rethink difficulty improvement. Currently it is to hard
+# TODO alternatively I can introduce some powers to improve player experience (like increase mag capacity)
 func increase_difficulty():
-	if(spawn_time.max_value > 3):
+	if(spawn_enemies_nr.value < spawn_enemies_nr.max_value):
+		spawn_enemies_nr.value += 1
+		spawn_time.increment_max_value()
+		return
+	if(spawn_time.max_value > 4):
 		spawn_time.decrement_max_value()
 		return
-	# FIXME enemies teleported to me and insta killed me
-	#if(spawn_enemies_nr.value < spawn_enemies_nr.max_value):
-	#	spawn_enemies_nr.value += 1
-	#	return		
+	

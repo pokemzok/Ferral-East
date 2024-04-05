@@ -50,3 +50,6 @@ func is_max_value():
 
 func decrement_max_value(delta: float = 1):
 	self.max_value -= delta
+
+func increment_max_value(delta: float = 1):
+	self.max_value += delta
