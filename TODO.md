@@ -1,21 +1,28 @@
-# TODO 2
-# 0. Fix multi-spawn
+# TODO 1
 # 1. I18n (it looks like it is simple thing to do)
-# 2.3 Score should take into consideration time it took player to complete level. On first shoot we should send event which would start the timer.
-# 2.4 Each wave should should trigger differnt music (maybe 10th wave would be a Payback song?)
-# 2.6 I would raise difficulty by adding more zombies and nudging their stats up till the threshold.
-# 2.7 Make cactus hurt player
+# 2.4 Each wave should should trigger different music (maybe 10th wave would be a Payback song?)
+# 2.7 Make cactus hurt player and enemy
 # 2.8 Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.
+# 3. Player HUD improvements:
+# 3.1 HUD for bullets (how many are in cylinder)
+# 3.2 Better health HUD?
 
-# TODO 3
-# 0. Find and fix all TODO's in code.
-# 1. better enemy pathfinding + new arcade level (non  test) -> this would corelate with a better map design
-#	possible idea: add new pathfinding as an algorithm which can  be picked, but leave my previous for dumber zombies. 
-# 	I would probably need to create some assets I can just put on map with a colision polygon on them
-# 	This way I wouldn't have to do it over and over for each map. I could just place lets say cactus and 
-# 	enemies will collide.
+# TODO 2
+# 1. Drop item on enemy death.
+#		I can keep all the rewards (like second revolver or regen), while having a bit more randomness.
+#		I can also introduce items, which would increase a chance of getting specific rewards.
+#		I can also pass wave info to enemies to slightly increase drop chances later on?  
+#		Like Health Update might be a pentagram visible on the zombie. Zombie will have all possible items + drop chance.   
+# 1.4 If player reaches 13 bullets in chamber (on 13 bullet), player will unlock second revolver with a 12 bullets (would need to create an asset for that).
+# 1.5 If player reach 10 HP (on 10th HP) then player gain regen. After each wave gain +1HP (if HP is missing).
+# 1.6 If player reach max speed  (7 level),  maybe player will unlock bullet-time (like a slow motion for a few seconds + power bar, which will regen on player killing enemies).
+# 2. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
+# 3. New test level which would allow pathfinding. 
+# 4. New zombie enemy (different color) which would be smarter (will use pathfinding) and would be reanimating once with less HP.
+# 5. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
+# 6. Score should take into consideration time it took player to complete wave. Wave counts as started after player completed leveling up.
 
-# TODO  4: improvements
+# TODO  3: improvements
 # 0. Resolution scaling (I  want for the player to  be able to pick a resolution)
 # 1. Nicer menu and loading screens
 # 1.1 Some interesting background as well
@@ -24,12 +31,8 @@
 # 2.1 Sound volume normalization (i  want same level of audio for all of my samples)
 # 2.2 More custome made songs for my game ( find or create so i  can swap my  first choices)
 # 3. More enemy types.
-# 4. Player HUD improvements:
-# 4.1 HUD for bullets (how many are in cylinder)
-# 4.2 Better health HUD?
-# 5. Graphics improvement (maybe less pixelated? and fix animation?)
 # 6. Level design improvements?
-# 7. Totems logic? -  the idea is that Surbi would find item, which would on right click do something (like for example teleport  or second revolver)
+# 7. Totems logic? -  the idea is that Surbi would find item, which would on right click do something (like for example teleport  or second revolver). Player can switch between second power using scroll or num pad.
 # 8. Shit-talking dialogue lines for Surbi, when he performes good (score is high)
 # 9. Multiplayer (local PC hosting a server for the other who knows the ID and password)
 # 10. Start release process to see how difficult it is.

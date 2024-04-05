@@ -48,7 +48,7 @@ func on_enemy_death(type, score):
 		rest_time.assign_max_value()
 
 # TODO more difficulty settings
-# TODO rethink difficulty improvement. Currently it is to hard
+# TODO rethink difficulty improvement. Currently it is too hard
 # TODO alternatively I can introduce some powers to improve player experience (like increase mag capacity)
 func increase_difficulty():
 	if(spawn_enemies_nr.value < spawn_enemies_nr.max_value):
