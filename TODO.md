@@ -1,11 +1,12 @@
 # TODO 1
-# 1. I18n (it looks like it is simple thing to do)
-# 2.4 Each wave should should trigger different music (maybe 10th wave would be a Payback song?)
-# 2.7 Make cactus hurt player and enemy
-# 2.8 Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.
-# 3. Player HUD improvements:
-# 3.1 HUD for bullets (how many are in cylinder)
-# 3.2 Better health HUD?
+# 2. I18n (it looks like it is simple thing to do)
+# 3. Sound design
+# 3.1 Player should manually start waves (on shoot). This way it would be easier to introduce sound effect.
+# 3.2 Whistle on complete wave  (plus graceful interrupt of a playing song)
+# 3.3 Make multiple different loops from Ferral East song so I could trigger them on different waves
+# 3.4 During rest time I can play slow down drums (when the user is resting) from Ferral East music. I can also introcue there some mellody to keep it interesting (like in Hot Line miami when there is a plot elements)
+# 4 Make cactus hurt player and enemy
+# 5 Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.
 
 # TODO 2
 # 1. Drop item on enemy death.

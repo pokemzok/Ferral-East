@@ -6,7 +6,9 @@ var health_point_res = preload("res://player/Health.png")
 @onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
 @onready var wave_info_label: RichTextLabel = %WaveInfo
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
+@onready var projectiles_left_label: RichTextLabel = %ProjectilesLeft
 
+var projectiles_image= "[img]res://player/hud-bullet.png[/img]"
 var outline_prefix="[outline_color=black][outline_size=10]"
 var outline_suffix= "[/outline_size][/outline_color]"
 
@@ -29,6 +31,7 @@ var wave_info_tween: Tween
 
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_HP_CHANGED, on_hp_changed)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_USED_PROJECTILE_WEAPON, on_projectile_weapon_used)	
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_DISPLAYED, on_menu_displayed)
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, on_menu_hidden)
 	GlobalEventBus.connect(GlobalEventBus.SCORE_CHANGED, on_score_changed)
@@ -43,6 +46,9 @@ func on_hp_changed(hp):
 	clear_hearts()
 	for i in range(hp):
 		add_hp()
+
+func on_projectile_weapon_used(projectiles_left):
+	projectiles_left_label.text = projectiles_image+outline_prefix+"x "+str(projectiles_left)+outline_suffix
 
 func on_menu_displayed():
 	hide()

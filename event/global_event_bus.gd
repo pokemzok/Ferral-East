@@ -19,10 +19,12 @@ const MAIN_MENU_HIDDEN =  "main_menu_hidden"
 signal player_death
 signal player_hp_changed
 signal player_damaged
+signal player_used_projectile_weapon
 # signal_names
 const PLAYER_DEATH = "player_death"
 const PLAYER_HP_CHANGED = "player_hp_changed"
 const PLAYER_DAMAGED = "player_damaged"
+const PLAYER_USED_PROJECTILE_WEAPON = "player_used_projectile_weapon"
 
 #enemy
 signal enemy_damaged
@@ -40,3 +42,4 @@ const SCORE_CHANGED = "score_changed"
 signal wave_started
 #signal_names
 const WAVE_STARTED = "wave_started"
+

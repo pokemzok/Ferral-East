@@ -7,7 +7,8 @@
 script = ExtResource("1_y8eoh")
 
 [node name="HealthContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
+offset_left = 25.0
+offset_right = 65.0
 offset_bottom = 38.0
 
 [node name="ThemeControl" type="Control" parent="."]
@@ -16,6 +17,23 @@ anchors_preset = 0
 offset_left = 1880.0
 offset_right = 1920.0
 theme = ExtResource("2_ndj7i")
+
+[node name="ProjectilesCountContainer" type="HBoxContainer" parent="ThemeControl"]
+layout_mode = 0
+offset_left = -1839.0
+offset_top = 75.0
+offset_right = -1672.0
+offset_bottom = 176.0
+
+[node name="ProjectilesLeft" type="RichTextLabel" parent="ThemeControl/ProjectilesCountContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "[img]res://player/hud-bullet.png[/img] [outline_color=black][outline_size=10]x6[/outline_size][/outline_color]"
+fit_content = true
+autowrap_mode = 0
 
 [node name="ScoreContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1

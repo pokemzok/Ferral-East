@@ -8,7 +8,7 @@ var reload_timer = NumericAttribute.new(0, 1)
 var health_points = NumericAttribute.new(3, 10)
 var enemies_in_player_collision_area =  []
 var is_dead = false
-
+var is_player = true
 var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
 var death_audio = GameSoundManager.Sounds.SURBI_DEATH
@@ -76,7 +76,7 @@ func on_reload(delta):
 	if(reload_timer.value > 0 ):
 		reload_timer.decrement_by(delta)
 	elif(reload_timer.value <= 0 && weapon.bullets_in_cylinder.value == 0):
-		weapon.reload()
+		weapon.reload_with(self)
 		
 func on_player_actions(delta):
 	look_at(get_global_mouse_position())	
