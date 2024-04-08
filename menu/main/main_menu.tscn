@@ -193,7 +193,7 @@ text = "SETTINGS_MUSIC"
 [node name="SFX" type="Label" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "SETTINGS_MUSIC"
+text = "SETTINGS_SFX"
 
 [node name="Voices" type="Label" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer"]
 layout_mode = 2

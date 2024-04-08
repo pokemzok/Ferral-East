@@ -16,6 +16,7 @@ var score
 @onready var loading_screen = $LoadingScreen
 
 func _ready():
+	TranslationServer.set_locale(\"en\")
 	death_menu.hide()
 	GlobalEventBus.connect(GlobalEventBus.START_BUTTON_PRESSED, on_start)
 	GlobalEventBus.connect(GlobalEventBus.RESUME_BUTTON_PRESSED, on_menu_toggle)

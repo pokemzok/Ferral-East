@@ -1,5 +1,4 @@
 # TODO 1
-# 2. I18n (it looks like it is simple thing to do)
 # 3. Sound design
 # 3.1 Player should manually start waves (on shoot). This way it would be easier to introduce sound effect.
 # 3.2 Whistle on complete wave  (plus graceful interrupt of a playing song)
