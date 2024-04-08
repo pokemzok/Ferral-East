@@ -43,17 +43,15 @@ grow_vertical = 2
 
 [node name="Restart" type="Button" parent="ThemeControl/HBoxContainer"]
 layout_mode = 2
-text = "Restart"
+text = "RESTART"
 
 [node name="Menu" type="Button" parent="ThemeControl/HBoxContainer"]
 layout_mode = 2
-text = "Quit to main menu
-"
+text = "QUIT_TO_MENU"
 
 [node name="Quit" type="Button" parent="ThemeControl/HBoxContainer"]
 layout_mode = 2
-text = "Quit
-"
+text = "QUIT"
 
 [connection signal="pressed" from="ThemeControl/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="ThemeControl/HBoxContainer/Menu" to="." method="_on_menu_pressed"]

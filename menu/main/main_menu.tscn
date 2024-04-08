@@ -44,33 +44,32 @@ pivot_offset = Vector2(25, 50)
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-text = "Resume"
+text = "RESUME"
 
 [node name="Start" type="Button" parent="ThemeControl/Menu"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Start"
+text = "START"
 
 [node name="Options" type="Button" parent="ThemeControl/Menu"]
 layout_mode = 2
-text = "Options"
+text = "OPTIONS"
 
 [node name="Restart" type="Button" parent="ThemeControl/Menu"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-text = "Restart"
+text = "RESTART"
 
 [node name="QuitToMenu" type="Button" parent="ThemeControl/Menu"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-text = "Quit to main menu
-"
+text = "QUIT_TO_MENU"
 
 [node name="Quit" type="Button" parent="ThemeControl/Menu"]
 layout_mode = 2
-text = "Quit"
+text = "QUIT"
 
 [node name="Settings" type="TabContainer" parent="ThemeControl"]
 unique_name_in_owner = true
@@ -82,11 +81,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Video" type="TabBar" parent="ThemeControl/Settings"]
+[node name="SETTINGS_VIDEO" type="TabBar" parent="ThemeControl/Settings"]
 layout_mode = 2
 script = ExtResource("1_rn1fe")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Settings/Video"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Settings/SETTINGS_VIDEO"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,39 +99,38 @@ offset_bottom = 43.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/Video/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="FullScreen" type="Label" parent="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer"]
+[node name="FullScreen" type="Label" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/shadow_outline_size = 270
 theme_override_constants/line_spacing = -235
-text = "Fullscreen
-"
+text = "SETTINGS_FULLSCREEN"
 
-[node name="Borderless" type="Label" parent="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer"]
+[node name="Borderless" type="Label" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Borderless"
+text = "SETTINGS_BORDERLESS"
 
-[node name="Vsync" type="Label" parent="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer"]
+[node name="Vsync" type="Label" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Vsync"
+text = "SETTINGS_VSYNC"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/Video/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="FullScreen" type="CheckBox" parent="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer2"]
+[node name="FullScreen" type="CheckBox" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Borderless" type="CheckBox" parent="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer2"]
+[node name="Borderless" type="CheckBox" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Vsync" type="OptionButton" parent="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer2"]
+[node name="Vsync" type="OptionButton" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 item_count = 4
@@ -146,7 +144,7 @@ popup/item_2/id = 2
 popup/item_3/text = "Mailbox"
 popup/item_3/id = 3
 
-[node name="Back" type="Button" parent="ThemeControl/Settings/Video"]
+[node name="Back" type="Button" parent="ThemeControl/Settings/SETTINGS_VIDEO"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -157,15 +155,15 @@ offset_left = -50.0
 offset_top = -31.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Back"
+text = "SETTINGS_BACK"
 script = ExtResource("3_t6l44")
 
-[node name="Audio" type="TabBar" parent="ThemeControl/Settings"]
+[node name="SETTINGS_AUDIO" type="TabBar" parent="ThemeControl/Settings"]
 visible = false
 layout_mode = 2
 script = ExtResource("2_gryrn")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Settings/Audio"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Settings/SETTINGS_AUDIO"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -179,35 +177,35 @@ offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/Audio/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer"]
 layout_mode = 2
 
-[node name="Master" type="Label" parent="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "Master"
-
-[node name="Music" type="Label" parent="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer"]
+[node name="Master" type="Label" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Music"
+text = "SETTINGS_MASTER"
 
-[node name="SFX" type="Label" parent="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer"]
+[node name="Music" type="Label" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "SFX"
+text = "SETTINGS_MUSIC"
 
-[node name="Voices" type="Label" parent="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer"]
+[node name="SFX" type="Label" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Voices"
+text = "SETTINGS_MUSIC"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/Audio/HBoxContainer"]
+[node name="Voices" type="Label" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "SETTINGS_VOICES"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 35
 
-[node name="Master" type="HSlider" parent="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer2"]
+[node name="Master" type="HSlider" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
@@ -216,7 +214,7 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Music" type="HSlider" parent="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer2"]
+[node name="Music" type="HSlider" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
@@ -224,7 +222,7 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="SFX" type="HSlider" parent="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer2"]
+[node name="SFX" type="HSlider" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
@@ -232,7 +230,7 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Voices" type="HSlider" parent="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer2"]
+[node name="Voices" type="HSlider" parent="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
@@ -240,16 +238,16 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="MusicBusPlayer" type="AudioStreamPlayer" parent="ThemeControl/Settings/Audio"]
+[node name="MusicBusPlayer" type="AudioStreamPlayer" parent="ThemeControl/Settings/SETTINGS_AUDIO"]
 bus = &"Music"
 
-[node name="SFXBusPlayer" type="AudioStreamPlayer" parent="ThemeControl/Settings/Audio"]
+[node name="SFXBusPlayer" type="AudioStreamPlayer" parent="ThemeControl/Settings/SETTINGS_AUDIO"]
 bus = &"SFX"
 
-[node name="VoicesBusPlayer" type="AudioStreamPlayer" parent="ThemeControl/Settings/Audio"]
+[node name="VoicesBusPlayer" type="AudioStreamPlayer" parent="ThemeControl/Settings/SETTINGS_AUDIO"]
 bus = &"Voices"
 
-[node name="Back" type="Button" parent="ThemeControl/Settings/Audio"]
+[node name="Back" type="Button" parent="ThemeControl/Settings/SETTINGS_AUDIO"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -260,14 +258,14 @@ offset_left = -50.0
 offset_top = -31.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Back"
+text = "SETTINGS_BACK"
 script = ExtResource("3_t6l44")
 
-[node name="Controls" type="TabBar" parent="ThemeControl/Settings"]
+[node name="SETTINGS_CONTROLS" type="TabBar" parent="ThemeControl/Settings"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Settings/Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -281,64 +279,63 @@ offset_bottom = 60.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/Controls/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer"]
 layout_mode = 2
 
-[node name="Up" type="Label" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "Up"
-
-[node name="Down" type="Label" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer"]
+[node name="Up" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Down
-"
+text = "CONTROLS_UP"
 
-[node name="Left" type="Label" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer"]
+[node name="Down" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Left"
+text = "CONTROLS_DOWN"
 
-[node name="Right" type="Label" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer"]
+[node name="Left" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Right"
+text = "CONTROLS_LEFT"
 
-[node name="Menu" type="Label" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer"]
+[node name="Right" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Menu"
+text = "CONTROLS_RIGHT"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/Controls/HBoxContainer"]
+[node name="Menu" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "CONTROLS_MENU"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="UpActionButton" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="UpActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 
-[node name="DownActionButton" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="DownActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "move_down"
 
-[node name="LeftActionButton" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="LeftActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "move_left"
 
-[node name="RightActionButton" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="RightActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "move_right"
 
-[node name="MenuActionButton" parent="ThemeControl/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="MenuActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "show_or_hide_menu"
 
-[node name="Back" type="Button" parent="ThemeControl/Settings/Controls"]
+[node name="Back" type="Button" parent="ThemeControl/Settings/SETTINGS_CONTROLS"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -349,7 +346,7 @@ offset_left = -50.0
 offset_top = -31.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Back"
+text = "SETTINGS_BACK"
 script = ExtResource("3_t6l44")
 
 [connection signal="pressed" from="ThemeControl/Menu/Resume" to="." method="_on_resume_pressed"]
@@ -358,13 +355,13 @@ script = ExtResource("3_t6l44")
 [connection signal="pressed" from="ThemeControl/Menu/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="ThemeControl/Menu/QuitToMenu" to="." method="_on_quit_to_main_menu_pressed"]
 [connection signal="pressed" from="ThemeControl/Menu/Quit" to="." method="_on_quit_pressed"]
-[connection signal="toggled" from="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer2/FullScreen" to="ThemeControl/Settings/Video" method="_on_full_screen_toggled"]
-[connection signal="toggled" from="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer2/Borderless" to="ThemeControl/Settings/Video" method="_on_borderless_toggled"]
-[connection signal="item_selected" from="ThemeControl/Settings/Video/HBoxContainer/VBoxContainer2/Vsync" to="ThemeControl/Settings/Video" method="_on_vsync_item_selected"]
-[connection signal="pressed" from="ThemeControl/Settings/Video/Back" to="ThemeControl/Settings/Video/Back" method="_on_pressed"]
-[connection signal="value_changed" from="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer2/Master" to="ThemeControl/Settings/Audio" method="_on_master_value_changed"]
-[connection signal="value_changed" from="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer2/Music" to="ThemeControl/Settings/Audio" method="_on_music_value_changed"]
-[connection signal="value_changed" from="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer2/SFX" to="ThemeControl/Settings/Audio" method="_on_sfx_value_changed"]
-[connection signal="value_changed" from="ThemeControl/Settings/Audio/HBoxContainer/VBoxContainer2/Voices" to="ThemeControl/Settings/Audio" method="_on_voices_value_changed"]
-[connection signal="pressed" from="ThemeControl/Settings/Audio/Back" to="ThemeControl/Settings/Audio/Back" method="_on_pressed"]
-[connection signal="pressed" from="ThemeControl/Settings/Controls/Back" to="ThemeControl/Settings/Controls/Back" method="_on_pressed"]
+[connection signal="toggled" from="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2/FullScreen" to="ThemeControl/Settings/SETTINGS_VIDEO" method="_on_full_screen_toggled"]
+[connection signal="toggled" from="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2/Borderless" to="ThemeControl/Settings/SETTINGS_VIDEO" method="_on_borderless_toggled"]
+[connection signal="item_selected" from="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2/Vsync" to="ThemeControl/Settings/SETTINGS_VIDEO" method="_on_vsync_item_selected"]
+[connection signal="pressed" from="ThemeControl/Settings/SETTINGS_VIDEO/Back" to="ThemeControl/Settings/SETTINGS_VIDEO/Back" method="_on_pressed"]
+[connection signal="value_changed" from="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer2/Master" to="ThemeControl/Settings/SETTINGS_AUDIO" method="_on_master_value_changed"]
+[connection signal="value_changed" from="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer2/Music" to="ThemeControl/Settings/SETTINGS_AUDIO" method="_on_music_value_changed"]
+[connection signal="value_changed" from="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer2/SFX" to="ThemeControl/Settings/SETTINGS_AUDIO" method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="ThemeControl/Settings/SETTINGS_AUDIO/HBoxContainer/VBoxContainer2/Voices" to="ThemeControl/Settings/SETTINGS_AUDIO" method="_on_voices_value_changed"]
+[connection signal="pressed" from="ThemeControl/Settings/SETTINGS_AUDIO/Back" to="ThemeControl/Settings/SETTINGS_AUDIO/Back" method="_on_pressed"]
+[connection signal="pressed" from="ThemeControl/Settings/SETTINGS_CONTROLS/Back" to="ThemeControl/Settings/SETTINGS_CONTROLS/Back" method="_on_pressed"]
