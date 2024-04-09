@@ -7,6 +7,12 @@ func _init(collection: Array):
 	randomize()	
 	self.collection = collection
 
+func append(element):
+	self.collection.append(element)
+
+func size() -> int:
+	return self.collection.size()
+	
 func random_element():
 	var index = random_index()
 	return collection[index]

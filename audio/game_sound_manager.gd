@@ -20,7 +20,20 @@ enum Sounds {
 	SURBI_GRUNT_4,
 	SURBI_DEATH,
 	BULLET_HIT_BODY,
-	MUSIC_DRUMS
+	DRUMS,
+	WAVE_END
+}
+enum Music {
+	SLOW_LOOP_1,
+	SLOW_LOOP_2,
+	FAST_LOOP_1,
+	FAST_LOOP_2,
+	FAST_LOOP_3,
+	FAST_LOOP_4,
+	LONG_LOOP_1,
+	LONG_LOOP_2,
+	REST_LOOP_1,
+	REST_LOOP_2
 }
 
 var zombie_voices = ArrayCollection.new([Sounds.ZOMBIE_VOICE_1, Sounds.ZOMBIE_VOICE_2, Sounds.ZOMBIE_VOICE_3, Sounds.ZOMBIE_VOICE_4])
@@ -45,8 +58,27 @@ var sound_files = {
 	Sounds.SURBI_GRUNT_3: preload("res://audio/player/surbi/grunt-3.wav"),
 	Sounds.SURBI_GRUNT_4: preload("res://audio/player/surbi/grunt-4.wav"),
 	Sounds.SURBI_DEATH: preload("res://audio/player/surbi/death.wav"),
-	Sounds.MUSIC_DRUMS: preload("res://audio/background_music/drum-hit.wav")
+	Sounds.DRUMS: preload("res://audio/effects/drum-hit.wav"),
+	Sounds.WAVE_END: preload("res://audio/effects/feral-east-wave-end.wav")
 }
+
+var music_res = {
+	Music.SLOW_LOOP_1: "res://audio/background_music/feral-east-wave-slow.wav",
+	Music.SLOW_LOOP_2: "res://audio/background_music/feral-east-wave-slow-2.wav",
+	Music.FAST_LOOP_1: "res://audio/background_music/feral-east-wave-fast.wav",
+	Music.FAST_LOOP_2: "res://audio/background_music/feral-east-wave-fast-2.wav",
+	Music.FAST_LOOP_3: "res://audio/background_music/feral-east-wave-fast-3.wav",
+	Music.FAST_LOOP_4: "res://audio/background_music/feral-east-wave-fast-4.wav",
+	Music.LONG_LOOP_1: "res://audio/background_music/feral-east-wave-long.wav",
+	Music.LONG_LOOP_2: "res://audio/background_music/feral-east-wave-long-2.wav",
+	Music.REST_LOOP_1: "res://audio/background_music/feral-east-resting.wav",
+	Music.REST_LOOP_2: "res://audio/background_music/feral-east-resting-2.wav"
+}
+
+var fast_music_loops_keys = [Music.FAST_LOOP_1, Music.FAST_LOOP_2, Music.FAST_LOOP_3, Music.FAST_LOOP_4]
+var slow_music_loops_keys = [Music.SLOW_LOOP_1, Music.SLOW_LOOP_2]
+var long_music_loops_keys = [Music.LONG_LOOP_1, Music.LONG_LOOP_2]
+var rest_music_loops_keys = [Music.REST_LOOP_1, Music.REST_LOOP_2]
 
 static var instance = null
 
@@ -64,3 +96,12 @@ func play_sound(sound_type: Sounds, sound_player: Node):
 			sound_player.play()
 		else:
 			print("Sound type not found: ", sound_type)	
+
+func async_music_loops_load(loops: Array) -> Array: 
+	var music = []
+	for music_loop_key in loops:
+		if  (music_res.has(music_loop_key)):
+			var music_path = music_res[music_loop_key]
+			ResourceLoader.load_threaded_request(music_path)
+			music.append(music_path)
+	return music

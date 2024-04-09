@@ -10,33 +10,68 @@ script/source = "extends Node
 var current_level_instance
 var current_level_path
 var score
-
+var menu_loops_paths: Array = []
+var menu_music: ArrayCollection = ArrayCollection.new([])
+var sound_manager = GameSoundManager.get_instance()
 @onready var menu = $MainMenu
 @onready var death_menu = $DeathMenu
 @onready var loading_screen = $LoadingScreen
+@onready var music_player = $MusicPlayer
 
 func _ready():
 	TranslationServer.set_locale(\"en\")
 	death_menu.hide()
+	load_menu_music()
 	GlobalEventBus.connect(GlobalEventBus.START_BUTTON_PRESSED, on_start)
 	GlobalEventBus.connect(GlobalEventBus.RESUME_BUTTON_PRESSED, on_menu_toggle)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_DEATH, on_player_death)
 	GlobalEventBus.connect(GlobalEventBus.RESTART_BUTTON_PRESSED, on_restart)
 	GlobalEventBus.connect(GlobalEventBus.QUIT_TO_MENU_BUTTON_PRESSED, on_quit_to_menu)
+
+func load_menu_music():
+	var loops_keys = sound_manager.rest_music_loops_keys
+	self.menu_loops_paths = sound_manager.async_music_loops_load(loops_keys)
+	loading_screen.show()	 
 	
 func _process(delta):
 	if (loading_screen.visible):
 		on_resource_loading()
 	elif(!death_menu.visible):	
 		on_keyboard_pressed()
-
+	if(menu.visible):
+		play_menu_music()
+	else:
+		stop_menu_music()	
+	
 func on_resource_loading():
-	if (ResourceLoader.load_threaded_get_status(current_level_path) == ResourceLoader.THREAD_LOAD_LOADED):
+	if(current_level_path == null):
+		on_menu_music_loading()	
+	else:
+		on_level_loading()
+
+func on_level_loading():
+	if (current_level_path != null && ResourceLoader.load_threaded_get_status(current_level_path) == ResourceLoader.THREAD_LOAD_LOADED):
 		var level = ResourceLoader.load_threaded_get(current_level_path)
 		current_level_instance = level.instantiate()
 		add_child(current_level_instance)
-		loading_screen.hide()
+		loading_screen.hide()	
 
+func on_menu_music_loading():
+	for loading_menu_music in menu_loops_paths:
+		if (ResourceLoader.load_threaded_get_status(loading_menu_music) == ResourceLoader.THREAD_LOAD_LOADED):
+			var music = ResourceLoader.load_threaded_get(loading_menu_music)
+			menu_music.append(music)
+	if (menu_music.size() == menu_loops_paths.size()):
+		loading_screen.hide()		
+
+func play_menu_music():
+	if(!music_player.is_playing() && menu_music.size() > 0 && current_level_instance == null):
+		music_player.stream = menu_music.random_element() 
+		music_player.play()
+
+func stop_menu_music():
+	music_player.stop()
+	
 func on_keyboard_pressed():
 	if Input.is_action_just_pressed(\"show_or_hide_menu\"):
 		on_menu_toggle()
@@ -82,3 +117,6 @@ visible = false
 
 [node name="LoadingScreen" parent="." instance=ExtResource("3_eks8k")]
 visible = false
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"

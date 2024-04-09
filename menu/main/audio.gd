@@ -5,7 +5,7 @@ extends TabBar
 @onready var voices_bus_player = $VoicesBusPlayer
 
 var sound_manager = GameSoundManager.get_instance()
-var music_example = GameSoundManager.Sounds.MUSIC_DRUMS
+var music_example = GameSoundManager.Sounds.DRUMS
 var sfx_example = GameSoundManager.Sounds.REVOLVER_SHOOT
 var voices_example = GameSoundManager.Sounds.ZOMBIE_DEATH_1
 
