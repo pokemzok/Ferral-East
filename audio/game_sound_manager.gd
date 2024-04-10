@@ -33,7 +33,8 @@ enum Music {
 	LONG_LOOP_1,
 	LONG_LOOP_2,
 	REST_LOOP_1,
-	REST_LOOP_2
+	REST_LOOP_2,
+	GAME_OVER
 }
 
 var zombie_voices = ArrayCollection.new([Sounds.ZOMBIE_VOICE_1, Sounds.ZOMBIE_VOICE_2, Sounds.ZOMBIE_VOICE_3, Sounds.ZOMBIE_VOICE_4])
@@ -72,13 +73,15 @@ var music_res = {
 	Music.LONG_LOOP_1: "res://audio/background_music/feral-east-wave-long.wav",
 	Music.LONG_LOOP_2: "res://audio/background_music/feral-east-wave-long-2.wav",
 	Music.REST_LOOP_1: "res://audio/background_music/feral-east-resting.wav",
-	Music.REST_LOOP_2: "res://audio/background_music/feral-east-resting-2.wav"
+	Music.REST_LOOP_2: "res://audio/background_music/feral-east-resting-2.wav",
+	Music.GAME_OVER: "res://audio/background_music/feral-east-game-over.wav"
 }
 
 var fast_music_loops_keys = [Music.FAST_LOOP_1, Music.FAST_LOOP_2, Music.FAST_LOOP_3, Music.FAST_LOOP_4]
 var slow_music_loops_keys = [Music.SLOW_LOOP_1, Music.SLOW_LOOP_2]
 var long_music_loops_keys = [Music.LONG_LOOP_1, Music.LONG_LOOP_2]
 var rest_music_loops_keys = [Music.REST_LOOP_1, Music.REST_LOOP_2]
+var game_over_loops_keys = [Music.GAME_OVER]
 
 static var instance = null
 

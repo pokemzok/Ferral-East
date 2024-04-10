@@ -1,6 +1,5 @@
 extends Node
 
-var zombie = preload("res://character/enemy/default_zombie/default_zombie.tscn")
 var game_mode: GameMode 
 @onready var level_music_player = $LevelMusicPlayer
 

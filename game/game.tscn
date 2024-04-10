@@ -9,15 +9,20 @@ script/source = "extends Node
 
 var current_level_instance
 var current_level_path
-var score
+
 var menu_loops_paths: Array = []
+var death_menu_loops_paths: Array = []
 var menu_music: ArrayCollection = ArrayCollection.new([])
+var death_menu_music: ArrayCollection = ArrayCollection.new([])
 var sound_manager = GameSoundManager.get_instance()
+
 @onready var menu = $MainMenu
 @onready var death_menu = $DeathMenu
 @onready var loading_screen = $LoadingScreen
 @onready var music_player = $MusicPlayer
 
+# TODO: how to dynamically load music with level? Should I display loading screen on my level as well (until I'll finish loading).
+ 
 func _ready():
 	TranslationServer.set_locale(\"en\")
 	death_menu.hide()
@@ -29,8 +34,10 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.QUIT_TO_MENU_BUTTON_PRESSED, on_quit_to_menu)
 
 func load_menu_music():
-	var loops_keys = sound_manager.rest_music_loops_keys
-	self.menu_loops_paths = sound_manager.async_music_loops_load(loops_keys)
+	var menu_loops_keys = sound_manager.rest_music_loops_keys
+	var death_menu_loops_keys = sound_manager.game_over_loops_keys
+	self.menu_loops_paths = sound_manager.async_music_loops_load(menu_loops_keys)
+	self.death_menu_loops_paths = sound_manager.async_music_loops_load(death_menu_loops_keys)
 	loading_screen.show()	 
 	
 func _process(delta):
@@ -38,14 +45,16 @@ func _process(delta):
 		on_resource_loading()
 	elif(!death_menu.visible):	
 		on_keyboard_pressed()
-	if(menu.visible):
-		play_menu_music()
+	if(menu.visible && current_level_instance == null):
+		play_menu_music(menu_music)
+	elif (death_menu.visible):
+		play_menu_music(death_menu_music)	
 	else:
 		stop_menu_music()	
 	
 func on_resource_loading():
 	if(current_level_path == null):
-		on_menu_music_loading()	
+		on_menus_music_loading()	
 	else:
 		on_level_loading()
 
@@ -56,17 +65,21 @@ func on_level_loading():
 		add_child(current_level_instance)
 		loading_screen.hide()	
 
-func on_menu_music_loading():
-	for loading_menu_music in menu_loops_paths:
-		if (ResourceLoader.load_threaded_get_status(loading_menu_music) == ResourceLoader.THREAD_LOAD_LOADED):
-			var music = ResourceLoader.load_threaded_get(loading_menu_music)
-			menu_music.append(music)
-	if (menu_music.size() == menu_loops_paths.size()):
+func on_menus_music_loading():
+	load_music_for(menu_music, menu_loops_paths)
+	load_music_for(death_menu_music, death_menu_loops_paths)	
+	if (menu_music.size() == menu_loops_paths.size() && death_menu_music.size() == death_menu_loops_paths.size()):
 		loading_screen.hide()		
 
-func play_menu_music():
-	if(!music_player.is_playing() && menu_music.size() > 0 && current_level_instance == null):
-		music_player.stream = menu_music.random_element() 
+func load_music_for(music_collection: ArrayCollection, music_paths: Array):
+	for music_path in music_paths:
+		if (ResourceLoader.load_threaded_get_status(music_path) == ResourceLoader.THREAD_LOAD_LOADED):
+			var music = ResourceLoader.load_threaded_get(music_path)
+			music_collection.append(music)
+
+func play_menu_music(music_collection: ArrayCollection):
+	if(!music_player.is_playing() && music_collection.size() > 0):
+		music_player.stream = music_collection.random_element() 
 		music_player.play()
 
 func stop_menu_music():
