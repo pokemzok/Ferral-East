@@ -43,7 +43,7 @@ func load_menu_music():
 func _process(delta):
 	if (loading_screen.visible):
 		on_resource_loading()
-	elif(!death_menu.visible):	
+	elif(!death_menu.visible):
 		on_keyboard_pressed()
 	if(menu.visible && current_level_instance == null):
 		play_menu_music(menu_music)
@@ -108,6 +108,7 @@ func on_quit_to_menu():
 	clean_up_after_player_death()
 	menu.reset()
 	menu.show()	
+	stop_menu_music()
 	current_level_instance.queue_free()
 
 func clean_up_after_player_death():
