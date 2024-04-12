@@ -36,8 +36,8 @@ func _ready():
 func load_menu_music():
 	var menu_loops_keys = sound_manager.rest_music_loops_keys
 	var death_menu_loops_keys = sound_manager.game_over_loops_keys
-	self.menu_loops_paths = sound_manager.async_music_loops_load(menu_loops_keys)
-	self.death_menu_loops_paths = sound_manager.async_music_loops_load(death_menu_loops_keys)
+	self.menu_loops_paths = ResourceFromDictionaryLoader.start_async_resource_load(menu_loops_keys, sound_manager.music_res)
+	self.death_menu_loops_paths = ResourceFromDictionaryLoader.start_async_resource_load(death_menu_loops_keys, sound_manager.music_res)
 	loading_screen.show()	 
 	
 func _process(delta):
@@ -66,8 +66,8 @@ func on_level_loading():
 		loading_screen.hide()	
 
 func on_menus_music_loading():
-	load_music_for(menu_music, menu_loops_paths)
-	load_music_for(death_menu_music, death_menu_loops_paths)	
+	ResourceFromDictionaryLoader.load_async_resource_into(menu_music, menu_loops_paths)
+	ResourceFromDictionaryLoader.load_async_resource_into(death_menu_music, death_menu_loops_paths)
 	if (menu_music.size() == menu_loops_paths.size() && death_menu_music.size() == death_menu_loops_paths.size()):
 		loading_screen.hide()		
 
@@ -126,11 +126,11 @@ script = SubResource("GDScript_3slsy")
 
 [node name="MainMenu" parent="." instance=ExtResource("1_iv2hg")]
 
-[node name="DeathMenu" parent="." instance=ExtResource("2_fckys")]
-visible = false
-
 [node name="LoadingScreen" parent="." instance=ExtResource("3_eks8k")]
 visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
+
+[node name="DeathMenu" parent="." instance=ExtResource("2_fckys")]
+visible = false

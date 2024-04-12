@@ -17,7 +17,7 @@ config/icon="res://game/shortcut/shortcut.png"
 
 [audio]
 
-buses/default_bus_layout="res://theme/default_bus_layout.tres"
+buses/default_bus_layout="res://assets/theme/default_bus_layout.tres"
 
 [autoload]
 
@@ -29,7 +29,7 @@ GlobalEventBus="*res://event/global_event_bus.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://cursor/Cursor.png"
+mouse_cursor/custom_image="res://assets/cursor/Cursor.png"
 mouse_cursor/custom_image_hotspot=Vector2(8, 8)
 
 [input]
@@ -68,4 +68,4 @@ show_or_hide_menu={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://translations/translations.en.translation", "res://translations/translations.pl.translation")
+locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation")

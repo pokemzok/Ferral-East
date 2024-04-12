@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgjvc8fmlnolf"]
 
-[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://theme/base_theme.tres" id="1_om3q8"]
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="1_om3q8"]
 
 [node name="LoadingScreen" type="CanvasLayer"]
 

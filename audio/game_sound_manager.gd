@@ -100,11 +100,3 @@ func play_sound(sound_type: Sounds, sound_player: Node):
 		else:
 			print("Sound type not found: ", sound_type)	
 
-func async_music_loops_load(loops: Array) -> Array: 
-	var music = []
-	for music_loop_key in loops:
-		if  (music_res.has(music_loop_key)):
-			var music_path = music_res[music_loop_key]
-			ResourceLoader.load_threaded_request(music_path)
-			music.append(music_path)
-	return music
