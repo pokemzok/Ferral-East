@@ -75,9 +75,10 @@ func on_wave_complete():
 	on_wave_complete_music()	
 
 func on_wave_complete_music():
-	self.music_player.stop()
-	self.music_player.stream = music.get_victory_music()
-	self.music_player.play()
+	if(music_player.is_playing()):
+		music_player.stop()
+	music_player.stream = music.get_victory_music()
+	music_player.play()
 	
 # TODO more difficulty settings
 # TODO rethink difficulty improvement. Currently it is too hard

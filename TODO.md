@@ -1,9 +1,7 @@
 # TODO 1
-# 3. Sound design
-# 3.1 Player should manually start waves (on shoot). This way it would be easier to introduce sound effect.
-# 3.2 Whistle on complete wave  (plus graceful interrupt of a playing song)
-# 3.3 Make multiple different loops from Ferral East song so I could trigger them on different waves
-# 3.4 During rest time I can play slow down drums (when the user is resting) from Ferral East music. I can also introcue there some mellody to keep it interesting (like in Hot Line miami when there is a plot elements)
+# 1. Nice sound transition from music to whistle.
+# 2. Make whistle sound (end of the wave) louder and shorter.
+# 3. Remove banjo theme from menu (too glitchy).
 # 4 Make cactus hurt player and enemy
 # 5 Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.
 
