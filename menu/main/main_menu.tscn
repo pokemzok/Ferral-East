@@ -282,6 +282,16 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer"]
 layout_mode = 2
 
+[node name="Attack" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "CONTROLS_ATTACK"
+
+[node name="Action" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "CONTROLS_ACTION"
+
 [node name="Up" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
@@ -310,6 +320,17 @@ text = "CONTROLS_MENU"
 [node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Attack" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+layout_mode = 2
+size_flags_vertical = 7
+action = "attack"
+
+[node name="Action" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+layout_mode = 2
+size_flags_vertical = 7
+action = "action"
 
 [node name="UpActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2

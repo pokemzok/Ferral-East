@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cht6mw1xpds5q"
-path="res://.godot/imported/feral-east-wave-end.wav-a5a2fa286e8155c21e1f4592454e8432.sample"
+path="res://.godot/imported/feral-east-wave-end.wav-4799097c0c669e8304c7dabd5a785912.sample"
 
 [deps]
 
-source_file="res://audio/effects/feral-east-wave-end.wav"
-dest_files=["res://.godot/imported/feral-east-wave-end.wav-a5a2fa286e8155c21e1f4592454e8432.sample"]
+source_file="res://audio/background_music/feral-east-wave-end.wav"
+dest_files=["res://.godot/imported/feral-east-wave-end.wav-4799097c0c669e8304c7dabd5a785912.sample"]
 
 [params]
 

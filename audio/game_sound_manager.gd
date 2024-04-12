@@ -34,7 +34,8 @@ enum Music {
 	LONG_LOOP_2,
 	REST_LOOP_1,
 	REST_LOOP_2,
-	GAME_OVER
+	GAME_OVER,
+	WAVE_END
 }
 
 var zombie_voices = ArrayCollection.new([Sounds.ZOMBIE_VOICE_1, Sounds.ZOMBIE_VOICE_2, Sounds.ZOMBIE_VOICE_3, Sounds.ZOMBIE_VOICE_4])
@@ -60,7 +61,7 @@ var sound_files = {
 	Sounds.SURBI_GRUNT_4: preload("res://audio/player/surbi/grunt-4.wav"),
 	Sounds.SURBI_DEATH: preload("res://audio/player/surbi/death.wav"),
 	Sounds.DRUMS: preload("res://audio/effects/drum-hit.wav"),
-	Sounds.WAVE_END: preload("res://audio/effects/feral-east-wave-end.wav")
+	Sounds.WAVE_END: preload("res://audio/effects/whistle.wav")
 }
 
 var music_res = {
@@ -74,7 +75,8 @@ var music_res = {
 	Music.LONG_LOOP_2: "res://audio/background_music/feral-east-wave-long-2.wav",
 	Music.REST_LOOP_1: "res://audio/background_music/feral-east-resting.wav",
 	Music.REST_LOOP_2: "res://audio/background_music/feral-east-resting-2.wav",
-	Music.GAME_OVER: "res://audio/background_music/feral-east-game-over.wav"
+	Music.GAME_OVER: "res://audio/background_music/feral-east-game-over.wav",
+	Music.WAVE_END: "res://audio/background_music/feral-east-wave-end.wav"
 }
 
 var slow_music_loops_keys = [Music.SLOW_LOOP_1, Music.SLOW_LOOP_2]
@@ -82,6 +84,7 @@ var fast_music_loops_keys = [Music.FAST_LOOP_1, Music.FAST_LOOP_2, Music.FAST_LO
 var long_music_loops_keys = [Music.LONG_LOOP_1, Music.LONG_LOOP_2]
 var rest_music_loops_keys = [Music.REST_LOOP_1, Music.REST_LOOP_2]
 var game_over_loops_keys = [Music.GAME_OVER]
+var victory_loops_keys = [Music.WAVE_END]
 
 static var instance = null
 

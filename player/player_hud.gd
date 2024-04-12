@@ -36,6 +36,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, on_menu_hidden)
 	GlobalEventBus.connect(GlobalEventBus.SCORE_CHANGED, on_score_changed)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
+	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
 	original_color = Color(last_enemy_points_label.modulate, 1)
@@ -80,7 +81,6 @@ func level_score_update(details: ScoreDetails):
 	level_score_tween.tween_property(level_score_label, "scale", Vector2(1.1, 1.1), 0.15)
 	level_score_tween.tween_property(level_score_label, "scale", Vector2(1, 1), 0.15)
 	
-	
 func enemy_points_update(details: ScoreDetails):
 	if (enemy_points_tween != null):
 		enemy_points_tween.kill()
@@ -100,17 +100,17 @@ func on_wave_started(wave_nr, enemies_left):
 	self.enemies_left = enemies_left
 	enemies_left_label.show()
 	update_enemies_left_label_text()	
+	show_wave_started_message(wave_nr)	
 	if (wave_nr == 1):
-		show_wave_started_message(wave_nr)
 		wave_info_tween.tween_callback(show_get_ready_message.bind(wave_nr))
-	elif (wave_nr > 1):
-		show_wave_completed_message(wave_nr-1)
-		wave_info_tween.tween_callback(show_wave_started_message.bind(wave_nr))
 
-func show_wave_completed_message(wave_nr):
+func on_wave_completed(wave_nr):
+	if(wave_info_tween != null):
+		wave_info_tween.kill()
 	wave_info_label.text = outline_prefix+tr("HUD_WAVE_COMPLETED").format({"wave_nr":wave_nr})+outline_suffix
 	wave_info_tween = create_tween()
 	fade_in_out_component(wave_info_label, wave_info_tween)
+	# TODO show periodically messages (press 'Action' button to start)
 	
 func show_wave_started_message(wave_nr):
 	wave_info_label.text = outline_prefix+tr("HUD_WAVE")+" "+str(wave_nr)+outline_suffix
