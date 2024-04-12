@@ -77,8 +77,8 @@ var music_res = {
 	Music.GAME_OVER: "res://audio/background_music/feral-east-game-over.wav"
 }
 
-var fast_music_loops_keys = [Music.FAST_LOOP_1, Music.FAST_LOOP_2, Music.FAST_LOOP_3, Music.FAST_LOOP_4]
 var slow_music_loops_keys = [Music.SLOW_LOOP_1, Music.SLOW_LOOP_2]
+var fast_music_loops_keys = [Music.FAST_LOOP_1, Music.FAST_LOOP_2, Music.FAST_LOOP_3, Music.FAST_LOOP_4]
 var long_music_loops_keys = [Music.LONG_LOOP_1, Music.LONG_LOOP_2]
 var rest_music_loops_keys = [Music.REST_LOOP_1, Music.REST_LOOP_2]
 var game_over_loops_keys = [Music.GAME_OVER]
@@ -100,3 +100,15 @@ func play_sound(sound_type: Sounds, sound_player: Node):
 		else:
 			print("Sound type not found: ", sound_type)	
 
+func survival_music_keys() -> Array:
+	if(slow_music_loops_keys.is_empty() || fast_music_loops_keys.is_empty() || long_music_loops_keys.is_empty()):
+		return []
+	else:	
+		var slow_music_collection = ArrayCollection.new(slow_music_loops_keys)
+		var fast_music_collection = ArrayCollection.new(fast_music_loops_keys)
+		var long_music_collection = ArrayCollection.new(long_music_loops_keys)
+		var survival_keys = slow_music_collection.random_elements(slow_music_collection.size())
+		survival_keys += fast_music_collection.random_elements(fast_music_collection.size())
+		survival_keys += long_music_collection.random_elements(long_music_collection.size())
+		return survival_keys
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://o2x8w13lasm1"]
+[gd_scene load_steps=31 format=3 uid="uid://o2x8w13lasm1"]
 
 [ext_resource type="Script" path="res://level/test/test-level.gd" id="1_085m1"]
 [ext_resource type="Texture2D" uid="uid://bqmifa0j6hwwm" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/bg.png" id="2_0wx2i"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dmbwdxk51kkvc" path="res://assets/tiles/my-own/house.png" id="9_uv2e1"]
 [ext_resource type="Texture2D" uid="uid://cpfiqo1br6bxt" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/land_5.png" id="10_8y3gr"]
 [ext_resource type="PackedScene" uid="uid://cf2bnf2wtv7ep" path="res://player/player.tscn" id="13_rh5vn"]
+[ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="14_jhdgt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ebigg"]
 texture = ExtResource("2_0wx2i")
@@ -9189,3 +9190,5 @@ polygon = PackedVector2Array(1660, 657, 1661, 757, 1356, 755, 1343, 724, 1337, 4
 [node name="LevelMusicPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
 bus = &"Music"
+
+[node name="LoadingScreen" parent="." instance=ExtResource("14_jhdgt")]

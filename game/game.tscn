@@ -8,12 +8,9 @@
 script/source = "extends Node
 
 var current_level_instance
-var current_level_path
-
-var menu_loops_paths: Array = []
-var death_menu_loops_paths: Array = []
-var menu_music: ArrayCollection = ArrayCollection.new([])
-var death_menu_music: ArrayCollection = ArrayCollection.new([])
+var current_level_resource: SingleResource
+var menu_music_resources_group: ResourcesGroup
+var death_menu_music_resources_group: ResourcesGroup
 var sound_manager = GameSoundManager.get_instance()
 
 @onready var menu = $MainMenu
@@ -21,8 +18,6 @@ var sound_manager = GameSoundManager.get_instance()
 @onready var loading_screen = $LoadingScreen
 @onready var music_player = $MusicPlayer
 
-# TODO: how to dynamically load music with level? Should I display loading screen on my level as well (until I'll finish loading).
- 
 func _ready():
 	TranslationServer.set_locale(\"en\")
 	death_menu.hide()
@@ -36,9 +31,9 @@ func _ready():
 func load_menu_music():
 	var menu_loops_keys = sound_manager.rest_music_loops_keys
 	var death_menu_loops_keys = sound_manager.game_over_loops_keys
-	self.menu_loops_paths = ResourceFromDictionaryLoader.start_async_resource_load(menu_loops_keys, sound_manager.music_res)
-	self.death_menu_loops_paths = ResourceFromDictionaryLoader.start_async_resource_load(death_menu_loops_keys, sound_manager.music_res)
-	loading_screen.show()	 
+	menu_music_resources_group = ResourcesGroup.new(menu_loops_keys, sound_manager.music_res)
+	death_menu_music_resources_group = ResourcesGroup.new(death_menu_loops_keys, sound_manager.music_res)
+	loading_screen.show()
 	
 func _process(delta):
 	if (loading_screen.visible):
@@ -46,36 +41,33 @@ func _process(delta):
 	elif(!death_menu.visible):
 		on_keyboard_pressed()
 	if(menu.visible && current_level_instance == null):
-		play_menu_music(menu_music)
+		play_menu_music(menu_music_resources_group.get_loaded_resources())
 	elif (death_menu.visible):
-		play_menu_music(death_menu_music)	
+		play_menu_music(death_menu_music_resources_group.get_loaded_resources())	
 	else:
 		stop_menu_music()	
 	
 func on_resource_loading():
-	if(current_level_path == null):
+	if(current_level_resource == null):
 		on_menus_music_loading()	
 	else:
 		on_level_loading()
 
 func on_level_loading():
-	if (current_level_path != null && ResourceLoader.load_threaded_get_status(current_level_path) == ResourceLoader.THREAD_LOAD_LOADED):
-		var level = ResourceLoader.load_threaded_get(current_level_path)
+	if( current_level_instance == null && current_level_resource.is_loaded()):
+		var level = current_level_resource.get_loaded_resource()
 		current_level_instance = level.instantiate()
 		add_child(current_level_instance)
 		loading_screen.hide()	
+	else:
+		current_level_resource.load_resource()		
 
 func on_menus_music_loading():
-	ResourceFromDictionaryLoader.load_async_resource_into(menu_music, menu_loops_paths)
-	ResourceFromDictionaryLoader.load_async_resource_into(death_menu_music, death_menu_loops_paths)
-	if (menu_music.size() == menu_loops_paths.size() && death_menu_music.size() == death_menu_loops_paths.size()):
-		loading_screen.hide()		
-
-func load_music_for(music_collection: ArrayCollection, music_paths: Array):
-	for music_path in music_paths:
-		if (ResourceLoader.load_threaded_get_status(music_path) == ResourceLoader.THREAD_LOAD_LOADED):
-			var music = ResourceLoader.load_threaded_get(music_path)
-			music_collection.append(music)
+	if (menu_music_resources_group.is_group_loaded() && death_menu_music_resources_group.is_group_loaded()):
+		loading_screen.hide()
+	else:
+		death_menu_music_resources_group.load_resource_group()
+		menu_music_resources_group.load_resource_group()		
 
 func play_menu_music(music_collection: ArrayCollection):
 	if(!music_player.is_playing() && music_collection.size() > 0):
@@ -96,8 +88,8 @@ func on_menu_toggle():
 func on_start():
 	get_tree().paused = false	
 	menu.hide()
-	current_level_path = LevelManager.get_instance().get_level(LevelManager.Levels.TEST)
-	ResourceLoader.load_threaded_request(current_level_path)
+	var level_manager = LevelManager.get_instance()
+	current_level_resource = SingleResource.new(level_manager.Levels.TEST, level_manager.level_paths)
 	loading_screen.show()
 
 func on_restart():
@@ -133,4 +125,7 @@ visible = false
 bus = &"Music"
 
 [node name="DeathMenu" parent="." instance=ExtResource("2_fckys")]
+visible = false
+
+[node name="DeathMenu" parent="DeathMenu" instance=ExtResource("2_fckys")]
 visible = false

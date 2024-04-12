@@ -27,3 +27,7 @@ func random_elements(nr: int) -> Array:
 
 func random_index():
 	return randi() % collection.size()	
+
+func get_element_by_index(index: int):
+	if(index < self.size()):
+		return collection[index]
