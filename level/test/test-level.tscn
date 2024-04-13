@@ -9192,6 +9192,10 @@ polygon = PackedVector2Array(1660, 657, 1661, 757, 1356, 755, 1343, 724, 1337, 4
 autoplay = true
 bus = &"Music"
 
+[node name="LevelVictoryMusicPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"Music"
+
 [node name="LoadingScreen" parent="." instance=ExtResource("14_jhdgt")]
 
 [node name="DeathMenu" parent="." instance=ExtResource("15_ifqbo")]

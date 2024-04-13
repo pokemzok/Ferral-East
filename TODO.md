@@ -1,12 +1,3 @@
-# TODO 1
-# 0.1 limit fire rate (maybe this would help for reload glitch)
-# 0.2 Zombie animation after death (should stay dead, reanimating zombie will come back later)
-# 1. Nice sound transition from music to whistle.
-# 2. Make whistle sound (end of the wave) louder and shorter.
-# 3. Remove banjo theme from menu (too glitchy).
-# 4 Make cactus hurt player and enemy
-# 5 Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.
-
 # TODO 2
 # 1. Drop item on enemy death.
 #		I can keep all the rewards (like second revolver or regen), while having a bit more randomness.
@@ -21,6 +12,13 @@
 # 4. New zombie enemy (different color) which would be smarter (will use pathfinding) and would be reanimating once with less HP.
 # 5. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
 # 6. Score should take into consideration time it took player to complete wave. Wave counts as started after player completed leveling up.
+
+# TODO 1
+# 1. Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.
+# 2. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
+# 3. limit fire rate (maybe this would help for reload glitch)
+# 4. Make whistle sound (end of the wave) louder and shorter.
+# 5. Make cactus hurt player and enemy
 
 # TODO  3: improvements
 # 0. Resolution scaling (I  want for the player to  be able to pick a resolution)

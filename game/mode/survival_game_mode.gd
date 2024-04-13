@@ -1,7 +1,6 @@
 class_name SurvivalGameMode
 extends GameMode
 
-var music_player: AudioStreamPlayer
 var music: SurvivalModeMusic
 var zombie = preload("res://character/enemy/default_zombie/default_zombie.tscn")
 var spawn_points: ArrayCollection
@@ -14,9 +13,8 @@ var enemies_to_kill = wave_enemies[wave_index]
 var enemies_to_spawn = wave_enemies[wave_index]
 var spawn_enemies_nr = NumericAttribute.new(1, 3)
 
-func _init(spawn_points: ArrayCollection, music_player: AudioStreamPlayer, music: SurvivalModeMusic):
+func _init(spawn_points: ArrayCollection, music: SurvivalModeMusic):
 	self.spawn_points = spawn_points
-	self.music_player = music_player
 	self.music = music
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.wave_started.emit(wave_index+1, enemies_to_kill)	
@@ -27,10 +25,8 @@ func _process(delta):
 	wave_processing(delta)	
 
 func music_processing():
-	if (!self.music_player.is_playing()):
-		if(!is_resting_period):
-			self.music_player.stream = music.get_music_for_wave(wave_index)	
-			self.music_player.play()
+	if(!is_resting_period):
+		music.play_on_wave(wave_index)
 
 func on_keyboard_pressed():
 	if(is_resting_period && Input.is_action_just_pressed("action")):
@@ -75,10 +71,7 @@ func on_wave_complete():
 	on_wave_complete_music()	
 
 func on_wave_complete_music():
-	if(music_player.is_playing()):
-		music_player.stop()
-	music_player.stream = music.get_victory_music()
-	music_player.play()
+	self.music.play_on_wave_complete()	
 	
 # TODO more difficulty settings
 # TODO rethink difficulty improvement. Currently it is too hard

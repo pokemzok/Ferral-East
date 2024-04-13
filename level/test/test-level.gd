@@ -7,6 +7,7 @@ var victory_music_resources_group: ResourcesGroup
 var survival_music_resources_group: ResourcesGroup
 var sound_manager = GameSoundManager.get_instance()
 @onready var level_music_player = $LevelMusicPlayer
+@onready var level_victory_music_player = $LevelVictoryMusicPlayer
 @onready var loading_screen = $LoadingScreen
 
 func _ready():
@@ -31,7 +32,7 @@ func _process(delta):
 func on_loading_resources():
 	if(level_music != null):
 		if (game_mode == null):
-			game_mode = SurvivalGameMode.new(spawn_points, level_music_player, level_music)		
+			game_mode = SurvivalGameMode.new(spawn_points, level_music)		
 			return
 	else:
 		survival_music_resources_group.load_resource_group()		
@@ -40,6 +41,8 @@ func on_loading_resources():
 			loading_screen.hide()
 			level_music = SurvivalModeMusic.new(
 				survival_music_resources_group.get_loaded_resources(),
-				victory_music_resources_group.get_loaded_resources()
+				level_music_player,				
+				victory_music_resources_group.get_loaded_resources(),
+				level_victory_music_player
 			)		
 	
