@@ -7,8 +7,6 @@ var health_point_res = preload("res://player/Health.png")
 @onready var wave_info_label: RichTextLabel = %WaveInfo
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
 @onready var projectiles_left_label: RichTextLabel = %ProjectilesLeft
-@onready var timer: Timer = $Timer
-var timer_original_time = 3
 
 var projectiles_image= "[img]res://player/hud-bullet.png[/img]"
 var outline_prefix="[outline_color=black][outline_size=10]"
@@ -46,7 +44,6 @@ func _ready():
 	last_enemy_points_label.modulate.a = 0
 	wave_info_label.modulate.a = 0
 	level_score_label.text = outline_prefix+tr("HUD_SCORE")+": " + str(0)+outline_suffix	
-	timer_original_time = timer.wait_time
 	
 func on_hp_changed(hp):
 	clear_hearts()
@@ -101,6 +98,7 @@ func enemy_points_update(details: ScoreDetails):
 func on_wave_started(wave_nr, enemies_left):
 	tutorial_repeat = 0
 	if(wave_info_tween != null):
+		wave_info_tween.stop()
 		wave_info_tween.kill()
 	self.enemies_left = enemies_left
 	enemies_left_label.show()
@@ -122,14 +120,11 @@ func on_wave_completed(wave_nr):
 func show_wave_trigger_tutorial():
 	if(tutorial_repeat > 0):
 		tutorial_repeat -= 1
-		timer.wait_time = timer_original_time
-		timer.start()
-		await timer.timeout
 		var action_key = InputMap.action_get_events("action")[0].as_text()
 		var action_key_translation = tr(action_key.to_upper())
 		wave_info_label.text = outline_prefix+tr("HUD_NEXT_WAVE_TUTORIAL").format({"action_key":action_key_translation})+outline_suffix
 		wave_info_tween = create_tween()
-		fade_in_out_component(wave_info_label, wave_info_tween)
+		fade_in_out_component(wave_info_label, wave_info_tween)		
 		wave_info_tween.tween_callback(show_wave_trigger_tutorial)
 	
 func show_wave_started_message(wave_nr):

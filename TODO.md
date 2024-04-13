@@ -1,4 +1,6 @@
 # TODO 1
+# 0.1 limit fire rate (maybe this would help for reload glitch)
+# 0.2 Zombie animation after death (should stay dead, reanimating zombie will come back later)
 # 1. Nice sound transition from music to whistle.
 # 2. Make whistle sound (end of the wave) louder and shorter.
 # 3. Remove banjo theme from menu (too glitchy).

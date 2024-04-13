@@ -5,6 +5,7 @@ var motion = Vector2()
 var vocal_timer_max_range = NumericAttribute.new(1,6)
 var vocal_timer = NumericAttribute.new(1, 3)
 var dying_timer = NumericAttribute.new(0, 100)
+var played_dying = false
 
 var stats: EnemyStats = ZombieStatsFactory.create()
 
@@ -22,6 +23,7 @@ var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 @onready var audio_pool = $GameAmbientAudioPool
 
 func _ready():
+	$AnimatedSprite2D.connect("animation_looped", on_animation_finished)
 	self.z_index = 1
 	vocal_timer.randomize_value()
 	var players = get_tree().get_nodes_in_group("player")
@@ -44,8 +46,15 @@ func _physics_process(delta):
 func on_dying(delta):
 	self.z_index = 0
 	walking_audio_player.stop()
-	$AnimatedSprite2D.play("death")
+	if not played_dying:
+		$AnimatedSprite2D.play("dying")
+		played_dying = true
+
 	dying_timer.decrement_by(delta)
+
+func on_animation_finished():
+	if $AnimatedSprite2D.animation == "dying":
+		$AnimatedSprite2D.play("dead")
 		
 func on_stun(delta):
 	walking_audio_player.stop()

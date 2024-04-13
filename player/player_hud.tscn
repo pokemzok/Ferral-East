@@ -114,6 +114,3 @@ bbcode_enabled = true
 text = "Enemies Left: 0"
 fit_content = true
 autowrap_mode = 0
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
