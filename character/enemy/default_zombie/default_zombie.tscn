@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2tfu8bbgndoa"]
+[gd_scene load_steps=12 format=3 uid="uid://b2tfu8bbgndoa"]
 
 [ext_resource type="Script" path="res://character/enemy/default_zombie/default_zombie.gd" id="1_deosn"]
 [ext_resource type="Texture2D" uid="uid://bphy8bstbcrwx" path="res://character/enemy/default_zombie/zombie-dying-1.png" id="2_6ula0"]
@@ -66,29 +66,24 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1py7y"]
-size = Vector2(77, 74)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c12mq"]
-size = Vector2(78, 75)
-
 [node name="DefaultZombie" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_deosn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
-animation = &"dead"
+animation = &"idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 light_mask = 0
-position = Vector2(13.5, -4)
-shape = SubResource("RectangleShape2D_1py7y")
+position = Vector2(11, -4)
+polygon = PackedVector2Array(-47, -9, -29, -18, -24, -32, -18, -36, 9, -36, 29, -35, 33, -28, 26, -26, 11, -1, 37, 29, 37, 34, 34, 36, 26, 37, 18, 36, 6, 37, -4, 39, -23, 38, -27, 28, -34, 23, -41, 19, -46, 20, -47, 14, -38, 12, -37, -1, -42, -4, -45, -4, -47, -5)
 
 [node name="HurtboxArea2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
-position = Vector2(12, -4.5)
-shape = SubResource("RectangleShape2D_c12mq")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HurtboxArea2D"]
+light_mask = 0
+position = Vector2(11, -4)
+polygon = PackedVector2Array(-47, -9, -29, -18, -24, -32, -18, -36, 9, -36, 29, -35, 33, -28, 26, -26, 11, -1, 37, 29, 37, 34, 34, 36, 26, 37, 18, 36, 6, 37, -4, 39, -23, 38, -27, 28, -34, 23, -41, 19, -46, 20, -47, 14, -38, 12, -37, -1, -42, -4, -45, -4, -47, -5)
 
 [node name="VoiceAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Voices"

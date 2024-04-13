@@ -1,4 +1,5 @@
 # TODO 2
+# 0. Fix incorrect events processing bug in surival mode.
 # 1. Drop item on enemy death.
 #		I can keep all the rewards (like second revolver or regen), while having a bit more randomness.
 #		I can also introduce items, which would increase a chance of getting specific rewards.
@@ -14,11 +15,10 @@
 # 6. Score should take into consideration time it took player to complete wave. Wave counts as started after player completed leveling up.
 
 # TODO 1
-# 1. Maybe better collision shapes for players and  enemies? I wonder if polygons would do the trick.
-# 2. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
-# 3. limit fire rate (maybe this would help for reload glitch)
-# 4. Make whistle sound (end of the wave) louder and shorter.
-# 5. Make cactus hurt player and enemy
+# 1. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
+# 2. limit fire rate (maybe this would help for reload glitch)
+# 3. Make whistle sound (end of the wave) louder and shorter.
+# 4. Make cactus hurt player and enemy
 
 # TODO  3: improvements
 # 0. Resolution scaling (I  want for the player to  be able to pick a resolution)

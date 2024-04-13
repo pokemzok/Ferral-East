@@ -6,6 +6,7 @@ var speed: NumericAttribute
 var dmg_score: int
 var death_score: int
 var stunned_timer = NumericAttribute.new(0, NumericAttribute.new(0.1, 0.3).randomize_value().value)
+var attack_timer = NumericAttribute.new(0, NumericAttribute.new(0.2, 0.4).randomize_value().value)
 var speed_increase_factor = 0.5
 var projectiles_dmg_velocity = 100
 

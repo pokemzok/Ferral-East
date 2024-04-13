@@ -40,6 +40,8 @@ func _physics_process(delta):
 		die()	
 	elif stats.stunned_timer.value > 0:		
 		on_stun(delta)
+	elif stats.attack_timer.value > 0:
+		on_attack(delta)	
 	else:
 		hunt_player(delta)
 
@@ -60,7 +62,11 @@ func on_stun(delta):
 	walking_audio_player.stop()
 	stats.stunned_timer.decrement_by(delta)
 	$AnimatedSprite2D.play("stunned")
-			
+
+func on_attack(delta):
+	walking_audio_player.stop()
+	stats.attack_timer.decrement_by(delta)
+	$AnimatedSprite2D.play("idle")		
 # TODO: make it common, so every enemy  could use similar logic. Maybe some new node?
 func growl_on(delta):
 	if dying_timer.value > 0:
@@ -107,11 +113,17 @@ func on_hurtbox_entered(body):
 		if (body.linear_velocity.length() >= stats.projectiles_dmg_velocity):
 			body.queue_free()
 			stun()		
-			take_dmg()				
+			take_dmg()
+	elif body.is_in_group("player"):
+		attack()						
 
 func stun():
 	if (stats.stunned_timer.value <= 0):
 		stats.stunned_timer.assign_max_value()
+
+func attack():
+	if (stats.attack_timer.value <= 0):
+		stats.attack_timer.assign_max_value()
 
 func take_dmg():
 	audio_pool.play_sound_effect(bullet_hit_audio)	
