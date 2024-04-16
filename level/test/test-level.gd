@@ -46,3 +46,7 @@ func on_loading_resources():
 				level_victory_music_player
 			)		
 	
+func destroy():
+	if (game_mode != null):
+		game_mode.clear_event_subscriptions()
+	queue_free()

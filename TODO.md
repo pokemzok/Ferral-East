@@ -1,5 +1,4 @@
 # TODO 2
-# 0. Fix incorrect events processing bug in surival mode.
 # 1. Drop item on enemy death.
 #		I can keep all the rewards (like second revolver or regen), while having a bit more randomness.
 #		I can also introduce items, which would increase a chance of getting specific rewards.

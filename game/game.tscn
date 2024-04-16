@@ -101,10 +101,10 @@ func on_quit_to_menu():
 	menu.reset()
 	menu.show()	
 	stop_menu_music()
-	current_level_instance.queue_free()
+	current_level_instance.destroy()
 
 func clean_up_after_player_death():
-	current_level_instance.queue_free()
+	current_level_instance.destroy()
 	death_menu.hide()
 	
 func on_player_death():

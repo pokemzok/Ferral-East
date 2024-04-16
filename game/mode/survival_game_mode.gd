@@ -19,6 +19,9 @@ func _init(spawn_points: ArrayCollection, music: SurvivalModeMusic):
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.wave_started.emit(wave_index+1, enemies_to_kill)	
 
+func clear_event_subscriptions():
+	GlobalEventBus.disconnect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
+
 func _process(delta):
 	music_processing()
 	on_keyboard_pressed()	
@@ -54,6 +57,7 @@ func spawn_enemies(delta):
 
 func on_enemy_death(type, score):
 	enemies_to_kill -= 1
+
 	if (enemies_to_kill <= 0):
 		on_wave_complete()
 		
