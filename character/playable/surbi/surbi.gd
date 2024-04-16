@@ -127,10 +127,9 @@ func on_hurtbox_entered(body):
 		if not enemies_in_player_collision_area.has(body):
 			enemies_in_player_collision_area.append(body)
 	elif body.is_in_group("item"):
-		sound_manager.play_sound(pickup_audio, effects_audio_player)
+		sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
 		stats.apply_item(body.get_item_type())
 		item_collection.append(body.get_item_type())
-		
 		body.queue_free()
 		
 func on_hurtbox_leave(body):

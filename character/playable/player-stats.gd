@@ -25,9 +25,11 @@ func _init(
 func apply_item(type: Item.ItemType):
 	if(item_actions.has(type)):
 		call(item_actions[type])
-
 func increment_health():
 	health_points.increment_by()
+	if (health_points.is_max_value()):
+		## TODO: add regen stat here. I will have a timer which would regen after lets say 2 minutes 
+		pass
 	GlobalEventBus.player_hp_changed.emit(health_points.value)	
 
 func decrement_health():

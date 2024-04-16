@@ -103,6 +103,15 @@ func play_sound(sound_type: Sounds, sound_player: Node):
 		else:
 			print("Sound type not found: ", sound_type)	
 
+func play_inerrupt_sound(sound_type: Sounds, sound_player: Node):
+	if  (sound_files.has(sound_type)):
+		if (!sound_player.is_playing()):
+			sound_player.stop()
+		sound_player.stream = sound_files[sound_type]
+		sound_player.play()
+	else:
+		print("Sound type not found: ", sound_type)	
+
 func survival_music_keys() -> Array:
 	if(slow_music_loops_keys.is_empty() || fast_music_loops_keys.is_empty() || long_music_loops_keys.is_empty()):
 		return []
