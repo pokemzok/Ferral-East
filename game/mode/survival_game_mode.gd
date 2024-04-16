@@ -55,7 +55,7 @@ func spawn_enemies(delta):
 			spawner.add_child(zombie.instantiate())
 			enemies_to_spawn -= 1		
 
-func on_enemy_death(type, score):
+func on_enemy_death(death_details: EnemyDeathDetails):
 	enemies_to_kill -= 1
 
 	if (enemies_to_kill <= 0):

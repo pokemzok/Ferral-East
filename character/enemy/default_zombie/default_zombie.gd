@@ -134,7 +134,8 @@ func take_dmg():
 	
 func dying():
 	if (dying_timer.value <= 0):
-		GlobalEventBus.enemy_death.emit(stats.type, stats.death_score)
+		var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
+		GlobalEventBus.enemy_death.emit(death_details)
 		play_death_sound()	
 		dying_timer.assign_max_value()
 		$CollisionShape2D.set_deferred("disabled",  true)

@@ -143,7 +143,7 @@ func fade_in_out_component(component: Node, component_tween: Tween):
 	component_tween.tween_property(component, "modulate", original_color, 2)
 	component_tween.tween_property(component, "modulate", original_color_transparent, 2)
 
-func on_enemy_death(type, score):
+func on_enemy_death(death_details: EnemyDeathDetails):
 	if (enemies_left  > 0 ): 
 		enemies_left -= 1
 		update_enemies_left_label_text()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://o2x8w13lasm1"]
+[gd_scene load_steps=33 format=3 uid="uid://o2x8w13lasm1"]
 
 [ext_resource type="Script" path="res://level/test/test-level.gd" id="1_085m1"]
 [ext_resource type="Texture2D" uid="uid://bqmifa0j6hwwm" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/bg.png" id="2_0wx2i"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://rx1noy177tnu" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/land_2.png" id="9_ko74t"]
 [ext_resource type="Texture2D" uid="uid://dmbwdxk51kkvc" path="res://assets/tiles/my-own/house.png" id="9_uv2e1"]
 [ext_resource type="Texture2D" uid="uid://cpfiqo1br6bxt" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/land_5.png" id="10_8y3gr"]
+[ext_resource type="PackedScene" uid="uid://d1h7wu5r8c0qh" path="res://item/items_factory.tscn" id="13_rg3mj"]
 [ext_resource type="PackedScene" uid="uid://cf2bnf2wtv7ep" path="res://player/player.tscn" id="13_rh5vn"]
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="14_jhdgt"]
 [ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="15_ifqbo"]
@@ -9162,6 +9163,8 @@ position = Vector2(1900, 39)
 
 [node name="EnemiesSpawn5" type="Node2D" parent="."]
 position = Vector2(1334, 497)
+
+[node name="ItemsFactory" parent="." instance=ExtResource("13_rg3mj")]
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(897, 457)

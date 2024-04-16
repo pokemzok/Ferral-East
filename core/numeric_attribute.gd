@@ -57,3 +57,6 @@ func increment_max_value(delta: float = 1):
 
 func change_by(delta):
 	self.value += delta
+
+func is_lte_zero() -> bool:
+	return self.value <= 0

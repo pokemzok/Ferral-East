@@ -22,11 +22,11 @@ func on_player_damaged():
 func on_enemy_damaged(type, score):
 	increment_score(score)
 
-func on_enemy_death(type, score):
+func on_enemy_death(death_details: EnemyDeathDetails):
 	perfect_kills += 1
 	global_kills += 1
 	score_multiplier = select_score_multiplier()
-	increment_score(score)
+	increment_score(death_details.score)
 			
 func select_score_multiplier() -> int:
 	var multiplier = 1 
