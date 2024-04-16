@@ -1,4 +1,4 @@
-# TODO 2
+# TODO 1
 # 1. Drop item on enemy death.
 #		I can keep all the rewards (like second revolver or regen), while having a bit more randomness.
 #		I can also introduce items, which would increase a chance of getting specific rewards.
@@ -8,18 +8,29 @@
 # 1.5 If player reach 10 HP (on 10th HP) then player gain regen. After each wave gain +1HP (if HP is missing).
 # 1.6 If player reach max speed  (7 level),  maybe player will unlock bullet-time (like a slow motion for a few seconds + power bar, which will regen on player killing enemies).
 # 2. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
-# 3. New test level which would allow pathfinding. 
-# 4. New zombie enemy (different color) which would be smarter (will use pathfinding) and would be reanimating once with less HP.
-# 5. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
-# 6. Score should take into consideration time it took player to complete wave. Wave counts as started after player completed leveling up.
 
-# TODO 1
+TODO 2
+# 1. New test level which would allow pathfinding. 
+# 2. New zombie enemy (different color) which would be smarter (will use pathfinding) and would be reanimating once with less HP.
+# 3. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
+# 4. Score should take into consideration time it took player to complete wave. Wave counts as started after player completed leveling up.
+
+TODO 3
+# 1. At least 5 levels, which would all have ten waves -> this way I would allow Surbi to be completely upgraded till the end of the game.
+# 2. Transition to next level after completing 10 wave (no saves).
+# 3. Player keeps all the powers during transitions.
+# 4. Defeating the last level (probably a necromancer house) with a necromancer boss (skeleton from my song)
+# 5. After the last boss fight prompt player with: do you want to continue? Which will esencially do infinity waves on the last map. Alternatively give a player a new game plus. If the player completes it 3 times, we can give the playe true ending (singlehandedly defeated all necromancer spawns).
+
+
+
+# TODO 4
 # 1. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
 # 2. limit fire rate (maybe this would help for reload glitch)
 # 3. Make whistle sound (end of the wave) louder and shorter.
 # 4. Make cactus hurt player and enemy
 
-# TODO  3: improvements
+# TODO 5
 # 0. Resolution scaling (I  want for the player to  be able to pick a resolution)
 # 1. Nicer menu and loading screens
 # 1.1 Some interesting background as well

@@ -35,12 +35,12 @@ func shoot_with(character: Node2D, target_position: Vector2):
 		bullet_instance.apply_impulse(Vector2(bullet_speed.value,  0).rotated(bullet_direction), Vector2())
 		character.get_tree().get_root().call_deferred("add_child", bullet_instance)
 		bullets_in_cylinder.decrement_by()
-		if (character.is_player):
+		if (character.is_in_group("player")):
 			GlobalEventBus.player_used_projectile_weapon.emit(bullets_in_cylinder.value)		
 	
 	return bullets_in_cylinder.value > 0 
 
 func reload_with(character: Node2D):
 	bullets_in_cylinder.assign_max_value()
-	if (character.is_player):
+	if (character.is_in_group("player")):
 		GlobalEventBus.player_used_projectile_weapon.emit(bullets_in_cylinder.value)	

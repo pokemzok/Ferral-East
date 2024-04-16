@@ -125,5 +125,8 @@ shape = SubResource("CircleShape2D_7iiwe")
 [node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 
+[node name="EffectsAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
 [connection signal="body_exited" from="HurtboxArea2D" to="." method="on_hurtbox_leave"]

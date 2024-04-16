@@ -9,7 +9,8 @@ func _init(value: float, max_value: float):
 	self.max_value = max_value
 
 func increment_by(delta: float = 1) -> NumericAttribute:
-	self.value += delta
+	if(self.value < self.max_value):
+		self.value += delta
 	return self
 	
 func decrement_by(delta: float = 1) -> NumericAttribute:
@@ -53,3 +54,6 @@ func decrement_max_value(delta: float = 1):
 
 func increment_max_value(delta: float = 1):
 	self.max_value += delta
+
+func change_by(delta):
+	self.value += delta

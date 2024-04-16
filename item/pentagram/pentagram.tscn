@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://cll843a181fvi"]
+
+[ext_resource type="Texture2D" uid="uid://b7lqx8mcmvpjn" path="res://item/pentagram/pentagram.png" id="1_4bejj"]
+[ext_resource type="Script" path="res://item/pentagram/pentagram.gd" id="1_quob7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nmnjm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r4ft"]
+atlas = ExtResource("1_4bejj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybu7r"]
+atlas = ExtResource("1_4bejj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgjwt"]
+atlas = ExtResource("1_4bejj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa3yn"]
+atlas = ExtResource("1_4bejj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cuib"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r4ft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybu7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgjwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa3yn")
+}],
+"loop": true,
+"name": &"glow",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gda1y"]
+radius = 16.0
+
+[node name="Pentagram" type="StaticBody2D" groups=["item"]]
+physics_material_override = SubResource("PhysicsMaterial_nmnjm")
+script = ExtResource("1_quob7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 1)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_6cuib")
+animation = &"glow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gda1y")
