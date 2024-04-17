@@ -35,7 +35,6 @@ func _physics_process(delta):
 func on_dmg():
 	if (stats.invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
 		stats.decrement_health()
-		GlobalEventBus.player_hp_changed.emit(stats.health_points.value)
 		if (stats.health_points.value < 1):
 			dying()
 		else:

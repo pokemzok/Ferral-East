@@ -36,7 +36,6 @@ func on_loading_completed(delta):
 			item_spawn_delay.decrement_by(delta)	
 	
 # FIXme better logic, plus more then one item
-# FIxme Surbi keeps health across restarts for some reason
 func on_enemy_death(enemy_death_details: EnemyDeathDetails):
 	var drop_chance = 0.2
 	var random_number = randf()

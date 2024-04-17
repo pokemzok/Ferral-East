@@ -118,6 +118,7 @@ shape = SubResource("CapsuleShape2D_nr0wd")
 [node name="GameAmbientAudioPool" parent="." instance=ExtResource("11_ewde7")]
 
 [node name="HurtboxArea2D" type="Area2D" parent="."]
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
 shape = SubResource("CircleShape2D_7iiwe")
