@@ -1,13 +1,11 @@
 extends Node2D
-# FiXME So I think here we could take lots of possible arguments.
-# Lets start vanilla though, let the kill score determine possible drop.
-# I can also have here enemy dictionary with weights
 
 var current_item_resource: SingleResource
 var current_enemy_death_details: EnemyDeathDetails
 var item_spawn_delay = NumericAttribute.new(0.5, 0.5)
 var items: Items = Items.get_instance()
 var item_instance
+
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 
@@ -35,14 +33,33 @@ func on_loading_completed(delta):
 		else:
 			item_spawn_delay.decrement_by(delta)	
 	
-# FIXme better logic, plus more then one item
 func on_enemy_death(enemy_death_details: EnemyDeathDetails):
-	var drop_chance = 0.2
-	var random_number = randf()
-	if  (random_number < drop_chance):
-		drop_item(enemy_death_details)
-	
-func drop_item(enemy_death_details: EnemyDeathDetails):
-	if (current_item_resource == null):
+	var base_drop_chance = Items.drop_chances[enemy_death_details.enemy_type]
+	var score_factor = calculate_score_factor(enemy_death_details.score)
+	var drop_chance = base_drop_chance + score_factor
+	var drawn_chance = randf()
+	if  (drawn_chance < drop_chance):
 		current_enemy_death_details = enemy_death_details
-		current_item_resource = SingleResource.new(items.ItemName.PENTAGRAM, items.res_dictionary)
+		drop_item(select_item(drawn_chance, drop_chance, enemy_death_details.enemy_type))
+
+func calculate_score_factor(score: int) -> float:
+	var max_drop_chance = 1
+	var min_drop_chance = 0
+	var max_score = 100.0
+	var normalized_score = float(score) / max_score
+	normalized_score = clamp(normalized_score, 0.0, 1.0)
+	var score_factor = lerp(min_drop_chance, max_drop_chance, normalized_score)
+	return score_factor/10
+
+func select_item(drawn_chance: float, chance_threshold: float, enemy_type: Enemy.EnemyType) -> Items.ItemName:
+	var legendary_tier_threshold = chance_threshold/6
+	if (drawn_chance <= legendary_tier_threshold):
+		return items.legendary_items[enemy_type]
+	elif(drawn_chance <= legendary_tier_threshold * 3):	
+		return items.rare_items[enemy_type]
+	else:	
+		return items.common_items[enemy_type]
+	
+func drop_item(item: Items.ItemName):
+	if (current_item_resource == null):
+		current_item_resource = SingleResource.new(item, items.res_dictionary)
