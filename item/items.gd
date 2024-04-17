@@ -2,11 +2,13 @@ extends Node
 class_name Items
 
 enum ItemName {
-	PENTAGRAM
+	PENTAGRAM,
+	CYLINDER
 }
 
 static var res_dictionary  = {
-	ItemName.PENTAGRAM: "res://item/pentagram/pentagram.tscn"
+	ItemName.PENTAGRAM: "res://item/pentagram/pentagram.tscn",
+	ItemName.CYLINDER: "res://item/cylinder/cylinder.tscn"
 }
 
 static var drop_chances = {
@@ -18,11 +20,11 @@ static var common_items = {
 }
 
 static var rare_items = {
-	Enemy.EnemyType.DEFAULT_ZOMBIE: ItemName.PENTAGRAM
+	Enemy.EnemyType.DEFAULT_ZOMBIE: ItemName.CYLINDER
 }
 
 static var legendary_items = {
-	Enemy.EnemyType.DEFAULT_ZOMBIE: ItemName.PENTAGRAM
+	Enemy.EnemyType.DEFAULT_ZOMBIE: ItemName.CYLINDER
 }
 
 static var instance = null

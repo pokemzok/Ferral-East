@@ -4,6 +4,7 @@ var weapon = Revolver.new()
 var stats: PlayerStats = SurbiStatsFactory.create()
 var enemies_in_player_collision_area =  []
 var is_dead = false
+var reloading = false
 var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
 var death_audio = GameSoundManager.Sounds.SURBI_DEATH
@@ -72,8 +73,9 @@ func die():
 func on_reload(delta):
 	if(stats.reload_timer.value > 0 ):
 		stats.reload_timer.decrement_by(delta)
-	elif(stats.reload_timer.value <= 0 && weapon.bullets_in_cylinder.value == 0):
+	elif(stats.reload_timer.value <= 0 && reloading):
 		weapon.reload_with(self)
+		reloading = false
 		
 func on_player_actions(delta):
 	look_at(get_global_mouse_position())	
@@ -119,6 +121,7 @@ func attack():
 
 func start_reloading():
 	stats.reload_timer.assign_max_value()
+	reloading = true
 	audio_pool.play_sound_effect(weapon.get_reload_audio())
 
 func on_hurtbox_entered(body):
@@ -126,10 +129,17 @@ func on_hurtbox_entered(body):
 		if not enemies_in_player_collision_area.has(body):
 			enemies_in_player_collision_area.append(body)
 	elif body.is_in_group("item"):
-		sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
-		stats.apply_item(body.get_item_type())
-		item_collection.append(body.get_item_type())
-		body.queue_free()
+		on_consume_item(body)
+		
+
+func on_consume_item(item: Item):
+	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
+	stats.apply_item(item.get_item_type())
+	var weapon_modified = weapon.apply_item(item.get_item_type())
+	item_collection.append(item.get_item_type())
+	item.queue_free()
+	if (weapon_modified):
+		start_reloading()
 		
 func on_hurtbox_leave(body):
 	if enemies_in_player_collision_area.has(body):

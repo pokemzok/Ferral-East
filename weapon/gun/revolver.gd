@@ -2,10 +2,15 @@ class_name Revolver
 extends Node
 
 var bullet_speed = NumericAttribute.new(1500, 2500)
+var max_bullet_capacity = 21
 var bullets_in_cylinder = NumericAttribute.new(6, 6)
 var bullet = preload("res://weapon/projectile/bullet/bullet.tscn")
 var reload_audio = GameSoundManager.Sounds.REVOLVER_RELOAD
 var shoot_audio = GameSoundManager.Sounds.REVOLVER_SHOOT
+
+var item_actions = {
+	Item.ItemType.BULLET_UPGRADE: "increment_bullets_capacity"
+}
 
 func get_reload_audio() -> GameSoundManager.Sounds:
 		return reload_audio
@@ -44,3 +49,13 @@ func reload_with(character: Node2D):
 	bullets_in_cylinder.assign_max_value()
 	if (character.is_in_group("player")):
 		GlobalEventBus.player_used_projectile_weapon.emit(bullets_in_cylinder.value)	
+
+func apply_item(type: Item.ItemType) -> bool:
+	if(item_actions.has(type)):
+		call(item_actions[type])
+		return true
+	return false	
+
+func increment_bullets_capacity():
+	if(bullets_in_cylinder.max_value < max_bullet_capacity):
+		bullets_in_cylinder.increment_max_value()

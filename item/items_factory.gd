@@ -5,6 +5,7 @@ var current_enemy_death_details: EnemyDeathDetails
 var item_spawn_delay = NumericAttribute.new(0.5, 0.5)
 var items: Items = Items.get_instance()
 var item_instance
+var drop_chance_increase = 0
 
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
@@ -36,11 +37,14 @@ func on_loading_completed(delta):
 func on_enemy_death(enemy_death_details: EnemyDeathDetails):
 	var base_drop_chance = Items.drop_chances[enemy_death_details.enemy_type]
 	var score_factor = calculate_score_factor(enemy_death_details.score)
-	var drop_chance = base_drop_chance + score_factor
+	var drop_chance = base_drop_chance + score_factor + drop_chance_increase
 	var drawn_chance = randf()
 	if  (drawn_chance < drop_chance):
 		current_enemy_death_details = enemy_death_details
 		drop_item(select_item(drawn_chance, drop_chance, enemy_death_details.enemy_type))
+		drop_chance_increase = 0
+	else:
+		drop_chance_increase += 0.03	
 
 func calculate_score_factor(score: int) -> float:
 	var max_drop_chance = 1

@@ -2,8 +2,7 @@
 # 1. Drop item on enemy death.
 #		I can keep all the rewards (like second revolver or regen), while having a bit more randomness.
 #		I can also introduce items, which would increase a chance of getting specific rewards.
-#		I can also pass wave info to enemies to slightly increase drop chances later on?  
-#		Like Health Update might be a pentagram visible on the zombie. Zombie will have all possible items + drop chance.   
+#		I can also pass wave info to enemies to slightly increase drop chances later on?    
 # 1.4 If player reaches 13 bullets in chamber (on 13 bullet), player will unlock second revolver with a 12 bullets (would need to create an asset for that).
 # 1.5 If player reach 10 HP (on 10th HP) then player gain regen. After each wave gain +1HP (if HP is missing).
 # 1.6 If player reach max speed  (7 level),  maybe player will unlock bullet-time (like a slow motion for a few seconds + power bar, which will regen on player killing enemies).
