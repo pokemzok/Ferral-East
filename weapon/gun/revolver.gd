@@ -26,6 +26,7 @@ func shoot_with(character: Node2D, target_position: Vector2):
 		var bullet_instance  = bullet.instantiate()
 		var offset = Vector2(40, 33) 
 		var character_position = character.global_position
+		bullet_instance.damage = character.stats.accuracy.value
 		bullet_instance.position = character_position + offset.rotated(character.rotation)
 		bullet_instance.rotation_degrees = character.rotation_degrees
 		

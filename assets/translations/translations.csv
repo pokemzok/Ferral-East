@@ -8,10 +8,11 @@ CONTROLS_RIGHT,Right,Prawo
 CONTROLS_UP,Up,Góra
 HUD_ENEMIES_LEFT,Enemies Left,Pozostało
 HUD_GET_READY,Get Ready!,Przygotuj się!
+HUD_NEXT_WAVE_TUTORIAL,Press “{action_key}” when you are ready,Naciśnij “{action_key}” gdy będziesz gotowy.
 HUD_SCORE,Score,Punkty
 HUD_WAVE,Wave,Fala
 HUD_WAVE_COMPLETED,Wave {wave_nr} Completed!,Fala {wave_nr} Ukończona!
-HUD_NEXT_WAVE_TUTORIAL,Press “{action_key}” when you are ready,Naciśnij “{action_key}” gdy będziesz gotowy.
+LEVEL_UP,You Leveled Up! ,Nowy Poziom Doświadczenia! 
 LOADING,LOADING,ŁADOWANIE
 OPTIONS,Options,Opcje
 QUIT,Quit,Wyjdź
@@ -29,5 +30,5 @@ SETTINGS_SFX,SFX,SFX
 SETTINGS_VIDEO,Video,Wideo
 SETTINGS_VOICES,Voices,Głosy
 SETTINGS_VSYNC,Vsync,Vsync
-START,Start,Start
 SPACE,Space,Spacja
+START,Start,Start

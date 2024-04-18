@@ -12,7 +12,7 @@ static var res_dictionary  = {
 }
 
 static var drop_chances = {
-	Enemy.EnemyType.DEFAULT_ZOMBIE: 0.05
+	Enemy.EnemyType.DEFAULT_ZOMBIE: 0.025
 }
 # FIXME different items for zombie, now all tiers are the same
 static var common_items = {
@@ -20,7 +20,7 @@ static var common_items = {
 }
 
 static var rare_items = {
-	Enemy.EnemyType.DEFAULT_ZOMBIE: ItemName.CYLINDER
+	Enemy.EnemyType.DEFAULT_ZOMBIE: ItemName.PENTAGRAM
 }
 
 static var legendary_items = {

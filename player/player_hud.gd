@@ -7,9 +7,14 @@ var health_point_res = preload("res://player/Health.png")
 @onready var wave_info_label: RichTextLabel = %WaveInfo
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
 @onready var projectiles_left_label: RichTextLabel = %ProjectilesLeft
+@onready var player_level_info_label: RichTextLabel = %PlayerLevelInfo
+@onready var sfx_player = $SFXPlayer
+var game_sound_manager = GameSoundManager.get_instance()
 
 var projectiles_image= "[img]res://player/hud-bullet.png[/img]"
 var outline_prefix="[outline_color=black][outline_size=10]"
+var level_info_color_prefix="[color=green]"
+var level_info_color_suffix="[/color]"
 var outline_suffix= "[/outline_size][/outline_color]"
 var tutorial_repeat = 3
 
@@ -28,6 +33,7 @@ var original_color: Color
 var original_color_transparent: Color
 var enemy_points_tween: Tween
 var level_score_tween: Tween
+var player_level_tween: Tween
 var wave_info_tween: Tween
 
 func _ready():
@@ -39,8 +45,10 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEVELED_UP, on_level_up)
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
 	original_color = Color(last_enemy_points_label.modulate, 1)
+	player_level_info_label.modulate.a = 0
 	last_enemy_points_label.modulate.a = 0
 	wave_info_label.modulate.a = 0
 	level_score_label.text = outline_prefix+tr("HUD_SCORE")+": " + str(0)+outline_suffix	
@@ -94,6 +102,14 @@ func enemy_points_update(details: ScoreDetails):
 	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1.25, 1.25), 0.15)
 	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1, 1), 0.15)
 	enemy_points_tween.tween_property(last_enemy_points_label, "modulate", color, 2)
+
+func on_level_up():
+	if (player_level_tween != null):
+		player_level_tween.kill()
+	player_level_tween = create_tween()	
+	player_level_info_label.text = outline_prefix+level_info_color_prefix+tr("LEVEL_UP")+level_info_color_suffix+outline_suffix
+	fade_in_out_component(player_level_info_label, player_level_tween)
+	game_sound_manager.play_inerrupt_sound(GameSoundManager.Sounds.LEVEL_UP, sfx_player)
 
 func on_wave_started(wave_nr, enemies_left):
 	tutorial_repeat = 0

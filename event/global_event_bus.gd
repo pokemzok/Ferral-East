@@ -20,11 +20,13 @@ signal player_death
 signal player_hp_changed
 signal player_damaged
 signal player_used_projectile_weapon
+signal player_leveled_up
 # signal_names
 const PLAYER_DEATH = "player_death"
 const PLAYER_HP_CHANGED = "player_hp_changed"
 const PLAYER_DAMAGED = "player_damaged"
 const PLAYER_USED_PROJECTILE_WEAPON = "player_used_projectile_weapon"
+const PLAYER_LEVELED_UP = "player_leveled_up"
 
 #enemy
 signal enemy_damaged

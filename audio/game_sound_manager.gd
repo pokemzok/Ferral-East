@@ -22,7 +22,8 @@ enum Sounds {
 	SURBI_DEATH,
 	BULLET_HIT_BODY,
 	DRUMS,
-	WAVE_END
+	WAVE_END,
+	LEVEL_UP
 }
 enum Music {
 	SLOW_LOOP_1,
@@ -55,14 +56,15 @@ var sound_files = {
 	Sounds.ZOMBIE_DEATH_3: preload("res://audio/enemies/zombie/zombie-death-3.mp3"),
 	Sounds.ZOMBIE_DEATH_4: preload("res://audio/enemies/zombie/zombie-death-4.mp3"),
 	Sounds.PLAYER_RUN: preload("res://audio/player/running-on-grass.mp3"),
-	Sounds.PLAYER_PICKUP_ITEM: preload("res://audio/player/pickup.mp3"),
+	Sounds.PLAYER_PICKUP_ITEM: preload("res://audio/effects/pickup.mp3"),
 	Sounds.SURBI_GRUNT_1: preload("res://audio/player/surbi/grunt-1.wav"),
 	Sounds.SURBI_GRUNT_2: preload("res://audio/player/surbi/grunt-2.wav"),
 	Sounds.SURBI_GRUNT_3: preload("res://audio/player/surbi/grunt-3.wav"),
 	Sounds.SURBI_GRUNT_4: preload("res://audio/player/surbi/grunt-4.wav"),
 	Sounds.SURBI_DEATH: preload("res://audio/player/surbi/death.wav"),
 	Sounds.DRUMS: preload("res://audio/effects/drum-hit.wav"),
-	Sounds.WAVE_END: preload("res://audio/effects/whistle.wav")
+	Sounds.WAVE_END: preload("res://audio/effects/whistle.wav"),
+	Sounds.LEVEL_UP: preload("res://audio/effects/level_up.wav")
 }
 
 var music_res = {

@@ -17,6 +17,7 @@ var item_collection = ArrayCollection.new([])
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
 
+# TODO Surbi levels up accuracy with each enemy killed, I would need level thresholds
 func after_external_init():
 	stats = SurbiStatsFactory.create()
 

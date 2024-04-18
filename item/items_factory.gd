@@ -42,9 +42,10 @@ func on_enemy_death(enemy_death_details: EnemyDeathDetails):
 	if  (drawn_chance < drop_chance):
 		current_enemy_death_details = enemy_death_details
 		drop_item(select_item(drawn_chance, drop_chance, enemy_death_details.enemy_type))
-		drop_chance_increase = 0
+		drop_chance_increase = -0.03
 	else:
-		drop_chance_increase += 0.03	
+		if(drop_chance_increase < 0.15):
+			drop_chance_increase += 0.015	
 
 func calculate_score_factor(score: int) -> float:
 	var max_drop_chance = 1

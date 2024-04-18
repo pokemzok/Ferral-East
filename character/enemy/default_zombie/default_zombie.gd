@@ -115,7 +115,7 @@ func on_hurtbox_entered(body):
 		if (body.linear_velocity.length() >= stats.projectiles_dmg_velocity):
 			body.queue_free()
 			stun()		
-			take_dmg()
+			take_dmg(body.damage)
 	elif body.is_in_group("player"):
 		attack()						
 
@@ -127,9 +127,10 @@ func attack():
 	if (stats.attack_timer.value <= 0):
 		stats.attack_timer.assign_max_value()
 
-func take_dmg():
+func take_dmg(dmg: float):
+	print(dmg)
 	audio_pool.play_sound_effect(bullet_hit_audio)	
-	stats.health_points.decrement_by()
+	stats.health_points.decrement_by(dmg)
 	GlobalEventBus.enemy_damaged.emit(stats.type, stats.dmg_score)
 	if stats.health_points.value <= 0:
 		dying()
