@@ -10,3 +10,4 @@ func _init():
 func apply_item(item: Item):
 	if (item.get_item_type() == Item.ItemType.COIN):
 		coins_nr += 1	
+		GlobalEventBus.player_collected_coins.emit(coins_nr)

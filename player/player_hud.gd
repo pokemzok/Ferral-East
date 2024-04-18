@@ -7,11 +7,13 @@ var health_point_res = preload("res://player/Health.png")
 @onready var wave_info_label: RichTextLabel = %WaveInfo
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
 @onready var projectiles_left_label: RichTextLabel = %ProjectilesLeft
+@onready var coins_left_label: RichTextLabel = %CoinsLeft
 @onready var player_level_info_label: RichTextLabel = %PlayerLevelInfo
 @onready var sfx_player = $SFXPlayer
 var game_sound_manager = GameSoundManager.get_instance()
 
 var projectiles_image= "[img]res://player/hud-bullet.png[/img]"
+var coins_image = "[img]res://player/hud-coin.png[/img]"
 var outline_prefix="[outline_color=black][outline_size=10]"
 var level_info_color_prefix="[color=green]"
 var level_info_color_suffix="[/color]"
@@ -46,6 +48,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEVELED_UP, on_level_up)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_COLLECTED_COINS, on_collected_coins)
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
 	original_color = Color(last_enemy_points_label.modulate, 1)
 	player_level_info_label.modulate.a = 0
@@ -59,7 +62,7 @@ func on_hp_changed(hp):
 		add_hp()
 
 func on_projectile_weapon_used(projectiles_left):
-	projectiles_left_label.text = projectiles_image+outline_prefix+"x "+str(projectiles_left)+outline_suffix
+	projectiles_left_label.text = projectiles_image+outline_prefix+" x "+str(projectiles_left)+outline_suffix
 
 func on_menu_displayed():
 	hide()
@@ -110,6 +113,10 @@ func on_level_up():
 	player_level_info_label.text = outline_prefix+level_info_color_prefix+tr("LEVEL_UP")+level_info_color_suffix+outline_suffix
 	fade_in_out_component(player_level_info_label, player_level_tween)
 	game_sound_manager.play_inerrupt_sound(GameSoundManager.Sounds.LEVEL_UP, sfx_player)
+
+func on_collected_coins(coins_nr):
+	coins_left_label.show()
+	coins_left_label.text = coins_image+outline_prefix+" x "+str(coins_nr)+outline_suffix
 
 func on_wave_started(wave_nr, enemies_left):
 	tutorial_repeat = 0
