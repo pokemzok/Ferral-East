@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://hh20wrdcr3en"]
+
+[ext_resource type="Script" path="res://item/coin/coin.gd" id="1_6r8ub"]
+[ext_resource type="Texture2D" uid="uid://ctbldm3xj6dp1" path="res://item/coin/samsara-coin.png" id="1_as1no"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1scxq"]
+atlas = ExtResource("1_as1no")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0k1nq"]
+atlas = ExtResource("1_as1no")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r768c"]
+atlas = ExtResource("1_as1no")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56v57"]
+atlas = ExtResource("1_as1no")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qm4a"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_1scxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0k1nq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r768c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56v57")
+}],
+"loop": true,
+"name": &"glow",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4wxv0"]
+radius = 16.0312
+
+[node name="Coin" type="StaticBody2D" groups=["item"]]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_6r8ub")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0qm4a")
+animation = &"glow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4wxv0")

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var weapon = Revolver.new()
 var stats: PlayerStats = SurbiStatsFactory.create()
+var wallet: Wallet = Wallet.new()
 var enemies_in_player_collision_area =  []
 var is_dead = false
 var reloading = false
@@ -135,9 +136,11 @@ func on_hurtbox_entered(body):
 
 func on_consume_item(item: Item):
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
-	stats.apply_item(item.get_item_type())
-	var weapon_modified = weapon.apply_item(item.get_item_type())
-	item_collection.append(item.get_item_type())
+	stats.apply_item(item)
+	var weapon_modified = weapon.apply_item(item)
+	wallet.apply_item(item)
+	if (!item.is_coin()):
+		item_collection.append(item.get_item_type())
 	item.queue_free()
 	if (weapon_modified):
 		start_reloading()

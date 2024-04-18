@@ -51,9 +51,9 @@ func reload_with(character: Node2D):
 	if (character.is_in_group("player")):
 		GlobalEventBus.player_used_projectile_weapon.emit(bullets_in_cylinder.value)	
 
-func apply_item(type: Item.ItemType) -> bool:
-	if(item_actions.has(type)):
-		call(item_actions[type])
+func apply_item(item: Item) -> bool:
+	if(item_actions.has(item.get_item_type())):
+		call(item_actions[item.get_item_type()])
 		return true
 	return false	
 

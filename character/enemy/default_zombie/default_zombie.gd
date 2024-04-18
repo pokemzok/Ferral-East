@@ -128,7 +128,6 @@ func attack():
 		stats.attack_timer.assign_max_value()
 
 func take_dmg(dmg: float):
-	print(dmg)
 	audio_pool.play_sound_effect(bullet_hit_audio)	
 	stats.health_points.decrement_by(dmg)
 	GlobalEventBus.enemy_damaged.emit(stats.type, stats.dmg_score)

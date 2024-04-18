@@ -57,7 +57,7 @@ func calculate_score_factor(score: int) -> float:
 	return score_factor/10
 
 func select_item(drawn_chance: float, chance_threshold: float, enemy_type: Enemy.EnemyType) -> Items.ItemName:
-	var legendary_tier_threshold = chance_threshold/8
+	var legendary_tier_threshold = chance_threshold/9
 	if (drawn_chance <= legendary_tier_threshold):
 		return items.legendary_items[enemy_type]
 	elif(drawn_chance <= legendary_tier_threshold * 3):	

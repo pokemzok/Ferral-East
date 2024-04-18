@@ -27,18 +27,16 @@ func _init(
 	GlobalEventBus.player_hp_changed.emit(health_points.value)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, increment_kill_count)
 
-func apply_item(type: Item.ItemType) -> bool:
-	if(item_actions.has(type)):
-		call(item_actions[type])
+func apply_item(item: Item) -> bool:
+	if(item_actions.has(item.get_item_type())):
+		call(item_actions[item.get_item_type()])
 		return true
 	return false	
 		
 func increment_health():
-	health_points.increment_by()
-	if (health_points.is_max_value()):
-		## TODO: add regen stat here. I will have a timer which would regen after lets say 2 minutes 
-		pass
-	GlobalEventBus.player_hp_changed.emit(health_points.value)	
+	if (!health_points.is_max_value()):
+		health_points.increment_by()		
+		GlobalEventBus.player_hp_changed.emit(health_points.value)	
 
 func decrement_health():
 	health_points.decrement_by()
