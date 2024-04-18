@@ -4,7 +4,7 @@ var player =  null
 var motion = Vector2()
 var vocal_timer_max_range = NumericAttribute.new(1,6)
 var vocal_timer = NumericAttribute.new(1, 3)
-var dying_timer = NumericAttribute.new(0, 100)
+var dying_timer = NumericAttribute.new(0, 50)
 var played_dying = false
 
 var stats: EnemyStats = ZombieStatsFactory.create()
@@ -57,6 +57,8 @@ func on_dying(delta):
 func on_animation_finished():
 	if $AnimatedSprite2D.animation == "dying":
 		$AnimatedSprite2D.play("dead")
+	elif $AnimatedSprite2D.animation == "despawn":
+		queue_free()
 		
 func on_stun(delta):
 	walking_audio_player.stop()
@@ -146,4 +148,4 @@ func play_death_sound():
 	sound_manager.play_sound(death_sounds.random_element(), voice_audio_player)
 
 func die():
-	queue_free()
+	$AnimatedSprite2D.play("despawn")

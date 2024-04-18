@@ -2,7 +2,7 @@ class_name Revolver
 extends Node
 
 var bullet_speed = NumericAttribute.new(1500, 2500)
-var max_bullet_capacity = 21
+var max_bullet_capacity = 13
 var bullets_in_cylinder = NumericAttribute.new(6, 6)
 var bullet = preload("res://weapon/projectile/bullet/bullet.tscn")
 var reload_audio = GameSoundManager.Sounds.REVOLVER_RELOAD

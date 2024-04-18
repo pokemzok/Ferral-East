@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2tfu8bbgndoa"]
+[gd_scene load_steps=14 format=3 uid="uid://b2tfu8bbgndoa"]
 
 [ext_resource type="Script" path="res://character/enemy/default_zombie/default_zombie.gd" id="1_deosn"]
 [ext_resource type="Texture2D" uid="uid://bphy8bstbcrwx" path="res://character/enemy/default_zombie/zombie-dying-1.png" id="2_6ula0"]
 [ext_resource type="Texture2D" uid="uid://cspj8gvc28g54" path="res://character/enemy/default_zombie/zombie-dying-2.png" id="3_owwiv"]
+[ext_resource type="Texture2D" uid="uid://8xxd56hhafbx" path="res://character/enemy/default_zombie/zombie-dying-4.png" id="3_rqtgm"]
+[ext_resource type="Texture2D" uid="uid://b20yq7co8n01j" path="res://character/enemy/default_zombie/zombie-dying-5.png" id="4_dkmxa"]
 [ext_resource type="Texture2D" uid="uid://bbsa4kg12nfnm" path="res://character/enemy/default_zombie/zombie-dying-3.png" id="4_hk8fx"]
 [ext_resource type="Texture2D" uid="uid://wi28nmg0513v" path="res://character/enemy/default_zombie/zombie--idle-1.png" id="5_l4htm"]
 [ext_resource type="Texture2D" uid="uid://uv7bnnegq6iv" path="res://character/enemy/default_zombie/zombie--hurt-1.png" id="6_l85vg"]
@@ -19,6 +21,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_hk8fx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rqtgm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dkmxa")
+}],
+"loop": true,
+"name": &"despawn",
 "speed": 5.0
 }, {
 "frames": [{
@@ -71,7 +87,7 @@ script = ExtResource("1_deosn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
-animation = &"dead"
+animation = &"despawn"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 light_mask = 0
