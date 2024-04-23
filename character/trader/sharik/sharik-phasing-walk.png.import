@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds03bo7qikkg4"
-path="res://.godot/imported/sharik-idle.png-a9880afa76bc39ee2bffc666f5490fc0.ctex"
+uid="uid://jb8h2eodkcmn"
+path="res://.godot/imported/sharik-phasing-walk.png-c42b198865d4e75a861edef9ef4b5d1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character/trader/Sharik/sharik-idle.png"
-dest_files=["res://.godot/imported/sharik-idle.png-a9880afa76bc39ee2bffc666f5490fc0.ctex"]
+source_file="res://character/trader/sharik/sharik-phasing-walk.png"
+dest_files=["res://.godot/imported/sharik-phasing-walk.png-c42b198865d4e75a861edef9ef4b5d1e.ctex"]
 
 [params]
 

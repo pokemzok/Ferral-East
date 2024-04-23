@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg05vwg2h5n1w"
-path="res://.godot/imported/sharik-portal.png-3ab9bff583347e7ef0504dfac2e80a66.ctex"
+uid="uid://x1qoryoewtte"
+path="res://.godot/imported/sharik.png-8529aed23968eb118d7b61a61a8f7024.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character/trader/Sharik/sharik-portal.png"
-dest_files=["res://.godot/imported/sharik-portal.png-3ab9bff583347e7ef0504dfac2e80a66.ctex"]
+source_file="res://character/trader/sharik/sharik.png"
+dest_files=["res://.godot/imported/sharik.png-8529aed23968eb118d7b61a61a8f7024.ctex"]
 
 [params]
 

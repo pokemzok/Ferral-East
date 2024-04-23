@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x1qoryoewtte"
-path="res://.godot/imported/sharik.png-2155587fe300fefa5b0caecf0247b351.ctex"
+uid="uid://iiaulrbhb5cn"
+path="res://.godot/imported/sharik-phasing.png-ab60fb8dc14cf3b8f57c6584ea67da38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character/trader/Sharik/sharik.png"
-dest_files=["res://.godot/imported/sharik.png-2155587fe300fefa5b0caecf0247b351.ctex"]
+source_file="res://character/trader/sharik/sharik-phasing.png"
+dest_files=["res://.godot/imported/sharik-phasing.png-ab60fb8dc14cf3b8f57c6584ea67da38.ctex"]
 
 [params]
 

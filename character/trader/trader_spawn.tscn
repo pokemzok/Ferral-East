@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp15meww1af4h"]
+
+[ext_resource type="Script" path="res://character/trader/trader_spawn.gd" id="1_h5npo"]
+
+[node name="TraderSpawn" type="Node2D"]
+script = ExtResource("1_h5npo")
