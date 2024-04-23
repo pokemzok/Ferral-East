@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://hbk7utcery1m"]
+[gd_scene load_steps=25 format=3 uid="uid://hbk7utcery1m"]
 
 [ext_resource type="Script" path="res://character/trader/Sharik/sharik.gd" id="1_0vupu"]
 [ext_resource type="Texture2D" uid="uid://ds03bo7qikkg4" path="res://character/trader/Sharik/sharik-idle.png" id="2_67b62"]
 [ext_resource type="Texture2D" uid="uid://x1qoryoewtte" path="res://character/trader/Sharik/sharik.png" id="2_bm484"]
+[ext_resource type="Texture2D" uid="uid://cg05vwg2h5n1w" path="res://character/trader/Sharik/sharik-portal.png" id="3_du11g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkr2s"]
 atlas = ExtResource("2_67b62")
@@ -27,6 +28,34 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vyfrf"]
 atlas = ExtResource("2_67b62")
 region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1i74"]
+atlas = ExtResource("3_du11g")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_814nr"]
+atlas = ExtResource("3_du11g")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytst2"]
+atlas = ExtResource("3_du11g")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xp7fe"]
+atlas = ExtResource("3_du11g")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu76v"]
+atlas = ExtResource("3_du11g")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44tlc"]
+atlas = ExtResource("3_du11g")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hka5r"]
+atlas = ExtResource("3_du11g")
+region = Rect2(768, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5mucu"]
 atlas = ExtResource("2_bm484")
@@ -80,6 +109,32 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1i74")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_814nr")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ytst2")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_xp7fe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xu76v")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_44tlc")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_hka5r")
+}],
+"loop": true,
+"name": &"portal_out",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_5mucu")
 }, {
@@ -115,7 +170,7 @@ script = ExtResource("1_0vupu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_rj7yv")
-animation = &"idle"
+animation = &"portal_out"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -13)
