@@ -105,6 +105,7 @@ height = 58.0
 radius = 34.4384
 
 [node name="Surbi" type="CharacterBody2D" groups=["player"]]
+scale = Vector2(1.1, 1.1)
 script = ExtResource("1_v6b7d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

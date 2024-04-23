@@ -1,11 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://hbk7utcery1m"]
+[gd_scene load_steps=42 format=3 uid="uid://hbk7utcery1m"]
 
 [ext_resource type="Script" path="res://character/trader/sharik/sharik.gd" id="1_0vupu"]
 [ext_resource type="Texture2D" uid="uid://ds03bo7qikkg4" path="res://character/trader/sharik/sharik-idle.png" id="2_67b62"]
 [ext_resource type="Texture2D" uid="uid://x1qoryoewtte" path="res://character/trader/sharik/sharik.png" id="2_bm484"]
-[ext_resource type="Texture2D" uid="uid://iiaulrbhb5cn" path="res://character/trader/sharik/sharik-phasing.png" id="3_afb2n"]
 [ext_resource type="Texture2D" uid="uid://cg05vwg2h5n1w" path="res://character/trader/sharik/sharik-portal.png" id="3_du11g"]
 [ext_resource type="Texture2D" uid="uid://bp3kgi5ubueq5" path="res://character/trader/sharik/sharik-phasing-idle.png" id="3_pf2w4"]
+[ext_resource type="Texture2D" uid="uid://dfc32e28havov" path="res://character/trader/sharik/sharik-phase-into.png" id="4_wtoga"]
 [ext_resource type="Texture2D" uid="uid://jb8h2eodkcmn" path="res://character/trader/sharik/sharik-phasing-walk.png" id="5_k4kf4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkr2s"]
@@ -56,21 +56,17 @@ region = Rect2(512, 0, 128, 128)
 atlas = ExtResource("3_pf2w4")
 region = Rect2(640, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8r45c"]
-atlas = ExtResource("3_afb2n")
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3x8m"]
+atlas = ExtResource("4_wtoga")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jupyo"]
-atlas = ExtResource("3_afb2n")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5noem"]
-atlas = ExtResource("3_afb2n")
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2pf4"]
+atlas = ExtResource("4_wtoga")
 region = Rect2(256, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y48fg"]
-atlas = ExtResource("3_afb2n")
-region = Rect2(384, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpt4t"]
+atlas = ExtResource("4_wtoga")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87b5n"]
 atlas = ExtResource("5_k4kf4")
@@ -202,19 +198,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8r45c")
+"texture": SubResource("AtlasTexture_v3x8m")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jupyo")
+"texture": SubResource("AtlasTexture_c2pf4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5noem")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jupyo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y48fg")
+"texture": SubResource("AtlasTexture_tpt4t")
 }],
 "loop": true,
 "name": &"phasing_into",
@@ -303,12 +293,13 @@ animations = [{
 height = 54.0
 
 [node name="Sharik" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_0vupu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_rj7yv")
-animation = &"idle"
+animation = &"phasing_into"
+frame_progress = 0.947759
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

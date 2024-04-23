@@ -83,6 +83,7 @@ animations = [{
 }]
 
 [node name="DefaultZombie" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(1.1, 1.1)
 script = ExtResource("1_deosn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

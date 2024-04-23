@@ -1,8 +1,9 @@
 # TODO 0
 # 0. Shop - now that I have coins, I might want to have a Sharik shop, so I can spend my coins.
-# 1. Cat should be spooked if the player will shoot him. I can indicate cate annoyance but how fast he is wiggling his tail.
+# 0.1 I created pretty nice shop, but AI did messed up some Sharik parts, so I wonder If I can turn it into feature. 
+		For example: Welcome to the shop beyond time and space. Here it is better to not stare too much, so you can avoid perception disturbance.
+# 1. Cat can be spooked if the player will shoot him. I can indicate cate annoyance but how fast he is wiggling his tail.
 # 2. Cat should try to reach the coins if there are any (later on, when I would have a pathfinding)
-# 3. If player would keep trying to shoot Sharik he will open a portal and go inside.
 
 # TODO 1
 # 1. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
