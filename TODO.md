@@ -1,8 +1,8 @@
 # TODO 1
-# 1. Shop - now that I have coins, I might want to have a Sharik shop.a 
-# 2. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
+# 1. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
 
 TODO 2
+# 0. Shop - now that I have coins, I might want to have a Sharik shop, so I can spend my coins.
 # 1. New test level which would allow pathfinding. 
 # 2. New zombie enemy (different color) which would be smarter (will use pathfinding) and would be reanimating once with less HP.
 # 3. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
@@ -15,12 +15,10 @@ TODO 3
 # 4. Defeating the last level (probably a necromancer house) with a necromancer boss (skeleton from my song)
 # 5. After the last boss fight prompt player with: do you want to continue? Which will esencially do infinity waves on the last map. Alternatively give a player a new game plus. If the player completes it 3 times, we can give the playe true ending (singlehandedly defeated all necromancer spawns).
 
-
-
 # TODO 4
 # 1. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
 # 2. limit fire rate (maybe this would help for reload glitch)
-# 3. Make whistle sound (end of the wave) louder and shorter.
+# 3. Make whistle sound (end of the wave) louder.
 # 4. Make cactus hurt player and enemy
 
 # TODO 5

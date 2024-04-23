@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfunv24aep358"]
+[gd_scene load_steps=6 format=3 uid="uid://bfunv24aep358"]
 
 [ext_resource type="Script" path="res://level/hometown/hometown.gd" id="1_n7mml"]
 [ext_resource type="PackedScene" uid="uid://bvsc4avfmu0kk" path="res://item/cylinder/cylinder.tscn" id="3_1bhvu"]
+[ext_resource type="PackedScene" uid="uid://hh20wrdcr3en" path="res://item/coin/coin.tscn" id="4_dhq22"]
 [ext_resource type="PackedScene" uid="uid://cll843a181fvi" path="res://item/pentagram/pentagram.tscn" id="4_lm0c0"]
 [ext_resource type="PackedScene" uid="uid://cf2bnf2wtv7ep" path="res://player/player.tscn" id="4_s40mx"]
 
@@ -71,5 +72,23 @@ position = Vector2(306, 771)
 
 [node name="Cylinder20" parent="." instance=ExtResource("3_1bhvu")]
 position = Vector2(358, 773)
+
+[node name="Coin" parent="." instance=ExtResource("4_dhq22")]
+position = Vector2(1100, 127)
+
+[node name="Coin2" parent="." instance=ExtResource("4_dhq22")]
+position = Vector2(1051, 199)
+
+[node name="Coin3" parent="." instance=ExtResource("4_dhq22")]
+position = Vector2(1093, 282)
+
+[node name="Coin4" parent="." instance=ExtResource("4_dhq22")]
+position = Vector2(1246, 203)
+
+[node name="Coin5" parent="." instance=ExtResource("4_dhq22")]
+position = Vector2(1221, 271)
+
+[node name="Coin6" parent="." instance=ExtResource("4_dhq22")]
+position = Vector2(1157, 197)
 
 [node name="Player" parent="." instance=ExtResource("4_s40mx")]

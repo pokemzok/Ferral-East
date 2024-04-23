@@ -1,0 +1,122 @@
+[gd_scene load_steps=17 format=3 uid="uid://hbk7utcery1m"]
+
+[ext_resource type="Script" path="res://character/trader/Sharik/sharik.gd" id="1_0vupu"]
+[ext_resource type="Texture2D" uid="uid://ds03bo7qikkg4" path="res://character/trader/Sharik/sharik-idle.png" id="2_67b62"]
+[ext_resource type="Texture2D" uid="uid://x1qoryoewtte" path="res://character/trader/Sharik/sharik.png" id="2_bm484"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkr2s"]
+atlas = ExtResource("2_67b62")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kklei"]
+atlas = ExtResource("2_67b62")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uer2g"]
+atlas = ExtResource("2_67b62")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu6rw"]
+atlas = ExtResource("2_67b62")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnd85"]
+atlas = ExtResource("2_67b62")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyfrf"]
+atlas = ExtResource("2_67b62")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mucu"]
+atlas = ExtResource("2_bm484")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0sl0"]
+atlas = ExtResource("2_bm484")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbcok"]
+atlas = ExtResource("2_bm484")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvgt5"]
+atlas = ExtResource("2_bm484")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik75x"]
+atlas = ExtResource("2_bm484")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rj7yv"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_rkr2s")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_kklei")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_rkr2s")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_uer2g")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_gu6rw")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_bnd85")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_vyfrf")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_uer2g")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_5mucu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0sl0")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_5mucu")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_nbcok")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_mvgt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik75x")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_mvgt5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_27m8t"]
+height = 86.0
+
+[node name="Sharik" type="CharacterBody2D"]
+script = ExtResource("1_0vupu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_rj7yv")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -13)
+shape = SubResource("CapsuleShape2D_27m8t")
