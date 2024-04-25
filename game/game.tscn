@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp4uapunwa8i1"]
+[gd_scene load_steps=6 format=3 uid="uid://cp4uapunwa8i1"]
 
 [ext_resource type="PackedScene" uid="uid://djcsnso72bwod" path="res://menu/main/main_menu.tscn" id="1_iv2hg"]
 [ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="2_fckys"]
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="3_eks8k"]
+[ext_resource type="PackedScene" uid="uid://bhfp2m5ktia7t" path="res://dialogic/dialogic.tscn" id="4_xeq7e"]
 
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node
@@ -113,11 +114,10 @@ func on_player_death():
 	get_tree().paused = true
 
 func on_start_conversation_with(character_name: String):
-	print(\"Now talking to \", character_name)
 	if (Dialogic.current_timeline != null):
 		return
 	Dialogic.timeline_ended.connect(on_timeline_ended)		
-	Dialogic.start(\"timeline\")
+	Dialogic.start(character_name+\"_timeline\")
 	current_level_instance.pause()
 
 func on_timeline_ended():
@@ -142,3 +142,5 @@ visible = false
 
 [node name="DeathMenu" parent="DeathMenu" instance=ExtResource("2_fckys")]
 visible = false
+
+[node name="Dialogic" parent="." instance=ExtResource("4_xeq7e")]

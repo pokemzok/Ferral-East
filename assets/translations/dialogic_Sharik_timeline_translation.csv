@@ -1,0 +1,14 @@
+keys,en
+Text/11/text,You tried to pet the creature
+Text/12/text,But it scratched your hand
+Text/13/text,"Buddy, I  don't know you well enough to get all touchy touchy. Got it?"
+Text/14/text,"You got some nerve, to try and touch me after you just shot at me."
+Choice/15/text,Think so...
+Choice/15/disabled_text,
+Choice/16/text,Try petting him again
+Choice/16/disabled_text,
+Text/17/text,It scratched your hand again
+Choice/18/text,Don't give up
+Choice/18/disabled_text,
+Choice/19/text,Give up
+Choice/19/disabled_text,

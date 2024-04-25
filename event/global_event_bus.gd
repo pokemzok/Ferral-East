@@ -29,7 +29,10 @@ const PLAYER_DAMAGED = "player_damaged"
 const PLAYER_USED_PROJECTILE_WEAPON = "player_used_projectile_weapon"
 const PLAYER_LEVELED_UP = "player_leveled_up"
 const PLAYER_COLLECTED_COINS = "player_collected_coins"
-
+#trader
+signal trader_damaged
+#signal_names
+const TRADER_DAMAGED = "trader_damaged"
 #enemy
 signal enemy_damaged
 signal enemy_death 

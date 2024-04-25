@@ -1,0 +1,9 @@
+1. Escape should close the dialog (you can completely interrupt it that way)
+2. Alternatively menu should be over dialog (so maybe better z-index)
+3. Character is sometimes stuck in the running mode, when starting conversation -> make it receive (conversation started) events and idle like a good boy.
+4. After closing dialog I need to send event dialog closed, so Trader can be interacted with again.
+5. Pause whole scene along the HUB, because I don't want to show new messages during my discussions with Sharik.
+6. Buble dialog for showing interaction popups.
+7. I need some kind of tutorial for people on how to use dialog system.
+6. I would like an ability to change layout as well. Maybe I would create my custom after all?
+

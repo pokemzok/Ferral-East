@@ -31,7 +31,7 @@ directories/dch_directory={
 "sharik": "res://dialogic/sharik/sharik.dch"
 }
 directories/dtl_directory={
-"timeline": "res://dialogic/timeline.dtl"
+"Sharik_timeline": "res://dialogic/sharik/Sharik_timeline.dtl"
 }
 layout/style_list=["res://dialogic/dialogue-style.tres"]
 layout/default_style="res://dialogic/dialogue-style.tres"
@@ -51,13 +51,24 @@ animations/leave_default_length=0.5
 animations/leave_default_wait=true
 animations/join_default_wait=true
 text/autopauses={}
-variables={}
+variables={
+"trader": {
+"player_attacking_trader_count": 0
+}
+}
 translation/enabled=true
 translation/original_locale="en"
 translation/file_mode=1
 translation/translation_folder="res://assets/translations"
 translation/save_mode=0
 translation/add_separator=false
+glossary/default_case_sensitive=true
+text/input_action="interact"
+choices/hotkey_behaviour=0
+translation/intern/save_mode=0
+translation/intern/file_mode=1
+translation/intern/translation_folder="res://assets/translations"
+translation/id_counter=26
 
 [display]
 
@@ -125,4 +136,4 @@ dialogic_default_action={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation")
+locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation", "res://assets/translations/dialogic_character_translations.en.translation", "res://assets/translations/dialogic_Sharik_timeline_translation.en.translation", "res://menu/main/translations.pl.translation", "res://menu/main/translations.en.translation")

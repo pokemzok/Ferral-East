@@ -68,7 +68,8 @@ func on_animation_finished():
 func _on_hurtbox_body_entered(body):
 	if body.is_in_group("projectiles"):
 		if (phasing_period.is_lte_zero()):
-			transgression_count.increment_by()			
+			transgression_count.increment_by()
+			GlobalEventBus.trader_damaged.emit(character_name)			
 		phasing_period.assign_max_on_less_or_zero()
 		body.queue_free()
 
