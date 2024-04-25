@@ -1,17 +1,26 @@
-extends CharacterBody2D
+extends Trader
 
 @onready var animations = $AnimatedSprite2D
 var teleporting = false
 var phasing_into = true
 var phasing_period = NumericAttribute.new(0, 1)
 var transgression_count = NumericAttribute.new(0, 5)
+var character_name = "Sharik"
 
 func _ready():
 	animations.connect("animation_looped", on_animation_finished)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
 
+func _process(delta):
+	process_interaction(character_name)
+
 func _physics_process(delta):
-	on_player_actions(delta)	
+	interaction_cooldown(delta)		
+	on_player_actions(delta)
+
+func interaction_cooldown(delta):
+	if(interaction_info_cooldown.is_gt_zero()):
+		interaction_info_cooldown.decrement_by(delta)
 
 func on_player_actions(delta):
 	if (phasing_into):
@@ -56,9 +65,10 @@ func on_animation_finished():
 	elif animations.animation == "phasing_into":
 		phasing_into = false
 
-func _on_interaction_box_body_entered(body):
+func _on_hurtbox_body_entered(body):
 	if body.is_in_group("projectiles"):
 		if (phasing_period.is_lte_zero()):
 			transgression_count.increment_by()			
 		phasing_period.assign_max_on_less_or_zero()
 		body.queue_free()
+

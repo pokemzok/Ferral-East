@@ -27,6 +27,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_DEATH, on_player_death)
 	GlobalEventBus.connect(GlobalEventBus.RESTART_BUTTON_PRESSED, on_restart)
 	GlobalEventBus.connect(GlobalEventBus.QUIT_TO_MENU_BUTTON_PRESSED, on_quit_to_menu)
+	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 
 func load_menu_music():
 	var menu_loops_keys = sound_manager.rest_music_loops_keys
@@ -110,6 +111,18 @@ func clean_up_after_player_death():
 func on_player_death():
 	death_menu.show()
 	get_tree().paused = true
+
+func on_start_conversation_with(character_name: String):
+	print(\"Now talking to \", character_name)
+	if (Dialogic.current_timeline != null):
+		return
+	Dialogic.timeline_ended.connect(on_timeline_ended)		
+	Dialogic.start(\"timeline\")
+	current_level_instance.pause()
+
+func on_timeline_ended():
+	current_level_instance.resume()
+	Dialogic.timeline_ended.disconnect(on_timeline_ended)		
 "
 
 [node name="Game" type="Node"]

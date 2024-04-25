@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://djcsnso72bwod"]
+[gd_scene load_steps=8 format=3 uid="uid://djcsnso72bwod"]
 
 [ext_resource type="Script" path="res://menu/main/video.gd" id="1_rn1fe"]
 [ext_resource type="Script" path="res://menu/main/main_menu.gd" id="1_vatmt"]
+[ext_resource type="Texture2D" uid="uid://dh7ajb56r4xxy" path="res://menu/main/img/feral-east-2.jpg" id="2_6mttb"]
 [ext_resource type="Script" path="res://menu/main/audio.gd" id="2_gryrn"]
 [ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="2_h2ege"]
 [ext_resource type="PackedScene" uid="uid://lsnxhkvoumvj" path="res://menu/main/action_button.tscn" id="3_i1hiv"]
@@ -16,6 +17,11 @@ modulate = Color(1, 1, 1, 0.478431)
 offset_right = 1923.0
 offset_bottom = 1083.0
 color = Color(0, 0, 0, 1)
+
+[node name="BackgroundImage" type="TextureRect" parent="."]
+offset_right = 1922.0
+offset_bottom = 1081.0
+texture = ExtResource("2_6mttb")
 
 [node name="ThemeControl" type="Control" parent="."]
 layout_mode = 3
@@ -287,10 +293,15 @@ layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_ATTACK"
 
-[node name="Action" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="StartWave" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "CONTROLS_ACTION"
+text = "CONTROLS_START_WAVE"
+
+[node name="Interact" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "CONTROLS_INTERACT"
 
 [node name="Up" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -327,10 +338,15 @@ layout_mode = 2
 size_flags_vertical = 7
 action = "attack"
 
-[node name="Action" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="StartWave" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
-action = "action"
+action = "start_wave"
+
+[node name="Interact" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+layout_mode = 2
+size_flags_vertical = 7
+action = "interact"
 
 [node name="UpActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2

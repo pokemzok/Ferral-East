@@ -32,7 +32,7 @@ func music_processing():
 		music.play_on_wave(wave_index)
 
 func on_keyboard_pressed():
-	if(is_resting_period && Input.is_action_just_pressed("action")):
+	if(is_resting_period && Input.is_action_just_pressed("start_wave")):
 		GlobalEventBus.wave_started.emit(wave_index+1, enemies_to_kill)
 		is_resting_period = false
 		

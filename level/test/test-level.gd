@@ -45,8 +45,22 @@ func on_loading_resources():
 				victory_music_resources_group.get_loaded_resources(),
 				level_victory_music_player
 			)		
-	
+
 func destroy():
 	if (game_mode != null):
 		game_mode.clear_event_subscriptions()
 	queue_free()
+
+func pause(node: Node = self):
+	set_pause(node, true)	
+
+func resume(node: Node = self):
+	set_pause(node, false)		
+
+func set_pause(node: Node, pause: bool):
+	if(node == self || node.is_in_group("character")):
+		node.set_process(!pause)
+		node.set_physics_process(!pause)
+	
+	for child in node.get_children():
+		set_pause(child, pause)			

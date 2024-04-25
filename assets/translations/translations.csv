@@ -1,13 +1,15 @@
 key,en,pl
-CONTROLS_ACTION,Action,Akcja
 CONTROLS_ATTACK,Attack,Atak
 CONTROLS_DOWN,Down,Dół
+CONTROLS_INTERACT,Interact,Akcja
 CONTROLS_LEFT,Left,Lewo
 CONTROLS_MENU,Menu,Menu
 CONTROLS_RIGHT,Right,Prawo
+CONTROLS_START_WAVE,Start new wave,Rozpocznij kolejną falę
 CONTROLS_UP,Up,Góra
 HUD_ENEMIES_LEFT,Enemies Left,Pozostało
 HUD_GET_READY,Get Ready!,Przygotuj się!
+HUD_INTERACTION_TUTORIAL,Press “{action_key}” to interact,Interakcja - “{action_key}”
 HUD_NEXT_WAVE_TUTORIAL,Press “{action_key}” when you are ready,Naciśnij “{action_key}” gdy będziesz gotowy.
 HUD_SCORE,Score,Punkty
 HUD_WAVE,Wave,Fala

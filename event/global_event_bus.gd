@@ -29,6 +29,7 @@ const PLAYER_DAMAGED = "player_damaged"
 const PLAYER_USED_PROJECTILE_WEAPON = "player_used_projectile_weapon"
 const PLAYER_LEVELED_UP = "player_leveled_up"
 const PLAYER_COLLECTED_COINS = "player_collected_coins"
+
 #enemy
 signal enemy_damaged
 signal enemy_death 
@@ -48,3 +49,11 @@ signal wave_completed
 const WAVE_STARTED = "wave_started"
 const WAVE_COMPLETED = "wave_completed"
 
+#interactions
+signal interaction_hint
+signal start_conversation_with
+signal finish_conversation
+#signal_names
+const INTERACTION_HINT = "interaction_hint"
+const START_CONVERSATION_WITH = "start_conversation_with"
+const FINISH_CONVERSATION = "finish_conversation"

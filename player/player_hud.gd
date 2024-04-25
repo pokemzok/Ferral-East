@@ -4,7 +4,7 @@ var health_point_res = preload("res://player/Health.png")
 
 @onready var level_score_label: RichTextLabel = %LevelScore
 @onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
-@onready var wave_info_label: RichTextLabel = %WaveInfo
+@onready var info_label: RichTextLabel = %Info
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
 @onready var projectiles_left_label: RichTextLabel = %ProjectilesLeft
 @onready var coins_left_label: RichTextLabel = %CoinsLeft
@@ -49,11 +49,13 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEVELED_UP, on_level_up)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_COLLECTED_COINS, on_collected_coins)
+	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT, show_interaction_tutorial)
+	
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
 	original_color = Color(last_enemy_points_label.modulate, 1)
 	player_level_info_label.modulate.a = 0
 	last_enemy_points_label.modulate.a = 0
-	wave_info_label.modulate.a = 0
+	info_label.modulate.a = 0
 	level_score_label.text = outline_prefix+tr("HUD_SCORE")+": " + str(0)+outline_suffix	
 	
 func on_hp_changed(hp):
@@ -135,31 +137,39 @@ func on_wave_completed(wave_nr):
 		tutorial_repeat = 3
 	if(wave_info_tween != null):
 		wave_info_tween.kill()
-	wave_info_label.text = outline_prefix+tr("HUD_WAVE_COMPLETED").format({"wave_nr":wave_nr})+outline_suffix
+	info_label.text = outline_prefix+tr("HUD_WAVE_COMPLETED").format({"wave_nr":wave_nr})+outline_suffix
 	wave_info_tween = create_tween()
-	fade_in_out_component(wave_info_label, wave_info_tween)
+	fade_in_out_component(info_label, wave_info_tween)
 	wave_info_tween.tween_callback(show_wave_trigger_tutorial)
 
 func show_wave_trigger_tutorial():
 	if(tutorial_repeat > 0):
 		tutorial_repeat -= 1
-		var action_key = InputMap.action_get_events("action")[0].as_text()
+		var action_key = InputMap.action_get_events("start_wave")[0].as_text()
 		var action_key_translation = tr(action_key.to_upper())
-		wave_info_label.text = outline_prefix+tr("HUD_NEXT_WAVE_TUTORIAL").format({"action_key":action_key_translation})+outline_suffix
+		info_label.text = outline_prefix+tr("HUD_NEXT_WAVE_TUTORIAL").format({"action_key":action_key_translation})+outline_suffix
 		wave_info_tween = create_tween()
-		fade_in_out_component(wave_info_label, wave_info_tween)		
+		fade_in_out_component(info_label, wave_info_tween)		
 		wave_info_tween.tween_callback(show_wave_trigger_tutorial)
+		
+func show_interaction_tutorial():
+	var action_key = InputMap.action_get_events("interact")[0].as_text()
+	var action_key_translation = tr(action_key.to_upper())
+	info_label.text = outline_prefix+tr("HUD_INTERACTION_TUTORIAL").format({"action_key":action_key_translation})+outline_suffix
+	wave_info_tween = create_tween()
+	fade_in_out_component(info_label, wave_info_tween)		
+	wave_info_tween.tween_callback(show_wave_trigger_tutorial)		
 	
 func show_wave_started_message(wave_nr):
-	wave_info_label.text = outline_prefix+tr("HUD_WAVE")+" "+str(wave_nr)+outline_suffix
+	info_label.text = outline_prefix+tr("HUD_WAVE")+" "+str(wave_nr)+outline_suffix
 	wave_info_tween = create_tween()
-	fade_in_out_component(wave_info_label, wave_info_tween)
+	fade_in_out_component(info_label, wave_info_tween)
 
 func show_get_ready_message(wave_nr):
 	wave_info_tween = create_tween()
 	if (wave_nr == 1):
-		wave_info_label.text = outline_prefix+tr("HUD_GET_READY")+outline_suffix
-	fade_in_out_component(wave_info_label, wave_info_tween)
+		info_label.text = outline_prefix+tr("HUD_GET_READY")+outline_suffix
+	fade_in_out_component(info_label, wave_info_tween)
 	
 func fade_in_out_component(component: Node, component_tween: Tween):
 	component_tween.tween_property(component, "modulate", original_color, 1)

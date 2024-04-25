@@ -60,3 +60,6 @@ func change_by(delta):
 
 func is_lte_zero() -> bool:
 	return self.value <= 0
+
+func is_gt_zero() -> bool:
+	return !is_lte_zero()

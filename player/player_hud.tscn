@@ -84,7 +84,7 @@ text = "0"
 fit_content = true
 autowrap_mode = 0
 
-[node name="WaveInfoContainer" type="VBoxContainer" parent="ThemeControl"]
+[node name="InfoContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -98,7 +98,7 @@ offset_bottom = 444.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="WaveInfo" type="RichTextLabel" parent="ThemeControl/WaveInfoContainer"]
+[node name="Info" type="RichTextLabel" parent="ThemeControl/InfoContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4

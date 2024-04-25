@@ -1,4 +1,5 @@
 # TODO 0
+# -1. I want for my dialogue to automatically advance without enter. I also want to be able to pick the button myself (instead of always it being enter).
 # 0. Shop - now that I have coins, I might want to have a Sharik shop, so I can spend my coins.
 # 0.1 I created pretty nice shop, but AI did messed up some Sharik parts, so I wonder If I can turn it into feature. 
 		For example: Welcome to the shop beyond time and space. Here it is better to not stare too much, so you can avoid perception disturbance.
@@ -41,6 +42,7 @@ TODO 3
 # 8. Shit-talking dialogue lines for Surbi, when he performes good (score is high)
 # 9. Multiplayer (local PC hosting a server for the other who knows the ID and password)
 # 10. Start release process to see how difficult it is.
+# 11. Make background images in menu  zoom in and out, also change them from time to  time.
 
 # For future
 # Halina is a melee (higher damage, more health, ability to regenerate between waves)

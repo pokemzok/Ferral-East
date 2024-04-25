@@ -6,10 +6,12 @@ extends CanvasLayer
 @onready var start_button = %Start
 @onready var restart_button = %Restart
 @onready var quit_to_menu_button = %QuitToMenu
-
+@onready var background_image = $BackgroundImage
+ 
 func _on_start_pressed():
 	GlobalEventBus.start_button_pressed.emit()
 	start_button.hide()
+	background_image.hide()
 	restart_button.show()
 	resume_button.show()
 	quit_to_menu_button.show()
@@ -44,6 +46,7 @@ func toggle() -> bool:
 
 func reset():
 	start_button.show()
+	background_image.show()
 	resume_button.hide()
 	restart_button.hide()
 	quit_to_menu_button.hide()

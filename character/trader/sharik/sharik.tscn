@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://hbk7utcery1m"]
+[gd_scene load_steps=43 format=3 uid="uid://hbk7utcery1m"]
 
 [ext_resource type="Script" path="res://character/trader/sharik/sharik.gd" id="1_0vupu"]
 [ext_resource type="Texture2D" uid="uid://ds03bo7qikkg4" path="res://character/trader/sharik/sharik-idle.png" id="2_67b62"]
@@ -292,7 +292,10 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_27m8t"]
 height = 54.0
 
-[node name="Sharik" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sndey"]
+radius = 69.0335
+
+[node name="Sharik" type="CharacterBody2D" groups=["character", "trader"]]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_0vupu")
 
@@ -306,10 +309,19 @@ visible = false
 position = Vector2(0, -11)
 shape = SubResource("CapsuleShape2D_27m8t")
 
-[node name="InteractionBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_27m8t")
 
-[connection signal="body_entered" from="InteractionBox" to="." method="_on_interaction_box_body_entered"]
+[node name="InterractionBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractionBox"]
+light_mask = 4
+visibility_layer = 4
+shape = SubResource("CircleShape2D_sndey")
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="InterractionBox" to="." method="_on_interraction_box_body_entered"]
+[connection signal="body_exited" from="InterractionBox" to="." method="_on_interractionbox_body_exited"]

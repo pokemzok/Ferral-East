@@ -1,0 +1,13 @@
+You tried to pet the creature
+But it scratched your hand
+sharik (portrait): Buddy, I  don't know you well enough to get all touchy touchy. Got it?
+- Think so...
+	[end_timeline]
+- Try petting him again
+	jump scratching_hand
+label scratching_hand
+It scratched your hand again
+- Don't give up
+	jump scratching_hand
+- Give up
+	[end_timeline]
