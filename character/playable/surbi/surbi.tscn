@@ -104,7 +104,7 @@ height = 58.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7iiwe"]
 radius = 34.4384
 
-[node name="Surbi" type="CharacterBody2D" groups=["player"]]
+[node name="Surbi" type="CharacterBody2D" groups=["character", "player"]]
 scale = Vector2(1.1, 1.1)
 script = ExtResource("1_v6b7d")
 
