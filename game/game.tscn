@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://djcsnso72bwod" path="res://menu/main/main_menu.tscn" id="1_iv2hg"]
 [ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="2_fckys"]
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="3_eks8k"]
-[ext_resource type="PackedScene" uid="uid://bhfp2m5ktia7t" path="res://dialogic/dialogic_wrapper.tscn" id="4_xeq7e"]
+[ext_resource type="PackedScene" uid="uid://bhfp2m5ktia7t" path="res://dialogs/dialogic/dialogic_wrapper.tscn" id="4_xeq7e"]
 
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node

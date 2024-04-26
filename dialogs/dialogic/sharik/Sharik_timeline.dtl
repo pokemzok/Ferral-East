@@ -5,11 +5,11 @@ if {trader.player_attacking_trader_count} > 0:
 else:
 	jump neutral greeting
 label neutral greeting
-[sound path="res://dialogic/sharik/typing.mp3" volume="0.0" bus="Voices"]
+[sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="0.0" bus="Voices"]
 sharik (portrait): Buddy, I  don't know you well enough to get all touchy touchy. Got it? #id:13
 jump after_greeting
 label hostal_greeting
-[sound path="res://dialogic/sharik/typing.mp3" volume="0.0" bus="Voices"]
+[sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="0.0" bus="Voices"]
 sharik (portrait): You got some nerve, to try and touch me after you just shot at me. #id:14
 label after_greeting
 - Think so... #id:15

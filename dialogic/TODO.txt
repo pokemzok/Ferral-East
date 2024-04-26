@@ -1,4 +1,0 @@
-6. Buble dialog for showing interaction popups.
-7. I need some kind of tutorial for people on how to use dialog system.
-6. I would like an ability to change layout as well. Maybe I would create my custom after all?
-

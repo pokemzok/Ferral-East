@@ -16,7 +16,7 @@ func _on_interraction_box_body_entered(body):
 	if body.is_in_group("player"):
 		ready_for_interaction = true
 		if (interaction_info_cooldown.is_lte_zero()):
-			GlobalEventBus.interaction_hint.emit()
+			GlobalEventBus.interaction_hint.emit(self)
 
 func _on_interractionbox_body_exited(body):
 	if body.is_in_group("player"):

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfunv24aep358"]
+[gd_scene load_steps=7 format=3 uid="uid://bfunv24aep358"]
 
 [ext_resource type="Script" path="res://level/hometown/hometown.gd" id="1_n7mml"]
 [ext_resource type="PackedScene" uid="uid://bvsc4avfmu0kk" path="res://item/cylinder/cylinder.tscn" id="3_1bhvu"]
 [ext_resource type="PackedScene" uid="uid://hh20wrdcr3en" path="res://item/coin/coin.tscn" id="4_dhq22"]
 [ext_resource type="PackedScene" uid="uid://cll843a181fvi" path="res://item/pentagram/pentagram.tscn" id="4_lm0c0"]
 [ext_resource type="PackedScene" uid="uid://cf2bnf2wtv7ep" path="res://player/player.tscn" id="4_s40mx"]
+[ext_resource type="PackedScene" uid="uid://hbk7utcery1m" path="res://character/trader/sharik/sharik.tscn" id="5_gjs34"]
 
 [node name="Hometown" type="Node2D"]
 process_mode = 1
@@ -90,5 +91,8 @@ position = Vector2(1221, 271)
 
 [node name="Coin6" parent="." instance=ExtResource("4_dhq22")]
 position = Vector2(1157, 197)
+
+[node name="Sharik" parent="." instance=ExtResource("5_gjs34")]
+position = Vector2(747, 673)
 
 [node name="Player" parent="." instance=ExtResource("4_s40mx")]

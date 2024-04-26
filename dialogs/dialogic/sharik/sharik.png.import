@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2l88ufjafeul"
-path="res://.godot/imported/sharik.png-be4c9cd1bdb600b8748733e9742856cf.ctex"
+path="res://.godot/imported/sharik.png-adde2bef7dddc5e695561197b0ececfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dialogic/sharik/sharik.png"
-dest_files=["res://.godot/imported/sharik.png-be4c9cd1bdb600b8748733e9742856cf.ctex"]
+source_file="res://dialogs/dialogic/sharik/sharik.png"
+dest_files=["res://.godot/imported/sharik.png-adde2bef7dddc5e695561197b0ececfa.ctex"]
 
 [params]
 

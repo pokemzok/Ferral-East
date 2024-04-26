@@ -1,0 +1,4 @@
+2. I can use dialogic as a tutorial tool. For example after first wave I might gave few tutorial lines which woild teach the user how to start the wave.
+6. I would like an ability to change layout as well. Maybe I would create my custom after all?
+7. Custom non interactable dialog bubble which would appear on some NPC like Sercia (would be talking shit, and if player drinks it, it will start talking shit inside of the Surbi).
+

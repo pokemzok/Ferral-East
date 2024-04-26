@@ -1,13 +1,21 @@
 extends Node
 
+var bubble_character = preload("res://dialogs/dialogic/buble/buble-character.dch")
+
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.TRADER_DAMAGED, on_trader_damaged)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
+
+func on_bubble_dialog_with(character: Node2D):
+	Dialogic.Styles.load_style("bubble")
+	var layout = Dialogic.start("hints_timeline")
+	layout.register_character(bubble_character, character)
 
 func on_trader_damaged(trader_name: String):
 	Dialogic.VAR.trader.player_attacking_trader_count += 1
 
 func on_start_conversation_with(character_name: String):
+	Dialogic.Styles.load_style("textbox")
 	if (Dialogic.current_timeline != null):
 		return
 	Dialogic.timeline_ended.connect(on_timeline_ended)		
