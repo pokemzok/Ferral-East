@@ -10,6 +10,8 @@ var character_name = "Sharik"
 func _ready():
 	animations.connect("animation_looped", on_animation_finished)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
+	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, conversation_started)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, conversation_ended)
 
 func _process(delta):
 	process_interaction(character_name)
@@ -72,4 +74,11 @@ func _on_hurtbox_body_entered(body):
 			GlobalEventBus.trader_damaged.emit(character_name)			
 		phasing_period.assign_max_on_less_or_zero()
 		body.queue_free()
+
+func conversation_started(npc_name: String):
+	pausable.set_pause(true)
+	on_idle(0)
+
+func conversation_ended():
+	pausable.set_pause(false)
 

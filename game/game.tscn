@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://djcsnso72bwod" path="res://menu/main/main_menu.tscn" id="1_iv2hg"]
 [ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="2_fckys"]
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="3_eks8k"]
-[ext_resource type="PackedScene" uid="uid://bhfp2m5ktia7t" path="res://dialogic/dialogic.tscn" id="4_xeq7e"]
+[ext_resource type="PackedScene" uid="uid://bhfp2m5ktia7t" path="res://dialogic/dialogic_wrapper.tscn" id="4_xeq7e"]
 
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node
@@ -18,6 +18,7 @@ var sound_manager = GameSoundManager.get_instance()
 @onready var death_menu = $DeathMenu
 @onready var loading_screen = $LoadingScreen
 @onready var music_player = $MusicPlayer
+@onready var dialogic_wrapper = $DialogicWrapper
 
 func _ready():
 	TranslationServer.set_locale(\"en\")
@@ -28,7 +29,6 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_DEATH, on_player_death)
 	GlobalEventBus.connect(GlobalEventBus.RESTART_BUTTON_PRESSED, on_restart)
 	GlobalEventBus.connect(GlobalEventBus.QUIT_TO_MENU_BUTTON_PRESSED, on_quit_to_menu)
-	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 
 func load_menu_music():
 	var menu_loops_keys = sound_manager.rest_music_loops_keys
@@ -86,6 +86,7 @@ func on_keyboard_pressed():
 func on_menu_toggle():
 	var is_menu_visible = menu.toggle()
 	get_tree().paused = is_menu_visible
+	dialogic_wrapper.toggle_dialogs()
 	
 func on_start():
 	get_tree().paused = false	
@@ -93,6 +94,7 @@ func on_start():
 	var level_manager = LevelManager.get_instance()
 	current_level_resource = SingleResource.new(level_manager.Levels.TEST, level_manager.level_paths)
 	loading_screen.show()
+	dialogic_wrapper.clear()
 
 func on_restart():
 	clean_up_after_player_death()
@@ -112,17 +114,6 @@ func clean_up_after_player_death():
 func on_player_death():
 	death_menu.show()
 	get_tree().paused = true
-
-func on_start_conversation_with(character_name: String):
-	if (Dialogic.current_timeline != null):
-		return
-	Dialogic.timeline_ended.connect(on_timeline_ended)		
-	Dialogic.start(character_name+\"_timeline\")
-	current_level_instance.pause()
-
-func on_timeline_ended():
-	current_level_instance.resume()
-	Dialogic.timeline_ended.disconnect(on_timeline_ended)		
 "
 
 [node name="Game" type="Node"]
@@ -143,4 +134,4 @@ visible = false
 [node name="DeathMenu" parent="DeathMenu" instance=ExtResource("2_fckys")]
 visible = false
 
-[node name="Dialogic" parent="." instance=ExtResource("4_xeq7e")]
+[node name="DialogicWrapper" parent="." instance=ExtResource("4_xeq7e")]

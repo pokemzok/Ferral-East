@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var health_point_res = preload("res://player/Health.png")
+var pausable = PausableNodeBehaviour.new(self)
 
 @onready var level_score_label: RichTextLabel = %LevelScore
 @onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
@@ -30,6 +31,7 @@ var enemy_points_colors = {
 	7: Color("#9c0000",0),
 	8: Color("#9c4af3",0)
 }
+var conversation_in_progress = false
 var enemies_left = 0
 var original_color: Color
 var original_color_transparent: Color
@@ -41,8 +43,8 @@ var wave_info_tween: Tween
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_HP_CHANGED, on_hp_changed)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_USED_PROJECTILE_WEAPON, on_projectile_weapon_used)	
-	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_DISPLAYED, on_menu_displayed)
-	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, on_menu_hidden)
+	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_DISPLAYED, hide_hud)
+	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, conditional_show_hud)
 	GlobalEventBus.connect(GlobalEventBus.SCORE_CHANGED, on_score_changed)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
@@ -50,7 +52,9 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEVELED_UP, on_level_up)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_COLLECTED_COINS, on_collected_coins)
 	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT, show_interaction_tutorial)
-	
+	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, hide_hud)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, show_hud)
+
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
 	original_color = Color(last_enemy_points_label.modulate, 1)
 	player_level_info_label.modulate.a = 0
@@ -66,11 +70,20 @@ func on_hp_changed(hp):
 func on_projectile_weapon_used(projectiles_left):
 	projectiles_left_label.text = projectiles_image+outline_prefix+" x "+str(projectiles_left)+outline_suffix
 
-func on_menu_displayed():
+func hide_hud(arg: String = ""):
+	if (arg.length() > 0):
+		conversation_in_progress = true
 	hide()
+	pausable.set_pause(true)
 
-func on_menu_hidden():
-	show()
+func conditional_show_hud():
+	show_hud(conversation_in_progress)
+
+func show_hud(conversation_in_progress: bool = false):
+	if(!conversation_in_progress):
+		pausable.set_pause(false)
+		show()
+		self.conversation_in_progress = false	
 
 func clear_hearts():
 	var health_container = $HealthContainer

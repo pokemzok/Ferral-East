@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var pausable = PausableNodeBehaviour.new(self)
 var weapon = Revolver.new()
 var stats: PlayerStats = SurbiStatsFactory.create()
 var wallet: Wallet = Wallet.new()
@@ -21,6 +22,10 @@ var item_collection = ArrayCollection.new([])
 func after_external_init():
 	stats = SurbiStatsFactory.create()
 
+func _ready():
+	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+
 func _physics_process(delta):
 	if (!is_dead):
 		on_dmg()
@@ -33,6 +38,13 @@ func _physics_process(delta):
 			if (stats.invincible_frames.value > 0):
 				stats.invincible_frames.decrement_by()
 			on_player_actions(delta)	
+
+func on_start_conversation_with(npc_name: String):
+	pausable.set_pause(true)
+	on_idle()
+
+func on_finish_conversation():
+	pausable.set_pause(false)
 
 func on_dmg():
 	if (stats.invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
