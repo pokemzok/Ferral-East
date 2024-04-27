@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=19 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://b13b425x3ihry" path="res://character/playable/surbi/walk-reload-1.png" id="7_opaai"]
 [ext_resource type="Texture2D" uid="uid://fvjd84dr0m5x" path="res://character/playable/surbi/walk-reload-2.png" id="8_d0rxc"]
 [ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="11_ewde7"]
+[ext_resource type="PackedScene" uid="uid://dd330po85dsde" path="res://character/playable/surbi/script/reactive_script.tscn" id="14_4qme2"]
+[ext_resource type="PackedScene" uid="uid://c2gnl54ls056d" path="res://dialogs/monolog/monolog_bubble.tscn" id="14_irqvk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dp80f"]
 animations = [{
@@ -129,6 +131,10 @@ bus = &"SFX"
 
 [node name="EffectsAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
+
+[node name="ReactiveScript" parent="." instance=ExtResource("14_4qme2")]
+
+[node name="MonologBubble" parent="." instance=ExtResource("14_irqvk")]
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
 [connection signal="body_exited" from="HurtboxArea2D" to="." method="on_hurtbox_leave"]

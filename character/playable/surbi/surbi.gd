@@ -18,6 +18,7 @@ var item_collection = ArrayCollection.new([])
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
+@onready var monolog_bubble = $MonologBubble
 
 func after_external_init():
 	stats = SurbiStatsFactory.create()
@@ -25,7 +26,8 @@ func after_external_init():
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
-
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_MONOLOG, monolog_bubble.show_bubble)
+	
 func _physics_process(delta):
 	if (!is_dead):
 		on_dmg()
