@@ -18,16 +18,15 @@ script = ExtResource("1_g7xp1")
 polygon = PackedVector2Array(-1, -2, -11, -40, -19, -48, -23, -53, -28, -59, -30, -63, -31, -71, -32, -79, -32, -87, -30, -95, -27, -102, -23, -108, -19, -112, -14, -116, -1, -122, 8, -123, 113, -123, 122, -123, 133, -121, 142, -117, 151, -111, 156, -103, 161, -92, 162, -84, 162, -73, 159, -60, 152, -51, 139, -40, 130, -37, 117, -36, 18, -36, 0, 0)
 
 [node name="Label" type="Label" parent="Polygon2D"]
-custom_minimum_size = Vector2(180, 65)
-offset_left = -22.0
-offset_top = -110.0
-offset_right = 158.0
-offset_bottom = -45.0
+custom_minimum_size = Vector2(170, 65)
+offset_left = -18.0
+offset_top = -111.0
+offset_right = 152.0
+offset_bottom = -46.0
 theme = ExtResource("1_jwqd4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2x2jm")
-text = ""
 autowrap_mode = 2
 text_overrun_behavior = 3
 
