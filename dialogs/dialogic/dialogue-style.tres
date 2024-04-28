@@ -19,6 +19,7 @@ overrides = {}
 script = ExtResource("2_h3crd")
 scene = ExtResource("3_h6jnr")
 overrides = {
+"box_panel": "\"default_stylebox.tres\"",
 "name_label_hide_when_no_character": "true"
 }
 

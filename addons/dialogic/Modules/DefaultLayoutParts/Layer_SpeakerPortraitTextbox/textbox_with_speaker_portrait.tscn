@@ -30,6 +30,8 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_top = 17.0
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -107,3 +109,7 @@ bbcode_enabled = true
 text = "Some text"
 scroll_following = true
 script = ExtResource("3_11puy")
+
+[node name="Polygon2D" type="Polygon2D" parent="Anchor/Panel/HBox/VBoxContainer"]
+position = Vector2(429, 144)
+polygon = PackedVector2Array(1, 1, 15, 1, 8, 11)
