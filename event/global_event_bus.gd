@@ -56,9 +56,11 @@ const WAVE_COMPLETED = "wave_completed"
 
 #interactions
 signal interaction_hint
+signal interaction_hint_hide
 signal start_conversation_with
 signal finish_conversation
 #signal_names
 const INTERACTION_HINT = "interaction_hint"
+const INTERACTION_HINT_HIDE = "interaction_hint_hide"
 const START_CONVERSATION_WITH = "start_conversation_with"
 const FINISH_CONVERSATION = "finish_conversation"

@@ -34,3 +34,8 @@ SETTINGS_VOICES,Voices,Głosy
 SETTINGS_VSYNC,Vsync,Vsync
 SPACE,Space,Spacja
 START,Start,Start
+SURBI_WAVE1_MONOLOG,That wasn't all of them. I need to use the  “{action_key}” to attract more.,"To dopiero początek. Muszę użyć “{action_key}”, by przyciągnąć kolejną hordę."
+SURBI_WAVE2_MONOLOG,Usually attracting THEM ten times is enough.,Zwykle hord jest dziesięć.
+SURBI_WAVE4_MONOLOG,That was scary. It will only get worse.,"Przerażające, a dalej będzie tylko gorzej."
+SURBI_WAVE6_MONOLOG,Why am I doing this? What am I trying to prove? And to whom?,Czemu to robię? Co dokładnie próbuję udowodnić? I właściwie komu?
+SURBI_WAVE9_MONOLOG,Maybe I can defeat necromancer after all…,Może jednak dam radę pokonać nekromantę…

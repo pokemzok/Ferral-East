@@ -84,7 +84,7 @@ text = "0"
 fit_content = true
 autowrap_mode = 0
 
-[node name="InfoContainer" type="VBoxContainer" parent="ThemeControl"]
+[node name="WaveInfoContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -98,13 +98,42 @@ offset_bottom = 444.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Info" type="RichTextLabel" parent="ThemeControl/InfoContainer"]
+[node name="WaveInfo" type="RichTextLabel" parent="ThemeControl/WaveInfoContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 bbcode_enabled = true
 text = "Wave"
+fit_content = true
+autowrap_mode = 0
+
+[node name="PlayerGuidesContainer" type="VBoxContainer" parent="ThemeControl"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1920.0
+offset_top = 766.0
+offset_right = 1.0
+offset_bottom = 922.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PlayerGuides" type="RichTextLabel" parent="ThemeControl/PlayerGuidesContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 15
+theme_override_font_sizes/italics_font_size = 15
+theme_override_font_sizes/bold_italics_font_size = 15
+theme_override_font_sizes/mono_font_size = 15
+bbcode_enabled = true
+text = "Press  'E' to interract"
 fit_content = true
 autowrap_mode = 0
 

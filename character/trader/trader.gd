@@ -11,14 +11,14 @@ func process_interaction(trader_name: String):
 			GlobalEventBus.start_conversation_with.emit(trader_name)
 			
 
-## FIXME maybe a popup dialogue to indicate? I need to setup dialogue first though
 func _on_interraction_box_body_entered(body):
 	if body.is_in_group("player"):
 		ready_for_interaction = true
 		if (interaction_info_cooldown.is_lte_zero()):
-			GlobalEventBus.interaction_hint.emit(self)
+			GlobalEventBus.interaction_hint.emit()
 
 func _on_interractionbox_body_exited(body):
 	if body.is_in_group("player"):
+		GlobalEventBus.interaction_hint_hide.emit()
 		ready_for_interaction = false
 	

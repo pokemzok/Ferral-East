@@ -11,6 +11,8 @@ var polygon_color_transparent: Color
 var polygon_color: Color
 var printing_index = 0
 var max_label_height: int
+var longer_pause_characters = [".", "!", "?"]
+var pause_characters = [","]
  	
 func _ready():
 	polygon_color_transparent = Color(polygon.modulate, 0)
@@ -18,12 +20,11 @@ func _ready():
 	polygon.modulate = polygon_color_transparent
 	max_label_height = label.size.y
 
+@warning_ignore("unused_parameter")
 func _process(delta):
 	if self.get_parent():
 		self.rotation_degrees = -self.get_parent().rotation_degrees
 
-# FIXME should be printed and not just shown
-# FIXME should disappear after some time.	
 func show_bubble(text: String):
 	clear()
 	bubble_tween = create_tween()	
@@ -47,12 +48,13 @@ func start_print_timer(text: String):
 	print_timer.start()
 	print_timer.connect("timeout", print_text_into_bubble.bind(text))
 
-# FIXME continue overflow strategy, this does not looks good yet
 func print_text_into_bubble(full_text: String):
 	if printing_index < full_text.length():
 		var character = full_text[printing_index]
-		if(label.size.y > max_label_height):
-			label.text = character
+		if(label.get_visible_line_count() != label.get_line_count()):
+			var last_white_space_index = get_last_white_space_index(full_text)
+			var last_word = full_text.substr(last_white_space_index, printing_index-last_white_space_index)+character
+			label.text = last_word
 		else:
 			label.text	+= character
 		printing_index += 1
@@ -60,11 +62,20 @@ func print_text_into_bubble(full_text: String):
 	else:
 		on_complete()
 
+func get_last_white_space_index(full_text: String,) -> int:
+	var search_text = full_text.substr(0, printing_index)
+	var last_space_index = search_text.rfind(" ")
+	if last_space_index == -1:
+		last_space_index = 0
+	return last_space_index
+	
 func update_print_text_config(current_character):
-	if current_character ==  ".":
+	if current_character in longer_pause_characters:
 		print_timer.wait_time = 1
+	elif current_character in pause_characters:	
+		print_timer.wait_time = 0.5
 	else:
-		print_timer.wait_time = 0.05
+		print_timer.wait_time = 0.09
 
 func on_complete():
 	print_timer.stop()
