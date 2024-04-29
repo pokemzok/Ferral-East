@@ -17,12 +17,14 @@ func _process(delta):
 	process_interaction(character_name)
 
 func _physics_process(delta):
-	interaction_cooldown(delta)		
+	_interaction_cooldown(delta)		
 	on_player_actions(delta)
 
-func interaction_cooldown(delta):
+func _interaction_cooldown(delta):
 	if(interaction_info_cooldown.is_gt_zero()):
 		interaction_info_cooldown.decrement_by(delta)
+	if(interaction_cooldown.is_gt_zero()):
+		interaction_cooldown.decrement_by(delta)	
 
 func on_player_actions(delta):
 	if (phasing_into):
@@ -80,5 +82,6 @@ func conversation_started(npc_name: String):
 	on_idle(0)
 
 func conversation_ended():
+	interaction_cooldown.assign_max_on_less_or_zero()
 	pausable.set_pause(false)
 

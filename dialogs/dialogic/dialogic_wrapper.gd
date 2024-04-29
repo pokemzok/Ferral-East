@@ -5,6 +5,7 @@ var bubble_character = preload("res://dialogs/dialogic/buble/buble-character.dch
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.TRADER_DAMAGED, on_trader_damaged)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERED_SHOP, on_enered_shop)
 
 func on_bubble_dialog_with(character: Node2D):
 	Dialogic.Styles.load_style("bubble")
@@ -13,6 +14,9 @@ func on_bubble_dialog_with(character: Node2D):
 
 func on_trader_damaged(trader_name: String):
 	Dialogic.VAR.trader.player_attacking_trader_count += 1
+
+func on_enered_shop(character_name: String):
+	on_start_conversation_with(character_name+"_shop")
 
 func on_start_conversation_with(character_name: String):
 	Dialogic.Styles.load_style("textbox")

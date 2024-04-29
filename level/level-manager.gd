@@ -7,12 +7,14 @@ static var instance = null
 
 enum Levels {
 	TEST,
-	HOMETOWN
+	HOMETOWN,
+	SHARIK_SHOP
 }
 
 var level_paths = {
 	Levels.TEST: "res://level/test/test-level.tscn",	
 	Levels.HOMETOWN: "res://level/hometown/hometown.tscn",	
+	Levels.SHARIK_SHOP: "res://level/shop/sharik/sharik_shop.tscn",	
 }
 
 static func get_instance() -> LevelManager:

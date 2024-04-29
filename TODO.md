@@ -1,12 +1,16 @@
 # TODO 0
-# -1. I want for my dialogue to automatically advance without enter. I also want to be able to pick the button myself (instead of always it being enter).
-# 0. Shop - now that I have coins, I might want to have a Sharik shop, so I can spend my coins.
+# 0. Transition to shop if conversation ends correctly. 
+	I would need to add animation of Surbi being teleported as well as show new level above my current level.
+	I would also need an animation of Surbi coming back from the portal (without Sharik).
+	After Surbi came back, player can move him again.
+# 1. 
 # 0.1 I created pretty nice shop, but AI did messed up some Sharik parts, so I wonder If I can turn it into feature. 
 		For example: Welcome to the shop beyond time and space. Here it is better to not stare too much, so you can avoid perception disturbance.
 # 1. Cat can be spooked if the player will shoot him. I can indicate cate annoyance but how fast he is wiggling his tail.
 # 2. Cat should try to reach the coins if there are any (later on, when I would have a pathfinding)
 
 # TODO 1
+# 0. After 10th wave go to Balbir for the summary.
 # 1. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
 
 TODO 2

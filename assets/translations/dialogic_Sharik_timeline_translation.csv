@@ -1,14 +1,22 @@
 keys,en
-Text/11/text,You tried to pet the creature
-Text/12/text,But it scratched your hand
+Text/11/text,You tried to pet the creature...
+Text/12/text,But it scratched your hand.
 Text/13/text,"Buddy, I  don't know you well enough to get all touchy touchy. Got it?"
 Text/14/text,"You got some nerve, to try and touch me after you just shot at me."
 Choice/15/text,Think so...
 Choice/15/disabled_text,
 Choice/16/text,Try petting him again
 Choice/16/disabled_text,
-Text/17/text,It scratched your hand again
+Text/17/text,It scratched your hand again.
 Choice/18/text,Don't give up
 Choice/18/disabled_text,
 Choice/19/text,Give up
 Choice/19/disabled_text,
+Text/1c/text,"Look, if I show you something, will you keep your hands to yourself?"
+Choice/1d/text,Yes
+Choice/1d/disabled_text,
+Choice/1e/text,No
+Choice/1e/disabled_text,
+Text/1f/text,The creature is annoyed and no longer wishes to continue conversation with you.
+Text/20/text,Then follow me...
+Text/21/text,Weird eliptic shape appeared below you. You only notice that it is purple and rotating until it sucked you in.

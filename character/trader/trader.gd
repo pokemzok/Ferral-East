@@ -1,12 +1,13 @@
 class_name Trader
 extends CharacterBody2D
 
-var interaction_info_cooldown =NumericAttribute.new(0, 1)
+var interaction_info_cooldown = NumericAttribute.new(0, 1)
+var interaction_cooldown = NumericAttribute.new(0, 0.25)
 var ready_for_interaction = false
 var pausable = PausableNodeBehaviour.new(self)
 
 func process_interaction(trader_name: String):
-	if(ready_for_interaction):
+	if(ready_for_interaction && interaction_cooldown.is_lte_zero()):
 		if Input.is_action_just_pressed("interact"):
 			GlobalEventBus.start_conversation_with.emit(trader_name)
 			

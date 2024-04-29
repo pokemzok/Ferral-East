@@ -1,5 +1,5 @@
-You tried to pet the creature #id:11
-But it scratched your hand #id:12
+You tried to pet the creature... #id:11
+But it scratched your hand. #id:12
 if {trader.player_attacking_trader_count} > 0:
 	jump hostal_greeting
 else:
@@ -17,8 +17,26 @@ label after_greeting
 - Try petting him again #id:16
 	jump scratching_hand
 label scratching_hand
-It scratched your hand again #id:17
+It scratched your hand again. #id:17
 - Don't give up #id:18
-	jump scratching_hand
+	set {trader.nr_of_times_scratched_player} += 1
+	if {trader.nr_of_times_scratched_player} < 2:
+		jump scratching_hand
+	else:
+		jump shop_invitation
 - Give up #id:19
 	[end_timeline]
+label shop_invitation
+[sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="0.0" bus="Voices"]
+sharik: Look, if I show you something, will you keep your hands to yourself? #id:1c
+- Yes #id:1d
+	jump go_to_shop
+- No #id:1e
+	jump annoyed_sharik
+label annoyed_sharik
+The creature is annoyed and no longer wishes to continue conversation with you. #id:1f
+[end_timeline]
+label go_to_shop
+sharik: Then follow me... #id:20
+Weird eliptic shape appeared below you. You only notice that it is purple and rotating until it sucked you in. #id:21
+[end_timeline]

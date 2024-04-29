@@ -32,6 +32,7 @@ directories/dch_directory={
 "sharik": "res://dialogs/dialogic/sharik/sharik.dch"
 }
 directories/dtl_directory={
+"Sharik_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_timeline.dtl",
 "Sharik_timeline": "res://dialogs/dialogic/sharik/Sharik_timeline.dtl",
 "buble_timeline": "res://dialogs/dialogic/buble/buble_timeline.dtl"
 }
@@ -55,6 +56,8 @@ animations/join_default_wait=true
 text/autopauses={}
 variables={
 "trader": {
+"": {},
+"nr_of_times_scratched_player": 0,
 "player_attacking_trader_count": 0
 }
 }
@@ -70,7 +73,7 @@ choices/hotkey_behaviour=0
 translation/intern/save_mode=0
 translation/intern/file_mode=1
 translation/intern/translation_folder="res://assets/translations"
-translation/id_counter=26
+translation/id_counter=34
 
 [display]
 
