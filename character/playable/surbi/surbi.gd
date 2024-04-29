@@ -13,7 +13,6 @@ var death_audio = GameSoundManager.Sounds.SURBI_DEATH
 var run_audio = GameSoundManager.Sounds.PLAYER_RUN
 var pickup_audio = GameSoundManager.Sounds.PLAYER_PICKUP_ITEM
 var item_collection = ArrayCollection.new([])
-
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
@@ -24,9 +23,18 @@ func after_external_init():
 	stats = SurbiStatsFactory.create()
 
 func _ready():
+	animations.connect("animation_looped", on_animation_finished)
+	animations.connect("animation_finished", on_animation_finished)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_MONOLOG, monolog_bubble.show_bubble)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
+
+func on_animation_finished():
+	animations.stop()	
+	if animations.animation == "teleporting":
+		animations.play("invisible")
+		GlobalEventBus.player_teleported.emit()
 	
 func _physics_process(delta):
 	if (!is_dead):
@@ -47,6 +55,10 @@ func on_start_conversation_with(npc_name: String):
 
 func on_finish_conversation():
 	pausable.set_pause(false)
+
+func on_player_enters_shop(shop_level):
+	animations.play("teleporting")
+	animations.animation_looped
 
 func on_dmg():
 	if (stats.invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):

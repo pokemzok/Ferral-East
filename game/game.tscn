@@ -12,6 +12,8 @@ var current_level_instance
 var current_level_resource: SingleResource
 var shop_level_instance
 var shop_level_resource: SingleResource
+var player_ready_for_shop_level = false
+var shop_transition_delay = NumericAttribute.new(0, 0.5)
 var menu_music_resources_group: ResourcesGroup
 var death_menu_music_resources_group: ResourcesGroup
 var sound_manager = GameSoundManager.get_instance()
@@ -32,6 +34,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.RESTART_BUTTON_PRESSED, on_restart)
 	GlobalEventBus.connect(GlobalEventBus.QUIT_TO_MENU_BUTTON_PRESSED, on_quit_to_menu)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_TELEPORTED, on_player_teleported)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEFT_SHOP, on_player_left_shop)
 
 func load_menu_music():
@@ -43,7 +46,7 @@ func load_menu_music():
 	
 func _process(delta):
 	if (shop_level_instance == null && shop_level_resource != null):
-		on_shop_loading()
+		on_shop_loading(delta)
 	elif (loading_screen.visible):
 		on_resource_loading()
 	elif(!death_menu.visible):
@@ -55,14 +58,19 @@ func _process(delta):
 	else:
 		stop_menu_music()	
 
-func on_shop_loading():
-	if(shop_level_resource.is_loaded()):
+func on_player_teleported():
+	player_ready_for_shop_level = true
+	shop_transition_delay.assign_max_on_less_or_zero()
+
+func on_shop_loading(delta):
+	if(shop_level_resource.is_loaded() && player_ready_for_shop_level &&  shop_transition_delay.is_lte_zero()):
 		var shop_resource = shop_level_resource.get_loaded_resource()
 		shop_level_instance = shop_resource.instantiate()
 		add_child(shop_level_instance)
 		current_level_instance.hide()
 	else:
-		shop_level_resource.load_resource()			
+		shop_level_resource.load_resource()
+		shop_transition_delay.decrement_by(delta)			
 	
 func on_resource_loading():
 	if(current_level_resource == null):
@@ -140,6 +148,7 @@ func on_player_left_shop():
 		current_level_instance.show()
 	shop_level_resource = null	
 	shop_level_instance = null	
+	player_ready_for_shop_level = false
 "
 
 [node name="Game" type="Node"]

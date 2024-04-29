@@ -25,6 +25,7 @@ signal player_collected_coins
 signal player_monolog
 signal player_enters_shop
 signal player_left_shop
+signal player_teleported
 # signal_names
 const PLAYER_DEATH = "player_death"
 const PLAYER_HP_CHANGED = "player_hp_changed"
@@ -35,6 +36,7 @@ const PLAYER_COLLECTED_COINS = "player_collected_coins"
 const PLAYER_MONOLOG = "player_monolog"
 const PLAYER_ENTERS_SHOP = "player_enters_shop"
 const PLAYER_LEFT_SHOP = "player_left_shop"
+const PLAYER_TELEPORTED = "player_teleported"
 #trader
 signal trader_damaged
 #signal_names

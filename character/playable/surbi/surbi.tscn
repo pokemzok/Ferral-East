@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=28 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -12,9 +12,42 @@
 [ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://character/playable/surbi/walk-2.png" id="6_ow20m"]
 [ext_resource type="Texture2D" uid="uid://b13b425x3ihry" path="res://character/playable/surbi/walk-reload-1.png" id="7_opaai"]
 [ext_resource type="Texture2D" uid="uid://fvjd84dr0m5x" path="res://character/playable/surbi/walk-reload-2.png" id="8_d0rxc"]
+[ext_resource type="Texture2D" uid="uid://cqutqedddansw" path="res://character/playable/surbi/surbi-teleporting.png" id="9_h1ipu"]
 [ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="11_ewde7"]
 [ext_resource type="PackedScene" uid="uid://dd330po85dsde" path="res://character/playable/surbi/script/reactive_script.tscn" id="14_4qme2"]
 [ext_resource type="PackedScene" uid="uid://c2gnl54ls056d" path="res://dialogs/monolog/monolog_bubble.tscn" id="14_irqvk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h8wu"]
+atlas = ExtResource("9_h1ipu")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_caivf"]
+atlas = ExtResource("9_h1ipu")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2h2l"]
+atlas = ExtResource("9_h1ipu")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o7d4"]
+atlas = ExtResource("9_h1ipu")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kusiu"]
+atlas = ExtResource("9_h1ipu")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2sk2"]
+atlas = ExtResource("9_h1ipu")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwox5"]
+atlas = ExtResource("9_h1ipu")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtkua"]
+atlas = ExtResource("9_h1ipu")
+region = Rect2(768, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dp80f"]
 animations = [{
@@ -61,6 +94,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8h8wu")
+}],
+"loop": true,
+"name": &"invisible",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("3_iqhs7")
 }, {
 "duration": 1.0,
@@ -74,6 +115,32 @@ animations = [{
 }],
 "loop": true,
 "name": &"stunned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_caivf")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_h2h2l")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_2o7d4")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_kusiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2sk2")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_xwox5")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_gtkua")
+}],
+"loop": true,
+"name": &"teleporting",
 "speed": 5.0
 }, {
 "frames": [{
@@ -112,7 +179,7 @@ script = ExtResource("1_v6b7d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
-animation = &"dying"
+animation = &"invisible"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

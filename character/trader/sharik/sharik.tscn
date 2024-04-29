@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://hbk7utcery1m"]
+[gd_scene load_steps=46 format=3 uid="uid://hbk7utcery1m"]
 
 [ext_resource type="Script" path="res://character/trader/sharik/sharik.gd" id="1_0vupu"]
 [ext_resource type="Texture2D" uid="uid://ds03bo7qikkg4" path="res://character/trader/sharik/sharik-idle.png" id="2_67b62"]
@@ -31,6 +31,18 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vyfrf"]
 atlas = ExtResource("2_67b62")
 region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_le71k"]
+atlas = ExtResource("4_wtoga")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d0as"]
+atlas = ExtResource("4_wtoga")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j36ct"]
+atlas = ExtResource("4_wtoga")
+region = Rect2(512, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7arpx"]
 atlas = ExtResource("3_pf2w4")
@@ -168,6 +180,23 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_le71k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d0as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j36ct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j36ct")
+}],
+"loop": true,
+"name": &"phase_out",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 5.0,
 "texture": SubResource("AtlasTexture_7arpx")
 }, {
@@ -301,8 +330,7 @@ script = ExtResource("1_0vupu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rj7yv")
-animation = &"phasing_into"
-frame_progress = 0.947759
+animation = &"phase_out"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

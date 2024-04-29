@@ -13,20 +13,27 @@ var wave_index = 0
 var enemies_to_kill = wave_enemies[wave_index]
 var enemies_to_spawn = wave_enemies[wave_index]
 var spawn_enemies_nr = NumericAttribute.new(1, 3)
+var pause = false
 
 func _init(spawn_points: ArrayCollection, music: SurvivalModeMusic):
 	self.spawn_points = spawn_points
 	self.music = music
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.wave_started.emit(wave_index+1, enemies_to_kill)	
+	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+	
 
 func clear_event_subscriptions():
 	GlobalEventBus.disconnect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
-
+	GlobalEventBus.disconnect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
+	GlobalEventBus.disconnect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+	
 func _process(delta):
-	music_processing()
-	on_keyboard_pressed()	
-	wave_processing(delta)	
+	if(!pause):
+		music_processing()
+		on_keyboard_pressed()	
+		wave_processing(delta)	
 
 func music_processing():
 	if(!is_resting_period):
@@ -79,8 +86,6 @@ func on_wave_complete_music():
 	self.music.play_on_wave_complete()	
 	
 # TODO more difficulty settings
-# TODO rethink difficulty improvement. Currently it is too hard
-# TODO alternatively I can introduce some powers to improve player experience (like increase mag capacity)
 func increase_difficulty():
 	if(spawn_enemies_nr.value < spawn_enemies_nr.max_value):
 		spawn_enemies_nr.value += 1
@@ -90,3 +95,8 @@ func increase_difficulty():
 		spawn_time.decrement_max_value()
 		return
 	
+func on_start_conversation_with(npc_name: String):
+	pause = true
+	
+func on_finish_conversation():
+	pause = false	

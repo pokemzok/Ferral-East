@@ -1,5 +1,4 @@
 # TODO 0
-# -1 Space button should not work during dialogs
 # 0. Transition to shop if conversation ends correctly. 
 	I would need to add animation of Surbi being teleported as well as show new level above my current level.
 	I would also need an animation of Surbi coming back from the portal (without Sharik).

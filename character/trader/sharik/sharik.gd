@@ -12,7 +12,8 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, conversation_started)
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, conversation_ended)
-
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
+	
 func _process(delta):
 	process_interaction(character_name)
 
@@ -40,6 +41,9 @@ func on_player_actions(delta):
 func on_phasing_into():
 	animations.play("phasing_into")	
 
+func on_player_enters_shop(shop_level):
+	animations.play("phase_out")
+	
 func on_teleporting():
 	animations.play("teleport")	
 
@@ -59,7 +63,7 @@ func on_idle(delta):
 
 func on_wave_started(wave_nr, enemies_left):
 	start_teleporting()
-	
+
 func start_teleporting():
 	teleporting = true
 
@@ -68,6 +72,8 @@ func on_animation_finished():
 		queue_free()
 	elif animations.animation == "phasing_into":
 		phasing_into = false
+	elif(animations.animation == "phase_out"):
+		queue_free()
 
 func _on_hurtbox_body_entered(body):
 	if body.is_in_group("projectiles"):
