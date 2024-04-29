@@ -10,10 +10,12 @@ script/source = "extends Node
 
 var current_level_instance
 var current_level_resource: SingleResource
+var shop_level_instance
+var shop_level_resource: SingleResource
 var menu_music_resources_group: ResourcesGroup
 var death_menu_music_resources_group: ResourcesGroup
 var sound_manager = GameSoundManager.get_instance()
-
+var level_manager = LevelManager.get_instance()
 @onready var menu = $MainMenu
 @onready var death_menu = $DeathMenu
 @onready var loading_screen = $LoadingScreen
@@ -29,6 +31,8 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_DEATH, on_player_death)
 	GlobalEventBus.connect(GlobalEventBus.RESTART_BUTTON_PRESSED, on_restart)
 	GlobalEventBus.connect(GlobalEventBus.QUIT_TO_MENU_BUTTON_PRESSED, on_quit_to_menu)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEFT_SHOP, on_player_left_shop)
 
 func load_menu_music():
 	var menu_loops_keys = sound_manager.rest_music_loops_keys
@@ -38,7 +42,9 @@ func load_menu_music():
 	loading_screen.show()
 	
 func _process(delta):
-	if (loading_screen.visible):
+	if (shop_level_instance == null && shop_level_resource != null):
+		on_shop_loading()
+	elif (loading_screen.visible):
 		on_resource_loading()
 	elif(!death_menu.visible):
 		on_keyboard_pressed()
@@ -48,6 +54,15 @@ func _process(delta):
 		play_menu_music(death_menu_music_resources_group.get_loaded_resources())	
 	else:
 		stop_menu_music()	
+
+func on_shop_loading():
+	if(shop_level_resource.is_loaded()):
+		var shop_resource = shop_level_resource.get_loaded_resource()
+		shop_level_instance = shop_resource.instantiate()
+		add_child(shop_level_instance)
+		current_level_instance.hide()
+	else:
+		shop_level_resource.load_resource()			
 	
 func on_resource_loading():
 	if(current_level_resource == null):
@@ -91,7 +106,6 @@ func on_menu_toggle():
 func on_start():
 	get_tree().paused = false	
 	menu.hide()
-	var level_manager = LevelManager.get_instance()
 	current_level_resource = SingleResource.new(level_manager.Levels.TEST, level_manager.level_paths)
 	loading_screen.show()
 	dialogic_wrapper.clear()
@@ -114,6 +128,18 @@ func clean_up_after_player_death():
 func on_player_death():
 	death_menu.show()
 	get_tree().paused = true
+
+func on_player_enters_shop(shop_level: LevelManager.Levels):
+	if(shop_level_resource == null):
+		shop_level_resource = SingleResource.new(shop_level, level_manager.level_paths)
+
+func on_player_left_shop():
+	if (shop_level_instance != null):
+		shop_level_instance.hide()
+		remove_child(shop_level_instance)
+		current_level_instance.show()
+	shop_level_resource = null	
+	shop_level_instance = null	
 "
 
 [node name="Game" type="Node"]

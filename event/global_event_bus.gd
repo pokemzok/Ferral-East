@@ -23,7 +23,8 @@ signal player_used_projectile_weapon
 signal player_leveled_up
 signal player_collected_coins
 signal player_monolog
-signal player_entered_shop
+signal player_enters_shop
+signal player_left_shop
 # signal_names
 const PLAYER_DEATH = "player_death"
 const PLAYER_HP_CHANGED = "player_hp_changed"
@@ -32,7 +33,8 @@ const PLAYER_USED_PROJECTILE_WEAPON = "player_used_projectile_weapon"
 const PLAYER_LEVELED_UP = "player_leveled_up"
 const PLAYER_COLLECTED_COINS = "player_collected_coins"
 const PLAYER_MONOLOG = "player_monolog"
-const PLAYER_ENTERED_SHOP = "player_entered_shop"
+const PLAYER_ENTERS_SHOP = "player_enters_shop"
+const PLAYER_LEFT_SHOP = "player_left_shop"
 #trader
 signal trader_damaged
 #signal_names

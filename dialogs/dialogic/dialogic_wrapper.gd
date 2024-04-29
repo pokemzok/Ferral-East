@@ -1,11 +1,16 @@
 extends Node
 
+static var warp_locations = {
+	LevelManager.Levels.SHARIK_SHOP: GlobalEventBus.player_enters_shop
+}
+
 var bubble_character = preload("res://dialogs/dialogic/buble/buble-character.dch")
 
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.TRADER_DAMAGED, on_trader_damaged)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
-	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERED_SHOP, on_enered_shop)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_enered_shop)
+	Dialogic.signal_event.connect(_on_dialogic_signal)
 
 func on_bubble_dialog_with(character: Node2D):
 	Dialogic.Styles.load_style("bubble")
@@ -45,3 +50,12 @@ func clear():
 		Dialogic.timeline_ended.disconnect(on_timeline_ended)	
 		Dialogic.end_timeline()
 		Dialogic.paused = false			
+
+func _on_dialogic_signal(arg: String):
+	if (arg == "PLAYER_LEFT_SHOP"):
+		GlobalEventBus.player_left_shop.emit()
+	else:	
+		var enum_value = LevelManager.Levels.get(arg)
+		if(warp_locations.has(enum_value)):
+			warp_locations.get(enum_value).emit(enum_value)
+	

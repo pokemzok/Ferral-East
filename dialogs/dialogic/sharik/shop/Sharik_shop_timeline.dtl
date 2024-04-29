@@ -1,0 +1,6 @@
+sharik: Welcome to my realm. How do you like it here?
+- Kind of  trippy
+- Pretty cosy actually...
+- Where the hell are we?
+[signal arg="PLAYER_LEFT_SHOP"]
+[end_timeline]

@@ -9204,6 +9204,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="LoadingScreen" parent="." instance=ExtResource("14_jhdgt")]
+visible = false
 
 [node name="DeathMenu" parent="." instance=ExtResource("15_ifqbo")]
 visible = false

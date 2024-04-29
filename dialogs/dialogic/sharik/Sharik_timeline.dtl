@@ -39,4 +39,5 @@ The creature is annoyed and no longer wishes to continue conversation with you. 
 label go_to_shop
 sharik: Then follow me... #id:20
 Weird eliptic shape appeared below you. You only notice that it is purple and rotating until it sucked you in. #id:21
-[end_timeline]
+[signal arg="SHARIK_SHOP"]
+jump Sharik_shop_timeline/
