@@ -55,7 +55,12 @@ grow_vertical = 0
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="PortraitPanel" type="Panel" parent="Anchor/Panel/HBox"]
+[node name="NoPortraitPanel" type="Panel" parent="Anchor/Panel/HBox" groups=["no_portrait_container"]]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="PortraitPanel" type="Panel" parent="Anchor/Panel/HBox" groups=["portrait_container"]]
 unique_name_in_owner = true
 clip_children = 1
 layout_mode = 2
@@ -110,6 +115,6 @@ text = "Some text"
 scroll_following = true
 script = ExtResource("3_11puy")
 
-[node name="Polygon2D" type="Polygon2D" parent="Anchor/Panel/HBox/VBoxContainer"]
-position = Vector2(429, 144)
-polygon = PackedVector2Array(1, 1, 15, 1, 8, 11)
+[node name="ArrowDown" type="Polygon2D" parent="Anchor/Panel/HBox"]
+position = Vector2(554, 128)
+polygon = PackedVector2Array(1, 1, 15, 1, 8, 13)

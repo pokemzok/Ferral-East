@@ -584,8 +584,15 @@ func change_speaker(speaker:DialogicCharacter = null, portrait:= ""):
 			if character_node.get_meta('character') != speaker:
 				_remove_portrait(character_node)
 
+		var no_portrait_container = get_tree().get_nodes_in_group('no_portrait_container')[0]
+		var potrait_container = get_tree().get_nodes_in_group('portrait_container')[0]
 		if speaker == null or speaker.portraits.is_empty():
+			no_portrait_container.show()
+			potrait_container.hide()
 			continue
+		else:
+			no_portrait_container.hide()
+			potrait_container.show()	
 
 		if con.get_children().is_empty():
 			_create_character_node(speaker, con)

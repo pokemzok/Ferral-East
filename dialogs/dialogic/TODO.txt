@@ -1,3 +1,0 @@
-1. I want to change layout:
-	- no portrait when narrator is talking
-	- I don't like that portraits and frame are "italic"
