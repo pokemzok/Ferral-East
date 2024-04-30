@@ -1,6 +1,6 @@
-sharik: Welcome to my realm. How do you like it here?
-- Kind of  trippy
-- Pretty cosy actually...
-- Where the hell are we?
+sharik: Welcome to my realm. How do you like it here? #id:23
+- Kind of  trippy #id:24
+- Pretty cosy actually... #id:25
+- Where the hell are we? #id:26
 [signal arg="PLAYER_LEFT_SHOP"]
 [end_timeline]

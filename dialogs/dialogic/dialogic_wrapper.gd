@@ -37,13 +37,20 @@ func on_timeline_ended():
 func toggle_dialogs():
 	if (Dialogic.current_timeline != null):
 		var is_menu_visible = get_tree().paused 
-		var layout := Dialogic.Styles.get_layout_node()	
 		if (is_menu_visible):
-			layout.hide()
-			Dialogic.paused = true	
+			hide_dialogs()
 		else:
-			Dialogic.paused = false	
-			layout.show()
+			show_dialogs()
+
+func hide_dialogs():
+	var layout := Dialogic.Styles.get_layout_node()	
+	layout.hide()		
+	Dialogic.paused = true	
+
+func show_dialogs():
+	var layout := Dialogic.Styles.get_layout_node()	
+	Dialogic.paused = false	
+	layout.show()
 
 func clear():
 	if (Dialogic.current_timeline != null):

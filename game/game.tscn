@@ -18,16 +18,32 @@ var menu_music_resources_group: ResourcesGroup
 var death_menu_music_resources_group: ResourcesGroup
 var sound_manager = GameSoundManager.get_instance()
 var level_manager = LevelManager.get_instance()
+var shop_transition_tween: Tween
+
 @onready var menu = $MainMenu
 @onready var death_menu = $DeathMenu
 @onready var loading_screen = $LoadingScreen
 @onready var music_player = $MusicPlayer
 @onready var dialogic_wrapper = $DialogicWrapper
+@onready var shop_transition_canvas = $ShopTransitionCanvas
+@onready var shop_transition_color_rect = $ShopTransitionCanvas/ColorRect
+
+var shop_transition_color: Color
+var shop_transition_color_transparent: Color
 
 func _ready():
 	TranslationServer.set_locale(\"en\")
+	init_shop_transition()
 	death_menu.hide()
 	load_menu_music()
+	connect_events()
+
+func init_shop_transition():
+	shop_transition_color_transparent = Color(shop_transition_color_rect.modulate, 0)
+	shop_transition_color = Color(shop_transition_color_rect.modulate, 1)
+	shop_transition_color_rect.modulate.a = 0
+	
+func connect_events():
 	GlobalEventBus.connect(GlobalEventBus.START_BUTTON_PRESSED, on_start)
 	GlobalEventBus.connect(GlobalEventBus.RESUME_BUTTON_PRESSED, on_menu_toggle)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_DEATH, on_player_death)
@@ -64,14 +80,31 @@ func on_player_teleported():
 
 func on_shop_loading(delta):
 	if(shop_level_resource.is_loaded() && player_ready_for_shop_level &&  shop_transition_delay.is_lte_zero()):
+		show_shop_transition()		
 		var shop_resource = shop_level_resource.get_loaded_resource()
 		shop_level_instance = shop_resource.instantiate()
-		add_child(shop_level_instance)
-		current_level_instance.hide()
 	else:
 		shop_level_resource.load_resource()
 		shop_transition_delay.decrement_by(delta)			
+
+func show_shop_transition():
+	if(shop_transition_tween != null):
+		shop_transition_tween.kill()
+	shop_transition_canvas.show()	
+	shop_transition_tween = create_tween()
+	shop_transition_tween.tween_property(shop_transition_color_rect, \"modulate\", shop_transition_color, 0.5)
+	shop_transition_tween.tween_callback(on_shop_transition)
+	shop_transition_tween.tween_property(shop_transition_color_rect, \"modulate\", shop_transition_color_transparent, 0.5)
+	shop_transition_tween.tween_callback(on_shop_transition_complete)
 	
+func on_shop_transition():
+	current_level_instance.hide()	
+	shop_transition_canvas.add_sibling(shop_level_instance)	
+
+func on_shop_transition_complete():
+	shop_transition_canvas.hide()
+	dialogic_wrapper.show_dialogs()
+		
 func on_resource_loading():
 	if(current_level_resource == null):
 		on_menus_music_loading()	
@@ -140,6 +173,7 @@ func on_player_death():
 func on_player_enters_shop(shop_level: LevelManager.Levels):
 	if(shop_level_resource == null):
 		shop_level_resource = SingleResource.new(shop_level, level_manager.level_paths)
+		dialogic_wrapper.hide_dialogs()
 
 func on_player_left_shop():
 	if (shop_level_instance != null):
@@ -170,3 +204,11 @@ visible = false
 visible = false
 
 [node name="DialogicWrapper" parent="." instance=ExtResource("4_xeq7e")]
+
+[node name="ShopTransitionCanvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="ShopTransitionCanvas"]
+offset_right = 1923.0
+offset_bottom = 1083.0
+color = Color(0.67451, 0.0666667, 0.807843, 1)

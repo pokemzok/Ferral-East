@@ -1,8 +1,7 @@
 # TODO 0
-# 0. Transition to shop if conversation ends correctly. 
+# 0. Transition to shop -> fade to purple and to shop, and when i go back, basically the same.
 	I would need to add animation of Surbi being teleported as well as show new level above my current level.
 	I would also need an animation of Surbi coming back from the portal (without Sharik).
-	After Surbi came back, player can move him again.
 # 0.1 I created pretty nice shop, but AI did messed up some Sharik parts, so I wonder If I can turn it into feature. 
 		For example: Welcome to the shop beyond time and space. Here it is better to not stare too much, so you can avoid perception disturbance.
 # 1. Cat can be spooked if the player will shoot him. I can indicate cate annoyance but how fast he is wiggling his tail.

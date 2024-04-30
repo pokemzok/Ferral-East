@@ -73,7 +73,7 @@ choices/hotkey_behaviour=0
 translation/intern/save_mode=0
 translation/intern/file_mode=1
 translation/intern/translation_folder="res://assets/translations"
-translation/id_counter=34
+translation/id_counter=38
 
 [display]
 
@@ -141,4 +141,4 @@ dialogic_default_action={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation", "res://assets/translations/dialogic_character_translations.en.translation", "res://assets/translations/dialogic_Sharik_timeline_translation.en.translation", "res://menu/main/translations.pl.translation", "res://menu/main/translations.en.translation")
+locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation", "res://assets/translations/dialogic_character_translations.en.translation", "res://assets/translations/dialogic_Sharik_timeline_translation.en.translation", "res://menu/main/translations.pl.translation", "res://menu/main/translations.en.translation", "res://assets/translations/dialogic_buble_timeline_translation.en.translation")
