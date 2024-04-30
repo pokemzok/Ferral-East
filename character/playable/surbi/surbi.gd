@@ -57,8 +57,6 @@ func _physics_process(delta):
 			if (stats.invincible_frames.value > 0):
 				stats.invincible_frames.decrement_by()
 			on_player_actions(delta)	
-	elif is_teleporting:
-		look_at(get_global_mouse_position())			
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -73,6 +71,7 @@ func on_player_enters_shop(shop_level):
 	audio_pool.play_sound_effect(teleport_audio)
 
 func on_player_left_shop():
+	look_at(get_global_mouse_position())	
 	animations.play("phasing")	
 	audio_pool.play_sound_effect(warp_audio)
 

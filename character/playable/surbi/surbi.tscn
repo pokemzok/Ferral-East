@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=33 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -22,17 +22,21 @@
 atlas = ExtResource("9_h1ipu")
 region = Rect2(896, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kv1xs"]
-atlas = ExtResource("8_2fgmk")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mdlky"]
-atlas = ExtResource("8_2fgmk")
-region = Rect2(128, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_k81av"]
 atlas = ExtResource("8_2fgmk")
 region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ruwvr"]
+atlas = ExtResource("8_2fgmk")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pw4ak"]
+atlas = ExtResource("8_2fgmk")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nypl4"]
+atlas = ExtResource("8_2fgmk")
+region = Rect2(640, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_caivf"]
 atlas = ExtResource("9_h1ipu")
@@ -115,13 +119,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kv1xs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mdlky")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_k81av")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ruwvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pw4ak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nypl4")
 }],
 "loop": true,
 "name": &"phasing",
