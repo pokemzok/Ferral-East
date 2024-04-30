@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://hbk7utcery1m"]
+[gd_scene load_steps=47 format=3 uid="uid://hbk7utcery1m"]
 
 [ext_resource type="Script" path="res://character/trader/sharik/sharik.gd" id="1_0vupu"]
 [ext_resource type="Texture2D" uid="uid://ds03bo7qikkg4" path="res://character/trader/sharik/sharik-idle.png" id="2_67b62"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bp3kgi5ubueq5" path="res://character/trader/sharik/sharik-phasing-idle.png" id="3_pf2w4"]
 [ext_resource type="Texture2D" uid="uid://dfc32e28havov" path="res://character/trader/sharik/sharik-phase-into.png" id="4_wtoga"]
 [ext_resource type="Texture2D" uid="uid://jb8h2eodkcmn" path="res://character/trader/sharik/sharik-phasing-walk.png" id="5_k4kf4"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="8_2tsjd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkr2s"]
 atlas = ExtResource("2_67b62")
@@ -330,7 +331,7 @@ script = ExtResource("1_0vupu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rj7yv")
-animation = &"phase_out"
+animation = &"phasing_into"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -349,6 +350,8 @@ shape = SubResource("CapsuleShape2D_27m8t")
 light_mask = 4
 visibility_layer = 4
 shape = SubResource("CircleShape2D_sndey")
+
+[node name="GameAmbientAudioPool" parent="." instance=ExtResource("8_2tsjd")]
 
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_entered" from="InterractionBox" to="." method="_on_interraction_box_body_entered"]

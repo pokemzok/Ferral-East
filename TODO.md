@@ -1,13 +1,9 @@
-# TODO 0
-# 0. Transition to shop -> fade to purple and to shop, and when i go back, basically the same.
-	I would need to add animation of Surbi being teleported as well as show new level above my current level.
-	I would also need an animation of Surbi coming back from the portal (without Sharik).
-# 0.1 I created pretty nice shop, but AI did messed up some Sharik parts, so I wonder If I can turn it into feature. 
+TODO 0
+# 1 Add items to my shop (sharik can sell weapon upgades for now and maybe one more item, I could add god favours logic later on).
+# 2 I created pretty nice shop, but AI did messed up some Sharik parts, so I wonder If I can turn it into feature. 
 		For example: Welcome to the shop beyond time and space. Here it is better to not stare too much, so you can avoid perception disturbance.
-# 1. Cat can be spooked if the player will shoot him. I can indicate cate annoyance but how fast he is wiggling his tail.
-# 2. Cat should try to reach the coins if there are any (later on, when I would have a pathfinding)
 
-# TODO 1
+TODO 1
 # 0. After 10th wave go to Balbir for the summary.
 # 1. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
 
@@ -23,19 +19,21 @@ TODO 3
 # 3. Player keeps all the powers during transitions.
 # 4. Defeating the last level (probably a necromancer house) with a necromancer boss (skeleton from my song)
 # 5. After the last boss fight prompt player with: do you want to continue? Which will esencially do infinity waves on the last map. Alternatively give a player a new game plus. If the player completes it 3 times, we can give the playe true ending (singlehandedly defeated all necromancer spawns).
+# 6. Add Gods favours to Sharik Shop (could be indicated as a numbers under the ammunition on player HUD)
 
-# TODO 4
+TODO 4
 # 1. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
 # 2. limit fire rate (maybe this would help for reload glitch)
 # 3. Make whistle sound (end of the wave) louder.
 # 4. Make cactus hurt player and enemy
+# 2. Cat should try to reach the coins if there are any (later on, when I would have a pathfinding)
 
 # TODO 5
 # 0. Resolution scaling (I  want for the player to  be able to pick a resolution)
 # 1. Nicer menu and loading screens
 # 1.1 Some interesting background as well
 # 1.2 Sounds on clicking on the main menu (not on options since that would be just annoying)
-# 2. Sound design
+# 2. Sound design (replace music you get from pixabay by your own custom)
 # 2.1 Sound volume normalization (i  want same level of audio for all of my samples)
 # 2.2 More custome made songs for my game ( find or create so i  can swap my  first choices)
 # 3. More enemy types.

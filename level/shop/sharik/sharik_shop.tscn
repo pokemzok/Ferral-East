@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://83lvftqvdbs6"]
+[gd_scene load_steps=4 format=3 uid="uid://83lvftqvdbs6"]
 
 [ext_resource type="Script" path="res://level/shop/sharik/sharik_shop.gd" id="1_cfege"]
 [ext_resource type="Texture2D" uid="uid://xhphhnimegg5" path="res://level/shop/sharik/sharik_shop_1.png" id="2_hxj6b"]
+[ext_resource type="AudioStream" uid="uid://5r4y6b5eycub" path="res://audio/background_music/sharik-shop.mp3" id="3_kr017"]
 
 [node name="SharikShop" type="Node2D"]
 script = ExtResource("1_cfege")
@@ -9,3 +10,7 @@ script = ExtResource("1_cfege")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("2_hxj6b")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kr017")
+autoplay = true

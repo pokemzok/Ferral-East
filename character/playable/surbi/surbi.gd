@@ -6,12 +6,15 @@ var stats: PlayerStats = SurbiStatsFactory.create()
 var wallet: Wallet = Wallet.new()
 var enemies_in_player_collision_area =  []
 var is_dead = false
+var is_teleporting = false
 var reloading = false
 var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
 var death_audio = GameSoundManager.Sounds.SURBI_DEATH
 var run_audio = GameSoundManager.Sounds.PLAYER_RUN
 var pickup_audio = GameSoundManager.Sounds.PLAYER_PICKUP_ITEM
+var teleport_audio = GameSoundManager.Sounds.TELEPORT
+var warp_audio = GameSoundManager.Sounds.WARP
 var item_collection = ArrayCollection.new([])
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
@@ -29,15 +32,21 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_MONOLOG, monolog_bubble.show_bubble)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEFT_SHOP, on_player_left_shop)
+
 
 func on_animation_finished():
-	animations.stop()	
 	if animations.animation == "teleporting":
+		animations.stop()			
 		animations.play("invisible")
 		GlobalEventBus.player_teleported.emit()
+	elif animations.animation == "phasing":	
+		animations.stop()
+		on_idle()		
+		is_teleporting = false
 	
 func _physics_process(delta):
-	if (!is_dead):
+	if (!is_dead && !is_teleporting):
 		on_dmg()
 		on_reload(delta)
 		if (stats.dying_timer.value > 0):
@@ -48,6 +57,8 @@ func _physics_process(delta):
 			if (stats.invincible_frames.value > 0):
 				stats.invincible_frames.decrement_by()
 			on_player_actions(delta)	
+	elif is_teleporting:
+		look_at(get_global_mouse_position())			
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -58,7 +69,12 @@ func on_finish_conversation():
 
 func on_player_enters_shop(shop_level):
 	animations.play("teleporting")
-	animations.animation_looped
+	is_teleporting = true	
+	audio_pool.play_sound_effect(teleport_audio)
+
+func on_player_left_shop():
+	animations.play("phasing")	
+	audio_pool.play_sound_effect(warp_audio)
 
 func on_dmg():
 	if (stats.invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):

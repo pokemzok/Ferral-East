@@ -23,7 +23,9 @@ enum Sounds {
 	BULLET_HIT_BODY,
 	DRUMS,
 	WAVE_END,
-	LEVEL_UP
+	LEVEL_UP,
+	TELEPORT,
+	WARP
 }
 enum Music {
 	SLOW_LOOP_1,
@@ -64,7 +66,9 @@ var sound_files = {
 	Sounds.SURBI_DEATH: preload("res://audio/player/surbi/death.wav"),
 	Sounds.DRUMS: preload("res://audio/effects/drum-hit.wav"),
 	Sounds.WAVE_END: preload("res://audio/effects/whistle.wav"),
-	Sounds.LEVEL_UP: preload("res://audio/effects/level_up.wav")
+	Sounds.LEVEL_UP: preload("res://audio/effects/level_up.wav"),
+	Sounds.TELEPORT: preload("res://audio/effects/teleport.mp3"),
+	Sounds.WARP: preload("res://audio/effects/warp.mp3")
 }
 
 var music_res = {

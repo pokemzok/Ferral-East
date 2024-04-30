@@ -6,6 +6,8 @@ var phasing_into = true
 var phasing_period = NumericAttribute.new(0, 1)
 var transgression_count = NumericAttribute.new(0, 5)
 var character_name = "Sharik"
+var teleport_audio = GameSoundManager.Sounds.TELEPORT
+@onready var audio_pool = $GameAmbientAudioPool
 
 func _ready():
 	animations.connect("animation_looped", on_animation_finished)
@@ -30,8 +32,10 @@ func _interaction_cooldown(delta):
 func on_player_actions(delta):
 	if (phasing_into):
 		on_phasing_into()
-	elif (teleporting || transgression_count.is_max_value()):
+	elif (teleporting):
 		on_teleporting()
+	elif (transgression_count.is_max_value()):
+		start_teleporting()			
 	else:	
 		if velocity.length() > 0:
 			on_walk(delta)
@@ -66,14 +70,15 @@ func on_wave_started(wave_nr, enemies_left):
 
 func start_teleporting():
 	teleporting = true
+	audio_pool.play_sound_effect(teleport_audio)		
 
 func on_animation_finished():
-	if animations.animation == "teleport":
+	if animations.animation == "teleport" || animations.animation == "phase_out":
 		queue_free()
 	elif animations.animation == "phasing_into":
+		animations.stop()
 		phasing_into = false
-	elif(animations.animation == "phase_out"):
-		queue_free()
+		on_idle(0)
 
 func _on_hurtbox_body_entered(body):
 	if body.is_in_group("projectiles"):
