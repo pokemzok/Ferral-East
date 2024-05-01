@@ -1,7 +1,6 @@
 TODO 0
 # 1 Add items to my shop (sharik can sell weapon upgades for now and maybe one more item, I could add god favours logic later on).
-# 2 I created pretty nice shop, but AI did messed up some Sharik parts, so I wonder If I can turn it into feature. 
-		For example: Welcome to the shop beyond time and space. Here it is better to not stare too much, so you can avoid perception disturbance.
+# 2 Extract common shopping dialog logic so I can reuse it between timelines.
 
 TODO 1
 # 0. After 10th wave go to Balbir for the summary.

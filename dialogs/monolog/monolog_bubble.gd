@@ -32,6 +32,7 @@ func show_bubble(text: String):
 	bubble_tween.tween_callback(start_print_timer.bind(text))
 
 func clear():
+	label.text = ""		
 	if (bubble_tween != null):
 		bubble_tween.kill()
 	if(!print_timer.is_stopped()):
@@ -41,7 +42,6 @@ func clear():
 	print_timer.disconnect("timeout", print_text_into_bubble)
 	close_timer.disconnect("timeout", hide_bubble)		
 	print_timer.wait_time = 0.05
-	label.text = ""	
 	
 func start_print_timer(text: String):
 	printing_index = 0		
