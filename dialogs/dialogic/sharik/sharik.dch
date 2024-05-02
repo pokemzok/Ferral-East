@@ -12,7 +12,7 @@
 "pitch_base": 0.6,
 "pitch_variance": 0.0,
 "skip_characters": 0.0,
-"sound_path": "res://dialogic/sharik/typing.mp3",
+"sound_path": "res://dialogs/dialogic/sharik/typing.mp3",
 "volume_base": 0.0,
 "volume_variance": 0.0
 }
@@ -21,7 +21,7 @@
 },
 "default_portrait": "portrait",
 "description": "",
-"display_name": "Sharik",
+"display_name": "{sharik_display_name}",
 "mirror": false,
 "nicknames": ["Creature"],
 "offset": Vector2(0, 0),

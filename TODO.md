@@ -1,6 +1,7 @@
 TODO 0
-# 1 Add items to my shop (sharik can sell weapon upgades for now and maybe one more item, I could add god favours logic later on).
-# 2 Extract common shopping dialog logic so I can reuse it between timelines.
+# 1. Add items to my shop (sharik can sell weapon upgades, catnip, water bottles (1 heal but only up to 3 HP)), I could add god favours logic later on).
+# 2. Maybe Surbi can have as many items as he have pockets (so up to 2 cantips and water bottles).
+# 4. Money and items HUD for the shop? -> can be different from the regular HUD, so it would not have too much information.
 
 TODO 1
 # 0. After 10th wave go to Balbir for the summary.

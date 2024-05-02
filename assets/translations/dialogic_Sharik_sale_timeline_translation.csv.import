@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bawmhi0yfv2pc"
+
+[deps]
+
+files=["res://assets/translations/dialogic_Sharik_sale_timeline_translation.en.translation"]
+
+source_file="res://assets/translations/dialogic_Sharik_sale_timeline_translation.csv"
+dest_files=["res://assets/translations/dialogic_Sharik_sale_timeline_translation.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

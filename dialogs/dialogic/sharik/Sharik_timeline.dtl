@@ -1,6 +1,6 @@
 You tried to pet the creature... #id:11
 But it scratched your hand. #id:12
-if {trader.player_attacking_trader_count} > 0:
+if {player.attacked_trader_count} > 0:
 	jump hostal_greeting
 else:
 	jump neutral greeting

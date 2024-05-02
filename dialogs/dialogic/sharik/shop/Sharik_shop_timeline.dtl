@@ -8,75 +8,84 @@ sharik: Welcome to my realm. How do you like it here? #id:23
 	jump confused
 label trippy
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Really? Well I guess lack of zombies might be shocking for the folks like you.
+sharik: Really? Well I guess lack of zombies might be shocking for the folks like you. #id:27
 jump questions
 label cosy
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: I think so too, though in the beginning it was hard to get used to.
+sharik: I think so too, though in the beginning it was hard to get used to. #id:28
 jump questions
 label confused
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: In a world I claimed as my own.
+sharik: In a world I claimed as my own. #id:29
 label questions
-- What is this place?
+- Who are you? #id:42
+	jump introduction
+- What is this place? #id:2a
 	jump world_explanation
-- Why did you take me here?
+- Why did you take me here? #id:2b
 	jump abduction_reason
-- Can I go back?
+- Can I go back? #id:2c
 	jump take_me_back
+label introduction
+set {sharik_display_name} = "Sharik"
+sharik: My name is Sharik. I am a cat. #id:43
+label introduction_reaction
+- A cat? #id:44
+	jump yes
+- What is cat? #id:45
+	jump cat_is_cat
+- My name is Surbi. #id:46
+	jump i_know
+label i_know
+sharik: I know. #id:47
+- You know? #id:48
+sharik: Yes. #id:49
+jump questions
+label yes
+sharik: Yes. #id:4a
+jump introduction_reaction
+label cat_is_cat
+sharik: A cat is a cat. #id:4b
+jump introduction_reaction
 label world_explanation
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: A destroyed residence of a goddess. A distorted home. Here it is better not to rely on your eyes too much. They will deceive you.
+sharik: A destroyed residence of a goddess. A distorted home. Here it is better not to rely on your eyes too much. They will deceive you. #id:2d
 jump questions
 label abduction_reason
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Because you wanted to see "something". Isn't THIS quite something?
-- It sure is.
+sharik: Because you wanted to see "something". Isn't THIS quite something? #id:2e
+- It sure is. #id:2f
 	jump sharik_feeling_out_player
-- I want to go back!
+- I want to go back! #id:30
 	jump take_me_back
 label sharik_feeling_out_player
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: I am glad, I did not misjudge you. Say, do you want to spend some coin?
-- Why do  you  want  coin?
+sharik: I am glad, I did not misjudge you. Say, do you want to spend some coin? #id:31
+- Why do  you  want  coin? #id:32
 	jump why_coin
-- I do.
+- I do. #id:33
 	jump spend_money
-- I don't.
+- I don't. #id:34
 	jump no_money
 label why_coin
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Because I don't want to starve to death, thank you very much.
-- I can spend some coin.
+sharik: Because I don't want to starve to death, thank you very much. #id:35
+- I can spend some coin. #id:36
 	jump spend_money
-- I don't want to spend money.
+- I don't want to spend money. #id:37
 	jump no_money
 label spend_money
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Terrific,because I have a few items to sell. Here take a look.
-Creature hits the ground with its paw. Three items materialize before your eyes.
-label shop
-- item 1
-	jump shop
-- item 2
-	jump shop
-- item 3
-	jump shop
-- i am done
-	jump thank_you_bye
-label thank_you_bye
-[sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Thank you and see you next time.
-[signal arg="PLAYER_LEFT_SHOP"]
-[end_timeline]
+sharik: Terrific,because I have a few items to sell. Here take a look. #id:38
+jump Sharik_sale_timeline/
 label no_money
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Then I guess we have nothing more to talk about.
+sharik: Then I guess we have nothing more to talk about. #id:3f
 jump bye
 label take_me_back
-sharik: Sure.
+sharik: Sure. #id:40
 label bye
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: So long, partner.
+sharik: So long, partner. #id:41
 [signal arg="PLAYER_LEFT_SHOP"]
 [end_timeline]

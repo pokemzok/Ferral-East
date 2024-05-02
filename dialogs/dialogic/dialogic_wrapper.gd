@@ -18,7 +18,7 @@ func on_bubble_dialog_with(character: Node2D):
 	layout.register_character(bubble_character, character)
 
 func on_trader_damaged(trader_name: String):
-	Dialogic.VAR.trader.player_attacking_trader_count += 1
+	Dialogic.VAR.player.attacked_trader_count += 1
 
 func on_enered_shop(character_name: String):
 	on_start_conversation_with(character_name+"_shop")

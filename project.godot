@@ -32,6 +32,7 @@ directories/dch_directory={
 "sharik": "res://dialogs/dialogic/sharik/sharik.dch"
 }
 directories/dtl_directory={
+"Sharik_sale_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_sale_timeline.dtl",
 "Sharik_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_timeline.dtl",
 "Sharik_timeline": "res://dialogs/dialogic/sharik/Sharik_timeline.dtl",
 "buble_timeline": "res://dialogs/dialogic/buble/buble_timeline.dtl"
@@ -55,11 +56,15 @@ animations/leave_default_wait=true
 animations/join_default_wait=true
 text/autopauses={}
 variables={
-"trader": {
-"": {},
-"nr_of_times_scratched_player": 0,
-"player_attacking_trader_count": 0
-}
+"player": {
+"attacked_trader_count": 0
+},
+"sharik": {
+"has_introduced_to_player": false,
+"nr_of_times_met_player": 0,
+"nr_of_times_scratched_player": 0
+},
+"sharik_display_name": "Creature"
 }
 translation/enabled=true
 translation/original_locale="en"
@@ -73,7 +78,7 @@ choices/hotkey_behaviour=0
 translation/intern/save_mode=0
 translation/intern/file_mode=1
 translation/intern/translation_folder="res://assets/translations"
-translation/id_counter=38
+translation/id_counter=75
 
 [display]
 
@@ -141,4 +146,4 @@ dialogic_default_action={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation", "res://assets/translations/dialogic_character_translations.en.translation", "res://assets/translations/dialogic_Sharik_timeline_translation.en.translation", "res://menu/main/translations.pl.translation", "res://menu/main/translations.en.translation", "res://assets/translations/dialogic_buble_timeline_translation.en.translation")
+locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation", "res://assets/translations/dialogic_character_translations.en.translation", "res://assets/translations/dialogic_Sharik_timeline_translation.en.translation", "res://menu/main/translations.pl.translation", "res://menu/main/translations.en.translation", "res://assets/translations/dialogic_buble_timeline_translation.en.translation", "res://assets/translations/dialogic_Sharik_shop_timeline_translation.en.translation", "res://assets/translations/dialogic_Sharik_sale_timeline_translation.en.translation")
