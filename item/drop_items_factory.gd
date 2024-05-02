@@ -3,7 +3,7 @@ extends Node2D
 var current_item_resource: SingleResource
 var current_enemy_death_details: EnemyDeathDetails
 var item_spawn_delay = NumericAttribute.new(0.5, 0.5)
-var items: Items = Items.get_instance()
+var items: DropItems = DropItems.get_instance()
 var item_instance
 var drop_chance_increase = 0
 
@@ -35,7 +35,7 @@ func on_loading_completed(delta):
 			item_spawn_delay.decrement_by(delta)	
 	
 func on_enemy_death(enemy_death_details: EnemyDeathDetails):
-	var base_drop_chance = Items.drop_chances[enemy_death_details.enemy_type]
+	var base_drop_chance = DropItems.drop_chances[enemy_death_details.enemy_type]
 	var score_factor = calculate_score_factor(enemy_death_details.score)
 	var drop_chance = base_drop_chance + score_factor + drop_chance_increase
 	var drawn_chance = randf()
@@ -56,7 +56,7 @@ func calculate_score_factor(score: int) -> float:
 	var score_factor = lerp(min_drop_chance, max_drop_chance, normalized_score)
 	return score_factor/10
 
-func select_item(drawn_chance: float, chance_threshold: float, enemy_type: Enemy.EnemyType) -> Items.ItemName:
+func select_item(drawn_chance: float, chance_threshold: float, enemy_type: Enemy.EnemyType) -> DropItems.ItemName:
 	var legendary_tier_threshold = chance_threshold/9
 	if (drawn_chance <= legendary_tier_threshold):
 		return items.legendary_items[enemy_type]
@@ -65,6 +65,6 @@ func select_item(drawn_chance: float, chance_threshold: float, enemy_type: Enemy
 	else:	
 		return items.common_items[enemy_type]
 	
-func drop_item(item: Items.ItemName):
+func drop_item(item: DropItems.ItemName):
 	if (current_item_resource == null):
 		current_item_resource = SingleResource.new(item, items.res_dictionary)

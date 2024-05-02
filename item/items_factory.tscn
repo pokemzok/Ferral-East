@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1h7wu5r8c0qh"]
-
-[ext_resource type="Script" path="res://item/items_factory.gd" id="1_bv4ip"]
-
-[node name="ItemsFactory" type="Node2D"]
-script = ExtResource("1_bv4ip")

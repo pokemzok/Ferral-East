@@ -1,5 +1,5 @@
 extends Node
-class_name Items
+class_name DropItems
 
 enum ItemName {
 	COIN,
@@ -31,9 +31,9 @@ static var legendary_items = {
 
 static var instance = null
 
-static func get_instance() -> Items:
+static func get_instance() -> DropItems:
 	if instance == null:
-		instance = Items.new()
-		instance.name = "Items"
+		instance = DropItems.new()
+		instance.name = "DropItems"
 		instance.add_to_group("singleton")
 	return instance	
