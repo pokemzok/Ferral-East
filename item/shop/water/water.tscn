@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://budoy0jwjf6hu"]
+
+[ext_resource type="Script" path="res://item/shop/water/water.gd" id="1_xnlxv"]
+[ext_resource type="Texture2D" uid="uid://cljwrjgr2ua6w" path="res://item/shop/water/water.png" id="2_4dgdl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cb8d"]
+atlas = ExtResource("2_4dgdl")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fxf2"]
+atlas = ExtResource("2_4dgdl")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h6up6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cb8d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fxf2")
+}],
+"loop": true,
+"name": &"highlight",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t6udo"]
+radius = 35.0
+height = 140.0
+
+[node name="Water" type="StaticBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_xnlxv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h6up6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 6)
+shape = SubResource("CapsuleShape2D_t6udo")

@@ -4,6 +4,7 @@ extends Item
 
 func _ready():
 	type = ItemType.COIN
-
+	price = 1
+	
 func _process(delta):
 	animation.play("glow")	

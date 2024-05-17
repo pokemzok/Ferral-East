@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp4uapunwa8i1"]
+[gd_scene load_steps=7 format=3 uid="uid://cp4uapunwa8i1"]
 
 [ext_resource type="PackedScene" uid="uid://djcsnso72bwod" path="res://menu/main/main_menu.tscn" id="1_iv2hg"]
 [ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="2_fckys"]
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="3_eks8k"]
 [ext_resource type="PackedScene" uid="uid://bhfp2m5ktia7t" path="res://dialogs/dialogic/dialogic_wrapper.tscn" id="4_xeq7e"]
+[ext_resource type="PackedScene" uid="uid://dvucf61iw46bt" path="res://game/statistics/game_statistics.tscn" id="5_v7gvh"]
 
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node
@@ -27,7 +28,7 @@ var shop_transition_tween: Tween
 @onready var dialogic_wrapper = $DialogicWrapper
 @onready var shop_transition_canvas = $ShopTransitionCanvas
 @onready var shop_transition_color_rect = $ShopTransitionCanvas/ColorRect
-
+@onready var statistics = $GameStatistics
 var shop_transition_color: Color
 var shop_transition_color_transparent: Color
 
@@ -52,7 +53,7 @@ func connect_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_TELEPORTED, on_player_teleported)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEFT_SHOP, on_player_left_shop)
-
+	
 func load_menu_music():
 	var menu_loops_keys = sound_manager.rest_music_loops_keys
 	var death_menu_loops_keys = sound_manager.game_over_loops_keys
@@ -83,6 +84,7 @@ func on_shop_loading(delta):
 		show_shop_transition()		
 		var shop_resource = shop_level_resource.get_loaded_resource()
 		shop_level_instance = shop_resource.instantiate()
+		shop_level_instance.after_init(statistics)
 	else:
 		shop_level_resource.load_resource()
 		shop_transition_delay.decrement_by(delta)			
@@ -183,6 +185,7 @@ func on_player_left_shop():
 	shop_level_resource = null	
 	shop_level_instance = null	
 	player_ready_for_shop_level = false
+
 "
 
 [node name="Game" type="Node"]
@@ -204,6 +207,8 @@ visible = false
 visible = false
 
 [node name="DialogicWrapper" parent="." instance=ExtResource("4_xeq7e")]
+
+[node name="GameStatistics" parent="." instance=ExtResource("5_v7gvh")]
 
 [node name="ShopTransitionCanvas" type="CanvasLayer" parent="."]
 visible = false

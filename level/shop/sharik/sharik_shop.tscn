@@ -14,3 +14,20 @@ texture = ExtResource("2_hxj6b")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kr017")
 autoplay = true
+
+[node name="ItemSpawns" type="Node2D" parent="."]
+
+[node name="ItemsSpawn" type="Node2D" parent="ItemSpawns"]
+position = Vector2(688, 783)
+
+[node name="ItemsSpawn2" type="Node2D" parent="ItemSpawns"]
+position = Vector2(975, 782)
+
+[node name="ItemsSpawn3" type="Node2D" parent="ItemSpawns"]
+position = Vector2(1221, 774)
+
+[node name="ItemsSpawn4" type="Node2D" parent="ItemSpawns"]
+position = Vector2(850, 947)
+
+[node name="ItemsSpawn5" type="Node2D" parent="ItemSpawns"]
+position = Vector2(1146, 954)

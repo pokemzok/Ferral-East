@@ -64,7 +64,8 @@ variables={
 "nr_of_times_met_player": 0,
 "nr_of_times_scratched_player": 0
 },
-"sharik_display_name": "Creature"
+"sharik_display_name": "Creature",
+"shop": {}
 }
 translation/enabled=true
 translation/original_locale="en"

@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dakk3lanbgjkf"]
+
+[ext_resource type="Script" path="res://item/shop/revolver_parts/revolver_parts.gd" id="1_mc35q"]
+[ext_resource type="Texture2D" uid="uid://d1r2404xlkdfu" path="res://item/shop/revolver_parts/cylinder-shop.png" id="2_ai5tr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66hfx"]
+atlas = ExtResource("2_ai5tr")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atj4m"]
+atlas = ExtResource("2_ai5tr")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6vxhi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66hfx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atj4m")
+}],
+"loop": true,
+"name": &"highlight",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vpchp"]
+radius = 49.366
+
+[node name="RevolverParts" type="StaticBody2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_mc35q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6vxhi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vpchp")

@@ -1,11 +1,13 @@
+class_name Sharik
 extends Trader
+
+static var character_name = "Sharik"
 
 @onready var animations = $AnimatedSprite2D
 var teleporting = false
 var phasing_into = true
 var phasing_period = NumericAttribute.new(0, 1)
 var transgression_count = NumericAttribute.new(0, 5)
-var character_name = "Sharik"
 var teleport_audio = GameSoundManager.Sounds.TELEPORT
 @onready var audio_pool = $GameAmbientAudioPool
 

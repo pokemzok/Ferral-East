@@ -56,7 +56,7 @@ func calculate_score_factor(score: int) -> float:
 	var score_factor = lerp(min_drop_chance, max_drop_chance, normalized_score)
 	return score_factor/10
 
-func select_item(drawn_chance: float, chance_threshold: float, enemy_type: Enemy.EnemyType) -> DropItems.ItemName:
+func select_item(drawn_chance: float, chance_threshold: float, enemy_type: Enemy.EnemyType) -> Item.ItemName:
 	var legendary_tier_threshold = chance_threshold/9
 	if (drawn_chance <= legendary_tier_threshold):
 		return items.legendary_items[enemy_type]
@@ -65,6 +65,6 @@ func select_item(drawn_chance: float, chance_threshold: float, enemy_type: Enemy
 	else:	
 		return items.common_items[enemy_type]
 	
-func drop_item(item: DropItems.ItemName):
+func drop_item(item: Item.ItemName):
 	if (current_item_resource == null):
 		current_item_resource = SingleResource.new(item, items.res_dictionary)
