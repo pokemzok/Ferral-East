@@ -1,15 +1,2 @@
-Creature hits the ground with its paw. Three items materialize before your eyes. #id:39
-label shop
-- item 1 #id:3a
-	jump shop
-- item 2 #id:3b
-	jump shop
-- item 3 #id:3c
-	jump shop
-- i am done #id:3d
-	jump thank_you_bye
-label thank_you_bye
-[sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Thank you and see you next time. #id:3e
-[signal arg="PLAYER_LEFT_SHOP"]
+Creature hits the ground with its paw. Few items materialize before your eyes. #id:39
 [end_timeline]

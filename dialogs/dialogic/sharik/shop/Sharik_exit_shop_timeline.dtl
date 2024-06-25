@@ -1,0 +1,8 @@
+The creature is looking at you with curiosity.
+- i am done #id:3d
+	jump thank_you_bye
+label thank_you_bye
+[sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
+sharik: Thank you and see you next time. #id:3e
+[signal arg="PLAYER_LEFT_SHOP"]
+[end_timeline]

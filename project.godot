@@ -32,6 +32,7 @@ directories/dch_directory={
 "sharik": "res://dialogs/dialogic/sharik/sharik.dch"
 }
 directories/dtl_directory={
+"Sharik_exit_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_exit_shop_timeline.dtl",
 "Sharik_sale_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_sale_timeline.dtl",
 "Sharik_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_timeline.dtl",
 "Sharik_timeline": "res://dialogs/dialogic/sharik/Sharik_timeline.dtl",
