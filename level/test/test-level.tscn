@@ -3868,7 +3868,6 @@ texture = ExtResource("7_goqij")
 15:15/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e7ehw"]
-load_path = "res://.godot/imported/Bones_shadow1_2.png-509954d72e8a02e128bc1bd68cf1dac1.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cov8"]
 texture = SubResource("CompressedTexture2D_e7ehw")
@@ -3877,7 +3876,6 @@ texture = SubResource("CompressedTexture2D_e7ehw")
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lqvkv"]
-load_path = "res://.godot/imported/Bones_shadow2_4-1.png-1828166fdcb61bb3442855603141512f.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s80m2"]
 texture = SubResource("CompressedTexture2D_lqvkv")

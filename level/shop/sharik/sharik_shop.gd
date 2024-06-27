@@ -10,11 +10,10 @@ var shop_items: ArrayCollection
 var player_can_shop = false
 
 #TODO
-# I would need to rework my shop, because I am not able to use dialogic for selling (it has limitations)
-# The plan is to place items one by one before Sharik and make them clickable (and glow on hover)
-# close dialogic and show items for user to buy (utilize events from dialogic)
 # Make Sharik clickable as well, so the player can return from the shop
-# make item highlight on click (as well as Sharik)
+# make item highlight on hover (as well as Sharik)
+# clicking on Sharik should return player back to main scene
+# TODO: test if that would  make main scene go back to where it was
 
 func _process(delta):
 	on_shop_items_loading()

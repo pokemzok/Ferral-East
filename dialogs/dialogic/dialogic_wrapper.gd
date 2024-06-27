@@ -23,12 +23,12 @@ func on_trader_damaged(trader_name: String):
 func on_enered_shop(character_name: String):
 	on_start_conversation_with(character_name+"_shop")
 
-func on_start_conversation_with(character_name: String):
+func on_start_conversation_with(conversation_timeline: String):
 	Dialogic.Styles.load_style("textbox")
 	if (Dialogic.current_timeline != null):
 		return
 	Dialogic.timeline_ended.connect(on_timeline_ended)		
-	Dialogic.start(character_name+"_timeline")
+	Dialogic.start(conversation_timeline+"_timeline")
 
 func on_timeline_ended():
 	GlobalEventBus.finish_conversation.emit()

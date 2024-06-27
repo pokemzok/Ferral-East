@@ -100,7 +100,8 @@ func show_shop_transition():
 	shop_transition_tween.tween_callback(on_shop_transition_complete)
 	
 func on_shop_transition():
-	current_level_instance.hide()	
+	current_level_instance.hide()
+	remove_child(current_level_instance)
 	shop_transition_canvas.add_sibling(shop_level_instance)	
 
 func on_shop_transition_complete():
@@ -179,6 +180,7 @@ func on_player_enters_shop(shop_level: LevelManager.Levels):
 
 func on_player_left_shop():
 	if (shop_level_instance != null):
+		add_child(current_level_instance)
 		shop_level_instance.hide()
 		remove_child(shop_level_instance)
 		current_level_instance.show()
@@ -201,9 +203,6 @@ visible = false
 bus = &"Music"
 
 [node name="DeathMenu" parent="." instance=ExtResource("2_fckys")]
-visible = false
-
-[node name="DeathMenu" parent="DeathMenu" instance=ExtResource("2_fckys")]
 visible = false
 
 [node name="DialogicWrapper" parent="." instance=ExtResource("4_xeq7e")]
