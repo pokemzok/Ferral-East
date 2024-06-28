@@ -14,16 +14,19 @@ func _init(
 	self.music_for_waves = music_for_waves
 	self.victory_music = victory_music
 	self.waves_music_player = waves_music_player
+	victory_music_player.autoplay = false
 	self.victory_music_player = victory_music_player
 
 func play_on_wave(wave_index):
 	if (!waves_music_player.is_playing()):
 		waves_music_player.stream = get_music_for_wave(wave_index)	
 		waves_music_player.play()
+		waves_music_player.autoplay = true
 
 func play_on_wave_complete():
 	if(waves_music_player.is_playing()):
 		waves_music_player.stop()
+		waves_music_player.autoplay = false
 	victory_music_player.stream = get_victory_music()
 	victory_music_player.play()
 

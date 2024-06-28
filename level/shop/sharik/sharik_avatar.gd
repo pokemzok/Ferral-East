@@ -8,8 +8,6 @@ static var conversation_timeline = "Sharik_exit_shop"
 # TODO:
 # 1. Refactor dialogic,  enhance current API to be aware of user state (like character in shop or something)
 # 2. Finish implementing buying of those three items (also make them look different on hover.
-# 4. Something is wrong with a sound system (it triggers when player exits shop and it should not).
-# 5. Clicking Escape just after entering shop results in dialogic bug, give some cooldown periods for buttons. 
 
 func _ready():
 	connect_events()

@@ -20,6 +20,7 @@ var death_menu_music_resources_group: ResourcesGroup
 var sound_manager = GameSoundManager.get_instance()
 var level_manager = LevelManager.get_instance()
 var shop_transition_tween: Tween
+var input_cooldown = NumericAttribute.new(0, 2)
 
 @onready var menu = $MainMenu
 @onready var death_menu = $DeathMenu
@@ -67,7 +68,7 @@ func _process(delta):
 	elif (loading_screen.visible):
 		on_resource_loading()
 	elif(!death_menu.visible):
-		on_keyboard_pressed()
+		on_keyboard_pressed(delta)
 	if(menu.visible && current_level_instance == null):
 		play_menu_music(menu_music_resources_group.get_loaded_resources())
 	elif (death_menu.visible):
@@ -85,6 +86,7 @@ func on_shop_loading(delta):
 		var shop_resource = shop_level_resource.get_loaded_resource()
 		shop_level_instance = shop_resource.instantiate()
 		shop_level_instance.after_init(statistics)
+		input_cooldown.assign_max_value()
 	else:
 		shop_level_resource.load_resource()
 		shop_transition_delay.decrement_by(delta)			
@@ -138,9 +140,12 @@ func play_menu_music(music_collection: ArrayCollection):
 func stop_menu_music():
 	music_player.stop()
 	
-func on_keyboard_pressed():
-	if Input.is_action_just_pressed(\"show_or_hide_menu\"):
-		on_menu_toggle()
+func on_keyboard_pressed(delta):
+	if (!input_cooldown.is_gt_zero()):
+		if Input.is_action_just_pressed(\"show_or_hide_menu\"):
+			on_menu_toggle()
+	else:
+		input_cooldown.decrement_by(delta)		
 
 func on_menu_toggle():
 	var is_menu_visible = menu.toggle()
