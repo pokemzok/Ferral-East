@@ -24,6 +24,7 @@ buses/default_bus_layout="res://assets/theme/default_bus_layout.tres"
 Persistence="*res://menu/main/persistence.gd"
 GlobalEventBus="*res://event/global_event_bus.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+CharacterNames="*res://character/character_names.gd"
 
 [dialogic]
 
@@ -38,7 +39,7 @@ directories/dtl_directory={
 "Sharik_timeline": "res://dialogs/dialogic/sharik/Sharik_timeline.dtl",
 "buble_timeline": "res://dialogs/dialogic/buble/buble_timeline.dtl"
 }
-layout/style_list=["res://dialogs/dialogic/dialogue-style.tres", "res://dialogs/dialogic/bubble-style.tres"]
+layout/style_list=["res://dialogs/dialogic/dialogue-style.tres"]
 layout/default_style="res://dialogs/dialogic/dialogue-style.tres"
 text/letter_speed=0.01
 text/initial_text_reveal_skippable=true

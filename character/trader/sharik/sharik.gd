@@ -1,7 +1,7 @@
 class_name Sharik
 extends Trader
 
-static var character_name = "Sharik"
+static var character_name = CharacterNames.SHARIK
 
 @onready var animations = $AnimatedSprite2D
 var teleporting = false

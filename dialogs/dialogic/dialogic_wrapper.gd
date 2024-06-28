@@ -4,18 +4,11 @@ static var warp_locations = {
 	LevelManager.Levels.SHARIK_SHOP: GlobalEventBus.player_enters_shop
 }
 
-var bubble_character = preload("res://dialogs/dialogic/buble/buble-character.dch")
-
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.TRADER_DAMAGED, on_trader_damaged)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_enered_shop)
 	Dialogic.signal_event.connect(_on_dialogic_signal)
-
-func on_bubble_dialog_with(character: Node2D):
-	Dialogic.Styles.load_style("bubble")
-	var layout = Dialogic.start("hints_timeline")
-	layout.register_character(bubble_character, character)
 
 func on_trader_damaged(trader_name: String):
 	Dialogic.VAR.player.attacked_trader_count += 1
@@ -23,12 +16,12 @@ func on_trader_damaged(trader_name: String):
 func on_enered_shop(character_name: String):
 	on_start_conversation_with(character_name+"_shop")
 
-func on_start_conversation_with(conversation_timeline: String):
+func on_start_conversation_with(character_name: String):
 	Dialogic.Styles.load_style("textbox")
 	if (Dialogic.current_timeline != null):
 		return
 	Dialogic.timeline_ended.connect(on_timeline_ended)		
-	Dialogic.start(conversation_timeline+"_timeline")
+	Dialogic.start(character_name+"_timeline")
 
 func on_timeline_ended():
 	GlobalEventBus.finish_conversation.emit()
