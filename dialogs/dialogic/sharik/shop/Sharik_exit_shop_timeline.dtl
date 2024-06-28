@@ -1,6 +1,13 @@
-The creature is looking at you with curiosity.
-- i am done #id:3d
+The creature is looking at you with curiosity. #id:4c
+- I am done #id:3d
 	jump thank_you_bye
+- I couldn't resist petting you #id:4d
+	jump understandable
+label understandable
+[sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
+sharik: Can't blame ya #id:4e
+[signal arg="PLAYER_READY_TO_BUY"]
+[end_timeline]
 label thank_you_bye
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
 sharik: Thank you and see you next time. #id:3e

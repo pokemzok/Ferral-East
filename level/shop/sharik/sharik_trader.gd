@@ -4,12 +4,12 @@ extends StaticBody2D
 
 static var conversation_timeline = "Sharik_exit_shop"
 # TODO:
-# 0. Add option to stay in shop (player might be curious and accidentally exit)
 # 1. Refactor dialogic, to accept timelines instead of character name or enhance current API to be aware of user state (like character in shopor something)
 # 2. Refactor dialogic - remove unnecessary functions (I don't  need buble style dialogs).
 # 3. Finish implementing buying of those three items (also make them look different on hover (I want Sharik highlight style).
 # 4. Something is wrong with a sound system (it triggers when player exits shop and it should not).
- 
+# 5. Clicking Escape just after entering shop results in dialogic bug, give some cooldown periods for buttons. 
+
 func _ready():
 	connect_events()
 

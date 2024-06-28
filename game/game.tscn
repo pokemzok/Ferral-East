@@ -155,18 +155,20 @@ func on_start():
 	dialogic_wrapper.clear()
 
 func on_restart():
-	clean_up_after_player_death()
+	clean_up_after_player()
 	on_start()
 
 func on_quit_to_menu():
-	clean_up_after_player_death()
+	clean_up_after_player()
 	menu.reset()
 	menu.show()	
 	stop_menu_music()
 	current_level_instance.destroy()
 
-func clean_up_after_player_death():
-	current_level_instance.destroy()
+func clean_up_after_player():
+	if (shop_level_instance != null):
+		on_player_left_shop()
+	current_level_instance.destroy()		
 	death_menu.hide()
 	
 func on_player_death():

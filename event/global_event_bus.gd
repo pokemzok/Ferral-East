@@ -72,3 +72,11 @@ const INTERACTION_HINT = "interaction_hint"
 const INTERACTION_HINT_HIDE = "interaction_hint_hide"
 const START_CONVERSATION_WITH = "start_conversation_with"
 const FINISH_CONVERSATION = "finish_conversation"
+
+
+func emit_signal_for(signal_name):
+	var name = signal_name.to_lower()
+	if has_signal(name):
+		call_deferred("emit_signal", name)
+	else:
+		print("No such signal")

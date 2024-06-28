@@ -10,10 +10,7 @@ var shop_items: ArrayCollection
 var player_can_shop = false
 
 #TODO
-# Make Sharik clickable as well, so the player can return from the shop
 # make item highlight on hover (as well as Sharik)
-# clicking on Sharik should return player back to main scene
-# TODO: test if that would  make main scene go back to where it was
 
 func _ready():
 	connect_events()

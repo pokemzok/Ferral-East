@@ -1,11 +1,2 @@
 keys,en
-Text/39/text,Creature hits the ground with its paw. Three items materialize before your eyes.
-Choice/3a/text,item 1
-Choice/3a/disabled_text,
-Choice/3b/text,item 2
-Choice/3b/disabled_text,
-Choice/3c/text,item 3
-Choice/3c/disabled_text,
-Choice/3d/text,i am done
-Choice/3d/disabled_text,
-Text/3e/text,Thank you and see you next time.
+Text/39/text,Creature hits the ground with its paw. Few items materialize before your eyes.

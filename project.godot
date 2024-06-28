@@ -80,7 +80,7 @@ choices/hotkey_behaviour=0
 translation/intern/save_mode=0
 translation/intern/file_mode=1
 translation/intern/translation_folder="res://assets/translations"
-translation/id_counter=75
+translation/id_counter=78
 
 [display]
 
