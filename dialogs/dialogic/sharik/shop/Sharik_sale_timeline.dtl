@@ -1,2 +1,3 @@
 Creature hits the ground with its paw. Few items materialize before your eyes. #id:39
+[signal arg="PLAYER_READY_TO_BUY"]
 [end_timeline]

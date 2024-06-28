@@ -15,8 +15,18 @@ var player_can_shop = false
 # clicking on Sharik should return player back to main scene
 # TODO: test if that would  make main scene go back to where it was
 
+func _ready():
+	connect_events()
+	hide_items()
+	
 func _process(delta):
 	on_shop_items_loading()
+
+func connect_events():
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_READY_TO_BUY, on_player_ready_to_buy)
+
+func on_player_ready_to_buy():
+	show_items()
 
 func show_items():
 	items_spawns.show()

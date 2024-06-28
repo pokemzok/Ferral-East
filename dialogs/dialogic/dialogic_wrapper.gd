@@ -61,6 +61,8 @@ func clear():
 func _on_dialogic_signal(arg: String):
 	if (arg == "PLAYER_LEFT_SHOP"):
 		GlobalEventBus.player_left_shop.emit()
+	if (arg == "PLAYER_READY_TO_BUY"):
+		GlobalEventBus.player_ready_to_buy.emit()
 	else:	
 		var enum_value = LevelManager.Levels.get(arg)
 		if(warp_locations.has(enum_value)):
