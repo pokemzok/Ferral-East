@@ -16,22 +16,16 @@ texture = ExtResource("2_1rq81")
 position = Vector2(940, 426)
 
 [node name="ItemSpawns" type="Node2D" parent="."]
-visible = false
+z_index = 1
 
 [node name="ItemsSpawn" type="Node2D" parent="ItemSpawns"]
-position = Vector2(688, 783)
+position = Vector2(684, 851)
 
 [node name="ItemsSpawn2" type="Node2D" parent="ItemSpawns"]
-position = Vector2(975, 782)
+position = Vector2(975, 854)
 
 [node name="ItemsSpawn3" type="Node2D" parent="ItemSpawns"]
-position = Vector2(1221, 774)
-
-[node name="ItemsSpawn4" type="Node2D" parent="ItemSpawns"]
-position = Vector2(850, 947)
-
-[node name="ItemsSpawn5" type="Node2D" parent="ItemSpawns"]
-position = Vector2(1146, 954)
+position = Vector2(1261, 856)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kr017")

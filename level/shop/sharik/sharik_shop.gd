@@ -1,6 +1,6 @@
 extends Node2D
 @onready var items_spawns = $ItemSpawns
-
+var spawn_slots = 3
 var statistics: GameStatistics
 var drawn_chance = 0
 var rare_item_chance = 0
@@ -8,9 +8,6 @@ var legendary_item_chance = 0
 var resources_group: ResourcesGroup
 var shop_items: ArrayCollection
 var player_can_shop = false
-
-#TODO
-# make item highlight on hover (as well as Sharik)
 
 func _ready():
 	connect_events()
@@ -50,7 +47,10 @@ func after_init(_statistics: GameStatistics):
 	var common_items = random_common_items()
 	var rare_items = random_rare_items()
 	var legendary_items = random_legendary_items()
-	resources_group = ResourcesGroup.new(common_items + rare_items + legendary_items, ShopItems.res_dictionary)
+	var items = legendary_items + rare_items + common_items
+	if items.size() > spawn_slots:
+		items = items.slice(0, spawn_slots)
+	resources_group = ResourcesGroup.new(items, ShopItems.res_dictionary)
 
 func calculate_rare_item_chance():
 	var base_chance = 0.1

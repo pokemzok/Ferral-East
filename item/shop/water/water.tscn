@@ -7,7 +7,7 @@
 atlas = ExtResource("2_4dgdl")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2fxf2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bokm"]
 atlas = ExtResource("2_4dgdl")
 region = Rect2(128, 0, 128, 128)
 
@@ -23,7 +23,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2fxf2")
+"texture": SubResource("AtlasTexture_1bokm")
 }],
 "loop": true,
 "name": &"highlight",
@@ -35,7 +35,7 @@ radius = 35.0
 height = 140.0
 
 [node name="Water" type="StaticBody2D"]
-scale = Vector2(3, 3)
+scale = Vector2(2.5, 2.5)
 script = ExtResource("1_xnlxv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

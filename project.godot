@@ -23,21 +23,19 @@ buses/default_bus_layout="res://assets/theme/default_bus_layout.tres"
 
 Persistence="*res://menu/main/persistence.gd"
 GlobalEventBus="*res://event/global_event_bus.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 CharacterNames="*res://character/character_names.gd"
+Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
 directories/dch_directory={
-"buble-character": "res://dialogs/dialogic/buble/buble-character.dch",
 "sharik": "res://dialogs/dialogic/sharik/sharik.dch"
 }
 directories/dtl_directory={
 "Sharik_exit_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_exit_shop_timeline.dtl",
 "Sharik_sale_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_sale_timeline.dtl",
 "Sharik_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_timeline.dtl",
-"Sharik_timeline": "res://dialogs/dialogic/sharik/Sharik_timeline.dtl",
-"buble_timeline": "res://dialogs/dialogic/buble/buble_timeline.dtl"
+"Sharik_timeline": "res://dialogs/dialogic/sharik/Sharik_timeline.dtl"
 }
 layout/style_list=["res://dialogs/dialogic/dialogue-style.tres"]
 layout/default_style="res://dialogs/dialogic/dialogue-style.tres"

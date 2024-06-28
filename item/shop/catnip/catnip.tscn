@@ -3,19 +3,19 @@
 [ext_resource type="Script" path="res://item/shop/catnip/catnip.gd" id="1_eognb"]
 [ext_resource type="Texture2D" uid="uid://c2vvcspua6pwl" path="res://item/shop/catnip/catnip.png" id="2_y0nrk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bde14"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_souoy"]
 atlas = ExtResource("2_y0nrk")
-region = Rect2(0, 0, 128, 128)
+region = Rect2(0, 0, 150, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_up3xo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pebcp"]
 atlas = ExtResource("2_y0nrk")
-region = Rect2(128, 0, 128, 128)
+region = Rect2(150, 0, 150, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sqw17"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bde14")
+"texture": SubResource("AtlasTexture_souoy")
 }],
 "loop": true,
 "name": &"default",
@@ -23,7 +23,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_up3xo")
+"texture": SubResource("AtlasTexture_pebcp")
 }],
 "loop": true,
 "name": &"highlight",

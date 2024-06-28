@@ -1,8 +1,7 @@
 extends Item
 
 @onready var animations = $AnimatedSprite2D
-# FIXME parent disrupts highlight. How to fix it?
-# TODO: maybe tutorials on how to do that
+
 func _ready():
 	type = ItemType.HEAL
 	price = 3
