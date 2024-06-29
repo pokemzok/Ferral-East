@@ -20,8 +20,9 @@ func on_start_conversation_with(character_name: String):
 	Dialogic.Styles.load_style("textbox")
 	if (Dialogic.current_timeline != null):
 		return
-	Dialogic.timeline_ended.connect(on_timeline_ended)		
-	Dialogic.start(character_name+"_timeline")
+	Dialogic.timeline_ended.connect(on_timeline_ended)
+	var location = PlayerLog.current_location	
+	Dialogic.start(character_name+"_"+location+"_timeline")
 
 func on_timeline_ended():
 	GlobalEventBus.finish_conversation.emit()

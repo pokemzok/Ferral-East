@@ -8,7 +8,15 @@ static var instance = null
 enum Levels {
 	TEST,
 	HOMETOWN,
+	ABANDONED_FARM,
 	SHARIK_SHOP
+}
+
+var level_names = {
+	Levels.TEST: "test",
+	Levels.HOMETOWN: "hometown",
+	Levels.ABANDONED_FARM: "abandoned_farm",
+	Levels.SHARIK_SHOP: "sharik_shop"
 }
 
 var level_paths = {
@@ -30,3 +38,9 @@ func get_level(level: Levels):
 	else:
 		print("Level not found: ", level)	
 	
+
+func get_level_name(level: Levels):
+	if  (level_names.has(level)):
+		return level_names[level]
+	else:
+		print("Level name not found: ", level)	

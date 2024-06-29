@@ -24,6 +24,7 @@ buses/default_bus_layout="res://assets/theme/default_bus_layout.tres"
 Persistence="*res://menu/main/persistence.gd"
 GlobalEventBus="*res://event/global_event_bus.gd"
 CharacterNames="*res://character/character_names.gd"
+PlayerLog="*res://player/player_log.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
@@ -32,10 +33,13 @@ directories/dch_directory={
 "sharik": "res://dialogs/dialogic/sharik/sharik.dch"
 }
 directories/dtl_directory={
+"Sharik_abandoned_farm_first_conversation_timeline": "res://dialogs/dialogic/sharik/abandoned_farm/Sharik_abandoned_farm_first_conversation_timeline.dtl",
+"Sharik_abandoned_farm_next_conversation_timeline": "res://dialogs/dialogic/sharik/abandoned_farm/Sharik_abandoned_farm_next_conversation_timeline.dtl",
+"Sharik_abandoned_farm_timeline": "res://dialogs/dialogic/sharik/abandoned_farm/Sharik_abandoned_farm_timeline.dtl",
 "Sharik_exit_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_exit_shop_timeline.dtl",
 "Sharik_sale_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_sale_timeline.dtl",
-"Sharik_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_timeline.dtl",
-"Sharik_timeline": "res://dialogs/dialogic/sharik/Sharik_timeline.dtl"
+"Sharik_sharik_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_sharik_shop_timeline.dtl",
+"Sharik_shop_first_conversation_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_first_conversation_timeline.dtl"
 }
 layout/style_list=["res://dialogs/dialogic/dialogue-style.tres"]
 layout/default_style="res://dialogs/dialogic/dialogue-style.tres"
@@ -57,7 +61,9 @@ animations/join_default_wait=true
 text/autopauses={}
 variables={
 "player": {
-"attacked_trader_count": 0
+"attacked_trader_count": 0,
+"had_intro_talk_in_shop": false,
+"was_in_shop": false
 },
 "sharik": {
 "has_introduced_to_player": false,
@@ -65,7 +71,9 @@ variables={
 "nr_of_times_scratched_player": 0
 },
 "sharik_display_name": "Creature",
-"shop": {}
+"sharik_shop": {
+"": {}
+}
 }
 translation/enabled=true
 translation/original_locale="en"

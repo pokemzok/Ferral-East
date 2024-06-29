@@ -1,0 +1,13 @@
+[sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
+sharik: You know the drill. Just say the word if you wanna buy.
+- Take me to your shop
+	jump go_to_shop
+- I am good
+	[end_timeline]
+- The word
+	sharik: Smartass...
+	jump go_to_shop
+label go_to_shop
+Something is happening!
+[signal arg="SHARIK_SHOP"]
+jump Sharik_sharik_shop_timeline/

@@ -1,0 +1,3 @@
+if {player.was_in_shop} == true:
+	jump Sharik_abandoned_farm_next_conversation_timeline/
+jump Sharik_abandoned_farm_first_conversation_timeline/

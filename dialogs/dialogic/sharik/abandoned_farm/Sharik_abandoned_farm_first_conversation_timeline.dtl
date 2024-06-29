@@ -40,4 +40,4 @@ label go_to_shop
 sharik: Then follow me... #id:20
 Something is happening! #id:21
 [signal arg="SHARIK_SHOP"]
-jump Sharik_shop_timeline/
+jump Sharik_sharik_shop_timeline/

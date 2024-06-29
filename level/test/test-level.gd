@@ -22,6 +22,7 @@ func _ready():
 		sound_manager.survival_music_keys(), 
 		sound_manager.music_res
 	)
+	GlobalEventBus.player_arrived_to_level.emit(LevelManager.Levels.ABANDONED_FARM)
 	
 func _process(delta):
 	if(game_mode != null):

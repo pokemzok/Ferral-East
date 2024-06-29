@@ -10,15 +10,16 @@ var shop_items: ArrayCollection
 var player_can_shop = false
 
 func _ready():
-	connect_events()
+	handle_events()
 	hide_items()
 	
 func _process(delta):
 	on_shop_items_loading()
 
-func connect_events():
+func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_READY_TO_BUY, on_player_ready_to_buy)
-
+	GlobalEventBus.player_arrived_to_level.emit(LevelManager.Levels.SHARIK_SHOP)
+	
 func on_player_ready_to_buy():
 	show_items()
 

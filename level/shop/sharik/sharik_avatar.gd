@@ -4,9 +4,8 @@ extends StaticBody2D
 
 static var character_name = CharacterNames.SHARIK
 
-static var conversation_timeline = "Sharik_exit_shop"
 # TODO:
-# 1. Refactor dialogic,  enhance current API to be aware of user state (like character in shop or something)
+# 1. Check if dialogic works as suposed (had some problem with a timelines and didn't had time to test)
 # 2. Finish implementing buying of those three items (also make them look different on hover.
 
 func _ready():
@@ -28,4 +27,4 @@ func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			input_pickable = false
-			GlobalEventBus.start_conversation_with.emit(conversation_timeline)
+			GlobalEventBus.start_conversation_with.emit(character_name)

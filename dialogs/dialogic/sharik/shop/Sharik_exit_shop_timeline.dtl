@@ -5,11 +5,12 @@ The creature is looking at you with curiosity. #id:4c
 	jump understandable
 label understandable
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Can't blame ya #id:4e
+sharik: Don't make me scratch you again, pal. #id:4e
 [signal arg="PLAYER_READY_TO_BUY"]
 [end_timeline]
 label thank_you_bye
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: Thank you and see you next time. #id:3e
+sharik: See you later, aligator. #id:3e
+set {player.had_intro_talk_in_shop} = false
 [signal arg="PLAYER_LEFT_SHOP"]
 [end_timeline]
