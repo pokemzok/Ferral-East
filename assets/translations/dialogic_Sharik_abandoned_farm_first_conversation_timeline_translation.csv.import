@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://csxrc66f40jn"
+
+[deps]
+
+files=["res://assets/translations/dialogic_Sharik_abandoned_farm_first_conversation_timeline_translation.en.translation"]
+
+source_file="res://assets/translations/dialogic_Sharik_abandoned_farm_first_conversation_timeline_translation.csv"
+dest_files=["res://assets/translations/dialogic_Sharik_abandoned_farm_first_conversation_timeline_translation.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

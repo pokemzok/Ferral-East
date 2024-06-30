@@ -85,8 +85,8 @@ jump bye
 label take_me_back
 sharik: Sure. #id:40
 label bye
+set {sharik.shop_state} = "VISITED"
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-set {player.had_intro_talk_in_shop} = 
 sharik: So long, partner. #id:41
 [signal arg="PLAYER_LEFT_SHOP"]
 [end_timeline]

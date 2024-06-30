@@ -1,0 +1,10 @@
+keys,en
+Text/4f/text,You know the drill. Just say the word if you wanna buy.
+Choice/50/text,Take me to your shop
+Choice/50/disabled_text,
+Choice/51/text,I am good
+Choice/51/disabled_text,
+Choice/52/text,The word
+Choice/52/disabled_text,
+Text/53/text,Smartass...
+Text/54/text,Something is happening!

@@ -1,13 +1,13 @@
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
-sharik: You know the drill. Just say the word if you wanna buy.
-- Take me to your shop
+sharik: You know the drill. Just say the word if you wanna buy. #id:4f
+- Take me to your shop #id:50
 	jump go_to_shop
-- I am good
+- I am good #id:51
 	[end_timeline]
-- The word
-	sharik: Smartass...
+- The word #id:52
+	sharik: Smartass... #id:53
 	jump go_to_shop
 label go_to_shop
-Something is happening!
+Something is happening! #id:54
 [signal arg="SHARIK_SHOP"]
 jump Sharik_sharik_shop_timeline/

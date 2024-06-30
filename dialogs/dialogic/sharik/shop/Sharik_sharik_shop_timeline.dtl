@@ -1,6 +1,5 @@
-if {player.had_intro_talk_in_shop} == true:
+if {sharik.shop_state} == "CONVERSATION":
 	jump Sharik_exit_shop_timeline/
 else:
-	set {player.was_in_shop} = true
-	set {player.had_intro_talk_in_shop} = true
+	set {sharik.shop_state} = "CONVERSATION"
 	jump Sharik_shop_first_conversation_timeline/

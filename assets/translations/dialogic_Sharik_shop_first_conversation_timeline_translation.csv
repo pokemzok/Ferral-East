@@ -1,0 +1,54 @@
+keys,en
+Text/23/text,Welcome to my realm. How do you like it here?
+Choice/24/text,Kind of  trippy
+Choice/24/disabled_text,
+Choice/25/text,Pretty cosy actually...
+Choice/25/disabled_text,
+Choice/26/text,Where the hell are we?
+Choice/26/disabled_text,
+Text/27/text,Really? Well I guess lack of zombies might be shocking for the folks like you.
+Text/28/text,"I think so too, though in the beginning it was hard to get used to."
+Text/29/text,In a world I claimed as my own.
+Choice/42/text,Who are you?
+Choice/42/disabled_text,
+Choice/2a/text,What is this place?
+Choice/2a/disabled_text,
+Choice/2b/text,Why did you take me here?
+Choice/2b/disabled_text,
+Choice/2c/text,Can I go back?
+Choice/2c/disabled_text,
+Text/43/text,My name is Sharik. I am a cat.
+Choice/44/text,A cat?
+Choice/44/disabled_text,
+Choice/45/text,What is cat?
+Choice/45/disabled_text,
+Choice/46/text,My name is Surbi.
+Choice/46/disabled_text,
+Text/47/text,I know.
+Choice/48/text,You know?
+Choice/48/disabled_text,
+Text/49/text,Yes.
+Text/4a/text,Yes.
+Text/4b/text,A cat is a cat.
+Text/2d/text,A destroyed residence of a goddess. A distorted home. Here it is better not to rely on your eyes too much. They will deceive you.
+Text/2e/text,"Because you wanted to see ""something"". Isn't THIS quite something?"
+Choice/2f/text,It sure is.
+Choice/2f/disabled_text,
+Choice/30/text,I want to go back!
+Choice/30/disabled_text,
+Text/31/text,"I am glad, I did not misjudge you. Say, do you want to spend some coin?"
+Choice/32/text,Why do  you  want  coin?
+Choice/32/disabled_text,
+Choice/33/text,I do.
+Choice/33/disabled_text,
+Choice/34/text,I don't.
+Choice/34/disabled_text,
+Text/35/text,"Because I don't want to starve to death, thank you very much."
+Choice/36/text,I can spend some coin.
+Choice/36/disabled_text,
+Choice/37/text,I don't want to spend money.
+Choice/37/disabled_text,
+Text/38/text,"Terrific,because I have a few items to sell. Here take a look."
+Text/3f/text,Then I guess we have nothing more to talk about.
+Text/40/text,Sure.
+Text/41/text,"So long, partner."

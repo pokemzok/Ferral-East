@@ -5,8 +5,8 @@ extends StaticBody2D
 static var character_name = CharacterNames.SHARIK
 
 # TODO:
-# 1. Check if dialogic works as suposed (had some problem with a timelines and didn't had time to test)
-# 2. Finish implementing buying of those three items (also make them look different on hover.
+# 1. Finish implementing buying of those three items.
+# 2. Change textures for revolver_parts (it might be even called broken revolver).
 
 func _ready():
 	connect_events()

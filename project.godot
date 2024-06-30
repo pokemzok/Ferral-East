@@ -62,13 +62,13 @@ text/autopauses={}
 variables={
 "player": {
 "attacked_trader_count": 0,
-"had_intro_talk_in_shop": false,
 "was_in_shop": false
 },
 "sharik": {
 "has_introduced_to_player": false,
 "nr_of_times_met_player": 0,
-"nr_of_times_scratched_player": 0
+"nr_of_times_scratched_player": 0,
+"shop_state": "NEVER_VISITED"
 },
 "sharik_display_name": "Creature",
 "sharik_shop": {
@@ -87,7 +87,7 @@ choices/hotkey_behaviour=0
 translation/intern/save_mode=0
 translation/intern/file_mode=1
 translation/intern/translation_folder="res://assets/translations"
-translation/id_counter=78
+translation/id_counter=84
 
 [display]
 
@@ -155,4 +155,4 @@ dialogic_default_action={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation", "res://assets/translations/dialogic_character_translations.en.translation", "res://assets/translations/dialogic_Sharik_timeline_translation.en.translation", "res://menu/main/translations.pl.translation", "res://menu/main/translations.en.translation", "res://assets/translations/dialogic_buble_timeline_translation.en.translation", "res://assets/translations/dialogic_Sharik_shop_timeline_translation.en.translation", "res://assets/translations/dialogic_Sharik_sale_timeline_translation.en.translation")
+locale/translations=PackedStringArray("res://assets/translations/translations.en.translation", "res://assets/translations/translations.pl.translation", "res://assets/translations/dialogic_character_translations.en.translation", "res://assets/translations/dialogic_Sharik_timeline_translation.en.translation", "res://menu/main/translations.pl.translation", "res://menu/main/translations.en.translation", "res://assets/translations/dialogic_buble_timeline_translation.en.translation", "res://assets/translations/dialogic_Sharik_shop_timeline_translation.en.translation", "res://assets/translations/dialogic_Sharik_sale_timeline_translation.en.translation", "res://assets/translations/dialogic_Sharik_exit_shop_timeline_translation.en.translation")
