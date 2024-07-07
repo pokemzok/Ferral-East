@@ -14,9 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cpfiqo1br6bxt" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/land_5.png" id="10_8y3gr"]
 [ext_resource type="PackedScene" uid="uid://cp15meww1af4h" path="res://character/trader/trader_spawn.tscn" id="13_1cpgp"]
 [ext_resource type="PackedScene" uid="uid://d1h7wu5r8c0qh" path="res://item/drop_items_factory.tscn" id="13_rg3mj"]
-[ext_resource type="PackedScene" uid="uid://cf2bnf2wtv7ep" path="res://player/player.tscn" id="13_rh5vn"]
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="14_jhdgt"]
 [ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="15_ifqbo"]
+[ext_resource type="PackedScene" uid="uid://bd62e5rcq0nxm" path="res://player/player_hud.tscn" id="15_top3i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ebigg"]
 texture = ExtResource("2_0wx2i")
@@ -9171,8 +9171,6 @@ position = Vector2(1173, 446)
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(897, 457)
 
-[node name="Player" parent="PlayerSpawn" instance=ExtResource("13_rh5vn")]
-
 [node name="TilesAboveCharacters" type="TileMap" parent="."]
 z_index = 1
 tile_set = SubResource("TileSet_y61wt")
@@ -9192,6 +9190,8 @@ polygon = PackedVector2Array(162, 1029, 164, 1022, 363, 1025, 596, 1022, 702, 10
 
 [node name="House" type="CollisionPolygon2D" parent="Colisions"]
 polygon = PackedVector2Array(1660, 657, 1661, 757, 1356, 755, 1343, 724, 1337, 474, 1334, 370, 1326, 248, 1657, 251, 1669, 263, 1666, 510)
+
+[node name="PlayerHud" parent="." instance=ExtResource("15_top3i")]
 
 [node name="LevelMusicPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true

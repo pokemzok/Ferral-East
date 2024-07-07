@@ -14,14 +14,12 @@ enum Levels {
 
 var level_names = {
 	Levels.TEST: "test",
-	Levels.HOMETOWN: "hometown",
 	Levels.ABANDONED_FARM: "abandoned_farm",
 	Levels.SHARIK_SHOP: "sharik_shop"
 }
 
 var level_paths = {
 	Levels.TEST: "res://level/test/test-level.tscn",	
-	Levels.HOMETOWN: "res://level/hometown/hometown.tscn",	
 	Levels.SHARIK_SHOP: "res://level/shop/sharik/sharik_shop.tscn",	
 }
 

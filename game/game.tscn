@@ -9,6 +9,8 @@
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node
 
+var player_factory = PlayerFactory.new()
+var player
 var current_level_instance
 var current_level_resource: SingleResource
 var shop_level_instance
@@ -84,8 +86,7 @@ func on_shop_loading(delta):
 	if(shop_level_resource.is_loaded() && player_ready_for_shop_level &&  shop_transition_delay.is_lte_zero()):
 		show_shop_transition()		
 		var shop_resource = shop_level_resource.get_loaded_resource()
-		shop_level_instance = shop_resource.instantiate()
-		shop_level_instance.after_init(statistics)
+		shop_level_instance = shop_resource.instantiate().with_data(player, statistics)
 		input_cooldown.assign_max_value()
 	else:
 		shop_level_resource.load_resource()
@@ -119,7 +120,7 @@ func on_resource_loading():
 func on_level_loading():
 	if( current_level_instance == null && current_level_resource.is_loaded()):
 		var level = current_level_resource.get_loaded_resource()
-		current_level_instance = level.instantiate()
+		current_level_instance = level.instantiate().with_data(player)
 		add_child(current_level_instance)
 		loading_screen.hide()	
 	else:
@@ -155,6 +156,7 @@ func on_menu_toggle():
 func on_start():
 	get_tree().paused = false	
 	menu.hide()
+	player = player_factory.create()
 	current_level_resource = SingleResource.new(level_manager.Levels.TEST, level_manager.level_paths)
 	loading_screen.show()
 	dialogic_wrapper.clear()
@@ -173,7 +175,8 @@ func on_quit_to_menu():
 func clean_up_after_player():
 	if (shop_level_instance != null):
 		on_player_left_shop()
-	current_level_instance.destroy()		
+	current_level_instance.destroy()
+	player = null		
 	death_menu.hide()
 	
 func on_player_death():

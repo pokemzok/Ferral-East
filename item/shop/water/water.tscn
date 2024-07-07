@@ -35,15 +35,17 @@ radius = 35.0
 height = 140.0
 
 [node name="Water" type="StaticBody2D"]
-scale = Vector2(2.5, 2.5)
 script = ExtResource("1_xnlxv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_h6up6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 6)
+scale = Vector2(2.5, 2.5)
 shape = SubResource("CapsuleShape2D_t6udo")
 
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

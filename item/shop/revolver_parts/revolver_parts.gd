@@ -1,4 +1,4 @@
-extends Item
+extends ShopItem
 
 @onready var animations = $AnimatedSprite2D
 

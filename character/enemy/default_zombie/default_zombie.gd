@@ -84,7 +84,7 @@ func growl_on(delta):
 func hunt_player(delta):
 	if player != null:
 		on_walk()
-		look_at(player.position)
+		look_at(player.global_position)
 		match path_finding_stategy:
 			stategy.PathFindingAlgorithm.DUMB_COLLIDE:
 				dumb_path_finding_collide(player, delta)

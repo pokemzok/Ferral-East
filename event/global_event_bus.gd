@@ -16,6 +16,7 @@ const MAIN_MENU_DISPLAYED = "main_menu_displayed"
 const MAIN_MENU_HIDDEN =  "main_menu_hidden"
 
 #player
+signal player_selected
 signal player_death
 signal player_hp_changed
 signal player_damaged
@@ -28,8 +29,9 @@ signal player_left_shop
 signal player_ready_to_buy
 signal player_teleported
 signal player_arrived_to_level
-
+signal player_clicked_shop_item
 # signal_names
+const PLAYER_SELECTED = "player_selected"
 const PLAYER_DEATH = "player_death"
 const PLAYER_HP_CHANGED = "player_hp_changed"
 const PLAYER_DAMAGED = "player_damaged"
@@ -42,6 +44,7 @@ const PLAYER_LEFT_SHOP = "player_left_shop"
 const PLAYER_READY_TO_BUY = "player_ready_to_buy"
 const PLAYER_TELEPORTED = "player_teleported"
 const PLAYER_ARRIVED_TO_LEVEL = "player_arrived_to_level"
+const PLAYER_CLICKED_SHOP_ITEM = "player_clicked_shop_item"
 #trader
 signal trader_damaged
 #signal_names

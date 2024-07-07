@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc333nomukjgx"]
+
+[ext_resource type="Script" path="res://level/shop/purchase_info.gd" id="1_hm0oa"]
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="2_ppxd7"]
+
+[node name="PurchaseInfo" type="Node2D"]
+z_index = 1
+script = ExtResource("1_hm0oa")
+
+[node name="ThemeControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1921.0
+offset_bottom = 1084.0
+theme = ExtResource("2_ppxd7")
+
+[node name="Panel" type="Panel" parent="ThemeControl"]
+layout_mode = 0
+offset_right = 1007.0
+offset_bottom = 788.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.5
+offset_top = -79.0
+offset_right = 225.5
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CancelButton" type="Button" parent="ThemeControl/Panel/HBoxContainer"]
+layout_mode = 2
+text = "CANCEL"
+
+[node name="PurchaseButton" type="Button" parent="ThemeControl/Panel/HBoxContainer"]
+layout_mode = 2
+text = "PURCHASE"
+
+[connection signal="pressed" from="ThemeControl/Panel/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ThemeControl/Panel/HBoxContainer/PurchaseButton" to="." method="_on_purchase_button_pressed"]

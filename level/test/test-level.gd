@@ -10,6 +10,10 @@ var sound_manager = GameSoundManager.get_instance()
 @onready var level_victory_music_player = $LevelVictoryMusicPlayer
 @onready var loading_screen = $LoadingScreen
 
+func with_data(player):
+	$PlayerSpawn.add_child(player)
+	return self
+
 func _ready():
 	spawn_points = ArrayCollection.new(
 		[$EnemiesSpawn, $EnemiesSpawn2, $EnemiesSpawn3, $EnemiesSpawn4, $EnemiesSpawn5]
@@ -23,7 +27,7 @@ func _ready():
 		sound_manager.music_res
 	)
 	GlobalEventBus.player_arrived_to_level.emit(LevelManager.Levels.ABANDONED_FARM)
-	
+
 func _process(delta):
 	if(game_mode != null):
 		game_mode._process(delta)

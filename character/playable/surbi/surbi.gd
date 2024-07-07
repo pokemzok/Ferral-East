@@ -22,9 +22,6 @@ var item_collection = ArrayCollection.new([])
 @onready var audio_pool = $GameAmbientAudioPool
 @onready var monolog_bubble = $MonologBubble
 
-func after_external_init():
-	stats = SurbiStatsFactory.create()
-
 func _ready():
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
@@ -33,7 +30,10 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_MONOLOG, monolog_bubble.show_bubble)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEFT_SHOP, on_player_left_shop)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_ARRIVED_TO_LEVEL, on_new_level)
 
+func on_new_level(level: LevelManager.Levels):
+	stats.emit_information()
 
 func on_animation_finished():
 	if animations.animation == "teleporting":

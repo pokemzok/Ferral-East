@@ -24,8 +24,11 @@ func _init(
 	self.stunned_timer = stunned_timer
 	self.reload_timer = reload_timer
 	self.health_points = health_points
-	GlobalEventBus.player_hp_changed.emit(health_points.value)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, increment_kill_count)
+	emit_information()
+
+func emit_information():
+	GlobalEventBus.player_hp_changed.emit(health_points.value)
 
 func apply_item(item: Item) -> bool:
 	if(item_actions.has(item.get_item_type())):

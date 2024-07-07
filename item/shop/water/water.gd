@@ -1,4 +1,4 @@
-extends Item
+extends ShopItem
 
 @onready var animations = $AnimatedSprite2D
 
@@ -12,3 +12,4 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	animations.play("default")
+
