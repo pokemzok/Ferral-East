@@ -1,5 +1,7 @@
 extends Node2D
 @onready var items_spawns = $ItemSpawns
+@onready var purchase_info = $PurchaseInfo
+
 var spawn_slots = 3
 var statistics: GameStatistics
 var drawn_chance = 0
@@ -23,9 +25,6 @@ func _ready():
 func _process(delta):
 	on_shop_items_loading()
 
-func add_player(player):
-	self.player = player
-
 #FIXME I think I need to somehow add here player node as well, so the player can physically buy shit
 #FIXME it seems like a correct idea, since player has a wallet and would be spending money with it.
 func handle_events():
@@ -34,6 +33,7 @@ func handle_events():
 	
 func on_player_ready_to_buy():
 	show_items()
+	purchase_info.for_player(player)
 
 func show_items():
 	items_spawns.show()
