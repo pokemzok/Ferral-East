@@ -4,6 +4,7 @@ extends ShopItem
 
 func _ready():
 	type = ItemType.EFFECT
+	item_name = "CATNIP"
 	price = 5
 	input_pickable = true
 	
