@@ -8,7 +8,7 @@ var player_wallet
 @onready var item_price_label = %ItemPriceLabel
 @onready var item_description_label = %ItemDescriptionLabel
 
-var coins_image = "[img]res://player/hud-coin.png[/img]" #FIXME move this to assets since it is common now
+var coins_image = "[img]res://assets/hud/hud-coin.png[/img]"
 var outline_prefix="[outline_color=black][outline_size=10]"
 var outline_suffix= "[/outline_size][/outline_color]"
 
@@ -32,7 +32,11 @@ func on_purchase_info(item: ShopItem):
 func _on_cancel_button_pressed():
 	clean_up()
 
+# TODO buy with player without worrying about wallet capacity
+# TODO disable buy button if user does not have enough coins
+# TODO add also check if user can buy so if for some reason user buypass disabled button, it still would not buy
 func _on_purchase_button_pressed():
+	player_wallet.pay(purchased_item)
 	clean_up()
 
 func clean_up():

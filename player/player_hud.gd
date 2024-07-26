@@ -14,8 +14,8 @@ var pausable = PausableNodeBehaviour.new(self)
 @onready var sfx_player = $SFXPlayer
 var game_sound_manager = GameSoundManager.get_instance()
 
-var projectiles_image= "[img]res://player/hud-bullet.png[/img]"
-var coins_image = "[img]res://player/hud-coin.png[/img]"
+var projectiles_image= "[img]res://assets/hud/hud-bullet.png[/img]"
+var coins_image = "[img]res://assets/hud/hud-coin.png[/img]"
 var outline_prefix="[outline_color=black][outline_size=10]"
 var level_info_color_prefix="[color=green]"
 var level_info_color_suffix="[/color]"

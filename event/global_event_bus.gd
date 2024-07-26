@@ -23,6 +23,7 @@ signal player_damaged
 signal player_used_projectile_weapon
 signal player_leveled_up
 signal player_collected_coins
+signal player_bought_item
 signal player_monolog
 signal player_enters_shop
 signal player_left_shop
@@ -38,6 +39,7 @@ const PLAYER_DAMAGED = "player_damaged"
 const PLAYER_USED_PROJECTILE_WEAPON = "player_used_projectile_weapon"
 const PLAYER_LEVELED_UP = "player_leveled_up"
 const PLAYER_COLLECTED_COINS = "player_collected_coins"
+const PLAYER_BOUGHT_ITEM = "player_bought_item"
 const PLAYER_MONOLOG = "player_monolog"
 const PLAYER_ENTERS_SHOP = "player_enters_shop"
 const PLAYER_LEFT_SHOP = "player_left_shop"

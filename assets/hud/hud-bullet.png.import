@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c4akbpwkaf8ei"
-path="res://.godot/imported/hud-bullet.png-96db9651cc2efc254c8e39e8a392c2c4.ctex"
+path="res://.godot/imported/hud-bullet.png-6b97eedb91cde52d5183672c2282810f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/hud-bullet.png"
-dest_files=["res://.godot/imported/hud-bullet.png-96db9651cc2efc254c8e39e8a392c2c4.ctex"]
+source_file="res://assets/hud/hud-bullet.png"
+dest_files=["res://.godot/imported/hud-bullet.png-6b97eedb91cde52d5183672c2282810f.ctex"]
 
 [params]
 

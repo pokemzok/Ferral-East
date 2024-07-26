@@ -31,6 +31,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEFT_SHOP, on_player_left_shop)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ARRIVED_TO_LEVEL, on_new_level)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_picked_item)
 
 func on_new_level(level: LevelManager.Levels):
 	stats.emit_information()
@@ -171,14 +172,16 @@ func on_hurtbox_entered(body):
 		if not enemies_in_player_collision_area.has(body):
 			enemies_in_player_collision_area.append(body)
 	elif body.is_in_group("item"):
-		on_consume_item(body)
+		on_picked_item(body)
 		
-
-func on_consume_item(item: Item):
+# FIXME consumables which are not immediately applied
+# TODO I can have queue of consumables, and rotate those with a q and e button, then consume with a tab.
+func on_picked_item(item: Item):
+	print("received item")
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
 	stats.apply_item(item)
 	var weapon_modified = weapon.apply_item(item)
-	wallet.apply_item(item)
+	wallet.add(item)
 	if (!item.is_coin()):
 		item_collection.append(item.get_item_type())
 	item.queue_free()

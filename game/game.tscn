@@ -86,6 +86,7 @@ func on_shop_loading(delta):
 	if(shop_level_resource.is_loaded() && player_ready_for_shop_level &&  shop_transition_delay.is_lte_zero()):
 		show_shop_transition()		
 		var shop_resource = shop_level_resource.get_loaded_resource()
+		# FIXME somehting wrong here (happens when user goes to the shop for the second time, player referene dos no pass through)
 		shop_level_instance = shop_resource.instantiate().with_data(player, statistics)
 		input_cooldown.assign_max_value()
 	else:

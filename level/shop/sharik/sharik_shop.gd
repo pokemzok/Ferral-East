@@ -25,8 +25,6 @@ func _ready():
 func _process(delta):
 	on_shop_items_loading()
 
-#FIXME I think I need to somehow add here player node as well, so the player can physically buy shit
-#FIXME it seems like a correct idea, since player has a wallet and would be spending money with it.
 func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_READY_TO_BUY, on_player_ready_to_buy)
 	GlobalEventBus.player_arrived_to_level.emit(LevelManager.Levels.SHARIK_SHOP)
