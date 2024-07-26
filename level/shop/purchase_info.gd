@@ -22,15 +22,12 @@ func for_player(_player):
 	self.player_wallet = _player.wallet
 	coins_left_label.text = coins_image+outline_prefix+" x "+str(player_wallet.coins_nr)+outline_suffix
 
-
-
-# FIXME currency translation, better formating
 func on_purchase_info(item: ShopItem):
 	show()
 	purchased_item = item
 	item_name_label.text = tr(purchased_item.item_name)
 	item_description_label.text = tr(purchased_item.item_name+"_DESCRIPTION")
-	item_price_label.text = tr(str(purchased_item.price))
+	item_price_label.text = tr("CURRENCY_AMOUNT").format({"amount": str(purchased_item.price)})
 
 func _on_cancel_button_pressed():
 	clean_up()
