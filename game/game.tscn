@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp4uapunwa8i1"]
+[gd_scene load_steps=8 format=3 uid="uid://cp4uapunwa8i1"]
 
 [ext_resource type="PackedScene" uid="uid://djcsnso72bwod" path="res://menu/main/main_menu.tscn" id="1_iv2hg"]
 [ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="2_fckys"]
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="3_eks8k"]
 [ext_resource type="PackedScene" uid="uid://bhfp2m5ktia7t" path="res://dialogs/dialogic/dialogic_wrapper.tscn" id="4_xeq7e"]
 [ext_resource type="PackedScene" uid="uid://dvucf61iw46bt" path="res://game/statistics/game_statistics.tscn" id="5_v7gvh"]
+[ext_resource type="PackedScene" uid="uid://dv0ufucow6wwr" path="res://game/effects/game_effects.tscn" id="6_v008q"]
 
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node
@@ -121,7 +122,7 @@ func on_level_loading():
 	if( current_level_instance == null && current_level_resource.is_loaded()):
 		var level = current_level_resource.get_loaded_resource()
 		current_level_instance = level.instantiate().with_data(player)
-		add_child(current_level_instance)
+		shop_transition_canvas.add_sibling(current_level_instance)	
 		loading_screen.hide()	
 	else:
 		current_level_resource.load_resource()		
@@ -190,7 +191,7 @@ func on_player_enters_shop(shop_level: LevelManager.Levels):
 
 func on_player_left_shop():
 	if (shop_level_instance != null):
-		add_child(current_level_instance)
+		shop_transition_canvas.add_sibling(current_level_instance)
 		shop_level_instance.hide()
 		remove_child(shop_level_instance)
 		current_level_instance.show()
@@ -226,3 +227,5 @@ visible = false
 offset_right = 1923.0
 offset_bottom = 1083.0
 color = Color(0.67451, 0.0666667, 0.807843, 1)
+
+[node name="GameEffects" parent="." instance=ExtResource("6_v008q")]

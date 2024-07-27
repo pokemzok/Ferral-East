@@ -10,6 +10,7 @@ enum ItemType {
 }
 
 enum ItemName {
+	NO_NAME,
 	COIN,
 	PENTAGRAM,
 	CYLINDER,
@@ -19,6 +20,7 @@ enum ItemName {
 
 @export var type = ItemType.NONE
 @export var price = 0
+@export var id = ItemName.NO_NAME
 
 func get_item_type() -> ItemType:
 	return type

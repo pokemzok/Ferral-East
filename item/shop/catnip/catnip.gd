@@ -4,6 +4,7 @@ extends ShopItem
 
 func _ready():
 	type = ItemType.CONSUMABLE
+	id = ItemName.CATNIP
 	item_name = "CATNIP"
 	price = 5
 	input_pickable = true

@@ -35,6 +35,10 @@ radius = 64.195
 
 [node name="Catnip" type="StaticBody2D"]
 script = ExtResource("1_eognb")
+item_name = null
+type = null
+price = null
+id = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sqw17")
