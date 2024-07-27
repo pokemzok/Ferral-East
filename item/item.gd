@@ -6,7 +6,7 @@ enum ItemType {
 	COIN,
 	HEAL,
 	BULLET_UPGRADE,
-	EFFECT
+	CONSUMABLE
 }
 
 enum ItemName {
@@ -25,3 +25,6 @@ func get_item_type() -> ItemType:
 
 func is_coin() -> bool:
 	return type == ItemType.COIN
+
+func is_consumable() -> bool:
+	return type == ItemType.CONSUMABLE

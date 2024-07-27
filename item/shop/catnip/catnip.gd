@@ -3,7 +3,7 @@ extends ShopItem
 @onready var animations = $AnimatedSprite2D
 
 func _ready():
-	type = ItemType.EFFECT
+	type = ItemType.CONSUMABLE
 	item_name = "CATNIP"
 	price = 5
 	input_pickable = true

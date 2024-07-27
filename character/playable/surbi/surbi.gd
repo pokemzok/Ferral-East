@@ -15,7 +15,9 @@ var run_audio = GameSoundManager.Sounds.PLAYER_RUN
 var pickup_audio = GameSoundManager.Sounds.PLAYER_PICKUP_ITEM
 var teleport_audio = GameSoundManager.Sounds.TELEPORT
 var warp_audio = GameSoundManager.Sounds.WARP
-var item_collection = ArrayCollection.new([])
+var items_collection = ArrayCollection.new([])
+var consumables_collection = ArrayCollection.new([])
+
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
@@ -175,16 +177,24 @@ func on_hurtbox_entered(body):
 		on_picked_item(body)
 		
 # FIXME consumables which are not immediately applied
-# TODO I can have queue of consumables, and rotate those with a q and e button, then consume with a tab.
-func on_picked_item(item: Item):
-	print("received item")
+# TODO I can have queue of consumables, and rotate those with a q and e button,
+# then consume with a tab.
+func on_picked_item(_item: Item):
+	#FIXME does not correctly duplicates an item, finetune this and then come back to testing
+	var item = _item.duplicate()
+	_item.queue_free()
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
 	stats.apply_item(item)
 	var weapon_modified = weapon.apply_item(item)
 	wallet.add(item)
 	if (!item.is_coin()):
-		item_collection.append(item.get_item_type())
-	item.queue_free()
+		items_collection.append(item.get_item_type())
+
+	if (item.is_consumable()):
+		consumables_collection.append(item) # FIXME do much more with consumables
+	else:		
+		item.queue_free()
+
 	if (weapon_modified):
 		start_reloading()
 		

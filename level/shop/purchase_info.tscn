@@ -38,10 +38,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ne2yn")
 
 [node name="WalletContainer" type="HBoxContainer" parent="ThemeControl/Panel"]
 layout_mode = 0
-offset_left = 853.0
-offset_top = 49.0
+offset_left = 809.0
+offset_top = 48.0
 offset_right = 966.0
-offset_bottom = 100.0
+offset_bottom = 99.0
 
 [node name="PlayerWalletCoinsLabel" type="RichTextLabel" parent="ThemeControl/Panel/WalletContainer"]
 unique_name_in_owner = true
@@ -109,6 +109,7 @@ layout_mode = 2
 text = "CANCEL"
 
 [node name="PurchaseButton" type="Button" parent="ThemeControl/Panel/ButtonsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "PURCHASE"
 

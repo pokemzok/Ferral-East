@@ -4,7 +4,7 @@ var coins_nr = 0
 var rare_coins_nr =0
 
 func _init():
-	coins_nr = 0
+	coins_nr = 39 # FIXME revert to 0
 	rare_coins_nr =0
 
 func add(item: Item):
@@ -12,8 +12,8 @@ func add(item: Item):
 		coins_nr += 1	
 		GlobalEventBus.player_collected_coins.emit(coins_nr)
 
-# FIXME revert after tests
 func pay(item: ShopItem):
-	#if(coins_nr >= item.price):
-	#	coins_nr -= item.price
-		GlobalEventBus.player_bought_item.emit(item) 	
+	if(coins_nr >= item.price):
+		coins_nr -= item.price
+		GlobalEventBus.player_bought_item.emit(item)
+		GlobalEventBus.player_collected_coins.emit(coins_nr)
