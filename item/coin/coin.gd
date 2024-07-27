@@ -4,6 +4,7 @@ extends Item
 
 func _ready():
 	type = ItemType.COIN
+	id = ItemName.COIN
 	price = 1
 	
 func _process(delta):

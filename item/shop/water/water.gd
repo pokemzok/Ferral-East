@@ -5,6 +5,7 @@ extends ShopItem
 func _ready():
 	type = ItemType.HEAL
 	item_name = "WATER"
+	id = ItemName.WATER
 	price = 3
 	input_pickable = true
 

@@ -8,6 +8,7 @@ extends ShopItem
 func _ready():
 	type = ItemType.BULLET_UPGRADE
 	item_name = "REVOLVER_PARTS"
+	id = ItemName.CYLINDER
 	price = 10
 	input_pickable = true
 

@@ -19,7 +19,9 @@ func handle_events():
 func on_player_bought_item(item: ShopItem):
 	if (item.id == Item.ItemName.CATNIP):
 		slow_time()
-		
+	
+# FIXME use tweens instead so I can gradually slow down time and resume it https://youtu.be/KB1rFrnN3-U?si=Rc2hQJ-qTabdIchY&t=83
+# FIXME LSD colors		
 func slow_time():
 	bullet_timer.wait_time = 6
 	bullet_timer.start()
