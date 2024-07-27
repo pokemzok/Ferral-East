@@ -1,5 +1,6 @@
 For later:
-1. catnip (kocimiautka) - can be bough from Sharik. Heals + make you high (like some LSD colors for a while).
+1. catnip (kocimiautka) - can be bough from Sharik. Make you high (like some LSD colors for a while).
 2. Unlimited Revolver - can be bought from Sharik. This revolver does not limit upgrades. You can have as much as you want.
 3. Sercya(Sercja) - Mana Potion + make you drunk for a while
 4. Profet Sercya - Looks like mana potion, but when encountered, will speak: Don't drink me, mate! On drink ocasionally will speak lots of nonsence in your head. Like I want a list of at least 20 nonsences. Might react to player actions. Text should appear in italic above Player head.  It will always start from: Mate, you really shouldn't drank me, now you stuck with me for live.
+5. Stone - description (a nice stone I've found. It is quite big! Want some?). Costs one coin. Each stone slows characters down. Sharik can talk to player after collecting three stones. Look pal, I know you like stones, but you can barely move carying them around. If you want, I can keep them. I'll sell them again to you, if you would like to... After that price for stone goes triple (it costs 3 Gold). It becomes expensive stone. Description changes: it is a stone, but more expensive. They are also heavier. If Surbi again collects 3 and give them back to Sharik, Surbi would have his speed permanently increased by 15%, because of the weight training.

@@ -1,6 +1,9 @@
 extends Node2D
 @onready var items_spawns = $ItemSpawns
 @onready var purchase_info = $PurchaseInfo
+@onready var audio_pool = $GameAmbientAudioPool
+var sound_manager = GameSoundManager.get_instance()
+var purchase_audio = GameSoundManager.Sounds.PURCHASE
 
 var spawn_slots = 3
 var statistics: GameStatistics
@@ -27,11 +30,15 @@ func _process(delta):
 
 func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_READY_TO_BUY, on_player_ready_to_buy)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_player_bought_item)
 	GlobalEventBus.player_arrived_to_level.emit(LevelManager.Levels.SHARIK_SHOP)
 	
 func on_player_ready_to_buy():
 	show_items()
 	purchase_info.for_player(player)
+
+func on_player_bought_item(item):
+	audio_pool.play_sound_effect(purchase_audio)
 
 func show_items():
 	items_spawns.show()

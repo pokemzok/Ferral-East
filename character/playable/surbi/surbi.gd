@@ -180,7 +180,6 @@ func on_hurtbox_entered(body):
 # TODO I can have queue of consumables, and rotate those with a q and e button,
 # then consume with a tab.
 func on_picked_item(_item: Item):
-	#FIXME does not correctly duplicates an item, finetune this and then come back to testing
 	var item = _item.duplicate()
 	_item.queue_free()
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)

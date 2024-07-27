@@ -17,8 +17,8 @@ enum ItemName {
 	CATNIP
 }
 
-var type = ItemType.NONE
-var price = 0
+@export var type = ItemType.NONE
+@export var price = 0
 
 func get_item_type() -> ItemType:
 	return type

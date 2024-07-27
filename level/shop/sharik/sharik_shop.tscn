@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://83lvftqvdbs6"]
+[gd_scene load_steps=7 format=3 uid="uid://83lvftqvdbs6"]
 
 [ext_resource type="Script" path="res://level/shop/sharik/sharik_shop.gd" id="1_cfege"]
 [ext_resource type="Texture2D" uid="uid://dxpged1l78n6c" path="res://level/shop/sharik/sharik-shop.png" id="2_1rq81"]
 [ext_resource type="PackedScene" uid="uid://dwoov5krbdh6v" path="res://level/shop/sharik/sharik_avatar.tscn" id="3_7s4s0"]
 [ext_resource type="AudioStream" uid="uid://5r4y6b5eycub" path="res://audio/background_music/sharik-shop.mp3" id="3_kr017"]
 [ext_resource type="PackedScene" uid="uid://dc333nomukjgx" path="res://level/shop/purchase_info.tscn" id="5_4yfew"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="5_v8vlb"]
 
 [node name="SharikShop" type="Node2D"]
 script = ExtResource("1_cfege")
@@ -31,6 +32,8 @@ position = Vector2(1248, 856)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kr017")
 autoplay = true
+
+[node name="GameAmbientAudioPool" parent="." instance=ExtResource("5_v8vlb")]
 
 [node name="PurchaseInfo" parent="." instance=ExtResource("5_4yfew")]
 position = Vector2(482, 145)

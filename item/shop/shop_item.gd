@@ -1,7 +1,7 @@
 class_name ShopItem
 extends Item
 
-var item_name = ""
+@export var item_name = ""
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bd62e5rcq0nxm"]
 
-[ext_resource type="Script" path="res://player/player_hud.gd" id="1_y8eoh"]
+[ext_resource type="Script" path="res://player/hud/player_hud.gd" id="1_y8eoh"]
 [ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="2_ndj7i"]
 
 [node name="Hud" type="CanvasLayer"]
