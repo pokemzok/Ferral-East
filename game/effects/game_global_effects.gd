@@ -21,8 +21,8 @@ func on_player_bought_item(item: ShopItem):
 	if (item.id == Item.ItemName.CATNIP):
 		slow_time()
 	
-# FIXME use tweens instead so I can gradually slow down time and resume it https://youtu.be/KB1rFrnN3-U?si=Rc2hQJ-qTabdIchY&t=83
 # FIXME LSD colors		
+# TODO: I would need to use shader like they use it on this tutorial https://www.youtube.com/watch?v=DlwyfdDOxLc
 func slow_time():
 	bullet_time_tween = clear_paralel_tween(bullet_time_tween)
 	bullet_time_tween.tween_property(Engine, "time_scale", 0.5, 0.5)

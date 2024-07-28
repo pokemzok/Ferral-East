@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dv0ufucow6wwr"]
-
-[ext_resource type="Script" path="res://game/effects/game_effects.gd" id="1_4ic0g"]
-
-[node name="GameEffects" type="Node2D"]
-script = ExtResource("1_4ic0g")
-
-[node name="BulletTimer" type="Timer" parent="."]
-wait_time = 5.0

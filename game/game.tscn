@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="3_eks8k"]
 [ext_resource type="PackedScene" uid="uid://bhfp2m5ktia7t" path="res://dialogs/dialogic/dialogic_wrapper.tscn" id="4_xeq7e"]
 [ext_resource type="PackedScene" uid="uid://dvucf61iw46bt" path="res://game/statistics/game_statistics.tscn" id="5_v7gvh"]
-[ext_resource type="PackedScene" uid="uid://dv0ufucow6wwr" path="res://game/effects/game_effects.tscn" id="6_v008q"]
+[ext_resource type="PackedScene" uid="uid://dv0ufucow6wwr" path="res://game/effects/game_global_effects.tscn" id="6_v008q"]
 
 [sub_resource type="GDScript" id="GDScript_3slsy"]
 script/source = "extends Node
@@ -228,4 +228,4 @@ offset_right = 1923.0
 offset_bottom = 1083.0
 color = Color(0.67451, 0.0666667, 0.807843, 1)
 
-[node name="GameEffects" parent="." instance=ExtResource("6_v008q")]
+[node name="GameGlobalEffects" parent="." instance=ExtResource("6_v008q")]
