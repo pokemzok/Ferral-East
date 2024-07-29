@@ -4,6 +4,7 @@ var pausable = PausableNodeBehaviour.new(self)
 var weapon = Revolver.new()
 var stats: PlayerStats = SurbiStatsFactory.create()
 var wallet: Wallet = Wallet.new()
+var consumables_inventory: PlayerInventory = PlayerInventory.new()
 var enemies_in_player_collision_area =  []
 var is_dead = false
 var is_teleporting = false
@@ -16,7 +17,6 @@ var pickup_audio = GameSoundManager.Sounds.PLAYER_PICKUP_ITEM
 var teleport_audio = GameSoundManager.Sounds.TELEPORT
 var warp_audio = GameSoundManager.Sounds.WARP
 var items_collection = ArrayCollection.new([])
-var consumables_collection = ArrayCollection.new([])
 
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
@@ -122,6 +122,10 @@ func on_reload(delta):
 		weapon.reload_with(self)
 		reloading = false
 		
+# TODO cooldown after consumables is used
+# TODO I can have queue of consumables, and rotate those with a q button,
+# TODO add tab key to configurations.
+# FIXME i need to pass player inventory to the HUD once, so it can keep object reference. That would happen on character creation	
 func on_player_actions(delta):
 	look_at(get_global_mouse_position())	
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -133,13 +137,15 @@ func on_player_actions(delta):
 		on_idle()	
 	if Input.is_action_just_pressed("attack") && stats.reload_timer.value <= 0:
 		attack()
-
-func knockback():
-	if (stats.invincible_frames.value < 1):
-		velocity = -velocity.normalized() * 5000
-		move_and_slide()
 	
-			
+	if (Input.is_action_just_pressed("consume")):
+		on_consume()		
+
+func on_consume():
+	var item = consumables_inventory.first()
+	if (item != null):
+		item.use()
+
 # Try different approach for animation for  Halina or Aneta (animation tree + animation player setup)
 func on_idle():
 	walking_audio_player.stop()
@@ -176,23 +182,22 @@ func on_hurtbox_entered(body):
 	elif body.is_in_group("item"):
 		on_picked_item(body)
 		
-# FIXME consumables which are not immediately applied
-# TODO I can have queue of consumables, and rotate those with a q and e button,
-# then consume with a tab.
-func on_picked_item(_item: Item):
-	var item = _item.duplicate()
-	_item.queue_free()
+func on_picked_item(item: Item):
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
 	stats.apply_item(item)
 	var weapon_modified = weapon.apply_item(item)
-	wallet.add(item)
 	if (!item.is_coin()):
 		items_collection.append(item.get_item_type())
+	else:
+		wallet.add(item)
 
 	if (item.is_consumable()):
-		consumables_collection.append(item) # FIXME do much more with consumables
-	else:		
-		item.queue_free()
+		var item_copy = item.duplicate()
+		var status = consumables_inventory.add(item_copy)
+		if (status == PlayerInventory.InsertStatus.INCREMENT):
+			item_copy.queue_free()
+	
+	item.queue_free()
 
 	if (weapon_modified):
 		start_reloading()

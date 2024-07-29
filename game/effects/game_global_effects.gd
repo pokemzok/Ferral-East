@@ -17,8 +17,7 @@ func _ready():
 	load_shaders()
 
 func handle_events():
-	# fixme I would actually need some player action instead
-	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_player_bought_item)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, on_player_consumed_item)
 
 func load_shaders():
 	var invert_shader = load(INVERT_SHADER_PATH)
@@ -29,7 +28,7 @@ func load_shaders():
 	wave_line_filter_shader_material = ShaderMaterial.new()
 	wave_line_filter_shader_material.shader = wave_line_shader
 
-func on_player_bought_item(item: ShopItem):
+func on_player_consumed_item(item: ShopItem):
 	if (item.id == Item.ItemName.CATNIP):
 		slow_time()
 	

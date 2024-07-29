@@ -20,9 +20,9 @@ theme = ExtResource("2_ndj7i")
 
 [node name="ProjectilesCountContainer" type="HBoxContainer" parent="ThemeControl"]
 layout_mode = 0
-offset_left = -1849.0
+offset_left = -1847.0
 offset_top = 75.0
-offset_right = -1682.0
+offset_right = -1680.0
 offset_bottom = 176.0
 
 [node name="ProjectilesLeft" type="RichTextLabel" parent="ThemeControl/ProjectilesCountContainer"]
@@ -51,6 +51,13 @@ bbcode_enabled = true
 text = "[img]res://assets/hud//hud-coin.png[/img] [outline_color=black][outline_size=10]x0[/outline_size][/outline_color]"
 fit_content = true
 autowrap_mode = 0
+
+[node name="Consumables" type="HBoxContainer" parent="ThemeControl"]
+layout_mode = 2
+offset_left = -1847.0
+offset_top = 225.0
+offset_right = -1734.0
+offset_bottom = 276.0
 
 [node name="ScoreContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1
@@ -137,6 +144,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="PlayerLevelInfoContainer" type="VBoxContainer" parent="ThemeControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -157,6 +165,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="EnemiesLeftContainer" type="VBoxContainer" parent="ThemeControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
