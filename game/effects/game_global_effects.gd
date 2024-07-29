@@ -1,9 +1,15 @@
 extends Node2D
 
 @onready var bullet_timer = $BulletTimer
-@onready var invert_filter = $InvertFilter
+
+@onready var bullet_time_filter_container = $BFilterContainer
+@onready var invert_filter = $BFilterContainer/InvertFilter
+@onready var wave_line_filter = $BFilterContainer/BackBufferCopy/WaveLineFilter
+
 const INVERT_SHADER_PATH = "res://shaders/invert.gdshader"
-var bullet_time_shader_material: ShaderMaterial
+const WAVE_LINE_SHADER_PATH = "res://shaders/wave_line.gdshader"
+var invert_filter_shader_material: ShaderMaterial
+var wave_line_filter_shader_material: ShaderMaterial
 var bullet_time_tween: Tween
 
 func _ready():
@@ -15,17 +21,22 @@ func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_player_bought_item)
 
 func load_shaders():
-	var bullet_time_shader = load(INVERT_SHADER_PATH)
-	bullet_time_shader_material = ShaderMaterial.new()
-	bullet_time_shader_material.shader = bullet_time_shader
+	var invert_shader = load(INVERT_SHADER_PATH)
+	invert_filter_shader_material = ShaderMaterial.new()
+	invert_filter_shader_material.shader = invert_shader
+	
+	var wave_line_shader = load(WAVE_LINE_SHADER_PATH)
+	wave_line_filter_shader_material = ShaderMaterial.new()
+	wave_line_filter_shader_material.shader = wave_line_shader
 
 func on_player_bought_item(item: ShopItem):
 	if (item.id == Item.ItemName.CATNIP):
 		slow_time()
 	
 func slow_time():
-	invert_filter.material = bullet_time_shader_material
-	invert_filter.show()
+	invert_filter.material = invert_filter_shader_material
+	wave_line_filter.material = wave_line_filter_shader_material
+	bullet_time_filter_container.show()
 	bullet_time_tween = clear_paralel_tween(bullet_time_tween)
 	bullet_time_tween.tween_property(Engine, "time_scale", 0.5, 0.5)
 	bullet_time_tween.tween_property(AudioServer, "playback_speed_scale", 0.5, 0.5)
@@ -48,10 +59,12 @@ func clear_paralel_tween(tween: Tween)-> Tween:
 
 func set_bullet_time_shader_strength(value: float):
 	invert_filter.material.set_shader_parameter("strength", value)
+	wave_line_filter.material.set_shader_parameter("strength", value)
+	
 
 func clear_bullet_time_shaders(value: float):
 	set_bullet_time_shader_strength(value)
 	if (value == 0.0):
-		invert_filter.hide()
+		bullet_time_filter_container.hide()
 		invert_filter.material = null
-	
+		wave_line_filter.material = null
