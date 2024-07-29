@@ -33,23 +33,27 @@ func on_player_consumed_item(item: ShopItem):
 		slow_time()
 	
 func slow_time():
-	invert_filter.material = invert_filter_shader_material
-	wave_line_filter.material = wave_line_filter_shader_material
-	bullet_time_filter_container.show()
-	bullet_time_tween = clear_paralel_tween(bullet_time_tween)
-	bullet_time_tween.tween_property(Engine, "time_scale", 0.5, 0.5)
-	bullet_time_tween.tween_property(AudioServer, "playback_speed_scale", 0.5, 0.5)
-	bullet_time_tween.tween_method(set_bullet_time_shader_strength, 0.0, 1.0, 0.5)
-	bullet_timer.wait_time = 6
-	bullet_timer.start()
-	bullet_timer.connect("timeout", reset_time_speed)
-	
+	if (!bullet_timer.is_stopped()):
+		bullet_timer.wait_time += 6
+	else:	
+		invert_filter.material = invert_filter_shader_material
+		wave_line_filter.material = wave_line_filter_shader_material
+		bullet_time_filter_container.show()
+		bullet_time_tween = clear_paralel_tween(bullet_time_tween)
+		bullet_time_tween.tween_property(Engine, "time_scale", 0.5, 0.5)
+		bullet_time_tween.tween_property(AudioServer, "playback_speed_scale", 0.5, 0.5)
+		bullet_time_tween.tween_method(set_bullet_time_shader_strength, 0.0, 1.0, 0.5)
+		bullet_timer.wait_time = 6
+		bullet_timer.start()
+		bullet_timer.connect("timeout", reset_time_speed)
+		
 func reset_time_speed():
 	bullet_timer.stop()
 	bullet_time_tween = clear_paralel_tween(bullet_time_tween)
 	bullet_time_tween.tween_property(Engine, "time_scale", 1, 0.5)
 	bullet_time_tween.tween_property(AudioServer, "playback_speed_scale", 1, 0.5)
 	bullet_time_tween.tween_method(clear_bullet_time_shaders, 1.0, 0.0, 0.5)
+	bullet_timer.disconnect("timeout", reset_time_speed)
 
 func clear_paralel_tween(tween: Tween)-> Tween:
 	if (tween != null):

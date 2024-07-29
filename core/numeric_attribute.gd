@@ -12,6 +12,11 @@ func increment_by(delta: float = 1) -> NumericAttribute:
 	if(self.value < self.max_value):
 		self.value += delta
 	return self
+
+func decrement_if_not_zero_by(delta: float = 1) ->NumericAttribute:
+	if(value > 0):
+		value -= delta
+	return self	
 	
 func decrement_by(delta: float = 1) -> NumericAttribute:
 	self.value -= delta	

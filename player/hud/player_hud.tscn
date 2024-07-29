@@ -144,7 +144,6 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="PlayerLevelInfoContainer" type="VBoxContainer" parent="ThemeControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -165,7 +164,6 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="EnemiesLeftContainer" type="VBoxContainer" parent="ThemeControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

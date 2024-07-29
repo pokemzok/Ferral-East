@@ -52,6 +52,9 @@ func _physics_process(delta):
 	if (!is_dead && !is_teleporting):
 		on_dmg()
 		on_reload(delta)
+		
+		stats.consumable_cooldown.decrement_if_not_zero_by(delta)
+		
 		if (stats.dying_timer.value > 0):
 			on_dying(delta)
 		elif stats.stunned_timer.value > 0:
@@ -121,8 +124,7 @@ func on_reload(delta):
 	elif(stats.reload_timer.value <= 0 && reloading):
 		weapon.reload_with(self)
 		reloading = false
-		
-# TODO cooldown after consumables is used
+
 # TODO I can have queue of consumables, and rotate those with a q button,
 # TODO add tab key to configurations.
 # FIXME i need to pass player inventory to the HUD once, so it can keep object reference. That would happen on character creation	
@@ -135,11 +137,12 @@ func on_player_actions(delta):
 		on_walk()
 	else:
 		on_idle()	
-	if Input.is_action_just_pressed("attack") && stats.reload_timer.value <= 0:
+	if Input.is_action_just_pressed("attack") && stats.reload_timer.is_lte_zero():
 		attack()
 	
-	if (Input.is_action_just_pressed("consume")):
-		on_consume()		
+	if (Input.is_action_just_pressed("consume") && stats.consumable_cooldown.is_lte_zero()):
+		on_consume()
+		stats.consumable_cooldown.assign_max_value()		
 
 func on_consume():
 	var item = consumables_inventory.first()
