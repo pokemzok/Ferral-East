@@ -50,7 +50,11 @@ func clear():
 	if (Dialogic.current_timeline != null):
 		Dialogic.timeline_ended.disconnect(on_timeline_ended)	
 		Dialogic.end_timeline()
-		Dialogic.paused = false			
+		Dialogic.paused = false		
+	reset_all_params()		
+
+func reset_all_params():
+	Dialogic.VAR.reset()
 
 func _on_dialogic_signal(arg: String):
 	var signal_name = arg.to_lower()

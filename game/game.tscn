@@ -171,7 +171,6 @@ func on_quit_to_menu():
 	menu.reset()
 	menu.show()	
 	stop_menu_music()
-	current_level_instance.destroy()
 
 func clean_up_after_player():
 	if (shop_level_instance != null):
@@ -195,6 +194,7 @@ func on_player_left_shop():
 		shop_level_instance.hide()
 		remove_child(shop_level_instance)
 		current_level_instance.show()
+		shop_level_instance.queue_free()
 	shop_level_resource = null	
 	shop_level_instance = null	
 	player_ready_for_shop_level = false

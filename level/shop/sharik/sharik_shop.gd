@@ -32,7 +32,7 @@ func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_READY_TO_BUY, on_player_ready_to_buy)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_player_bought_item)
 	GlobalEventBus.player_arrived_to_level.emit(LevelManager.Levels.SHARIK_SHOP)
-	
+
 func on_player_ready_to_buy():
 	show_items()
 	purchase_info.for_player(player)
