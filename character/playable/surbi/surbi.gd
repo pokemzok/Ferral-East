@@ -37,6 +37,7 @@ func _ready():
 
 func on_new_level(level: LevelManager.Levels):
 	stats.emit_information()
+	GlobalEventBus.player_consumables.emit(consumables_inventory)
 
 func on_animation_finished():
 	if animations.animation == "teleporting":

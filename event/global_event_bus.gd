@@ -32,6 +32,8 @@ signal player_teleported
 signal player_arrived_to_level
 signal player_clicked_shop_item
 signal player_consumed_item
+signal player_consumables
+signal player_put_consumable_item_into_inventory
 # signal_names
 const PLAYER_SELECTED = "player_selected"
 const PLAYER_DEATH = "player_death"
@@ -49,6 +51,8 @@ const PLAYER_TELEPORTED = "player_teleported"
 const PLAYER_ARRIVED_TO_LEVEL = "player_arrived_to_level"
 const PLAYER_CLICKED_SHOP_ITEM = "player_clicked_shop_item"
 const PLAYER_CONSUMED_ITEM = "player_consumed_item"
+const PLAYER_PUT_CONSUMABLE_ITEM_INTO_INVENTORY = "player_put_consumable_item_into_inventory"
+const PLAYER_CONSUMABLES = "player_consumables"
 #trader
 signal trader_damaged
 #signal_names

@@ -19,6 +19,8 @@ func add(item: Item) -> InsertStatus:
 	else:
 		inventory[item.id] = item
 		hotbar.append(item.id)
+
+	GlobalEventBus.player_put_consumable_item_into_inventory.emit(inventory[item.id])
 	return status
 	
 func on_item_consumed(item: Item):

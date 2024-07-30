@@ -13,6 +13,7 @@ var pausable = PausableNodeBehaviour.new(self)
 @onready var player_guides = %PlayerGuides
 @onready var sfx_player = $SFXPlayer
 var game_sound_manager = GameSoundManager.get_instance()
+var player_consumables: PlayerInventory
 
 var projectiles_image= "[img]res://assets/hud/hud-bullet.png[/img]"
 var coins_image = "[img]res://assets/hud/hud-coin.png[/img]"
@@ -57,7 +58,9 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT_HIDE, hide_interaction_tutorial)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, hide_hud)
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, show_hud)
-
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMABLES, on_player_consumables)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, on_consumed_item)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_PUT_CONSUMABLE_ITEM_INTO_INVENTORY, on_new_item)
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
 	original_color = Color(last_enemy_points_label.modulate, 1)
 	player_level_info_label.modulate.a = 0
@@ -194,6 +197,19 @@ func show_get_ready_message(wave_nr):
 		wave_info_label.text = outline_prefix+tr("HUD_GET_READY")+outline_suffix
 	fade_in_out_component(wave_info_label, wave_info_tween)
 	
+func on_player_consumables(consumables: PlayerInventory):
+	player_consumables = consumables
+	print("Player inventory")
+	print(consumables) #TODO: update consumables information in the HUD
+
+func on_consumed_item(item):
+	print("Player inventory updated (consumed item)")
+	print(player_consumables) #TODO: update consumables information in the HUD
+
+func on_new_item(item):
+	print("Player inventory updated (new item)")
+	print(player_consumables) #TODO: update consumables information in the HUD
+
 func fade_in_out_component(component: Node, component_tween: Tween):
 	component_tween.tween_property(component, "modulate", original_color, 1)
 	component_tween.tween_property(component, "modulate", original_color, 2)
