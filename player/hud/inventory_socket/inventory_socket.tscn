@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck3ixamk7q7gg"]
+
+[ext_resource type="Script" path="res://player/hud/inventory_socket/inventory_socket.gd" id="1_j0tuf"]
+[ext_resource type="Texture2D" uid="uid://dlsvc72gtxpcp" path="res://player/hud/inventory_socket/highlighted_socket.png" id="1_tpedp"]
+[ext_resource type="Texture2D" uid="uid://cj027si8pim1v" path="res://player/hud/inventory_socket/socket.png" id="2_c53y8"]
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="5_8rn4p"]
+
+[node name="InventorySocket" type="Node2D"]
+script = ExtResource("1_j0tuf")
+
+[node name="ActiveSocketIcon" type="Sprite2D" parent="."]
+texture = ExtResource("1_tpedp")
+
+[node name="InactiveSocketIcon" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_c53y8")
+
+[node name="ItemIcon" type="Sprite2D" parent="."]
+
+[node name="ItemQuantity" type="RichTextLabel" parent="."]
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 54.0
+offset_bottom = 27.0
+theme = ExtResource("5_8rn4p")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true

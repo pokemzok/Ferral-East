@@ -34,6 +34,13 @@ func remove_from_hotbar(item_id):
 			hotbar.erase(hotbar[i])
 			return
 
+func size() -> int:
+	return hotbar.size()
+
+func get_by_index(index: int):
+	if (index < size()):
+		return inventory[hotbar[index]]
+
 func first():
-	if (hotbar.size() > 0):
+	if (size() > 0):
 		return inventory[hotbar[0]]

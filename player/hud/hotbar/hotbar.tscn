@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://jsfvw7igt4k8"]
+
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="1_qvtue"]
+[ext_resource type="Script" path="res://player/hud/hotbar/hotbar.gd" id="2_mmc83"]
+[ext_resource type="PackedScene" uid="uid://ck3ixamk7q7gg" path="res://player/hud/inventory_socket/inventory_socket.tscn" id="3_ipmwd"]
+
+[node name="Hotbar" type="HBoxContainer"]
+theme = ExtResource("1_qvtue")
+alignment = 1
+script = ExtResource("2_mmc83")
+
+[node name="LeftPocket" parent="." instance=ExtResource("3_ipmwd")]
+opacity = 0.5
+
+[node name="QuickAccessPocket" parent="." instance=ExtResource("3_ipmwd")]
+position = Vector2(73, -4)
+
+[node name="RightPocket" parent="." instance=ExtResource("3_ipmwd")]
+position = Vector2(147, 0)
+opacity = 0.5

@@ -7,6 +7,7 @@ func _ready():
 	id = ItemName.CATNIP
 	item_name = "CATNIP"
 	price = 5
+	texture_path = "res://assets/hud/catnip.png"
 	input_pickable = true
 	
 func _on_mouse_entered():

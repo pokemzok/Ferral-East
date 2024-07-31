@@ -22,6 +22,7 @@ enum ItemName {
 @export var price = 0
 @export var id = ItemName.NO_NAME
 @export var quantity = 1
+@export var texture_path = ""
 
 func get_item_type() -> ItemType:
 	return type
