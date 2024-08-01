@@ -1,6 +1,7 @@
 extends StaticBody2D
 class_name Item
 
+# FIXME rework this, for now I only need consumables vs apply_immediately, rest would work based on item name/id
 enum ItemType {
 	NONE,
 	COIN,
@@ -8,12 +9,13 @@ enum ItemType {
 	BULLET_UPGRADE,
 	CONSUMABLE
 }
-
+# FIXME refactor this, instead of ItemName I want ItemID
 enum ItemName {
 	NO_NAME,
 	COIN,
 	PENTAGRAM,
 	CYLINDER,
+	REVOLVER_PARTS,
 	WATER,
 	CATNIP
 }
@@ -22,7 +24,7 @@ enum ItemName {
 @export var price = 0
 @export var id = ItemName.NO_NAME
 @export var quantity = 1
-@export var texture_path = ""
+@export var inventory_texture_path = ""
 
 func get_item_type() -> ItemType:
 	return type

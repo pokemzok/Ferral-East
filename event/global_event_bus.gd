@@ -87,6 +87,10 @@ const INTERACTION_HINT_HIDE = "interaction_hint_hide"
 const START_CONVERSATION_WITH = "start_conversation_with"
 const FINISH_CONVERSATION = "finish_conversation"
 
+#weapon
+signal weapon_needs_reload
+#signal_names
+const WEAPON_NEEDS_RELOAD = "weapon_needs_reload"
 
 func emit_signal_for(signal_name):
 	var name = signal_name.to_lower()

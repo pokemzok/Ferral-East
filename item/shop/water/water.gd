@@ -3,9 +3,10 @@ extends ShopItem
 @onready var animations = $AnimatedSprite2D
 
 func _ready():
-	type = ItemType.HEAL
+	type = ItemType.CONSUMABLE
 	item_name = "WATER"
 	id = ItemName.WATER
+	inventory_texture_path = "res://item/shop/water/water_inventory.png"
 	price = 3
 	input_pickable = true
 

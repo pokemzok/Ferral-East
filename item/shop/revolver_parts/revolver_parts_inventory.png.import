@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://miphx8y61qgi"
-path="res://.godot/imported/catnip.png-b0af51d11b5fec45b38bcd29f50c4773.ctex"
+uid="uid://boaohqxvqorxt"
+path="res://.godot/imported/revolver_parts_inventory.png-f2f3985aabcb0aba89f63470f48f29ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hud/catnip.png"
-dest_files=["res://.godot/imported/catnip.png-b0af51d11b5fec45b38bcd29f50c4773.ctex"]
+source_file="res://item/shop/revolver_parts/revolver_parts_inventory.png"
+dest_files=["res://.godot/imported/revolver_parts_inventory.png-f2f3985aabcb0aba89f63470f48f29ed.ctex"]
 
 [params]
 

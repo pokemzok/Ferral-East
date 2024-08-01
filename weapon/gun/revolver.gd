@@ -9,8 +9,12 @@ var reload_audio = GameSoundManager.Sounds.REVOLVER_RELOAD
 var shoot_audio = GameSoundManager.Sounds.REVOLVER_SHOOT
 
 var item_actions = {
-	Item.ItemType.BULLET_UPGRADE: "increment_bullets_capacity"
+	Item.ItemName.CYLINDER: "increment_bullets_capacity",
+	Item.ItemName.REVOLVER_PARTS: "increment_bullets_capacity"
 }
+
+func _init():
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, apply_item)
 
 func get_reload_audio() -> GameSoundManager.Sounds:
 		return reload_audio
@@ -52,11 +56,12 @@ func reload_with(character: Node2D):
 		GlobalEventBus.player_used_projectile_weapon.emit(bullets_in_cylinder.value)	
 
 func apply_item(item: Item) -> bool:
-	if(item_actions.has(item.get_item_type())):
-		call(item_actions[item.get_item_type()])
+	if(item_actions.has(item.id)):
+		call(item_actions[item.id])
 		return true
 	return false	
 
 func increment_bullets_capacity():
 	if(bullets_in_cylinder.max_value < max_bullet_capacity):
 		bullets_in_cylinder.increment_max_value()
+		GlobalEventBus.weapon_needs_reload.emit()

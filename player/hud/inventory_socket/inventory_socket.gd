@@ -36,7 +36,7 @@ func process_socket_state():
 func put_item(_item: Item):
 	item = _item
 	if (item != null):
-		var new_texture = load(item.texture_path)
+		var new_texture = load(item.inventory_texture_path)
 		if new_texture:
 			item_icon.texture = new_texture
 		item_quantity.text = outline_prefix+str(item.quantity)+outline_suffix

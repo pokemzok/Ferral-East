@@ -34,6 +34,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEFT_SHOP, on_player_left_shop)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ARRIVED_TO_LEVEL, on_new_level)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_picked_item)
+	GlobalEventBus.connect(GlobalEventBus.WEAPON_NEEDS_RELOAD, start_reloading)
 
 func on_new_level(level: LevelManager.Levels):
 	stats.emit_information()
@@ -126,9 +127,6 @@ func on_reload(delta):
 		weapon.reload_with(self)
 		reloading = false
 
-# TODO I can have queue of consumables, and rotate those with a q button,
-# TODO add tab key to configurations.
-# FIXME i need to pass player inventory to the HUD once, so it can keep object reference. That would happen on character creation	
 func on_player_actions(delta):
 	look_at(get_global_mouse_position())	
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -146,7 +144,7 @@ func on_player_actions(delta):
 		stats.consumable_cooldown.assign_max_value()		
 
 func on_consume():
-	var item = consumables_inventory.first()
+	var item = consumables_inventory.get_quick_access_item()
 	if (item != null):
 		item.use()
 
@@ -187,24 +185,26 @@ func on_hurtbox_entered(body):
 		on_picked_item(body)
 		
 func on_picked_item(item: Item):
-	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
-	stats.apply_item(item)
-	var weapon_modified = weapon.apply_item(item)
-	if (!item.is_coin()):
-		items_collection.append(item.get_item_type())
-	else:
-		wallet.add(item)
-
+	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	
 	if (item.is_consumable()):
-		var item_copy = item.duplicate()
-		var status = consumables_inventory.add(item_copy)
-		if (status == PlayerInventory.InsertStatus.INCREMENT):
-			item_copy.queue_free()
-	
+		on_consumable_item(item)
+	else:
+		on_immediate_item(item)
 	item.queue_free()
 
-	if (weapon_modified):
-		start_reloading()
+func on_consumable_item(item: Item):
+	var item_copy = item.duplicate()
+	var status = consumables_inventory.add(item_copy)
+	if (status == PlayerInventory.InsertStatus.INCREMENT):
+		item_copy.queue_free()
+
+func on_immediate_item(item: Item):
+	stats.apply_item(item)
+	if (!item.is_coin()):
+		items_collection.append(item.get_item_type())
+		weapon.apply_item(item)
+	else:
+		wallet.add(item)
 		
 func on_hurtbox_leave(body):
 	if enemies_in_player_collision_area.has(body):

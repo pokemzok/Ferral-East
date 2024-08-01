@@ -6,9 +6,10 @@ extends ShopItem
 # I can draw those differently too. Those could either increase damage or add more bullets to the weapon.
 
 func _ready():
-	type = ItemType.BULLET_UPGRADE
+	type = ItemType.CONSUMABLE
 	item_name = "REVOLVER_PARTS"
-	id = ItemName.CYLINDER
+	id = ItemName.REVOLVER_PARTS
+	inventory_texture_path = "res://item/shop/revolver_parts/revolver_parts_inventory.png"
 	price = 10
 	input_pickable = true
 

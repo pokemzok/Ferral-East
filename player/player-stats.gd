@@ -13,7 +13,8 @@ var level_threshoulds = [10, 30, 60, 100, 150, 220, 300, 400, 520, 670, 900, 120
 var current_level = 0
 
 var item_actions = {
-	Item.ItemType.HEAL: "increment_health"
+	Item.ItemName.PENTAGRAM: "increment_health",
+	Item.ItemName.WATER: "increment_health"
 }
 
 func _init(
@@ -27,14 +28,15 @@ func _init(
 	self.reload_timer = reload_timer
 	self.health_points = health_points
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, increment_kill_count)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, apply_item)
 	emit_information()
 
 func emit_information():
 	GlobalEventBus.player_hp_changed.emit(health_points.value)
 
 func apply_item(item: Item) -> bool:
-	if(item_actions.has(item.get_item_type())):
-		call(item_actions[item.get_item_type()])
+	if(item_actions.has(item.id)):
+		call(item_actions[item.id])
 		return true
 	return false	
 		

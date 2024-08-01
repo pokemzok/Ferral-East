@@ -2,6 +2,7 @@ class_name PlayerInventory
 
 var inventory: Dictionary = {}
 var hotbar: Array = []
+var quick_access_index = 0
 
 enum InsertStatus {
 	INSERT,
@@ -38,9 +39,12 @@ func size() -> int:
 	return hotbar.size()
 
 func get_by_index(index: int):
-	if (index < size()):
+	if (index < size() && index > -1):
 		return inventory[hotbar[index]]
 
-func first():
+func update_quick_access_index(index: int):
+	quick_access_index = index
+
+func get_quick_access_item():
 	if (size() > 0):
-		return inventory[hotbar[0]]
+		return inventory[hotbar[quick_access_index]]
