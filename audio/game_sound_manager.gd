@@ -27,7 +27,8 @@ enum Sounds {
 	TELEPORT,
 	WARP,
 	PURCHASE,
-	ROTATE_INVENTORY
+	ROTATE_INVENTORY,
+	DRINKING
 }
 enum Music {
 	SLOW_LOOP_1,
@@ -72,7 +73,8 @@ var sound_files = {
 	Sounds.TELEPORT: preload("res://audio/effects/teleport.mp3"),
 	Sounds.WARP: preload("res://audio/effects/warp.mp3"),
 	Sounds.PURCHASE: preload("res://audio/effects/purchase.mp3"),
-	Sounds.ROTATE_INVENTORY: preload("res://audio/effects/rotate_inventory.mp3")
+	Sounds.ROTATE_INVENTORY: preload("res://audio/effects/rotate_inventory.mp3"),
+	Sounds.DRINKING: preload("res://audio/effects/drinking.mp3")
 }
 
 var music_res = {

@@ -7,7 +7,6 @@
 script = ExtResource("1_m1kif")
 
 [node name="BulletTimer" type="Timer" parent="."]
-wait_time = 5.0
 
 [node name="BFilterContainer" type="Node2D" parent="."]
 visible = false
@@ -26,3 +25,12 @@ rect = Rect2(-10, -10, 1950, 1100)
 position = Vector2(963.5, 528)
 scale = Vector2(15.0547, 8.53125)
 texture = ExtResource("2_fpu3q")
+
+[node name="FlashColorRect" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="EffectsAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
