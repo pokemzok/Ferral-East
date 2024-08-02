@@ -197,17 +197,17 @@ func show_get_ready_message(wave_nr):
 	
 
 func fade_in_out_component(component: Node, component_tween: Tween):
-	if component:
+	if component && component_tween:
 		component_tween.tween_property(component, "modulate", original_color, 1)
 		component_tween.tween_property(component, "modulate", original_color, 2)
 		component_tween.tween_property(component, "modulate", original_color_transparent, 2)
 
 func fade_in_component(component: Node, component_tween: Tween):
-	if component:
+	if component && component_tween:
 		component_tween.tween_property(component, "modulate", original_color, 0.3)
 
 func fade_out_component(component: Node, component_tween: Tween):
-	if component:
+	if component && component_tween:
 		component_tween.tween_property(component, "modulate", original_color_transparent, 0.3)		
 	
 func on_enemy_death(death_details: EnemyDeathDetails):

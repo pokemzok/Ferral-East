@@ -18,3 +18,6 @@ position = Vector2(73, -4)
 [node name="RightPocket" parent="." instance=ExtResource("3_ipmwd")]
 position = Vector2(147, 0)
 opacity = 0.5
+
+[node name="EffectsAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

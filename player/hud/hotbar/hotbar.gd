@@ -3,6 +3,10 @@ extends HBoxContainer
 @onready var left_pocket = $LeftPocket
 @onready var right_pocket = $RightPocket
 @onready var quick_access_pocket = $QuickAccessPocket
+@onready var effects_audio_player = $EffectsAudioStreamPlayer
+var sound_manager = GameSoundManager.get_instance()
+var rotate_inventory_audio = GameSoundManager.Sounds.ROTATE_INVENTORY
+var pausable = PausableNodeBehaviour.new(self)
 
 var player_consumables: PlayerInventory
 var quick_access_pocket_index: int = 0
@@ -13,10 +17,18 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMABLES, on_player_consumables)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, on_consumed_item)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_PUT_CONSUMABLE_ITEM_INTO_INVENTORY, on_new_item)
+	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_conversation_started)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_conversation_finnished)
 
 func _process(delta):
 	handle_inputs(delta)
 
+func on_conversation_started(arg: String = ""):
+	pausable.set_pause(true)
+
+func on_conversation_finnished():	
+	pausable.set_pause(false)
+	
 func handle_inputs(delta):
 	if Input.is_action_just_pressed("rotate_hotbar_left"):
 		rotate_quick_access_index(-1)
@@ -26,6 +38,7 @@ func handle_inputs(delta):
 func rotate_quick_access_index(increment_value: int):
 	var consumables_size = player_consumables.size()
 	if (consumables_size > 0):
+		sound_manager.play_inerrupt_sound(rotate_inventory_audio, effects_audio_player)
 		quick_access_pocket_index = quick_access_pocket_index + increment_value
 		update_indexes()
 		assign_items_to_pockets()
