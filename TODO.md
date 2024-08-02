@@ -1,6 +1,4 @@
 TODO 0
-# -3. Checkboxes in Video tab look weird
-# -2. Maybe hints over the hotbar? So the player new what button do what
 # -1. Make weapon parts look different, make them sometimes add dmg to weapon (communicate this to user as well)
 # 0. Add stone item, so I can test Q and E rotation on 4 elements
 # 1. Special effects on water consumed (like screen goes slightly white plus some sound)
