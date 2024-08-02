@@ -14,17 +14,19 @@ offset_bottom = 38.0
 
 [node name="ThemeControl" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 1880.0
-offset_right = 1920.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_ndj7i")
 
 [node name="ProjectilesCountContainer" type="HBoxContainer" parent="ThemeControl"]
-layout_mode = 0
-offset_left = -1847.0
-offset_top = 75.0
-offset_right = -1680.0
-offset_bottom = 176.0
+layout_mode = 1
+offset_left = 32.0
+offset_top = 76.0
+offset_right = 199.0
+offset_bottom = 177.0
 
 [node name="ProjectilesLeft" type="RichTextLabel" parent="ThemeControl/ProjectilesCountContainer"]
 unique_name_in_owner = true
@@ -32,16 +34,20 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 bbcode_enabled = true
-text = "[img]res://assets/hud/hud-bullet.png[/img] [outline_color=black][outline_size=10]x6[/outline_size][/outline_color]"
+text = "[img]res://assets/hud/hud-bullet.png[/img] [outline_color=black][outline_size=10]x 6[/outline_size][/outline_color]"
 fit_content = true
 autowrap_mode = 0
 
 [node name="Wallet" type="HBoxContainer" parent="ThemeControl"]
-layout_mode = 0
-offset_left = -1847.0
-offset_top = 150.0
-offset_right = -1679.0
-offset_bottom = 201.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 33.0
+offset_top = -390.5
+offset_right = 201.0
+offset_bottom = -339.5
+grow_vertical = 2
 
 [node name="CoinsLeft" type="RichTextLabel" parent="ThemeControl/Wallet"]
 unique_name_in_owner = true
@@ -49,7 +55,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 bbcode_enabled = true
-text = "[img]res://assets/hud//hud-coin.png[/img] [outline_color=black][outline_size=10]x0[/outline_size][/outline_color]"
+text = "[img]res://assets/hud//hud-coin.png[/img] [outline_color=black][outline_size=10]x 0[/outline_size][/outline_color]"
 fit_content = true
 autowrap_mode = 0
 
@@ -86,16 +92,16 @@ autowrap_mode = 0
 
 [node name="WaveInfoContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1920.0
-offset_top = 288.0
-offset_right = 1.0
-offset_bottom = 444.0
-grow_horizontal = 0
+offset_left = -960.5
+offset_top = -249.0
+offset_right = 960.5
+offset_bottom = -93.0
+grow_horizontal = 2
 grow_vertical = 2
 
 [node name="WaveInfo" type="RichTextLabel" parent="ThemeControl/WaveInfoContainer"]
@@ -110,17 +116,17 @@ autowrap_mode = 0
 
 [node name="PlayerGuidesContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -1920.0
-offset_top = 766.0
-offset_right = 1.0
-offset_bottom = 922.0
-grow_horizontal = 0
-grow_vertical = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.5
+offset_top = -283.0
+offset_right = 960.5
+offset_bottom = -127.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="PlayerGuides" type="RichTextLabel" parent="ThemeControl/PlayerGuidesContainer"]
 unique_name_in_owner = true
@@ -143,8 +149,8 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -1921.0
-offset_top = 82.0
-offset_bottom = 238.0
+offset_top = 101.0
+offset_bottom = 257.0
 grow_horizontal = 0
 
 [node name="PlayerLevelInfo" type="RichTextLabel" parent="ThemeControl/PlayerLevelInfoContainer"]
@@ -159,17 +165,9 @@ autowrap_mode = 0
 
 [node name="EnemiesLeftContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -1920.0
-offset_top = 6.0
-offset_right = 1.0
-offset_bottom = 162.0
-grow_horizontal = 0
-grow_vertical = 2
+offset_top = 3.0
+offset_right = 1921.0
+offset_bottom = 159.0
 
 [node name="EnemiesLeft" type="RichTextLabel" parent="ThemeControl/EnemiesLeftContainer"]
 unique_name_in_owner = true

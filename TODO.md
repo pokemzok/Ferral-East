@@ -1,5 +1,6 @@
 TODO 0
-# -2. Allow binding change for Q, E and Tab in controls settings.
+# -3. bugs in menu settings. Checkboxes in Video tab look weird, Controls should scroll.
+# -2. Maybe hints over the hotbar? So the player new what button do what
 # -1. Make weapon parts look different, make them sometimes add dmg to weapon (communicate this to user as well)
 # 0. Add stone item, so I can test Q and E rotation on 4 elements
 # 1. Special effects on water consumed (like screen goes slightly white plus some sound)
@@ -49,6 +50,7 @@ TODO 4
 # 9. Multiplayer (local PC hosting a server for the other who knows the ID and password)
 # 10. Start release process to see how difficult it is.
 # 11. Make background images in menu  zoom in and out, also change them from time to  time.
+# 12. Sharik prices might be influenced by how many times he was shot by the player
 
 # For future
 # Halina is a melee (higher damage, more health, ability to regenerate between waves)
