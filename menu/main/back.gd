@@ -1,4 +1,4 @@
-extends Button
+extends BaseButton
 
 @onready var menu = %Menu
 @onready var settings = %Settings

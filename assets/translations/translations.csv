@@ -2,11 +2,14 @@ key,en,pl
 CATNIP,Catnip,Kocimiautka
 CATNIP_DESCRIPTION,"Try it, if you think life goes too fast.","Spróbuj, jeśli życie zbyt szybko przelatuje przed oczami."
 CONTROLS_ATTACK,Attack,Atak
+CONTROLS_CONSUME,Use hotbar item,Użyj przedmiotu z pasku dostępu
 CONTROLS_DOWN,Down,Dół
 CONTROLS_INTERACT,Interact,Akcja
 CONTROLS_LEFT,Left,Lewo
 CONTROLS_MENU,Menu,Menu
 CONTROLS_RIGHT,Right,Prawo
+CONTROLS_ROTATE_HOTBAR_LEFT,Rotate hotbar items to the left ,Zamień aktywny przedmiot na lewy
+CONTROLS_ROTATE_HOTBAR_RIGHT,Rotate hotbar items to the right,Zamień aktywny przedmiot na prawy
 CONTROLS_START_WAVE,Start new wave,Rozpocznij kolejną falę
 CONTROLS_UP,Up,Góra
 CURRENCY_AMOUNT,{amount} G,{amount} G
@@ -42,7 +45,7 @@ START,Start,Start
 SURBI_WAVE1_MONOLOG,That wasn't all of them. I need to use the  “{action_key}” to attract more.,"To dopiero początek. Muszę użyć “{action_key}”, by przyciągnąć kolejną hordę."
 SURBI_WAVE2_MONOLOG,Usually attracting THEM ten times is enough.,Zwykle hord jest dziesięć.
 SURBI_WAVE4_MONOLOG,That was scary. It will only get worse.,"Przerażające, a dalej będzie tylko gorzej."
-SURBI_WAVE6_MONOLOG,Why am I doing this? What am I trying to prove? And to whom?,Czemu to robię? Co dokładnie próbuję udowodnić? I właściwie komu?
+SURBI_WAVE6_MONOLOG,Why am I doing this?,Czemu to robię? 
 SURBI_WAVE9_MONOLOG,Maybe I can defeat necromancer after all…,Może jednak dam radę pokonać nekromantę…
 WATER,Sharik Water,Woda Szarika
 WATER_DESCRIPTION,Water of my own brand. Don't ask me where I got it.,Woda mojej własnej marki. Nie pytaj skąd ją mam.

@@ -1,5 +1,5 @@
 TODO 0
-# -3. bugs in menu settings. Checkboxes in Video tab look weird, Controls should scroll.
+# -3. Checkboxes in Video tab look weird
 # -2. Maybe hints over the hotbar? So the player new what button do what
 # -1. Make weapon parts look different, make them sometimes add dmg to weapon (communicate this to user as well)
 # 0. Add stone item, so I can test Q and E rotation on 4 elements

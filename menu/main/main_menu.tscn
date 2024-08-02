@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://djcsnso72bwod"]
+[gd_scene load_steps=10 format=3 uid="uid://djcsnso72bwod"]
 
 [ext_resource type="Script" path="res://menu/main/video.gd" id="1_rn1fe"]
 [ext_resource type="Script" path="res://menu/main/main_menu.gd" id="1_vatmt"]
@@ -7,6 +7,8 @@
 [ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="2_h2ege"]
 [ext_resource type="PackedScene" uid="uid://lsnxhkvoumvj" path="res://menu/main/action_button.tscn" id="3_i1hiv"]
 [ext_resource type="Script" path="res://menu/main/back.gd" id="3_t6l44"]
+[ext_resource type="Texture2D" uid="uid://b8kchahjbfdti" path="res://assets/icons/close.png" id="5_jb4xv"]
+[ext_resource type="Texture2D" uid="uid://byvlicg7gp1vu" path="res://assets/icons/close_hover.png" id="6_a3r3d"]
 
 [node name="MainMenu" type="CanvasLayer"]
 process_mode = 3
@@ -85,7 +87,6 @@ text = "QUIT"
 
 [node name="Settings" type="TabContainer" parent="ThemeControl"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,10 +140,12 @@ theme_override_constants/separation = 15
 [node name="FullScreen" type="CheckBox" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+flat = true
 
 [node name="Borderless" type="CheckBox" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+flat = true
 
 [node name="Vsync" type="OptionButton" parent="ThemeControl/Settings/SETTINGS_VIDEO/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
@@ -158,18 +161,18 @@ popup/item_2/id = 2
 popup/item_3/text = "Mailbox"
 popup/item_3/id = 3
 
-[node name="Back" type="Button" parent="ThemeControl/Settings/SETTINGS_VIDEO"]
+[node name="Back" type="TextureButton" parent="ThemeControl/Settings/SETTINGS_VIDEO"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = -1
+anchor_left = 0.973
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -31.0
+anchor_bottom = 0.058
+offset_left = -0.160156
+offset_right = 3.0
+offset_bottom = -0.218002
 grow_horizontal = 0
-grow_vertical = 0
-text = "SETTINGS_BACK"
+texture_normal = ExtResource("5_jb4xv")
+texture_hover = ExtResource("6_a3r3d")
 script = ExtResource("3_t6l44")
 
 [node name="SETTINGS_AUDIO" type="TabBar" parent="ThemeControl/Settings"]
@@ -261,168 +264,176 @@ bus = &"SFX"
 [node name="VoicesBusPlayer" type="AudioStreamPlayer" parent="ThemeControl/Settings/SETTINGS_AUDIO"]
 bus = &"Voices"
 
-[node name="Back" type="Button" parent="ThemeControl/Settings/SETTINGS_AUDIO"]
+[node name="Back" type="TextureButton" parent="ThemeControl/Settings/SETTINGS_AUDIO"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = -1
+anchor_left = 0.973
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -31.0
+anchor_bottom = 0.058
+offset_left = -0.160156
+offset_right = 3.0
+offset_bottom = -0.218002
 grow_horizontal = 0
-grow_vertical = 0
-text = "SETTINGS_BACK"
+texture_normal = ExtResource("5_jb4xv")
+texture_hover = ExtResource("6_a3r3d")
 script = ExtResource("3_t6l44")
 
 [node name="SETTINGS_CONTROLS" type="TabBar" parent="ThemeControl/Settings"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS"]
+custom_minimum_size = Vector2(1300, 900)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -461.5
-offset_top = -480.5
-offset_right = 461.5
-offset_bottom = 480.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Attack" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Attack" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_ATTACK"
 
-[node name="StartWave" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="StartWave" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_START_WAVE"
 
-[node name="Interact" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="Interact" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_INTERACT"
 
-[node name="Consume" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="Consume" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "CONTROLS_CONSUME
-"
+text = "CONTROLS_CONSUME"
 
-[node name="RotateHotbarLeft" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="RotateHotbarLeft" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_ROTATE_HOTBAR_LEFT"
 
-[node name="RotateHotbarRight" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="RotateHotbarRight" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_ROTATE_HOTBAR_RIGHT"
 
-[node name="Up" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="Up" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_UP"
 
-[node name="Down" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="Down" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_DOWN"
 
-[node name="Left" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="Left" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_LEFT"
 
-[node name="Right" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="Right" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_RIGHT"
 
-[node name="Menu" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer"]
+[node name="Menu" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_MENU"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Attack" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="Attack" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "attack"
 
-[node name="StartWave" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="StartWave" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "start_wave"
 
-[node name="Interact" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="Interact" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "interact"
 
-[node name="Consume" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="Consume" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "consume"
 
-[node name="RotateHotbarLeft" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="RotateHotbarLeft" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "rotate_hotbar_left"
 
-[node name="RotateHotbarRight" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="RotateHotbarRight" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "rotate_hotbar_right"
 
-[node name="UpActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="UpActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 
-[node name="DownActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="DownActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "move_down"
 
-[node name="LeftActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="LeftActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "move_left"
 
-[node name="RightActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="RightActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "move_right"
 
-[node name="MenuActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+[node name="MenuActionButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2
 size_flags_vertical = 7
 action = "show_or_hide_menu"
 
-[node name="Back" type="Button" parent="ThemeControl/Settings/SETTINGS_CONTROLS"]
+[node name="Back" type="TextureButton" parent="ThemeControl/Settings/SETTINGS_CONTROLS"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = -1
+anchor_left = 0.973
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -31.0
+anchor_bottom = 0.058
+offset_left = -0.160156
+offset_right = 3.0
+offset_bottom = -0.218002
 grow_horizontal = 0
-grow_vertical = 0
-text = "SETTINGS_BACK"
+texture_normal = ExtResource("5_jb4xv")
+texture_hover = ExtResource("6_a3r3d")
 script = ExtResource("3_t6l44")
 
 [connection signal="pressed" from="ThemeControl/Menu/Resume" to="." method="_on_resume_pressed"]
