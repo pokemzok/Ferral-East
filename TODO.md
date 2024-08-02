@@ -1,10 +1,12 @@
 TODO 0
-# 0. Make weapon parts look different, make them sometimes add dmg to weapon (communicate this to user as well)
-# -1. Switching item with Q and E plus allow binding change in controls settings.
-# 0. Special effects on water consumed (like screen goes slightly white)
-# 1. Refactor item types (should be two types: consumables and immediate) and item names (should be item ID instead everywhere)
-# 2. Make user only have 3 pockets (currently it is not limited)
-# 3. Make user have a limit of how much he can carry, plus limit item stacks.
+# -3. Add sound effect for rotation, then check if rotation occurs during dialogic and during shopping. If so, it needs to be locked for those occurances.
+# -2. Allow binding change for Q, E and Tab in controls settings.
+# -1. Make weapon parts look different, make them sometimes add dmg to weapon (communicate this to user as well)
+# 0. Add stone item, so I can test Q and E rotation on 4 elements
+# 1. Special effects on water consumed (like screen goes slightly white)
+# 2. Refactor item types (should be two types: consumables and immediate) and item names (should be item ID instead everywhere)
+# 3. Make user only have 3 pockets (currently it is not limited)
+# 4. Make user have a limit of how much he can carry, plus limit item stacks.
 
  
 
