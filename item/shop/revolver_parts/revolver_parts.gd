@@ -3,7 +3,8 @@ extends ShopItem
 @onready var animations = $AnimatedSprite2D
 
 # FIXME
-# I can draw those differently too. Those could either increase damage or add more bullets to the weapon.
+# Think if the drawing is good enough. Maybe more relastic plus no weapon parts visible?
+# Those could either increase damage or add more bullets to the weapon.
 
 func _ready():
 	type = ItemType.CONSUMABLE

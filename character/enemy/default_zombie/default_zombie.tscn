@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://kbmm2h5tm4a0" path="res://character/enemy/default_zombie/zombie-hurt-2.png" id="7_7pu1u"]
 [ext_resource type="Texture2D" uid="uid://b1wwfvj7elxi6" path="res://character/enemy/default_zombie/zombie--walk-1.png" id="8_jh0ly"]
 [ext_resource type="Texture2D" uid="uid://bu60mg2gmv2vs" path="res://character/enemy/default_zombie/zombie--walk-2.png" id="9_fushc"]
-[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/background_music/game_ambient_audio_pool.tscn" id="10_qiyc7"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="10_qiyc7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nct2"]
 animations = [{
