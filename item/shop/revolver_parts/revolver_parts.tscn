@@ -34,7 +34,7 @@ animations = [{
 radius = 49.366
 
 [node name="RevolverParts" type="StaticBody2D"]
-scale = Vector2(2.5, 2.5)
+scale = Vector2(2, 2)
 script = ExtResource("1_mc35q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

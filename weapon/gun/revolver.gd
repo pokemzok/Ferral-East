@@ -3,6 +3,7 @@ extends Node
 
 var bullet_speed = NumericAttribute.new(1500, 2500)
 var max_bullet_capacity = 13
+var weapon_dmg = NumericAttribute.new(0.75, 2)
 var bullets_in_cylinder = NumericAttribute.new(6, 6)
 var bullet = preload("res://weapon/projectile/bullet/bullet.tscn")
 var reload_audio = GameSoundManager.Sounds.REVOLVER_RELOAD
@@ -10,7 +11,7 @@ var shoot_audio = GameSoundManager.Sounds.REVOLVER_SHOOT
 
 var item_actions = {
 	Item.ItemName.CYLINDER: "increment_bullets_capacity",
-	Item.ItemName.REVOLVER_PARTS: "increment_bullets_capacity"
+	Item.ItemName.REVOLVER_PARTS: "increment_weapon_dmg"
 }
 
 func _init():
@@ -30,7 +31,7 @@ func shoot_with(character: Node2D, target_position: Vector2):
 		var bullet_instance  = bullet.instantiate()
 		var offset = Vector2(40, 33) 
 		var character_position = character.global_position
-		bullet_instance.damage = character.stats.accuracy.value
+		bullet_instance.damage = character.stats.accuracy.value * weapon_dmg.value
 		bullet_instance.position = character_position + offset.rotated(character.rotation)
 		bullet_instance.rotation_degrees = character.rotation_degrees
 		
@@ -64,4 +65,10 @@ func apply_item(item: Item) -> bool:
 func increment_bullets_capacity():
 	if(bullets_in_cylinder.max_value < max_bullet_capacity):
 		bullets_in_cylinder.increment_max_value()
+		GlobalEventBus.weapon_needs_reload.emit()
+
+func increment_weapon_dmg():
+	if(!weapon_dmg.is_max_value()):
+		weapon_dmg.increment_by(0.25)
+		#FIXME some information on HUD that weapon was improved
 		GlobalEventBus.weapon_needs_reload.emit()
