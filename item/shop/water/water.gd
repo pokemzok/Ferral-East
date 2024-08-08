@@ -5,7 +5,7 @@ extends ShopItem
 func _ready():
 	type = ItemType.CONSUMABLE
 	item_name = "WATER"
-	id = ItemName.WATER
+	id = ItemID.WATER
 	inventory_texture_path = "res://item/shop/water/water_inventory.png"
 	price = 3
 	input_pickable = true

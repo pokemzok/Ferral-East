@@ -5,7 +5,7 @@ extends ShopItem
 func _ready():
 	type = ItemType.CONSUMABLE
 	item_name = "REVOLVER_PARTS"
-	id = ItemName.REVOLVER_PARTS
+	id = ItemID.REVOLVER_PARTS
 	inventory_texture_path = "res://item/shop/revolver_parts/revolver_parts_inventory.png"
 	price = 7
 	input_pickable = true

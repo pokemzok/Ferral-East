@@ -1,10 +1,7 @@
 TODO 0
-# 1. Refactor item types (should be two types: consumables and immediate) and item names (should be item ID instead everywhere)
-# 2. Make user only have 3 pockets (currently it is not limited)
-# 3. Make user have a limit of how much he can carry, plus limit item stacks.
-# 4. Add stones later on,  so they could be a  "funny" item without reason to carry  it.
-# 5. Maybe refactor items so they would have modes instead of being shop dedicated. For example I might want to cell cylinder in shop as well, but I need to somehow scale that item  better in the shop.
-  
+# 1. Make user only have 3 pockets (currently it is not limited)
+# 2. Make user have a limit of how much he can carry.
+# 3. Refactor HUD (should be lots of smaller components).
 
 TODO 1
 # 0. After 10th wave go to Balbir for the summary.
@@ -22,7 +19,9 @@ TODO 3
 # 3. Player keeps all the powers during transitions.
 # 4. Defeating the last level (probably a necromancer house) with a necromancer boss (skeleton from my song)
 # 5. After the last boss fight prompt player with: do you want to continue? Which will esencially do infinity waves on the last map. Alternatively give a player a new game plus. If the player completes it 3 times, we can give the playe true ending (singlehandedly defeated all necromancer spawns).
-# 6. Add Gods favours to Sharik Shop (could be indicated as a numbers under the ammunition on player HUD)
+# 6. Maybe refactor items so they would have modes instead of being shop dedicated. For example I might want to cell cylinder in shop as well, but I need to somehow scale that item  better in the shop.
+# 7. Add stones later on,  so they could be a  "funny" item without reason to carry  it.
+# 8. Add Gods favours to Sharik Shop (could be indicated as a numbers under the ammunition on player HUD)
 
 TODO 4
 # 1. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
@@ -53,7 +52,7 @@ TODO 4
 # Aneta is faster runner but slower gunner
 
 # Potential powers:
-	# Surbi otrzymuje drugi rewolwer i większą prędkość  strzelania
+	# Surbi shoots all bullets like a machine gun.
 	# Aneta wpada w  panikę, więc biega jeszcze szybciej a  jej strzały zadają więcej obrażeń.
 	# Halina dostaje  większe klapki i god mode na  kilka sekund i zabija wszystkich na hita
 

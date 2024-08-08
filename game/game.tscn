@@ -213,9 +213,6 @@ visible = false
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
 
-[node name="DeathMenu" parent="." instance=ExtResource("2_fckys")]
-visible = false
-
 [node name="DialogicWrapper" parent="." instance=ExtResource("4_xeq7e")]
 
 [node name="GameStatistics" parent="." instance=ExtResource("5_v7gvh")]
@@ -229,3 +226,6 @@ offset_bottom = 1083.0
 color = Color(0.67451, 0.0666667, 0.807843, 1)
 
 [node name="GameGlobalEffects" parent="." instance=ExtResource("6_v008q")]
+
+[node name="DeathMenu" parent="." instance=ExtResource("2_fckys")]
+visible = false

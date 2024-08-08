@@ -10,8 +10,8 @@ var reload_audio = GameSoundManager.Sounds.REVOLVER_RELOAD
 var shoot_audio = GameSoundManager.Sounds.REVOLVER_SHOOT
 
 var item_actions = {
-	Item.ItemName.CYLINDER: "increment_bullets_capacity",
-	Item.ItemName.REVOLVER_PARTS: "increment_weapon_dmg"
+	Item.ItemID.CYLINDER: "increment_bullets_capacity",
+	Item.ItemID.REVOLVER_PARTS: "increment_weapon_dmg"
 }
 
 func _init():

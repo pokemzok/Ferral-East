@@ -4,7 +4,7 @@ extends Item
 
 func _ready():
 	type = ItemType.IMMEDIATE
-	id = ItemName.PENTAGRAM
+	id = ItemID.PENTAGRAM
 
 func _process(delta):
 	animation.play("glow")	

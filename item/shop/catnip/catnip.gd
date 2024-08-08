@@ -4,7 +4,7 @@ extends ShopItem
 
 func _ready():
 	type = ItemType.CONSUMABLE
-	id = ItemName.CATNIP
+	id = ItemID.CATNIP
 	item_name = "CATNIP"
 	price = 5
 	inventory_texture_path = "res://item/shop/catnip/catnip_inventory.png"

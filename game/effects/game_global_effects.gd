@@ -39,9 +39,9 @@ func prepare_effects():
 
 func on_player_consumed_item(item: ShopItem):
 	match item.id:
-		Item.ItemName.CATNIP:
+		Item.ItemID.CATNIP:
 			slow_time()
-		Item.ItemName.WATER:
+		Item.ItemID.WATER:
 			on_heal()	
 	
 func slow_time():

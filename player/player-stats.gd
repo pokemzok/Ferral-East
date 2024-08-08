@@ -13,8 +13,8 @@ var level_threshoulds = [10, 30, 60, 100, 150, 220, 300, 400, 520, 670, 900, 120
 var current_level = 0
 
 var item_actions = {
-	Item.ItemName.PENTAGRAM: "increment_health",
-	Item.ItemName.WATER: "increment_health"
+	Item.ItemID.PENTAGRAM: "increment_health",
+	Item.ItemID.WATER: "increment_health"
 }
 
 func _init(

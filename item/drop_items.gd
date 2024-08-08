@@ -2,9 +2,9 @@ extends Node
 class_name DropItems
 
 static var res_dictionary  = {
-	Item.ItemName.COIN: "res://item/coin/coin.tscn",
-	Item.ItemName.PENTAGRAM: "res://item/pentagram/pentagram.tscn",
-	Item.ItemName.CYLINDER: "res://item/cylinder/cylinder.tscn"
+	Item.ItemID.COIN: "res://item/coin/coin.tscn",
+	Item.ItemID.PENTAGRAM: "res://item/pentagram/pentagram.tscn",
+	Item.ItemID.CYLINDER: "res://item/cylinder/cylinder.tscn"
 }
 
 static var drop_chances = {
@@ -12,15 +12,15 @@ static var drop_chances = {
 }
 
 static var common_items = {
-	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemName.COIN
+	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN
 }
 
 static var rare_items = {
-	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemName.PENTAGRAM
+	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.PENTAGRAM
 }
 
 static var legendary_items = {
-	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemName.CYLINDER
+	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.CYLINDER
 }
 
 static var instance = null
