@@ -1,10 +1,10 @@
 TODO 0
-# 0. I can make cylinder to be a shop item as well, so I can test Q and E rotation on 4 elements
 # 1. Refactor item types (should be two types: consumables and immediate) and item names (should be item ID instead everywhere)
 # 2. Make user only have 3 pockets (currently it is not limited)
 # 3. Make user have a limit of how much he can carry, plus limit item stacks.
 # 4. Add stones later on,  so they could be a  "funny" item without reason to carry  it.
- 
+# 5. Maybe refactor items so they would have modes instead of being shop dedicated. For example I might want to cell cylinder in shop as well, but I need to somehow scale that item  better in the shop.
+  
 
 TODO 1
 # 0. After 10th wave go to Balbir for the summary.

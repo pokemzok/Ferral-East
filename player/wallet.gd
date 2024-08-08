@@ -8,8 +8,8 @@ func _init():
 	rare_coins_nr =0
 
 func add(item: Item):
-	if (item.get_item_type() == Item.ItemType.COIN):
-		coins_nr += 1	
+	if (item.is_coin()):
+		coins_nr += item.quantity	
 		GlobalEventBus.player_collected_coins.emit(coins_nr)
 
 func pay(item: ShopItem):

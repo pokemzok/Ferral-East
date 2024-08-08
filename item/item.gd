@@ -1,12 +1,9 @@
 extends StaticBody2D
 class_name Item
 
-# FIXME rework this, for now I only need consumables vs apply_immediately, rest would work based on item name/id
 enum ItemType {
 	NONE,
-	COIN,
-	HEAL,
-	BULLET_UPGRADE,
+	IMMEDIATE,
 	CONSUMABLE
 }
 # FIXME refactor this, instead of ItemName I want ItemID
@@ -30,7 +27,7 @@ func get_item_type() -> ItemType:
 	return type
 
 func is_coin() -> bool:
-	return type == ItemType.COIN
+	return id == ItemName.COIN
 
 func is_consumable() -> bool:
 	return type == ItemType.CONSUMABLE

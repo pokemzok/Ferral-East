@@ -3,7 +3,7 @@ extends Item
 @onready var animation = $AnimatedSprite2D
 
 func _ready():
-	type = ItemType.HEAL
+	type = ItemType.IMMEDIATE
 	id = ItemName.PENTAGRAM
 
 func _process(delta):
