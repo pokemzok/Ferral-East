@@ -4,7 +4,6 @@ var health_point_res = preload("res://player/Health.png")
 var pausable = PausableNodeBehaviour.new(self)
 
 @onready var level_score_label: RichTextLabel = %LevelScore
-@onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
 @onready var wave_info_label: RichTextLabel = %WaveInfo
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
 @onready var projectiles_left_label: RichTextLabel = %ProjectilesLeft
@@ -23,22 +22,10 @@ var level_info_color_suffix="[/color]"
 var outline_suffix= "[/outline_size][/outline_color]"
 var tutorial_repeat = 3
 
-var enemy_points_colors = {
-	1: Color("#ffffff", 0),
-	2: Color("#00ff00", 0), 
-	3: Color("#6bc3fe", 0),
-	4: Color("#f25932", 0),
-	5: Color("#833e19",0),
-	6: Color("#b22727",0),
-	7: Color("#9c0000",0),
-	8: Color("#9c4af3",0)
-}
 var conversation_in_progress = false
 var enemies_left = 0
 var original_color: Color
 var original_color_transparent: Color
-var enemy_points_tween: Tween
-var level_score_tween: Tween
 var player_upgrade_tween: Tween
 var wave_info_tween: Tween
 var player_guides_tween: Tween
@@ -49,7 +36,6 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_USED_PROJECTILE_WEAPON, on_projectile_weapon_used)	
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_DISPLAYED, hide_hud)
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, conditional_show_hud)
-	GlobalEventBus.connect(GlobalEventBus.SCORE_CHANGED, on_score_changed)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
@@ -59,13 +45,11 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT_HIDE, hide_interaction_tutorial)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, hide_hud)
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, show_hud)
-	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
-	original_color = Color(last_enemy_points_label.modulate, 1)
+	original_color_transparent = Color(enemies_left_label.modulate, 0)
+	original_color = Color(enemies_left_label.modulate, 1)
 	player_upgrades_info_label.modulate.a = 0
-	last_enemy_points_label.modulate.a = 0
 	wave_info_label.modulate.a = 0
 	player_guides.modulate.a = 0
-	level_score_label.text = outline_prefix+tr("HUD_SCORE")+": " + str(0)+outline_suffix	
 	
 func on_hp_changed(hp):
 	clear_hearts()
@@ -100,31 +84,6 @@ func add_hp():
 	var health_point_icon = TextureRect.new()
 	health_point_icon.texture = health_point_res
 	$HealthContainer.add_child(health_point_icon)
-
-func on_score_changed(details: ScoreDetails):
-	level_score_update(details)
-	enemy_points_update(details)
-
-func level_score_update(details: ScoreDetails):
-	if (level_score_tween != null):
-		level_score_tween.kill()
-	level_score_label.text = outline_prefix+tr("HUD_SCORE")+": " + str(details.score)+outline_suffix	
-	level_score_tween = create_tween()
-	level_score_tween.tween_property(level_score_label, "scale", Vector2(1.1, 1.1), 0.15)
-	level_score_tween.tween_property(level_score_label, "scale", Vector2(1, 1), 0.15)
-	
-func enemy_points_update(details: ScoreDetails):
-	if (enemy_points_tween != null):
-		enemy_points_tween.kill()
-	var color = original_color_transparent
-	if (enemy_points_colors.has(details.score_multiplier)):
-		color = enemy_points_colors[details.score_multiplier]
-	last_enemy_points_label.modulate = Color(color,1)
-	last_enemy_points_label.text  = outline_prefix+str(details.enemy_value)+" x "+str(details.score_multiplier)+outline_suffix
-	enemy_points_tween = create_tween()
-	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1.25, 1.25), 0.15)
-	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1, 1), 0.15)
-	enemy_points_tween.tween_property(last_enemy_points_label, "modulate", color, 2)
 
 func on_player_upgrade(msg_translation: String):
 	if (player_upgrade_tween != null):
