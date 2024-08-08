@@ -65,10 +65,11 @@ func apply_item(item: Item) -> bool:
 func increment_bullets_capacity():
 	if(bullets_in_cylinder.max_value < max_bullet_capacity):
 		bullets_in_cylinder.increment_max_value()
+		GlobalEventBus.player_upgraded.emit("WPN_CAPACITY_UP")	
 		GlobalEventBus.weapon_needs_reload.emit()
 
 func increment_weapon_dmg():
 	if(!weapon_dmg.is_max_value()):
 		weapon_dmg.increment_by(0.25)
-		#FIXME some information on HUD that weapon was improved
+		GlobalEventBus.player_upgraded.emit("WPN_DMG_UP")	
 		GlobalEventBus.weapon_needs_reload.emit()

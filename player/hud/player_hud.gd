@@ -9,7 +9,7 @@ var pausable = PausableNodeBehaviour.new(self)
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
 @onready var projectiles_left_label: RichTextLabel = %ProjectilesLeft
 @onready var coins_left_label: RichTextLabel = %CoinsLeft
-@onready var player_level_info_label: RichTextLabel = %PlayerLevelInfo
+@onready var player_upgrades_info_label: RichTextLabel = %PlayerUpgradesInfo
 @onready var player_guides = %PlayerGuides
 @onready var sfx_player = $SFXPlayer
 
@@ -39,7 +39,7 @@ var original_color: Color
 var original_color_transparent: Color
 var enemy_points_tween: Tween
 var level_score_tween: Tween
-var player_level_tween: Tween
+var player_upgrade_tween: Tween
 var wave_info_tween: Tween
 var player_guides_tween: Tween
 
@@ -53,7 +53,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
-	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEVELED_UP, on_level_up)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_UPGRADED, on_player_upgrade)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_COLLECTED_COINS, on_collected_coins)
 	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT, show_interaction_tutorial)
 	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT_HIDE, hide_interaction_tutorial)
@@ -61,7 +61,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, show_hud)
 	original_color_transparent = Color(last_enemy_points_label.modulate, 0)
 	original_color = Color(last_enemy_points_label.modulate, 1)
-	player_level_info_label.modulate.a = 0
+	player_upgrades_info_label.modulate.a = 0
 	last_enemy_points_label.modulate.a = 0
 	wave_info_label.modulate.a = 0
 	player_guides.modulate.a = 0
@@ -126,13 +126,13 @@ func enemy_points_update(details: ScoreDetails):
 	enemy_points_tween.tween_property(last_enemy_points_label, "scale", Vector2(1, 1), 0.15)
 	enemy_points_tween.tween_property(last_enemy_points_label, "modulate", color, 2)
 
-func on_level_up():
-	if (player_level_tween != null):
-		player_level_tween.kill()
-	player_level_tween = create_tween()	
-	player_level_info_label.text = outline_prefix+level_info_color_prefix+tr("LEVEL_UP")+level_info_color_suffix+outline_suffix
-	fade_in_out_component(player_level_info_label, player_level_tween)
-	game_sound_manager.play_inerrupt_sound(GameSoundManager.Sounds.LEVEL_UP, sfx_player)
+func on_player_upgrade(msg_translation: String):
+	if (player_upgrade_tween != null):
+		player_upgrade_tween.kill()
+	player_upgrade_tween = create_tween()	
+	player_upgrades_info_label.text = outline_prefix+level_info_color_prefix+tr(msg_translation)+level_info_color_suffix+outline_suffix
+	fade_in_out_component(player_upgrades_info_label, player_upgrade_tween)
+	game_sound_manager.play_inerrupt_sound(GameSoundManager.Sounds.UPGRADED, sfx_player)
 
 func on_collected_coins(coins_nr):
 	coins_left_label.show()

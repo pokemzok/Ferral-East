@@ -59,7 +59,7 @@ func level_up():
 	if (!is_max_level()):
 		current_level += 1
 		increment_accuracy()
-		GlobalEventBus.player_leveled_up.emit()		
+		GlobalEventBus.player_upgraded.emit("LEVEL_UP")		
 
 func is_max_level()->bool:
 	return current_level >= level_threshoulds.size()

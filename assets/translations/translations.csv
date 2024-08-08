@@ -1,51 +1,53 @@
 key,en,pl
-CATNIP,Catnip,Kocimiautka
-CATNIP_DESCRIPTION,"Try it, if you think life goes too fast.","Spróbuj, jeśli życie zbyt szybko przelatuje przed oczami."
-CONTROLS_ATTACK,Attack,Atak
-CONTROLS_CONSUME,Use hotbar item,Użyj przedmiotu z pasku dostępu
-CONTROLS_DOWN,Down,Dół
-CONTROLS_INTERACT,Interact,Akcja
-CONTROLS_LEFT,Left,Lewo
-CONTROLS_MENU,Menu,Menu
-CONTROLS_RIGHT,Right,Prawo
-CONTROLS_ROTATE_HOTBAR_LEFT,Rotate hotbar items to the left ,Zamień aktywny przedmiot na lewy
-CONTROLS_ROTATE_HOTBAR_RIGHT,Rotate hotbar items to the right,Zamień aktywny przedmiot na prawy
-CONTROLS_START_WAVE,Start new wave,Rozpocznij kolejną falę
-CONTROLS_UP,Up,Góra
 CURRENCY_AMOUNT,{amount} G,{amount} G
-HUD_ENEMIES_LEFT,Enemies Left,Pozostało
-HUD_GET_READY,Get Ready!,Przygotuj się!
-HUD_INTERACTION_TUTORIAL,Press “{action_key}” to interact,Interakcja - “{action_key}”
-HUD_NEXT_WAVE_TUTORIAL,Press “{action_key}” when you are ready,Naciśnij “{action_key}” gdy będziesz gotowy.
-HUD_SCORE,Score,Punkty
+CONTROLS_INTERACT,Interact,Akcja
+CONTROLS_ATTACK,Attack,Atak
+SETTINGS_AUDIO,Audio,Audio
+SETTINGS_BORDERLESS,Borderless,Bez obramowania
+SETTINGS_BACK,Back,Cofnij
+SURBI_WAVE6_MONOLOG,Why am I doing this?,Czemu to robię? 
+REVOLVER_PARTS,Revolver parts,Części rewolveru
+CONTROLS_DOWN,Down,Dół
 HUD_WAVE,Wave,Fala
 HUD_WAVE_COMPLETED,Wave {wave_nr} Completed!,Fala {wave_nr} Ukończona!
-LEVEL_UP,You Leveled Up! ,Nowy Poziom Doświadczenia! 
-LOADING,LOADING,ŁADOWANIE
-OPTIONS,Options,Opcje
-QUIT,Quit,Wyjdź
-QUIT_TO_MENU,Quit to main menu,Menu Główne
-RESTART,Restart,Restart
-RESUME,Resume,Wznów
-REVOLVER_PARTS,Revolver parts,Części rewolveru
-REVOLVER_PARTS_DESCRIPTION,I've found those on a dead body. You can use it to upgrade your weapon. Probably…,"Znalazłem je przy świeżych zwłokach. Możesz je użyć, by ulepszyć swoją broń. Chyba…"
-SETTINGS_AUDIO,Audio,Audio
-SETTINGS_BACK,Back,Cofnij
-SETTINGS_BORDERLESS,Borderless,Bez obramowania
-SETTINGS_CONTROLS,Controls,Sterowanie
-SETTINGS_FULLSCREEN,Fullscreen,Pełen Ekran
-SETTINGS_MASTER,Master,Master
-SETTINGS_MUSIC,Music,Muzyka
-SETTINGS_SFX,SFX,SFX
-SETTINGS_VIDEO,Video,Wideo
 SETTINGS_VOICES,Voices,Głosy
-SETTINGS_VSYNC,Vsync,Vsync
-SPACE,Space,Spacja
-START,Start,Start
-SURBI_WAVE1_MONOLOG,That wasn't all of them. I need to use the  “{action_key}” to attract more.,"To dopiero początek. Muszę użyć “{action_key}”, by przyciągnąć kolejną hordę."
-SURBI_WAVE2_MONOLOG,Usually attracting THEM ten times is enough.,Zwykle hord jest dziesięć.
-SURBI_WAVE4_MONOLOG,That was scary. It will only get worse.,"Przerażające, a dalej będzie tylko gorzej."
-SURBI_WAVE6_MONOLOG,Why am I doing this?,Czemu to robię? 
+CONTROLS_UP,Up,Góra
+HUD_INTERACTION_TUTORIAL,Press “{action_key}” to interact,Interakcja - “{action_key}”
+CATNIP,Catnip,Kocimiautka
+LOADING,LOADING,ŁADOWANIE
+CONTROLS_LEFT,Left,Lewo
+SETTINGS_MASTER,Master,Master
+CONTROLS_MENU,Menu,Menu
+QUIT_TO_MENU,Quit to main menu,Menu Główne
 SURBI_WAVE9_MONOLOG,Maybe I can defeat necromancer after all…,Może jednak dam radę pokonać nekromantę…
-WATER,Sharik Water,Woda Szarika
+SETTINGS_MUSIC,Music,Muzyka
+HUD_NEXT_WAVE_TUTORIAL,Press “{action_key}” when you are ready,Naciśnij “{action_key}” gdy będziesz gotowy.
+LEVEL_UP,You Leveled Up! ,Nowy Poziom Doświadczenia! 
+OPTIONS,Options,Opcje
+SETTINGS_FULLSCREEN,Fullscreen,Pełen Ekran
+HUD_ENEMIES_LEFT,Enemies Left,Pozostało
+CONTROLS_RIGHT,Right,Prawo
+SURBI_WAVE4_MONOLOG,That was scary. It will only get worse.,"Przerażające, a dalej będzie tylko gorzej."
+HUD_GET_READY,Get Ready!,Przygotuj się!
+HUD_SCORE,Score,Punkty
+RESTART,Restart,Restart
+CONTROLS_START_WAVE,Start new wave,Rozpocznij kolejną falę
+SETTINGS_SFX,SFX,SFX
+SPACE,Space,Spacja
+CATNIP_DESCRIPTION,"Try it, if you think life goes too fast.","Spróbuj, jeśli życie zbyt szybko przelatuje przed oczami."
+START,Start,Start
+SETTINGS_CONTROLS,Controls,Sterowanie
+SURBI_WAVE1_MONOLOG,That wasn't all of them. I need to use the  “{action_key}” to attract more.,"To dopiero początek. Muszę użyć “{action_key}”, by przyciągnąć kolejną hordę."
+WPN_CAPACITY_UP,Improved revolver capacity!,Ulepszono pojemność rewolweru
+WPN_DMG_UP,Improved revolver damage!,Ulepszono rewolwer
+CONTROLS_CONSUME,Use hotbar item,Użyj przedmiotu z pasku dostępu
+SETTINGS_VSYNC,Vsync,Vsync
+SETTINGS_VIDEO,Video,Wideo
 WATER_DESCRIPTION,Water of my own brand. Don't ask me where I got it.,Woda mojej własnej marki. Nie pytaj skąd ją mam.
+WATER,Sharik Water,Woda Szarika
+QUIT,Quit,Wyjdź
+RESUME,Resume,Wznów
+CONTROLS_ROTATE_HOTBAR_LEFT,Rotate hotbar items to the left ,Zamień aktywny przedmiot na lewy
+CONTROLS_ROTATE_HOTBAR_RIGHT,Rotate hotbar items to the right,Zamień aktywny przedmiot na prawy
+REVOLVER_PARTS_DESCRIPTION,I've found those on a dead body. You can use it to upgrade your weapon. Probably…,"Znalazłem je przy świeżych zwłokach. Możesz je użyć, by ulepszyć swoją broń. Chyba…"
+SURBI_WAVE2_MONOLOG,Usually attracting THEM ten times is enough.,Zwykle hord jest dziesięć.
