@@ -3,7 +3,7 @@ extends Node
 
 var bullet_speed = NumericAttribute.new(1500, 2500)
 var max_bullet_capacity = 13
-var weapon_dmg = NumericAttribute.new(0.75, 2)
+var weapon_dmg = NumericAttribute.new(0.8, 2)
 var bullets_in_cylinder = NumericAttribute.new(6, 6)
 var bullet = preload("res://weapon/projectile/bullet/bullet.tscn")
 var reload_audio = GameSoundManager.Sounds.REVOLVER_RELOAD
@@ -70,6 +70,6 @@ func increment_bullets_capacity():
 
 func increment_weapon_dmg():
 	if(!weapon_dmg.is_max_value()):
-		weapon_dmg.increment_by(0.25)
+		weapon_dmg.increment_by(0.1)
 		GlobalEventBus.player_upgraded.emit("WPN_DMG_UP")	
 		GlobalEventBus.weapon_needs_reload.emit()
