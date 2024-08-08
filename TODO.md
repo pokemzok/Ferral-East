@@ -1,6 +1,4 @@
 TODO 0
-# 1. Make user only have 3 pockets (currently it is not limited)
-# 2. Make user have a limit of how much he can carry.
 # 3. Refactor HUD (should be lots of smaller components).
 
 TODO 1
@@ -24,6 +22,8 @@ TODO 3
 # 8. Add Gods favours to Sharik Shop (could be indicated as a numbers under the ammunition on player HUD)
 
 TODO 4
+# 1. Make user only have 3 pockets (currently it is not limited) and add "threads and needles" item to increase pocket nr.
+# 2. Make user have a limit of how much he can carry.
 # 1. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
 # 2. limit fire rate (maybe this would help for reload glitch)
 # 3. Make whistle sound (end of the wave) louder.
