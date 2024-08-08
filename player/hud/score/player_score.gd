@@ -2,12 +2,12 @@ extends VBoxContainer
 
 @onready var level_score_label: RichTextLabel = %LevelScore
 @onready var last_enemy_points_label: RichTextLabel = %LastEnemyPoints
+var tween_behaviour = CustomTweenBehaviour.new(self)
 
 var outline_prefix="[outline_color=black][outline_size=10]"
 var outline_suffix= "[/outline_size][/outline_color]"
 var level_score_tween: Tween
 var enemy_points_tween: Tween
-
 var original_color: Color
 var original_color_transparent: Color
 
@@ -40,16 +40,14 @@ func on_score_changed(details: ScoreDetails):
 	enemy_points_update(details)
 
 func level_score_update(details: ScoreDetails):
-	if (level_score_tween != null):
-		level_score_tween.kill()
+	level_score_tween = tween_behaviour.clear_tween(level_score_tween)
 	level_score_label.text = outline_prefix+tr("HUD_SCORE")+": " + str(details.score)+outline_suffix	
 	level_score_tween = create_tween()
 	level_score_tween.tween_property(level_score_label, "scale", Vector2(1.1, 1.1), 0.15)
 	level_score_tween.tween_property(level_score_label, "scale", Vector2(1, 1), 0.15)
 
 func enemy_points_update(details: ScoreDetails):
-	if (enemy_points_tween != null):
-		enemy_points_tween.kill()
+	enemy_points_tween = tween_behaviour.clear_tween(enemy_points_tween)	
 	var color = original_color_transparent
 	if (enemy_points_colors.has(details.score_multiplier)):
 		color = enemy_points_colors[details.score_multiplier]
