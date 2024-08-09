@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxkg1cv0166ad"]
+
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="1_in5mm"]
+[ext_resource type="Script" path="res://player/hud/upgrades/player_upgrades_information.gd" id="2_uysnd"]
+
+[node name="PlayerUpgradesInformation" type="VBoxContainer"]
+theme = ExtResource("1_in5mm")
+script = ExtResource("2_uysnd")
+
+[node name="UpgradesLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[color=green]Level Info[/color]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

@@ -1,7 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bd62e5rcq0nxm"]
 
 [ext_resource type="Script" path="res://player/hud/player_hud.gd" id="1_y8eoh"]
-[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="2_ndj7i"]
 [ext_resource type="PackedScene" uid="uid://b7h8gjft1yovw" path="res://player/hud/healthbar/healthbar.tscn" id="2_tno7a"]
 [ext_resource type="PackedScene" uid="uid://b3eppf4mfch3t" path="res://player/hud/score/player_score.tscn" id="3_e6tdq"]
 [ext_resource type="PackedScene" uid="uid://skv8pfixitst" path="res://player/hud/projectiles/projectiles_count.tscn" id="3_h1yyv"]
@@ -9,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ck10sivl66ww3" path="res://player/hud/wallet/wallet_information.tscn" id="4_c7y6e"]
 [ext_resource type="PackedScene" uid="uid://dyb8b7dyxdp86" path="res://player/hud/guides/player_guides.tscn" id="5_5g8eh"]
 [ext_resource type="PackedScene" uid="uid://cfgux2d5w8lxx" path="res://player/hud/waveinfo/wave_information.tscn" id="6_p4plr"]
+[ext_resource type="PackedScene" uid="uid://cxkg1cv0166ad" path="res://player/hud/upgrades/player_upgrades_information.tscn" id="7_i2d6s"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_y8eoh")
@@ -46,35 +46,15 @@ size_flags_vertical = 4
 
 [node name="WaveInformation" parent="." instance=ExtResource("6_p4plr")]
 
-[node name="ThemeControl" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="PlayerUpgradesInformation" parent="." instance=ExtResource("7_i2d6s")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.5
+offset_top = 99.0
+offset_right = 105.5
+offset_bottom = 150.0
 grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_ndj7i")
-
-[node name="PlayerUpgradesContainer" type="VBoxContainer" parent="ThemeControl"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -1921.0
-offset_top = 101.0
-offset_bottom = 257.0
-grow_horizontal = 0
-
-[node name="PlayerUpgradesInfo" type="RichTextLabel" parent="ThemeControl/PlayerUpgradesContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-bbcode_enabled = true
-text = "[color=green]Level Info[/color]"
-fit_content = true
-autowrap_mode = 0
 
 [node name="PlayerScore" parent="." instance=ExtResource("3_e6tdq")]
 anchors_preset = 1
