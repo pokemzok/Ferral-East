@@ -3,14 +3,12 @@ extends Node2D
 var purchased_item: ShopItem
 var player_wallet
 
-@onready var coins_left_label = %PlayerWalletCoinsLabel
 @onready var item_name_label = %ItemNameLabel
 @onready var item_price_label = %ItemPriceLabel
 @onready var item_description_label = %ItemDescriptionLabel
 @onready var purchase_button = %PurchaseButton
+@onready var wallet_info =  %WalletInformation
 var rich_text_behaviour = RichTextCustomBehaviour.get_instance()
-
-var coins_image = "[img]res://assets/hud/hud-coin.png[/img]"
 
 func _ready():
 	handle_events()
@@ -29,7 +27,7 @@ func for_player(_player):
 	
 func on_purchase_info(item: ShopItem):
 	purchased_item = item
-	coins_left_label.text = coins_image+rich_text_behaviour.outline_text(" x "+str(player_wallet.coins_nr))
+	wallet_info.on_collected_coins(player_wallet.coins_nr)
 	item_name_label.text = tr(purchased_item.item_name)
 	item_description_label.text = tr(purchased_item.item_name+"_DESCRIPTION")
 	item_price_label.text = tr("CURRENCY_AMOUNT").format({"amount": str(purchased_item.price)})	

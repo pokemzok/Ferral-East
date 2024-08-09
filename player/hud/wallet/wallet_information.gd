@@ -1,5 +1,6 @@
 extends HBoxContainer
 
+# FIXME use it on the purchase information (so I would have same component)
 
 @onready var coins_left_label: RichTextLabel = $CoinsLeft
 var rich_text_behaviour = RichTextCustomBehaviour.get_instance()
