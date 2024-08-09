@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd62e5rcq0nxm"]
+[gd_scene load_steps=7 format=3 uid="uid://bd62e5rcq0nxm"]
 
 [ext_resource type="Script" path="res://player/hud/player_hud.gd" id="1_y8eoh"]
 [ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="2_ndj7i"]
 [ext_resource type="PackedScene" uid="uid://b7h8gjft1yovw" path="res://player/hud/healthbar/healthbar.tscn" id="2_tno7a"]
 [ext_resource type="PackedScene" uid="uid://b3eppf4mfch3t" path="res://player/hud/score/player_score.tscn" id="3_e6tdq"]
+[ext_resource type="PackedScene" uid="uid://skv8pfixitst" path="res://player/hud/projectiles/projectiles_count.tscn" id="3_h1yyv"]
 [ext_resource type="PackedScene" uid="uid://jsfvw7igt4k8" path="res://player/hud/hotbar/hotbar.tscn" id="3_yfn6u"]
 
 [node name="Hud" type="CanvasLayer"]
@@ -13,6 +14,12 @@ script = ExtResource("1_y8eoh")
 offset_left = 25.0
 offset_right = 25.0
 
+[node name="ProjectilesCount" parent="." instance=ExtResource("3_h1yyv")]
+offset_left = 32.0
+offset_top = 76.0
+offset_right = 155.0
+offset_bottom = 127.0
+
 [node name="ThemeControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -21,23 +28,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_ndj7i")
-
-[node name="ProjectilesCountContainer" type="HBoxContainer" parent="ThemeControl"]
-layout_mode = 1
-offset_left = 32.0
-offset_top = 76.0
-offset_right = 199.0
-offset_bottom = 177.0
-
-[node name="ProjectilesLeft" type="RichTextLabel" parent="ThemeControl/ProjectilesCountContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-bbcode_enabled = true
-text = "[img]res://assets/hud/hud-bullet.png[/img] [outline_color=black][outline_size=10]x 6[/outline_size][/outline_color]"
-fit_content = true
-autowrap_mode = 0
 
 [node name="Wallet" type="HBoxContainer" parent="ThemeControl"]
 layout_mode = 1

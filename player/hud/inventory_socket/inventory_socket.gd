@@ -8,8 +8,7 @@ extends Node2D
 @onready var item_quantity = $ItemQuantity
 @onready var item_icon = $ItemIcon
 
-const outline_prefix = "[outline_color=black][outline_size=5]"
-const outline_suffix = "[/outline_size][/outline_color]"
+var rich_text_behaviour = RichTextCustomBehaviour.get_instance()
 
 var item: Item
 
@@ -39,7 +38,7 @@ func put_item(_item: Item):
 		var new_texture = load(item.inventory_texture_path)
 		if new_texture:
 			item_icon.texture = new_texture
-		item_quantity.text = outline_prefix+str(item.quantity)+outline_suffix
+		item_quantity.text = rich_text_behaviour.small_outline_text(str(item.quantity))
 	else:
 		item_icon.texture = null
 		item_quantity.text = ""	

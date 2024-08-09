@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var health_point_res = preload("res://player/Health.png")
+var health_point_res = preload("res://player/hud/healthbar/Health.png")
 
 func _ready():
 	handle_events()

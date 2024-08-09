@@ -8,7 +8,6 @@ theme = ExtResource("2_n8qgy")
 script = ExtResource("1_5yx64")
 
 [node name="LevelScore" type="RichTextLabel" parent="."]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -18,7 +17,6 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="LastEnemyPoints" type="RichTextLabel" parent="."]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
