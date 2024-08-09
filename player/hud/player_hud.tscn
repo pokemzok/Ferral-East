@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd62e5rcq0nxm"]
+[gd_scene load_steps=10 format=3 uid="uid://bd62e5rcq0nxm"]
 
 [ext_resource type="Script" path="res://player/hud/player_hud.gd" id="1_y8eoh"]
 [ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="2_ndj7i"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://jsfvw7igt4k8" path="res://player/hud/hotbar/hotbar.tscn" id="3_yfn6u"]
 [ext_resource type="PackedScene" uid="uid://ck10sivl66ww3" path="res://player/hud/wallet/wallet_information.tscn" id="4_c7y6e"]
 [ext_resource type="PackedScene" uid="uid://dyb8b7dyxdp86" path="res://player/hud/guides/player_guides.tscn" id="5_5g8eh"]
+[ext_resource type="PackedScene" uid="uid://cfgux2d5w8lxx" path="res://player/hud/waveinfo/wave_information.tscn" id="6_p4plr"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_y8eoh")
@@ -43,7 +44,10 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="WaveInformation" parent="." instance=ExtResource("6_p4plr")]
+
 [node name="ThemeControl" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,30 +55,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_ndj7i")
-
-[node name="WaveInfoContainer" type="VBoxContainer" parent="ThemeControl"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -960.5
-offset_top = -249.0
-offset_right = 960.5
-offset_bottom = -93.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="WaveInfo" type="RichTextLabel" parent="ThemeControl/WaveInfoContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-bbcode_enabled = true
-text = "Wave"
-fit_content = true
-autowrap_mode = 0
 
 [node name="PlayerUpgradesContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1
@@ -93,23 +73,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 bbcode_enabled = true
 text = "[color=green]Level Info[/color]"
-fit_content = true
-autowrap_mode = 0
-
-[node name="EnemiesLeftContainer" type="VBoxContainer" parent="ThemeControl"]
-layout_mode = 1
-offset_top = 3.0
-offset_right = 1921.0
-offset_bottom = 159.0
-
-[node name="EnemiesLeft" type="RichTextLabel" parent="ThemeControl/EnemiesLeftContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-bbcode_enabled = true
-text = "Enemies Left: 0"
 fit_content = true
 autowrap_mode = 0
 

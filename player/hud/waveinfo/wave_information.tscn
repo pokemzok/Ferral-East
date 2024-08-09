@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfgux2d5w8lxx"]
+
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="1_4wwso"]
+[ext_resource type="Script" path="res://player/hud/waveinfo/wave_information.gd" id="2_pav0u"]
+
+[node name="WaveInformation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4wwso")
+script = ExtResource("2_pav0u")
+
+[node name="WaveMsgContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.5
+offset_top = -249.0
+offset_right = 960.5
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WaveMsg" type="RichTextLabel" parent="WaveMsgContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Wave"
+fit_content = true
+autowrap_mode = 0
+
+[node name="EnemiesLeftContainer" type="VBoxContainer" parent="."]
+offset_top = 3.0
+offset_right = 1921.0
+offset_bottom = 159.0
+
+[node name="EnemiesLeft" type="RichTextLabel" parent="EnemiesLeftContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Enemies Left: 0"
+fit_content = true
+autowrap_mode = 0
