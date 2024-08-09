@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-var health_point_res = preload("res://player/Health.png")
 var pausable = PausableNodeBehaviour.new(self)
 
 @onready var level_score_label: RichTextLabel = %LevelScore
@@ -31,7 +30,6 @@ var player_guides_tween: Tween
 
 # TODO Refactor all this to be separated as many tiny hud elements, so it would be better organized and reusable in different places all over
 func _ready():
-	GlobalEventBus.connect(GlobalEventBus.PLAYER_HP_CHANGED, on_hp_changed)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_USED_PROJECTILE_WEAPON, on_projectile_weapon_used)	
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_DISPLAYED, hide_hud)
 	GlobalEventBus.connect(GlobalEventBus.MAIN_MENU_HIDDEN, conditional_show_hud)
@@ -47,11 +45,6 @@ func _ready():
 	player_upgrades_info_label.modulate.a = 0
 	wave_info_label.modulate.a = 0
 	player_guides.modulate.a = 0
-	
-func on_hp_changed(hp):
-	clear_hearts()
-	for i in range(hp):
-		add_hp()
 
 func on_projectile_weapon_used(projectiles_left):
 	projectiles_left_label.text = projectiles_image+outline_prefix+" x "+str(projectiles_left)+outline_suffix
@@ -70,17 +63,6 @@ func show_hud(conversation_in_progress: bool = false):
 		pausable.set_pause(false)
 		show()
 		self.conversation_in_progress = false	
-
-func clear_hearts():
-	var health_container = $HealthContainer
-	while health_container.get_child_count() > 0:
-		var heart = health_container.get_child(0)
-		health_container.remove_child(heart)
-
-func add_hp():
-	var health_point_icon = TextureRect.new()
-	health_point_icon.texture = health_point_res
-	$HealthContainer.add_child(health_point_icon)
 
 func on_player_upgrade(msg_translation: String):
 	player_upgrade_tween = tween_behaviour.clear_tween(player_upgrade_tween)	

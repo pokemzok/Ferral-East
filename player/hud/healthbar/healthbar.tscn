@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7h8gjft1yovw"]
+
+[ext_resource type="Script" path="res://player/hud/healthbar/healthbar.gd" id="1_njves"]
+
+[node name="Healthbar" type="HBoxContainer"]
+script = ExtResource("1_njves")
