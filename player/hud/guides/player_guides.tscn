@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyb8b7dyxdp86"]
+
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="1_1ru24"]
+[ext_resource type="Script" path="res://player/hud/guides/player_guides.gd" id="1_t156d"]
+
+[node name="PlayerGuides" type="HBoxContainer"]
+theme = ExtResource("1_1ru24")
+script = ExtResource("1_t156d")
+
+[node name="PlayerGuides" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+bbcode_enabled = true
+text = "Press  'E' to interract"
+fit_content = true
+autowrap_mode = 0

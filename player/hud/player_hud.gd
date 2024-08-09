@@ -9,7 +9,6 @@ var tween_behaviour = CustomTweenBehaviour.new(self)
 @onready var wave_info_label: RichTextLabel = %WaveInfo
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
 @onready var player_upgrades_info_label: RichTextLabel = %PlayerUpgradesInfo
-@onready var player_guides = %PlayerGuides
 @onready var sfx_player = $SFXPlayer
 
 var level_info_color_prefix="[color=green]"
@@ -20,7 +19,6 @@ var conversation_in_progress = false
 var enemies_left = 0
 var player_upgrade_tween: Tween
 var wave_info_tween: Tween
-var player_guides_tween: Tween
 
 # TODO Refactor all this to be separated as many tiny hud elements, so it would be better organized and reusable in different places all over
 func _ready():
@@ -30,13 +28,10 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_UPGRADED, on_player_upgrade)
-	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT, show_interaction_tutorial)
-	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT_HIDE, hide_interaction_tutorial)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, hide_hud)
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, show_hud)
 	player_upgrades_info_label.modulate.a = 0
 	wave_info_label.modulate.a = 0
-	player_guides.modulate.a = 0
 
 func hide_hud(arg: String = ""):
 	if (arg.length() > 0):
@@ -88,17 +83,6 @@ func show_wave_trigger_tutorial():
 		tween_behaviour.fade_in_out_component(wave_info_label, wave_info_tween)		
 		wave_info_tween.tween_callback(show_wave_trigger_tutorial)
 		
-func show_interaction_tutorial():
-	player_guides_tween = tween_behaviour.clear_tween(player_guides_tween)	
-	var action_key = InputMap.action_get_events("interact")[0].as_text()
-	var action_key_translation = tr(action_key.to_upper())
-	player_guides.text = rich_text_behaviour.outline_text(tr("HUD_INTERACTION_TUTORIAL").format({"action_key":action_key_translation}))
-	tween_behaviour.fade_in_component(player_guides, player_guides_tween)	
-
-func hide_interaction_tutorial():
-	player_guides_tween = tween_behaviour.clear_tween(player_guides_tween)
-	tween_behaviour.fade_out_component(player_guides, player_guides_tween)		
-	
 func show_wave_started_message(wave_nr):
 	wave_info_label.text = rich_text_behaviour.outline_text(tr("HUD_WAVE")+" "+str(wave_nr))
 	wave_info_tween = create_tween()
