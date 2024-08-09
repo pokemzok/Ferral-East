@@ -1,6 +1,5 @@
 TODO 0
-# 1. Refactor HUD (should be lots of smaller components).
-# 2. In shop, on F talk to sharik (when the player is done with buying).
+# 1. Refactor HUD - level up information and wave information is a bit cut on  the beginning
 
 TODO 1
 # 0. After 10th wave go to Balbir for the summary.
