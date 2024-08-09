@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck10sivl66ww3"]
+
+[ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="1_glldw"]
+[ext_resource type="Script" path="res://player/hud/wallet/wallet_information.gd" id="1_ohlhm"]
+
+[node name="WalletInformation" type="HBoxContainer"]
+theme = ExtResource("1_glldw")
+script = ExtResource("1_ohlhm")
+
+[node name="CoinsLeft" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "[img]res://assets/hud//hud-coin.png[/img] [outline_color=black][outline_size=10]x 0[/outline_size][/outline_color]"
+fit_content = true
+autowrap_mode = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd62e5rcq0nxm"]
+[gd_scene load_steps=8 format=3 uid="uid://bd62e5rcq0nxm"]
 
 [ext_resource type="Script" path="res://player/hud/player_hud.gd" id="1_y8eoh"]
 [ext_resource type="Theme" uid="uid://dvy7di712gwwf" path="res://assets/theme/base_theme.tres" id="2_ndj7i"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b3eppf4mfch3t" path="res://player/hud/score/player_score.tscn" id="3_e6tdq"]
 [ext_resource type="PackedScene" uid="uid://skv8pfixitst" path="res://player/hud/projectiles/projectiles_count.tscn" id="3_h1yyv"]
 [ext_resource type="PackedScene" uid="uid://jsfvw7igt4k8" path="res://player/hud/hotbar/hotbar.tscn" id="3_yfn6u"]
+[ext_resource type="PackedScene" uid="uid://ck10sivl66ww3" path="res://player/hud/wallet/wallet_information.tscn" id="4_c7y6e"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_y8eoh")
@@ -20,6 +21,12 @@ offset_top = 76.0
 offset_right = 155.0
 offset_bottom = 127.0
 
+[node name="WalletInformation" parent="." instance=ExtResource("4_c7y6e")]
+offset_left = 33.0
+offset_top = 150.0
+offset_right = 156.0
+offset_bottom = 201.0
+
 [node name="ThemeControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -28,27 +35,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_ndj7i")
-
-[node name="Wallet" type="HBoxContainer" parent="ThemeControl"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 33.0
-offset_top = -390.5
-offset_right = 201.0
-offset_bottom = -339.5
-grow_vertical = 2
-
-[node name="CoinsLeft" type="RichTextLabel" parent="ThemeControl/Wallet"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-bbcode_enabled = true
-text = "[img]res://assets/hud//hud-coin.png[/img] [outline_color=black][outline_size=10]x 0[/outline_size][/outline_color]"
-fit_content = true
-autowrap_mode = 0
 
 [node name="WaveInfoContainer" type="VBoxContainer" parent="ThemeControl"]
 layout_mode = 1

@@ -8,13 +8,10 @@ var tween_behaviour = CustomTweenBehaviour.new(self)
 @onready var level_score_label: RichTextLabel = %LevelScore
 @onready var wave_info_label: RichTextLabel = %WaveInfo
 @onready var enemies_left_label: RichTextLabel = %EnemiesLeft
-@onready var coins_left_label: RichTextLabel = %CoinsLeft
 @onready var player_upgrades_info_label: RichTextLabel = %PlayerUpgradesInfo
 @onready var player_guides = %PlayerGuides
 @onready var sfx_player = $SFXPlayer
 
-var projectiles_image= "[img]res://assets/hud/hud-bullet.png[/img]"
-var coins_image = "[img]res://assets/hud/hud-coin.png[/img]"
 var level_info_color_prefix="[color=green]"
 var level_info_color_suffix="[/color]"
 var tutorial_repeat = 3
@@ -33,7 +30,6 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_UPGRADED, on_player_upgrade)
-	GlobalEventBus.connect(GlobalEventBus.PLAYER_COLLECTED_COINS, on_collected_coins)
 	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT, show_interaction_tutorial)
 	GlobalEventBus.connect(GlobalEventBus.INTERACTION_HINT_HIDE, hide_interaction_tutorial)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, hide_hud)
@@ -62,10 +58,6 @@ func on_player_upgrade(msg_translation: String):
 	player_upgrades_info_label.text = rich_text_behaviour.outline_text(level_info_color_prefix+tr(msg_translation)+level_info_color_suffix)
 	tween_behaviour.fade_in_out_component(player_upgrades_info_label, player_upgrade_tween)
 	game_sound_manager.play_inerrupt_sound(GameSoundManager.Sounds.UPGRADED, sfx_player)
-
-func on_collected_coins(coins_nr):
-	coins_left_label.show()
-	coins_left_label.text = coins_image+rich_text_behaviour.outline_text(" x "+str(coins_nr))
 
 func on_wave_started(wave_nr, enemies_left):
 	tutorial_repeat = 0
