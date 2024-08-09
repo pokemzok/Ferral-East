@@ -3,7 +3,7 @@ extends HBoxContainer
 
 @onready var coins_left_label: RichTextLabel = $CoinsLeft
 var rich_text_behaviour = RichTextCustomBehaviour.get_instance()
-var coins_image = "[img]res://assets/hud/hud-coin.png[/img]"
+var coins_image = "[img]res://player/hud/wallet/coin.png[/img]"
 
 func _ready():
 	handle_events()

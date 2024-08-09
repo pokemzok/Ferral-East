@@ -2,8 +2,8 @@ extends HBoxContainer
 
 @onready var projectiles_left_label: RichTextLabel = $ProjectilesLeft
 
-
-var projectiles_image= "[img]res://assets/hud/hud-bullet.png[/img]"
+var rich_text_behaviour = RichTextCustomBehaviour.get_instance()
+var projectiles_image= "[img]res://player/hud/projectiles/bullet.png[/img]"
 
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_USED_PROJECTILE_WEAPON, on_projectile_weapon_used)	

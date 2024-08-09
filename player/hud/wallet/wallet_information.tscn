@@ -12,6 +12,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 bbcode_enabled = true
-text = "[img]res://assets/hud//hud-coin.png[/img] [outline_color=black][outline_size=10]x 0[/outline_size][/outline_color]"
+text = "[img]res://player/hud/wallet/coin.png[/img] [outline_color=black][outline_size=10]x 0[/outline_size][/outline_color]"
 fit_content = true
 autowrap_mode = 0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmoox4iuipr23"
-path="res://.godot/imported/hud-coin.png-9ed30cdd7e9a15722fa7a2caebd968e2.ctex"
+uid="uid://c4akbpwkaf8ei"
+path="res://.godot/imported/bullet.png-5948f7b43650580944517632f22c109e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hud/hud-coin.png"
-dest_files=["res://.godot/imported/hud-coin.png-9ed30cdd7e9a15722fa7a2caebd968e2.ctex"]
+source_file="res://player/hud/projectiles/bullet.png"
+dest_files=["res://.godot/imported/bullet.png-5948f7b43650580944517632f22c109e.ctex"]
 
 [params]
 
