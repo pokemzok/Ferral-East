@@ -29,6 +29,7 @@ grow_vertical = 2
 
 [node name="WaveMsg" type="RichTextLabel" parent="WaveMsgContainer"]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -38,6 +39,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="EnemiesLeftContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_top = 3.0
 offset_right = 1921.0
 offset_bottom = 159.0

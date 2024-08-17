@@ -1,15 +1,13 @@
-TODO 0
-# 1. Refactor HUD - level up information and wave information is a bit cut on  the beginning
-
-TODO 1
-# 0. After 10th wave go to Balbir for the summary.
-# 1. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
 
 TODO 2
 # 1. New test level which would allow pathfinding. 
 # 2. New zombie enemy (different color) which would be smarter (will use pathfinding) and would be reanimating once with less HP.
 # 3. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
-# 4. Score should take into consideration time it took player to complete wave. Wave counts as started after player completed leveling up.
+# 4. Score should take into consideration dmg tooked by player to complete wave (the more dmg the more the minus gets). Wave counts as started after player completed leveling up.
+
+TODO 1
+# 0. After 10th wave go to Balbir for the summary.
+# 1. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
 
 TODO 3
 # 1. At least 5 levels, which would all have ten waves -> this way I would allow Surbi to be completely upgraded till the end of the game.
