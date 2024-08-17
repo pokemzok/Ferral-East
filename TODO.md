@@ -1,5 +1,8 @@
 
 TODO 2
+# 0. Allow pathfinding in my current test level.
+# 0.1 start from introducing smart-zombies, which would be more green. 
+# 0.2 they will be able to use pathfinding.
 # 1. New test level which would allow pathfinding. 
 # 2. New zombie enemy (different color) which would be smarter (will use pathfinding) and would be reanimating once with less HP.
 # 3. Maybe a miniboss as well, basically same guy as Surbi, but more HP 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://o2x8w13lasm1"]
+[gd_scene load_steps=33 format=3 uid="uid://o2x8w13lasm1"]
 
 [ext_resource type="Script" path="res://level/test/test-level.gd" id="1_085m1"]
 [ext_resource type="Texture2D" uid="uid://bqmifa0j6hwwm" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/bg.png" id="2_0wx2i"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://cp15meww1af4h" path="res://character/trader/trader_spawn.tscn" id="13_1cpgp"]
 [ext_resource type="PackedScene" uid="uid://d1h7wu5r8c0qh" path="res://item/drop_items_factory.tscn" id="13_rg3mj"]
 [ext_resource type="PackedScene" uid="uid://cgjvc8fmlnolf" path="res://level/loading-screen.tscn" id="14_jhdgt"]
-[ext_resource type="PackedScene" uid="uid://d4jon5ago286d" path="res://menu/death/death_menu.tscn" id="15_ifqbo"]
 [ext_resource type="PackedScene" uid="uid://bd62e5rcq0nxm" path="res://player/hud/player_hud.tscn" id="15_top3i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ebigg"]
@@ -9204,5 +9203,4 @@ bus = &"Music"
 [node name="LoadingScreen" parent="." instance=ExtResource("14_jhdgt")]
 visible = false
 
-[node name="DeathMenu" parent="." instance=ExtResource("15_ifqbo")]
-visible = false
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
