@@ -88,7 +88,7 @@ script = ExtResource("1_deosn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
-animation = &"despawn"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 light_mask = 0
@@ -109,5 +109,11 @@ bus = &"Voices"
 bus = &"SFX"
 
 [node name="GameAmbientAudioPool" parent="." instance=ExtResource("10_qiyc7")]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+vertices = PackedVector2Array(-38.1818, -18.1818, -17.2727, -40, 6.36364, -44.5455, 43.6364, -41.8182, 48.1818, -30.9091, 50, -6.36364, 51.8182, 22.7273, 50.9091, 36.3636, 30, 40, -12.7273, 42.7273, -40.9091, 15.4545, -41.8182, -1.81818)
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]

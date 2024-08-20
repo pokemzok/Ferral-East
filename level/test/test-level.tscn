@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://o2x8w13lasm1"]
+[gd_scene load_steps=34 format=3 uid="uid://o2x8w13lasm1"]
 
 [ext_resource type="Script" path="res://level/test/test-level.gd" id="1_085m1"]
 [ext_resource type="Texture2D" uid="uid://bqmifa0j6hwwm" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/bg.png" id="2_0wx2i"]
@@ -9136,6 +9136,12 @@ sources/28 = SubResource("TileSetAtlasSource_phiig")
 sources/29 = SubResource("TileSetAtlasSource_kldvo")
 sources/30 = SubResource("TileSetAtlasSource_umb7k")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_r7kk6"]
+vertices = PackedVector2Array(3, -8, 160, 22, 159, 22, 27, 120, 27, 121, 2, 45, 1931, 9, 1964, 1147, 1735, 775, 1733, 210, 1716, 832, 1822, 1035, 1765, 974, 1756, 1137, 470, 983, 1319, 830, 1282, 788, 96, 988, 130, 1127, 13, 1126, -17, 1000, 74, 216, 260, 55, 565, 249, 838, 223, 1267, 203, 1261, 275, 795, 311, -7, 523, 51, 350, 15, 346, 15, 312, 49, 303, 1293, 447, 74, 429, 657, 301, 342, 27, 634, 146, 786, 150, 1660, 191)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 8, 7, 11, 12), PackedInt32Array(7, 13, 11), PackedInt32Array(10, 12, 14, 15), PackedInt32Array(16, 15, 14), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 3, 5, 0, 2, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(17, 20, 28), PackedInt32Array(29, 30, 31, 32, 23), PackedInt32Array(26, 33, 16, 14, 17, 28, 34, 27), PackedInt32Array(35, 27, 34), PackedInt32Array(23, 35, 34, 29), PackedInt32Array(23, 32, 21), PackedInt32Array(23, 22, 36, 37), PackedInt32Array(37, 36, 6, 38), PackedInt32Array(24, 38, 6, 25), PackedInt32Array(39, 25, 6), PackedInt32Array(39, 6, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(162, 12, 260, 44, 342, 17, 1941, -1, 1975, 1158, 1740, 1147, 1809, 1036, 1761, 984, 470, 993, 109, 998, 143, 1138, 5, 1136, -27, 1000, -17, 519, 63, 427, 43, 359, 5, 356, 6, 305, 41, 295, 63, 217, 18, 124, -8, 45, -6, -21), PackedVector2Array(1276, 213, 1271, 274, 1303, 445, 1292, 784, 1324, 820, 1709, 822, 1725, 773, 1723, 218, 1659, 201), PackedVector2Array(639, 156, 579, 246, 660, 291, 789, 301, 826, 224, 781, 160)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
 [node name="TestLevel" type="Node2D"]
 process_mode = 1
 position = Vector2(-2, 0)
@@ -9170,6 +9176,9 @@ position = Vector2(1173, 446)
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(897, 457)
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_r7kk6")
+
 [node name="TilesAboveCharacters" type="TileMap" parent="."]
 z_index = 1
 tile_set = SubResource("TileSet_y61wt")
@@ -9202,5 +9211,3 @@ bus = &"Music"
 
 [node name="LoadingScreen" parent="." instance=ExtResource("14_jhdgt")]
 visible = false
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

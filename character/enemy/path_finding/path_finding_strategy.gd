@@ -3,11 +3,10 @@ extends Node
 
 enum PathFindingAlgorithm {
 	DUMB_COLLIDE,
-	DUMB_SLIDE
+	NAVIGATION_AGENT
 }
 
-static var algorithms = [PathFindingAlgorithm.DUMB_COLLIDE, PathFindingAlgorithm.DUMB_SLIDE]
+static var algorithms = [PathFindingAlgorithm.DUMB_COLLIDE, PathFindingAlgorithm.NAVIGATION_AGENT]
 
 static func random_strategy() -> PathFindingAlgorithm:
-	return algorithms[0]
-	#return algorithms[randi() % algorithms.size()] FIXME, uncomment when I have better strategies
+	return algorithms[randi() % algorithms.size()] 
