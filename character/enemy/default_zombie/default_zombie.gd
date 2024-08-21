@@ -56,7 +56,6 @@ func _physics_process(delta):
 
 func on_dying(delta):
 	self.z_index = 0
-	nav_obstacle.avoidance_enabled = false
 	walking_audio_player.stop()
 	if not played_dying:
 		sprite.play("dying")
@@ -114,7 +113,16 @@ func nav_agent_pathfinding(player, delta):
 	stats.speed.new_value(stats.speed.value + (distance * stats.speed_increase_factor))
 	stats.speed.new_value(min(stats.speed.value, stats.speed.max_value))
 	velocity = velocity.lerp(direction * stats.speed.value, 7 *  delta)
-	move_and_collide(velocity*delta)
+	var collision = move_and_collide(velocity*delta)
+	if(collision):
+		on_collision(collision)
+
+func on_collision(collision):
+	var collider = collision.get_collider()
+	if(collider.is_in_group("enemy")):
+		var repulsion_vector = global_position - collider.global_position
+		var avoidance_strength = 100.0
+		velocity += repulsion_vector.normalized() * avoidance_strength
 
 func dumb_path_finding_collide(player, delta):
 	global_position += dumb_path_finding(player, delta)
