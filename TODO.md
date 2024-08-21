@@ -1,8 +1,9 @@
 
 TODO 2
-# 1. New zombie enemy (different color) which would be smarter (will use pathfinding) and would be reanimating once with less HP.
-# 2. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
-# 3. Score should take into consideration dmg tooked by player to complete wave (the more dmg the more the minus gets). Wave counts as started after player completed leveling up.
+# 1. New zombie enemy (different color) which would be smarter (will use pathfinding).
+# 2. Another zombie enemy which would be dumb but reanimate itself.
+# 3. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
+# 4. Score should take into consideration dmg tooked by player to complete wave (the more dmg the more the minus gets). Wave counts as started after player completed leveling up.
 
 TODO 1
 # 0. After 10th wave go to Balbir for the summary.

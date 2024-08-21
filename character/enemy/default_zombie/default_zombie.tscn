@@ -115,6 +115,5 @@ avoidance_enabled = true
 radius = 150.0
 max_neighbors = 20
 max_speed = 500.0
-debug_enabled = true
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]

@@ -4,7 +4,6 @@ var player =  null
 var motion = Vector2()
 var vocal_timer_max_range = NumericAttribute.new(1,6)
 var vocal_timer = NumericAttribute.new(1, 3)
-var dying_timer = NumericAttribute.new(0, 50)
 var played_dying = false
 
 var stats: EnemyStats = ZombieStatsFactory.create()
@@ -34,18 +33,22 @@ func _ready():
 	if !players.is_empty():
 		player = players[0] #FIXME future support for coop
 
+# TODO remove this, I would create different scene instead
 func pick_zombie_color():
 	if (path_finding_strategy == strategy.PathFindingAlgorithm.NAVIGATION_AGENT):
 		sprite.modulate = Color(0,1,0)
+		# Best stats for smart zombie
+		stats.speed.value = 300 
+		stats.speed.max_value = 400
 	
 
 func _process(delta):
 	growl_on(delta)
 	
 func _physics_process(delta):
-	if dying_timer.value > 0:
+	if stats.get_dying_timer().value > 0:
 		on_dying(delta)
-	elif dying_timer.value < 0:
+	elif stats.get_dying_timer().value < 0:
 		die()	
 	elif stats.stunned_timer.value > 0:		
 		on_stun(delta)
@@ -61,7 +64,7 @@ func on_dying(delta):
 		sprite.play("dying")
 		played_dying = true
 
-	dying_timer.decrement_by(delta)
+	stats.get_dying_timer().decrement_by(delta)
 
 func on_animation_finished():
 	if sprite.animation == "dying":
@@ -80,7 +83,7 @@ func on_attack(delta):
 	sprite.play("idle")		
 # TODO: make it common, so every enemy  could use similar logic. Maybe some new node?
 func growl_on(delta):
-	if dying_timer.value > 0:
+	if stats.get_dying_timer().value > 0:
 		return
 	if (vocal_timer.value <= 0):
 		sound_manager.play_sound(voices.random_element(), voice_audio_player)
@@ -160,11 +163,12 @@ func take_dmg(dmg: float):
 		dying()
 	
 func dying():
-	if (dying_timer.value <= 0):
-		var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
-		GlobalEventBus.enemy_death.emit(death_details)
+	if (stats.get_dying_timer().value <= 0):
+		if (!stats.can_reanimate()):
+			var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
+			GlobalEventBus.enemy_death.emit(death_details)
 		play_death_sound()	
-		dying_timer.assign_max_value()
+		stats.get_dying_timer().assign_max_value()
 		$CollisionShape2D.set_deferred("disabled",  true)
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
 
@@ -173,4 +177,13 @@ func play_death_sound():
 	sound_manager.play_sound(death_sounds.random_element(), voice_audio_player)
 
 func die():
-	sprite.play("despawn")
+	if (stats.can_reanimate()):
+		reanimate()
+	else:
+		sprite.play("despawn")
+		
+func reanimate():
+	$CollisionShape2D.set_deferred("disabled",  false)
+	$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  false)			
+	stats.reanimated()
+	played_dying = false
