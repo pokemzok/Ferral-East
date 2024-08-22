@@ -1,15 +1,13 @@
 extends CharacterBody2D
 
+@export var type: Enemy.EnemyType
+var stats: EnemyStats
+
 var player =  null
 var motion = Vector2()
 var vocal_timer_max_range = NumericAttribute.new(1,6)
 var vocal_timer = NumericAttribute.new(1, 3)
 var played_dying = false
-
-var stats: EnemyStats = ZombieStatsFactory.create()
-
-var strategy = preload("res://character/enemy/path_finding/path_finding_strategy.gd")
-var path_finding_strategy = strategy.random_strategy()
 
 var sound_manager = GameSoundManager.get_instance()
 var voices = sound_manager.zombie_voices
@@ -25,6 +23,7 @@ var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 @onready var nav_obstacle = $NavigationObstacle2D
 
 func _ready():
+	stats = ZombieStatsFactory.create(type)
 	sprite.connect("animation_looped", on_animation_finished)
 	pick_zombie_color()	
 	self.z_index = 1
@@ -35,13 +34,11 @@ func _ready():
 
 # TODO remove this, I would create different scene instead
 func pick_zombie_color():
-	if (path_finding_strategy == strategy.PathFindingAlgorithm.NAVIGATION_AGENT):
+	if (stats.type == Enemy.EnemyType.FAST_ZOMBIE):
 		sprite.modulate = Color(0,1,0)
-		# Best stats for smart zombie
-		stats.speed.value = 300 
-		stats.speed.max_value = 400
-	
-
+	elif (stats.type == Enemy.EnemyType.REANIMATING_ZOMBIE):
+		sprite.modulate = Color(0,0,1)
+		
 func _process(delta):
 	growl_on(delta)
 	
@@ -97,10 +94,10 @@ func hunt_player(delta):
 	if player != null:
 		on_walk()
 		look_at(player.global_position)
-		match path_finding_strategy:
-			strategy.PathFindingAlgorithm.DUMB_COLLIDE:
+		match stats.path_finding_algo:
+			PathFindingStrategy.PathFindingAlgorithm.DUMB_COLLIDE:
 				dumb_path_finding_collide(player, delta)
-			strategy.PathFindingAlgorithm.NAVIGATION_AGENT:
+			PathFindingStrategy.PathFindingAlgorithm.NAVIGATION_AGENT:
 				nav_agent_pathfinding(player, delta)
 
 func on_walk():

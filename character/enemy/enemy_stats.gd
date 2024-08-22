@@ -13,8 +13,9 @@ var speed_increase_factor = 0.5
 var projectiles_dmg_velocity = 100
 var reanimates_times: int
 var starting_health: int
-
-func _init(type: Enemy.EnemyType, health_points: NumericAttribute, speed: NumericAttribute, reanimates_times: int):
+var path_finding_algo: PathFindingStrategy.PathFindingAlgorithm  
+	
+func _init(type: Enemy.EnemyType, health_points: NumericAttribute, speed: NumericAttribute, reanimates_times: int, path_finding_algo: PathFindingStrategy.PathFindingAlgorithm):
 	self.health_points = health_points
 	self.speed = speed
 	self.type = type
@@ -25,7 +26,8 @@ func _init(type: Enemy.EnemyType, health_points: NumericAttribute, speed: Numeri
 	self.dmg_score = calculate_score(5, 20)
 	var reanimation_multipler = reanimates_times + 1
 	self.death_score = calculate_score(40*reanimation_multipler, 80*reanimation_multipler)
-	
+	self.path_finding_algo = path_finding_algo
+				
 func calculate_score(min: int, max: int):
 	var normalized_health = (health_points.value) / (health_points.max_value)
 	var normalized_speed = (speed.value) / (speed.max_value)

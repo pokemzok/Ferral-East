@@ -1,23 +1,23 @@
 [gd_scene load_steps=14 format=3 uid="uid://b2tfu8bbgndoa"]
 
-[ext_resource type="Script" path="res://character/enemy/default_zombie/default_zombie.gd" id="1_deosn"]
-[ext_resource type="Texture2D" uid="uid://bphy8bstbcrwx" path="res://character/enemy/default_zombie/zombie-dying-1.png" id="2_6ula0"]
-[ext_resource type="Texture2D" uid="uid://cspj8gvc28g54" path="res://character/enemy/default_zombie/zombie-dying-2.png" id="3_owwiv"]
-[ext_resource type="Texture2D" uid="uid://8xxd56hhafbx" path="res://character/enemy/default_zombie/zombie-dying-4.png" id="3_rqtgm"]
-[ext_resource type="Texture2D" uid="uid://b20yq7co8n01j" path="res://character/enemy/default_zombie/zombie-dying-5.png" id="4_dkmxa"]
-[ext_resource type="Texture2D" uid="uid://bbsa4kg12nfnm" path="res://character/enemy/default_zombie/zombie-dying-3.png" id="4_hk8fx"]
-[ext_resource type="Texture2D" uid="uid://wi28nmg0513v" path="res://character/enemy/default_zombie/zombie--idle-1.png" id="5_l4htm"]
-[ext_resource type="Texture2D" uid="uid://uv7bnnegq6iv" path="res://character/enemy/default_zombie/zombie--hurt-1.png" id="6_l85vg"]
-[ext_resource type="Texture2D" uid="uid://kbmm2h5tm4a0" path="res://character/enemy/default_zombie/zombie-hurt-2.png" id="7_7pu1u"]
-[ext_resource type="Texture2D" uid="uid://b1wwfvj7elxi6" path="res://character/enemy/default_zombie/zombie--walk-1.png" id="8_jh0ly"]
-[ext_resource type="Texture2D" uid="uid://bu60mg2gmv2vs" path="res://character/enemy/default_zombie/zombie--walk-2.png" id="9_fushc"]
-[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="10_qiyc7"]
+[ext_resource type="Script" path="res://character/enemy/zombie/zombie.gd" id="1_t34le"]
+[ext_resource type="Texture2D" uid="uid://bbsa4kg12nfnm" path="res://character/enemy/zombie/default/zombie-dying-3.png" id="2_terlf"]
+[ext_resource type="Texture2D" uid="uid://8xxd56hhafbx" path="res://character/enemy/zombie/default/zombie-dying-4.png" id="3_vcu7a"]
+[ext_resource type="Texture2D" uid="uid://b20yq7co8n01j" path="res://character/enemy/zombie/default/zombie-dying-5.png" id="4_ddm2n"]
+[ext_resource type="Texture2D" uid="uid://bphy8bstbcrwx" path="res://character/enemy/zombie/default/zombie-dying-1.png" id="5_o2eql"]
+[ext_resource type="Texture2D" uid="uid://cspj8gvc28g54" path="res://character/enemy/zombie/default/zombie-dying-2.png" id="6_dxgrj"]
+[ext_resource type="Texture2D" uid="uid://wi28nmg0513v" path="res://character/enemy/zombie/default/zombie--idle-1.png" id="7_qrore"]
+[ext_resource type="Texture2D" uid="uid://uv7bnnegq6iv" path="res://character/enemy/zombie/default/zombie--hurt-1.png" id="8_6okka"]
+[ext_resource type="Texture2D" uid="uid://kbmm2h5tm4a0" path="res://character/enemy/zombie/default/zombie-hurt-2.png" id="9_861ff"]
+[ext_resource type="Texture2D" uid="uid://b1wwfvj7elxi6" path="res://character/enemy/zombie/default/zombie--walk-1.png" id="10_hyh6m"]
+[ext_resource type="Texture2D" uid="uid://bu60mg2gmv2vs" path="res://character/enemy/zombie/default/zombie--walk-2.png" id="11_72cx2"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="12_i7byk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nct2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_hk8fx")
+"texture": ExtResource("2_terlf")
 }],
 "loop": true,
 "name": &"dead",
@@ -25,13 +25,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_hk8fx")
+"texture": ExtResource("2_terlf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_rqtgm")
+"texture": ExtResource("3_vcu7a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_dkmxa")
+"texture": ExtResource("4_ddm2n")
 }],
 "loop": true,
 "name": &"despawn",
@@ -39,13 +39,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_6ula0")
+"texture": ExtResource("5_o2eql")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_owwiv")
+"texture": ExtResource("6_dxgrj")
 }, {
 "duration": 5.0,
-"texture": ExtResource("4_hk8fx")
+"texture": ExtResource("2_terlf")
 }],
 "loop": true,
 "name": &"dying",
@@ -53,7 +53,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_l4htm")
+"texture": ExtResource("7_qrore")
 }],
 "loop": true,
 "name": &"idle",
@@ -61,10 +61,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_l85vg")
+"texture": ExtResource("8_6okka")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_7pu1u")
+"texture": ExtResource("9_861ff")
 }],
 "loop": true,
 "name": &"stunned",
@@ -72,10 +72,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_jh0ly")
+"texture": ExtResource("10_hyh6m")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_fushc")
+"texture": ExtResource("11_72cx2")
 }],
 "loop": true,
 "name": &"walk",
@@ -84,7 +84,7 @@ animations = [{
 
 [node name="DefaultZombie" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(1.1, 1.1)
-script = ExtResource("1_deosn")
+script = ExtResource("1_t34le")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
@@ -108,7 +108,7 @@ bus = &"Voices"
 [node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 
-[node name="GameAmbientAudioPool" parent="." instance=ExtResource("10_qiyc7")]
+[node name="GameAmbientAudioPool" parent="." instance=ExtResource("12_i7byk")]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true

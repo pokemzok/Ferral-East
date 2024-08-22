@@ -2,7 +2,7 @@ class_name SurvivalGameMode
 extends GameMode
 
 var music: SurvivalModeMusic
-var zombie = preload("res://character/enemy/default_zombie/default_zombie.tscn")
+var zombie = preload("res://character/enemy/zombie/default/default_zombie.tscn")
 var spawn_points: ArrayCollection
 var spawn_time = NumericAttribute.new(3, 3)
 var is_resting_period = false
