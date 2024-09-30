@@ -1,0 +1,155 @@
+[gd_scene load_steps=19 format=3 uid="uid://c3pei7q6t28io"]
+
+[ext_resource type="Script" path="res://character/enemy/zombie/zombie.gd" id="1_wiae2"]
+[ext_resource type="Texture2D" uid="uid://c1ig5aspasl0t" path="res://character/enemy/zombie/reanimating/reanimating-zombie-despawn.png" id="2_y1ty3"]
+[ext_resource type="Texture2D" uid="uid://dcghq31s4e44t" path="res://character/enemy/zombie/reanimating/respawning-zombie-dying.png" id="4_1g8ip"]
+[ext_resource type="Texture2D" uid="uid://uv7bnnegq6iv" path="res://character/enemy/zombie/default/zombie--hurt-1.png" id="5_nxqfp"]
+[ext_resource type="Texture2D" uid="uid://cvol4wkqtq2n2" path="res://character/enemy/zombie/reanimating/reanimating-zombie.png" id="5_s64wo"]
+[ext_resource type="Texture2D" uid="uid://kbmm2h5tm4a0" path="res://character/enemy/zombie/default/zombie-hurt-2.png" id="6_yjwma"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="7_tgint"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4a01h"]
+atlas = ExtResource("2_y1ty3")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_diqq6"]
+atlas = ExtResource("2_y1ty3")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jxl0"]
+atlas = ExtResource("2_y1ty3")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl87s"]
+atlas = ExtResource("2_y1ty3")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyvja"]
+atlas = ExtResource("4_1g8ip")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdrvl"]
+atlas = ExtResource("4_1g8ip")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bomqa"]
+atlas = ExtResource("4_1g8ip")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78f0w"]
+atlas = ExtResource("5_s64wo")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gle4"]
+atlas = ExtResource("5_s64wo")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ph7v"]
+atlas = ExtResource("5_s64wo")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0nct2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4a01h")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_diqq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jxl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl87s")
+}],
+"loop": true,
+"name": &"despawn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyvja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdrvl")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_bomqa")
+}],
+"loop": true,
+"name": &"dying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78f0w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_nxqfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yjwma")
+}],
+"loop": true,
+"name": &"stunned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gle4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ph7v")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="ReanimatingZombie" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(1.1, 1.1)
+script = ExtResource("1_wiae2")
+type = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0nct2")
+animation = &"despawn"
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+light_mask = 0
+position = Vector2(11, -4)
+polygon = PackedVector2Array(-47, -9, -29, -18, -24, -32, -18, -36, 9, -36, 29, -35, 33, -28, 26, -26, 11, -1, 37, 29, 37, 34, 34, 36, 26, 37, 18, 36, 6, 37, -4, 39, -23, 38, -27, 28, -34, 23, -41, 19, -46, 20, -47, 14, -38, 12, -37, -1, -42, -4, -45, -4, -47, -5)
+
+[node name="HurtboxArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HurtboxArea2D"]
+light_mask = 0
+position = Vector2(11, -4)
+polygon = PackedVector2Array(-47, -9, -29, -18, -24, -32, -18, -36, 9, -36, 29, -35, 33, -28, 26, -26, 11, -1, 37, 29, 37, 34, 34, 36, 26, 37, 18, 36, 6, 37, -4, 39, -23, 38, -27, 28, -34, 23, -41, 19, -46, 20, -47, 14, -38, 12, -37, -1, -42, -4, -45, -4, -47, -5)
+
+[node name="VoiceAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Voices"
+
+[node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="GameAmbientAudioPool" parent="." instance=ExtResource("7_tgint")]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 150.0
+max_neighbors = 20
+max_speed = 500.0
+
+[connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]

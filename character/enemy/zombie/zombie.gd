@@ -22,23 +22,17 @@ var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 @onready var sprite = $AnimatedSprite2D
 @onready var nav_obstacle = $NavigationObstacle2D
 
+#TODO use different zombies during waves
+
 func _ready():
 	stats = ZombieStatsFactory.create(type)
 	sprite.connect("animation_looped", on_animation_finished)
-	pick_zombie_color()	
 	self.z_index = 1
 	vocal_timer.randomize_value()
 	var players = get_tree().get_nodes_in_group("player")
 	if !players.is_empty():
 		player = players[0] #FIXME future support for coop
 
-# TODO remove this, I would create different scene instead
-func pick_zombie_color():
-	if (stats.type == Enemy.EnemyType.FAST_ZOMBIE):
-		sprite.modulate = Color(0,1,0)
-	elif (stats.type == Enemy.EnemyType.REANIMATING_ZOMBIE):
-		sprite.modulate = Color(0,0,1)
-		
 func _process(delta):
 	growl_on(delta)
 	

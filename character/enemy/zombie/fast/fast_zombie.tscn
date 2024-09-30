@@ -1,23 +1,58 @@
-[gd_scene load_steps=14 format=3 uid="uid://vrn47lsvmkn0"]
+[gd_scene load_steps=19 format=3 uid="uid://vrn47lsvmkn0"]
 
 [ext_resource type="Script" path="res://character/enemy/zombie/zombie.gd" id="1_f5tjh"]
-[ext_resource type="Texture2D" uid="uid://bbsa4kg12nfnm" path="res://character/enemy/zombie/default/zombie-dying-3.png" id="2_i0e6o"]
-[ext_resource type="Texture2D" uid="uid://8xxd56hhafbx" path="res://character/enemy/zombie/default/zombie-dying-4.png" id="3_45v8m"]
-[ext_resource type="Texture2D" uid="uid://b20yq7co8n01j" path="res://character/enemy/zombie/default/zombie-dying-5.png" id="4_f051i"]
-[ext_resource type="Texture2D" uid="uid://bphy8bstbcrwx" path="res://character/enemy/zombie/default/zombie-dying-1.png" id="5_h2hlr"]
-[ext_resource type="Texture2D" uid="uid://cspj8gvc28g54" path="res://character/enemy/zombie/default/zombie-dying-2.png" id="6_p6rxq"]
-[ext_resource type="Texture2D" uid="uid://wi28nmg0513v" path="res://character/enemy/zombie/default/zombie--idle-1.png" id="7_668t8"]
+[ext_resource type="Texture2D" uid="uid://j54g03mw4u4q" path="res://character/enemy/zombie/fast/fast-zombie-despawn.png" id="3_x626y"]
+[ext_resource type="Texture2D" uid="uid://cve4v3xkyw7wh" path="res://character/enemy/zombie/fast/dying-fast-zombie.png" id="5_yrm5s"]
+[ext_resource type="Texture2D" uid="uid://ca6ax2x1yh3qs" path="res://character/enemy/zombie/fast/fast-zombie.png" id="7_vbt4r"]
 [ext_resource type="Texture2D" uid="uid://uv7bnnegq6iv" path="res://character/enemy/zombie/default/zombie--hurt-1.png" id="8_bljfo"]
 [ext_resource type="Texture2D" uid="uid://kbmm2h5tm4a0" path="res://character/enemy/zombie/default/zombie-hurt-2.png" id="9_ki05x"]
-[ext_resource type="Texture2D" uid="uid://b1wwfvj7elxi6" path="res://character/enemy/zombie/default/zombie--walk-1.png" id="10_wrpd4"]
-[ext_resource type="Texture2D" uid="uid://bu60mg2gmv2vs" path="res://character/enemy/zombie/default/zombie--walk-2.png" id="11_6lwif"]
 [ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="12_ms03m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pajmx"]
+atlas = ExtResource("5_yrm5s")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn2yf"]
+atlas = ExtResource("3_x626y")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awhhx"]
+atlas = ExtResource("3_x626y")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o38e0"]
+atlas = ExtResource("3_x626y")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13j2o"]
+atlas = ExtResource("5_yrm5s")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k710"]
+atlas = ExtResource("5_yrm5s")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmjsy"]
+atlas = ExtResource("5_yrm5s")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfvu6"]
+atlas = ExtResource("7_vbt4r")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxpai"]
+atlas = ExtResource("7_vbt4r")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2gfd"]
+atlas = ExtResource("7_vbt4r")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nct2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_i0e6o")
+"texture": SubResource("AtlasTexture_pajmx")
 }],
 "loop": true,
 "name": &"dead",
@@ -25,13 +60,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_i0e6o")
+"texture": SubResource("AtlasTexture_cn2yf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_45v8m")
+"texture": SubResource("AtlasTexture_awhhx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_f051i")
+"texture": SubResource("AtlasTexture_o38e0")
 }],
 "loop": true,
 "name": &"despawn",
@@ -39,13 +74,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_h2hlr")
+"texture": SubResource("AtlasTexture_13j2o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_p6rxq")
+"texture": SubResource("AtlasTexture_1k710")
 }, {
 "duration": 5.0,
-"texture": ExtResource("2_i0e6o")
+"texture": SubResource("AtlasTexture_xmjsy")
 }],
 "loop": true,
 "name": &"dying",
@@ -53,7 +88,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_668t8")
+"texture": SubResource("AtlasTexture_kfvu6")
 }],
 "loop": true,
 "name": &"idle",
@@ -72,24 +107,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_wrpd4")
+"texture": SubResource("AtlasTexture_gxpai")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_6lwif")
+"texture": SubResource("AtlasTexture_f2gfd")
 }],
 "loop": true,
 "name": &"walk",
 "speed": 5.0
 }]
 
-[node name="FasttZombie" type="CharacterBody2D" groups=["enemy"]]
+[node name="FastZombie" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(1.1, 1.1)
 script = ExtResource("1_f5tjh")
 type = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
-animation = &"idle"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 light_mask = 0
