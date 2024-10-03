@@ -177,4 +177,5 @@ func reanimate():
 	$CollisionShape2D.set_deferred("disabled",  false)
 	$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  false)			
 	stats.reanimated()
+	self.z_index = 1
 	played_dying = false

@@ -2,7 +2,7 @@ class_name SurvivalGameMode
 extends GameMode
 
 var music: SurvivalModeMusic
-var zombie = preload("res://character/enemy/zombie/default/default_zombie.tscn")
+var enemies: SurvivalModeEnemies
 var spawn_points: ArrayCollection
 var spawn_time = NumericAttribute.new(3, 3)
 var is_resting_period = false
@@ -15,9 +15,10 @@ var enemies_to_spawn = wave_enemies[wave_index]
 var spawn_enemies_nr = NumericAttribute.new(1, 3)
 var pause = false
 
-func _init(spawn_points: ArrayCollection, music: SurvivalModeMusic):
+func _init(spawn_points: ArrayCollection, music: SurvivalModeMusic, enemies: SurvivalModeEnemies):
 	self.spawn_points = spawn_points
 	self.music = music
+	self.enemies = enemies
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.wave_started.emit(wave_index+1, enemies_to_kill)	
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
@@ -60,7 +61,8 @@ func spawn_enemies(delta):
 			if(enemies_to_spawn <= 0):
 				break
 			var spawner = spawners[i]	
-			spawner.add_child(zombie.instantiate())
+			var enemy = enemies.get_enemy_for_wave(wave_index)
+			spawner.add_child(enemy.instantiate())
 			enemies_to_spawn -= 1		
 
 func on_enemy_death(death_details: EnemyDeathDetails):
