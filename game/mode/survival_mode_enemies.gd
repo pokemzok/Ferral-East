@@ -5,6 +5,8 @@ var enemies_for_waves: ArrayCollection
 var num_enemies: int
 var base_probabilities: Array = []
 var base_total_weight = 0.0
+var max_first_weight = 0.9
+var min_first_weight = 0.3
 
 func _init(enemies: ArrayCollection):
 	self.enemies_for_waves = enemies
@@ -19,9 +21,6 @@ func calculate_base_probabilities():
 	if num_enemies == 1:
 		base_probabilities.append(1.0)
 		return
-	
-	var max_first_weight = 0.9
-	var min_first_weight = 0.3
 
 	var first_weight_substraction = 0.0
 	if (num_enemies  > 3):
@@ -49,9 +48,21 @@ func calculate_wave_adjusted_probabilities(wave_index: int) -> Array:
 	# Scale factor, adjusting difficulty. Starts near 0 for early waves, increases over time
 	var scale_factor = clamp(float(wave_index) / 10.0, 0.0, 1.0)
 	# Recalculate the probabilities based on wave_index
+	var falloff_total_weight = 0.0
+	if (num_enemies >  1):
+		for j in range(1, num_enemies):
+			falloff_total_weight += pow(0.5, j)
+			
 	for i in range(num_enemies):
-		# Flatten the probability curve as wave_index increases
-		var adjusted_weight = lerp(base_probabilities[i], 1.0 / num_enemies, scale_factor)
+		var adjusted_weight = 0.0
+		if (i == 0):
+			adjusted_weight = lerp(base_probabilities[i], 1.0 / num_enemies, scale_factor)
+			adjusted_weight = clamp(adjusted_weight, min_first_weight, max_first_weight) 
+		else:
+			var remaining_weight = 1.0 - adjusted_probabilities[0]
+			adjusted_weight = pow(0.5, i)
+			adjusted_weight = adjusted_weight * (remaining_weight / falloff_total_weight)
+				
 		adjusted_probabilities.append(adjusted_weight)
 		adjusted_total_weight += adjusted_weight
 	
@@ -65,7 +76,6 @@ func get_enemy_for_wave(wave_index: int):
 	var adjusted_probabilities = calculate_wave_adjusted_probabilities(wave_index)
 	var random_value = randf()
 	var cumulative_probability = 0.0
-	print(adjusted_probabilities)
 	for i in range(adjusted_probabilities.size()):
 		cumulative_probability += adjusted_probabilities[i]
 		if random_value <= cumulative_probability:
