@@ -14,13 +14,34 @@ func _init(enemies: ArrayCollection):
 	calculate_base_probabilities()	
 
 func calculate_base_probabilities():
-	for i in range(num_enemies):
-		var weight = pow(0.5, i)  # Exponential falloff (0.5 for every next enemy)
+	base_probabilities.clear()
+	base_total_weight = 0
+	if num_enemies == 1:
+		base_probabilities.append(1.0)
+		return
+	
+	var max_first_weight = 0.9
+	var min_first_weight = 0.3
+
+	var first_weight_substraction = 0.0
+	if (num_enemies  > 3):
+		first_weight_substraction = (num_enemies - 3)/10
+	var first_weight = max_first_weight - first_weight_substraction
+	first_weight = clamp(first_weight, min_first_weight, max_first_weight)  # Ensure it's within the bounds
+	
+	base_probabilities.append(first_weight)
+	var remaining_weight = 1.0 - first_weight
+	
+	var falloff_total_weight = 0.0
+	for i in range(1, num_enemies):
+		falloff_total_weight += pow(0.5, i)
+	
+	# Now calculate the weights for the rest of the enemies and normalize them
+	for i in range(1, num_enemies):
+		var weight = pow(0.5, i)
+		# Scale the falloff weights to fit the remaining weight
+		weight = weight * (remaining_weight / falloff_total_weight)
 		base_probabilities.append(weight)
-		base_total_weight += weight
- 	#Normalize probabilities to sum up to 1.0
-	for i in range(base_probabilities.size()):
-		base_probabilities[i] /= base_total_weight
 
 func calculate_wave_adjusted_probabilities(wave_index: int) -> Array:
 	var adjusted_probabilities: Array = []
@@ -44,6 +65,7 @@ func get_enemy_for_wave(wave_index: int):
 	var adjusted_probabilities = calculate_wave_adjusted_probabilities(wave_index)
 	var random_value = randf()
 	var cumulative_probability = 0.0
+	print(adjusted_probabilities)
 	for i in range(adjusted_probabilities.size()):
 		cumulative_probability += adjusted_probabilities[i]
 		if random_value <= cumulative_probability:

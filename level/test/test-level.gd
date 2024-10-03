@@ -61,7 +61,7 @@ func on_loading_resources():
 func on_music_loaded():
 	if (victory_music_resources_group.is_group_loaded() && survival_music_resources_group.is_group_loaded()):	
 		level_music = SurvivalModeMusic.new(
-					survival_music_resources_group.get_loaded_resources(),
+					survival_music_resources_group.sort().get_loaded_resources(),
 					level_music_player,				
 					victory_music_resources_group.get_loaded_resources(),
 					level_victory_music_player
@@ -69,10 +69,9 @@ func on_music_loaded():
 
 func on_enemies_loaded():
 	if(enemies_resources_group.is_group_loaded()):
-		# TODO: sort this group (order should be similar to  keys)
-		# TODO: maybe I can sort music groups as well, so it would have necessary order
-		# TODO: I can even sort it by default in specific order during get_loaded_resources()
-		level_enemies =  SurvivalModeEnemies.new(enemies_resources_group.get_loaded_resources())
+		level_enemies =  SurvivalModeEnemies.new(
+			enemies_resources_group.sort().get_loaded_resources()
+		)
 	
 func destroy():
 	if (game_mode != null):

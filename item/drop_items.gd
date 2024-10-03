@@ -22,10 +22,11 @@ static var common_items = {
 static var rare_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.PENTAGRAM,
-	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.COIN
+	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.CYLINDER
 }
 
 static var legendary_items = {
+	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.CYLINDER,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.PENTAGRAM
 }
