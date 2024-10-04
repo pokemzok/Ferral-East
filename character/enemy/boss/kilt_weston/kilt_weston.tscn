@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://cdokidrekqjas"]
+
+[ext_resource type="Script" path="res://character/enemy/boss/kilt_weston/kilt_weston.gd" id="1_22pbn"]
+[ext_resource type="Texture2D" uid="uid://dsw8wjvejj44y" path="res://character/enemy/boss/kilt_weston/kilt_weston_moving.png" id="1_a3wdl"]
+[ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="3_cewi7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bpet"]
+atlas = ExtResource("1_a3wdl")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h860p"]
+atlas = ExtResource("1_a3wdl")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7xnb"]
+atlas = ExtResource("1_a3wdl")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dgjim"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bpet")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h860p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7xnb")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ciqp7"]
+radius = 28.0
+height = 58.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tmbjt"]
+radius = 34.4384
+
+[node name="KiltWeston" type="CharacterBody2D"]
+script = ExtResource("1_22pbn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dgjim")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ciqp7")
+
+[node name="HurtboxArea2D" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
+shape = SubResource("CircleShape2D_tmbjt")
+
+[node name="WalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="EffectsAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="GameAmbientAudioPool" parent="." instance=ExtResource("3_cewi7")]
