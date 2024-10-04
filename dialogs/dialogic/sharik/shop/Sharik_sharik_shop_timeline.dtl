@@ -2,4 +2,7 @@ if {sharik.shop_state} == "CONVERSATION":
 	jump Sharik_exit_shop_timeline/
 else:
 	set {sharik.shop_state} = "CONVERSATION"
-	jump Sharik_shop_first_conversation_timeline/
+	if {player.was_in_shop}:
+		jump Sharik_sale_timeline/
+	else:	
+		jump Sharik_shop_first_conversation_timeline/

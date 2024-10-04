@@ -1,9 +1,7 @@
 
-TODO 2
-# 1. New zombie enemy (different color) which would be smarter (will use pathfinding).
-# 2. Another zombie enemy which would be dumb but reanimate itself.
-# 3. Maybe a miniboss as well, basically same guy as Surbi, but more HP 
-# 4. Score should take into consideration dmg tooked by player to complete wave (the more dmg the more the minus gets). Wave counts as started after player completed leveling up.
+TODO 0
+# 1. Maybe a miniboss as well, basically same guy as Surbi, but more HP.
+# 2. I can also trigger dialogue between both guys. 
 
 TODO 1
 # 0. After 10th wave go to Balbir for the summary.
@@ -18,6 +16,7 @@ TODO 3
 # 6. Maybe refactor items so they would have modes instead of being shop dedicated. For example I might want to cell cylinder in shop as well, but I need to somehow scale that item  better in the shop.
 # 7. Add stones later on,  so they could be a  "funny" item without reason to carry  it.
 # 8. Add Gods favours to Sharik Shop (could be indicated as a numbers under the ammunition on player HUD)
+# 9. Fix Sharik dialogues, when I finally have everything
 
 TODO 4
 # 1. Make user only have 3 pockets (currently it is not limited) and add "threads and needles" item to increase pocket nr.
@@ -44,6 +43,8 @@ TODO 4
 # 10. Start release process to see how difficult it is.
 # 11. Make background images in menu  zoom in and out, also change them from time to  time.
 # 12. Sharik prices might be influenced by how many times he was shot by the player
+# 13. Score should take into consideration dmg tooked by player to complete wave (the more dmg the more the minus gets). Wave counts as started after player completed leveling up.
+
 
 # For future
 # Halina is a melee (higher damage, more health, ability to regenerate between waves)

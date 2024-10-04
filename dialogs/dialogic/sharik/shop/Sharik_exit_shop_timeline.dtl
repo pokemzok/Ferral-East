@@ -10,6 +10,7 @@ sharik: Don't make me scratch you again, pal. #id:4e
 [end_timeline]
 label thank_you_bye
 set {sharik.shop_state} = "VISITED"
+set {player.was_in_shop} = true
 [sound path="res://dialogs/dialogic/sharik/typing.mp3" volume="-1.0" bus="Voices"]
 sharik: See you later, aligator. #id:3e
 [signal arg="PLAYER_LEFT_SHOP"]
