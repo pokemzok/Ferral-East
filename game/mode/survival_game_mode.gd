@@ -7,11 +7,9 @@ var spawn_points: ArrayCollection
 var spawn_time = NumericAttribute.new(3, 3)
 var is_resting_period = false
 var wave_cooldown = NumericAttribute.new(5,5)
-var wave_enemies  = [5, 10, 15, 25, 30, 40, 50, 60, 80, 100]
-#var wave_enemies  = [1]
 var wave_index = 0
-var enemies_to_kill = wave_enemies[wave_index]
-var enemies_to_spawn = wave_enemies[wave_index]
+var enemies_to_kill = 0
+var enemies_to_spawn = 0
 var spawn_enemies_nr = NumericAttribute.new(1, 3)
 var pause = false
 
@@ -19,6 +17,8 @@ func _init(spawn_points: ArrayCollection, music: SurvivalModeMusic, enemies: Sur
 	self.spawn_points = spawn_points
 	self.music = music
 	self.enemies = enemies
+	self.enemies_to_kill = enemies.nr_enemies_per_wave[wave_index]
+	self.enemies_to_spawn = enemies.nr_enemies_per_wave[wave_index]
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.wave_started.emit(wave_index+1, enemies_to_kill)	
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
@@ -61,7 +61,7 @@ func spawn_enemies(delta):
 			if(enemies_to_spawn <= 0):
 				break
 			var spawner = spawners[i]	
-			var enemy = enemies.get_enemy_for_wave(wave_index)
+			var enemy = enemies.get_boss() if enemies.nr_enemies_per_wave[wave_index] == 1 else enemies.get_enemy_for_wave(wave_index)
 			spawner.add_child(enemy.instantiate())
 			enemies_to_spawn -= 1		
 
@@ -73,11 +73,11 @@ func on_enemy_death(death_details: EnemyDeathDetails):
 		
 func on_wave_complete():
 	wave_index += 1
-	if (wave_index < wave_enemies.size()):
-		enemies_to_kill = wave_enemies[wave_index]
+	if (wave_index < enemies.nr_enemies_per_wave.size()):
+		enemies_to_kill = enemies.nr_enemies_per_wave[wave_index]
 		increase_difficulty()
 	else:
-		enemies_to_kill = wave_enemies[wave_enemies.size()-1]	
+		enemies_to_kill = enemies.nr_enemies_per_wave[enemies.nr_enemies_per_wave.size()-1]	
 	is_resting_period = true
 	wave_cooldown.assign_max_value()
 	enemies_to_spawn = enemies_to_kill

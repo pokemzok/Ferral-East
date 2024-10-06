@@ -1,19 +1,31 @@
 class_name SurvivalModeEnemies
 extends Node
 
-var enemies_for_waves: ArrayCollection
+var regular_enemies: ArrayCollection
 var num_enemies: int
+var bosses: ArrayCollection
+var boss_index = 0
+var nr_enemies_per_wave = [0]
 var base_probabilities: Array = []
 var base_total_weight = 0.0
 var max_first_weight = 0.9
 var min_first_weight = 0.3
 
-func _init(enemies: ArrayCollection):
-	self.enemies_for_waves = enemies
-	num_enemies = enemies_for_waves.size()
+func _init(regular_enemies: ArrayCollection, bosses: ArrayCollection, nr_enemies_per_wave: Array):
+	self.regular_enemies = regular_enemies
+	self.bosses = bosses
+	self.nr_enemies_per_wave = nr_enemies_per_wave
+	enemies_precondition()
+	calculate_base_probabilities()	
+
+func enemies_precondition():
+	num_enemies = regular_enemies.size()
 	if num_enemies == 0:
 		push_error("No enemies to draw from")
-	calculate_base_probabilities()	
+
+func bosses_precondition():
+	if bosses.size() == 0:
+		push_error("No bosses to draw from")
 
 func calculate_base_probabilities():
 	base_probabilities.clear()
@@ -79,6 +91,12 @@ func get_enemy_for_wave(wave_index: int):
 	for i in range(adjusted_probabilities.size()):
 		cumulative_probability += adjusted_probabilities[i]
 		if random_value <= cumulative_probability:
-			return enemies_for_waves.get_element_by_index(i)
+			return regular_enemies.get_element_by_index(i)
 
-	
+func get_boss():
+	if (bosses.size() > boss_index):
+		var boss = bosses.collection[boss_index]
+		boss_index = boss_index + 1
+		return boss
+	else:
+		push_error("All bosses were used up")	

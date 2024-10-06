@@ -16,4 +16,9 @@ var enemy_res = {
 	Enemy.EnemyType.REANIMATING_ZOMBIE: "res://character/enemy/zombie/reanimating/reanimating_zombie.tscn",
 }
 
+var bosses_res = {
+	Enemy.EnemyType.KILT_WESTON: "res://character/enemy/boss/kilt_weston/kilt_weston.tscn"
+}
+
 var zombie_keys = [Enemy.EnemyType.DEFAULT_ZOMBIE, Enemy.EnemyType.FAST_ZOMBIE, Enemy.EnemyType.REANIMATING_ZOMBIE]
+var bosses_keys = [Enemy.EnemyType.KILT_WESTON]

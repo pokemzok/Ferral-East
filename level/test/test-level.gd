@@ -7,6 +7,7 @@ var victory_music_resources_group: ResourcesGroup
 var survival_music_resources_group: ResourcesGroup
 var sound_manager = GameSoundManager.get_instance()
 var enemies_resources_group: ResourcesGroup
+var bosses_resource_group: ResourcesGroup
 var enemies_manager = EnemiesManager.get_instance() 
 var level_enemies: SurvivalModeEnemies
 var resources = []
@@ -33,8 +34,9 @@ func _ready():
 		sound_manager.music_res
 	)
 	enemies_resources_group = ResourcesGroup.new(enemies_manager.zombie_keys, enemies_manager.enemy_res)
+	bosses_resource_group = ResourcesGroup.new(enemies_manager.bosses_keys, enemies_manager.bosses_res)
 	
-	resources = [victory_music_resources_group, survival_music_resources_group, enemies_resources_group]
+	resources = [victory_music_resources_group, survival_music_resources_group, enemies_resources_group, bosses_resource_group]
 	
 	GlobalEventBus.player_arrived_to_level.emit(LevelManager.Levels.ABANDONED_FARM)
 
@@ -68,9 +70,11 @@ func on_music_loaded():
 			)
 
 func on_enemies_loaded():
-	if(enemies_resources_group.is_group_loaded()):
+	if(enemies_resources_group.is_group_loaded() && bosses_resource_group.is_group_loaded()):
 		level_enemies =  SurvivalModeEnemies.new(
-			enemies_resources_group.sort().get_loaded_resources()
+			enemies_resources_group.sort().get_loaded_resources(),
+			bosses_resource_group.sort().get_loaded_resources(),
+			[5, 10, 15, 18, 20, 22, 25, 27, 30, 1]
 		)
 	
 func destroy():
