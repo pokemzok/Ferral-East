@@ -1,7 +1,12 @@
 
 TODO 0
-# 1. Maybe a miniboss as well, basically same guy as Surbi, but more HP.
-# 2. I can also trigger dialogue between both guys. 
+# 1. Maybe a boss as well, basically same guy as Surbi, but more HP.
+# 2. I need all the animations for Kilt Weston.
+# 3. I need  AI for Kilt. It should move around a lot and fire on Surbi previous position (some delay, so the player could react). 
+#    Kilt needs to be aware of terrain so he would not be stuck on cactuses.
+# 4. I need a boss spawn, so bosses could appear from the specific places.
+# 5. I might need to rework my SurvivalGameMode to extract spawning algorithm.
+# 6. I can also trigger dialogue between both guys. 
 
 TODO 1
 # 0. After 10th wave go to Balbir for the summary.
