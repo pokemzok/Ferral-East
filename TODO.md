@@ -5,14 +5,20 @@ TODO 0
 # 3. I need  AI for Kilt. It should move around a lot and fire on Surbi previous position (some delay, so the player could react). 
 #    Kilt needs to be aware of terrain so he would not be stuck on cactuses.
 # 4. I need a boss spawn, so bosses could appear from the specific places.
-# 5. I might need to rework my SurvivalGameMode to extract spawning algorithm.
-# 6. I can also trigger dialogue between both guys. 
 
 TODO 1
+# 1. Make Sharik in Blender, so I can try generating resources from it.
+
+TODO 2
+# 5. I might need to rework my SurvivalGameMode to extract spawning algorithm.
+# 6. I can also trigger dialogue between both guys. 
+# 7. TODO learn blender so I can make more realistic animations.
+
+TODO 3
 # 0. After 10th wave go to Balbir for the summary.
 # 1. Revisit increasing of the difficulty level after those changes and try to nudge it into the right direction.
 
-TODO 3
+TODO 4
 # 1. At least 5 levels, which would all have ten waves -> this way I would allow Surbi to be completely upgraded till the end of the game.
 # 2. Transition to next level after completing 10 wave (no saves).
 # 3. Player keeps all the powers during transitions.
@@ -23,7 +29,7 @@ TODO 3
 # 8. Add Gods favours to Sharik Shop (could be indicated as a numbers under the ammunition on player HUD)
 # 9. Fix Sharik dialogues, when I finally have everything
 
-TODO 4
+TODO 5
 # 1. Make user only have 3 pockets (currently it is not limited) and add "threads and needles" item to increase pocket nr.
 # 2. Make user have a limit of how much he can carry.
 # 1. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
@@ -32,7 +38,7 @@ TODO 4
 # 4. Make cactus hurt player and enemy
 # 2. Cat should try to reach the coins if there are any (later on, when I would have a pathfinding)
 
-# TODO 5
+# TODO 6
 # 0. Resolution scaling (I  want for the player to  be able to pick a resolution)
 # 1. Nicer menu and loading screens
 # 1.1 Some interesting background as well

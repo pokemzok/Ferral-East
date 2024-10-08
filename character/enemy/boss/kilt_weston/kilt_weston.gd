@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var pausable = PausableNodeBehaviour.new(self)
 var weapon = Revolver.new()
-var stats: PlayerStats = SurbiStatsFactory.create()
+var stats: UndeadShooterStats = KiltStatsFactory.create()
 var wallet: Wallet = Wallet.new()
 var consumables_inventory: PlayerInventory = PlayerInventory.new()
 var enemies_in_player_collision_area =  []
@@ -13,11 +13,9 @@ var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
 var death_audio = GameSoundManager.Sounds.SURBI_DEATH
 var run_audio = GameSoundManager.Sounds.PLAYER_RUN
-var pickup_audio = GameSoundManager.Sounds.PLAYER_PICKUP_ITEM
-var teleport_audio = GameSoundManager.Sounds.TELEPORT
-var warp_audio = GameSoundManager.Sounds.WARP
+var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 var items_collection = ArrayCollection.new([])
-
+var phasing_counter = 0
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
@@ -35,42 +33,49 @@ var items_collection = ArrayCollection.new([])
 # FIXME: for now  it just copied Surbi code
 # I can make only half of his face visible, since the other half might be a skeleton
 
+# TODO: events to HUD, so the player can see a boss fight bar.
+
 func _ready():
+	#FIXME phase in animation
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
-	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
-	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
-	GlobalEventBus.connect(GlobalEventBus.WEAPON_NEEDS_RELOAD, start_reloading)
-
-func on_new_level(level: LevelManager.Levels):
-	stats.emit_information()
-	GlobalEventBus.player_consumables.emit(consumables_inventory)
-
+	# FIXME adapt so villain can have a conversation with a Surbi
+	#GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
+	#GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+	#  FIXME adapt for enemy
+	#GlobalEventBus.connect(GlobalEventBus.WEAPON_NEEDS_RELOAD, start_reloading)
+	on_phasing_in()
+	
 func on_animation_finished():
-	if animations.animation == "teleporting":
-		animations.stop()			
-		animations.play("invisible")
-		GlobalEventBus.player_teleported.emit()
-	elif animations.animation == "phasing":	
+	if animations.animation == "death":
+		queue_free()
+	if  animations.animation == "phasing_in":
+		phasing_counter = phasing_counter + 1
+	if  animations.animation == "phasing_out":
 		animations.stop()
-		on_idle()		
-		is_teleporting = false
+		
 	
 func _physics_process(delta):
-	if (!is_dead && !is_teleporting):
-		on_dmg()
-		on_reload(delta)
-		
-		stats.consumable_cooldown.decrement_if_not_zero_by(delta)
-		
-		if (stats.dying_timer.value > 0):
-			on_dying(delta)
-		elif stats.stunned_timer.value > 0:
-			on_stun(delta)	
-		else:
-			if (stats.invincible_frames.value > 0):
-				stats.invincible_frames.decrement_by()
-			on_player_actions(delta)	
+	if (phasing_counter > 0):
+		if (is_phasing_out()):
+			#FIXME allow animation to finish
+			#FIXME after it's finished, enemy should reappear in a different place
+			pass
+		elif (!is_dead):
+			on_reload(delta)
+			
+			stats.consumable_cooldown.decrement_if_not_zero_by(delta)
+			
+			if (stats.dying_timer.value > 0):
+				on_dying(delta)
+			elif stats.stunned_timer.value > 0:
+				on_stun(delta)	
+			else:
+				# FIXME AI processing
+				on_idle()
+	if (stats.invincible_frames.value > 0):
+		stats.invincible_frames.decrement_by()
+
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -78,25 +83,6 @@ func on_start_conversation_with(npc_name: String):
 
 func on_finish_conversation():
 	pausable.set_pause(false)
-
-func on_player_enters_shop(shop_level):
-	animations.play("teleporting")
-	is_teleporting = true	
-	audio_pool.play_sound_effect(teleport_audio)
-
-func on_player_left_shop():
-	look_at(get_global_mouse_position())	
-	animations.play("phasing")	
-	audio_pool.play_sound_effect(warp_audio)
-
-func on_dmg():
-	if (stats.invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
-		stats.decrement_health()
-		if (stats.health_points.value < 1):
-			dying()
-		else:
-			GlobalEventBus.player_damaged.emit()
-			stun()	
 
 func stun():
 	if (stats.stunned_timer.value <= 0):
@@ -107,12 +93,22 @@ func dying():
 	if (stats.dying_timer.value <= 0):
 		stats.dying_timer.assign_max_value()
 		audio_pool.play_sound_effect(death_audio)
+
+func on_phasing_in():
+	animations.play("phasing_in")
+
+func on_phasing_out():
+	stats.invincible_frames.assign_max_value()	
+	animations.stop()
+	animations.play("phasing_out")
+
+func is_phasing_out() -> bool:
+	return animations.animation == "phasing_out" && animations.is_playing()
 	
 func on_stun(delta):
 	stats.stunned_timer.decrement_by(delta)
 	play_stunned()
 	walking_audio_player.stop()
-	stats.invincible_frames.assign_max_value()	
 	stats.reload_timer.assign_max_on_more_then_zero()
 
 func on_dying(delta):
@@ -123,8 +119,8 @@ func on_dying(delta):
 
 func die():
 	is_dead = true
+	# FIXME should phase_out
 	animations.play("death")	
-	GlobalEventBus.player_death.emit()
 	
 func on_reload(delta):
 	if(stats.reload_timer.value > 0 ):
@@ -133,28 +129,11 @@ func on_reload(delta):
 		weapon.reload_with(self)
 		reloading = false
 
-func on_player_actions(delta):
-	look_at(get_global_mouse_position())	
-	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = direction * 600
-	move_and_slide()	
-	if velocity.length() > 0:
-		on_walk()
-	else:
-		on_idle()	
-	if Input.is_action_just_pressed("attack") && stats.reload_timer.is_lte_zero():
-		attack()
-	
-	if (Input.is_action_just_pressed("consume") && stats.consumable_cooldown.is_lte_zero()):
-		on_consume()
-		stats.consumable_cooldown.assign_max_value()		
-
 func on_consume():
 	var item = consumables_inventory.get_quick_access_item()
 	if (item != null):
 		item.use()
 
-# Try different approach for animation for  Halina or Aneta (animation tree + animation player setup)
 func on_idle():
 	walking_audio_player.stop()
 	if(stats.reload_timer.value > 0 ):
@@ -184,35 +163,21 @@ func start_reloading():
 	audio_pool.play_sound_effect(weapon.get_reload_audio())
 
 func on_hurtbox_entered(body):
-	if body.is_in_group("enemy"):
-		if not enemies_in_player_collision_area.has(body):
-			enemies_in_player_collision_area.append(body)
-	elif body.is_in_group("item"):
-		on_picked_item(body)
-		
-func on_picked_item(item: Item):
-	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	
-	if (item.is_consumable()):
-		on_consumable_item(item)
-	else:
-		on_immediate_item(item)
-	item.queue_free()
+	if body.is_in_group("projectiles"):
+		if (body.linear_velocity.length() >= stats.projectiles_dmg_velocity):
+			dmg_processing(body)
+			body.queue_free()			
 
-func on_consumable_item(item: Item):
-	var item_copy = item.duplicate()
-	var status = consumables_inventory.add(item_copy)
-	if (status == PlayerInventory.InsertStatus.INCREMENT):
-		item_copy.queue_free()
+func dmg_processing(body):
+	if(stats.invincible_frames.value  <= 0):
+		take_dmg(body.damage)
+		on_phasing_out()	
+		#FIXME if player can attack successfully 8 times, without taking dmg, enemy is stunned
+		#FIXME I can verify it by receiving events here from the player
+		#stun()				
 
-func on_immediate_item(item: Item):
-	stats.apply_item(item)
-	if (!item.is_coin()):
-		items_collection.append(item.get_item_type())
-		weapon.apply_item(item)
-	else:
-		wallet.add(item)
-		
-func on_hurtbox_leave(body):
-	if enemies_in_player_collision_area.has(body):
-		enemies_in_player_collision_area.erase(body)
-
+func take_dmg(dmg: float):
+	audio_pool.play_sound_effect(bullet_hit_audio)	
+	stats.health_points.decrement_by(dmg)
+	if stats.health_points.value <= 0:
+		dying()

@@ -213,7 +213,7 @@ script = ExtResource("1_v6b7d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
-animation = &"phasing"
+animation = &"stunned"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

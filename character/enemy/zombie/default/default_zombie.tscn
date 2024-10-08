@@ -88,7 +88,7 @@ script = ExtResource("1_t34le")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
-animation = &"idle"
+animation = &"stunned"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 light_mask = 0

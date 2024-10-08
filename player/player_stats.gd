@@ -1,3 +1,4 @@
+extends Node
 class_name PlayerStats
 
 var invincible_frames = NumericAttribute.new(0, 10)
@@ -7,6 +8,7 @@ var reload_timer = NumericAttribute.new(0, 1)
 var health_points = NumericAttribute.new(3, 10)
 var accuracy = NumericAttribute.new(1, 5)
 var consumable_cooldown = NumericAttribute.new(0, 0.3)
+var projectiles_dmg_velocity = 100
 
 var kill_count = 0
 var level_threshoulds = [10, 30, 60, 100, 150, 220, 300, 400, 520, 670, 900, 1200, 1700, 2200, 2700, 3200, 3700, 4200, 4700, 5200, 5700, 6200, 6700, 7200, 7700, 8200, 8700, 10000]
