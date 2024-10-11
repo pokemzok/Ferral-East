@@ -22,6 +22,7 @@ var phasing_counter = 0
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
+@onready var raycast: RayCast2D = $RayCast2D
 
 # TODO
 # We might fight this boss 3 times, first time he is just shooting, second he is using items (like his version of bullet time for exampe), third he  is regenerating unless Surbi stops him with some Holy item (Kilton is half skeleton)
@@ -73,7 +74,18 @@ func attack_player(delta):
 	if player != null:
 		look_at(player.global_position)
 		on_idle()
-		attack(delta)
+		if (raycast_check()):
+			attack(delta)
+
+func raycast_check():
+	var player_direction = global_position - player.global_position 
+	var ray_length = player_direction.length()
+	raycast.target_position = Vector2(ray_length, 0)
+	raycast.force_raycast_update()
+	if (raycast.is_colliding()):
+		var collider = raycast.get_collider()
+		return collider.get_parent() == player
+	return false	
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)

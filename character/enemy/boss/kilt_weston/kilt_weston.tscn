@@ -104,13 +104,13 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_313sk")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_f6fge")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_rc2pg")
 }],
 "loop": true,
@@ -210,7 +210,7 @@ script = ExtResource("1_22pbn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dgjim")
-animation = &"walk_reload"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -231,5 +231,6 @@ bus = &"SFX"
 [node name="GameAmbientAudioPool" parent="." instance=ExtResource("3_cewi7")]
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+collide_with_areas = true
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
