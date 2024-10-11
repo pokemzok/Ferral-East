@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var player_detection = PlayerDetectionBehaviour.new(self)
+var player =  null
 var pausable = PausableNodeBehaviour.new(self)
 var weapon = Revolver.new()
 var stats: UndeadShooterStats = KiltStatsFactory.create()
@@ -30,6 +32,7 @@ func _ready():
 	#FIXME phase in animation
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
+	player = player_detection.get_player()
 	# FIXME adapt so villain can have a conversation with a Surbi
 	#GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 	#GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
@@ -56,11 +59,13 @@ func _physics_process(delta):
 			elif stats.stunned_timer.value > 0:
 				on_stun(delta)	
 			else:
-				# FIXME AI processing
-				on_idle()
+				attack_player(delta)
 	if (stats.invincible_frames.value > 0):
 		stats.invincible_frames.decrement_by()
 
+func attack_player(delta):
+	if player != null:
+		look_at(player.global_position)
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)

@@ -22,7 +22,7 @@ TODO 4
 # 1. At least 5 levels, which would all have ten waves -> this way I would allow Surbi to be completely upgraded till the end of the game.
 # 2. Transition to next level after completing 10 wave (no saves).
 # 3. Player keeps all the powers during transitions.
-# 4. A this stage I would also want to have plot dialogues between Surbi and bosses (those were skipped to save time previously).
+# 4. A this stage I would also want to have plot dialogues between Surbi and the bosses (those were skipped to save time previously).
 # 4. Defeating the last level (probably a necromancer house) with a necromancer boss (skeleton from my song)
 # 5. After the last boss fight prompt player with: do you want to continue? Which will esencially do infinity waves on the last map. Alternatively give a player a new game plus. If the player completes it 3 times, we can give the playe true ending (singlehandedly defeated all necromancer spawns).
 # 6. Maybe refactor items so they would have modes instead of being shop dedicated. For example I might want to cell cylinder in shop as well, but I need to somehow scale that item  better in the shop.

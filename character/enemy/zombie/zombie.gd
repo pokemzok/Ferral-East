@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var type: Enemy.EnemyType
 var stats: EnemyStats
 
+var player_detection = PlayerDetectionBehaviour.new(self)
 var player =  null
 var motion = Vector2()
 var vocal_timer_max_range = NumericAttribute.new(1,6)
@@ -22,16 +23,12 @@ var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 @onready var sprite = $AnimatedSprite2D
 @onready var nav_obstacle = $NavigationObstacle2D
 
-#TODO use different zombies during waves
-
 func _ready():
 	stats = ZombieStatsFactory.create(type)
 	sprite.connect("animation_looped", on_animation_finished)
 	self.z_index = 1
 	vocal_timer.randomize_value()
-	var players = get_tree().get_nodes_in_group("player")
-	if !players.is_empty():
-		player = players[0] #FIXME future support for coop
+	player = player_detection.get_player()
 
 func _process(delta):
 	growl_on(delta)
@@ -72,7 +69,7 @@ func on_attack(delta):
 	walking_audio_player.stop()
 	stats.attack_timer.decrement_by(delta)
 	sprite.play("idle")		
-# TODO: make it common, so every enemy  could use similar logic. Maybe some new node?
+# TODO: make it common, so every enemy  could use similar logic. Maybe as a behaviours (composition pattern)?
 func growl_on(delta):
 	if stats.get_dying_timer().value > 0:
 		return
