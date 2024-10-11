@@ -21,20 +21,11 @@ var phasing_counter = 0
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
 
-#TODO animations
-#TODO: idle reload
-#TODO: walk reload
-#TODO: stuned
-#TODO: dying
-#TODO: running away
+# TODO
 # We might fight this boss 3 times, first time he is just shooting, second he is using items (like his version of bullet time for exampe), third he  is regenerating unless Surbi stops him with some Holy item (Kilton is half skeleton)
-
-# TODO: make this be an enemy instead
-# FIXME: for now  it just copied Surbi code
 # I can make only half of his face visible, since the other half might be a skeleton
-
-# TODO: events to HUD, so the player can see a boss fight bar.
-
+# TODO: events to HUD, so the player can see a boss fight bar?
+# TODO: will need a guaranteed drop, legendary drop would be a phasing_orb (item which would allow Surbi to teleport short distance). 
 func _ready():
 	#FIXME phase in animation
 	animations.connect("animation_looped", on_animation_finished)
@@ -47,21 +38,15 @@ func _ready():
 	on_phasing_in()
 	
 func on_animation_finished():
-	if animations.animation == "death":
+	animations.stop()
+	if animations.animation == "dying_phasing_out":
 		queue_free()
 	if  animations.animation == "phasing_in":
 		phasing_counter = phasing_counter + 1
-	if  animations.animation == "phasing_out":
-		animations.stop()
-		
 	
 func _physics_process(delta):
 	if (phasing_counter > 0):
-		if (is_phasing_out()):
-			#FIXME allow animation to finish
-			#FIXME after it's finished, enemy should reappear in a different place
-			pass
-		elif (!is_dead):
+		if (!is_dead && !is_phasing_out()):
 			on_reload(delta)
 			
 			stats.consumable_cooldown.decrement_if_not_zero_by(delta)
@@ -91,8 +76,13 @@ func stun():
 
 func dying():
 	if (stats.dying_timer.value <= 0):
+		self.z_index = 0
+		$CollisionShape2D.set_deferred("disabled",  true)
+		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
 		stats.dying_timer.assign_max_value()
 		audio_pool.play_sound_effect(death_audio)
+		var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
+		GlobalEventBus.enemy_death.emit(death_details)
 
 func on_phasing_in():
 	animations.play("phasing_in")
@@ -119,8 +109,7 @@ func on_dying(delta):
 
 func die():
 	is_dead = true
-	# FIXME should phase_out
-	animations.play("death")	
+	animations.play("dying_phasing_out")	
 	
 func on_reload(delta):
 	if(stats.reload_timer.value > 0 ):
