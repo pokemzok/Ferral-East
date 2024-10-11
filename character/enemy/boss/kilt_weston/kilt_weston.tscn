@@ -230,4 +230,6 @@ bus = &"SFX"
 
 [node name="GameAmbientAudioPool" parent="." instance=ExtResource("3_cewi7")]
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]

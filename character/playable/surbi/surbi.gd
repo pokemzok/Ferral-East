@@ -52,7 +52,8 @@ func on_animation_finished():
 	
 func _physics_process(delta):
 	if (!is_dead && !is_teleporting):
-		on_dmg()
+		if(enemies_in_player_collision_area.size() > 0):
+			on_dmg()
 		on_reload(delta)
 		
 		stats.consumable_cooldown.decrement_if_not_zero_by(delta)
@@ -84,7 +85,7 @@ func on_player_left_shop():
 	audio_pool.play_sound_effect(warp_audio)
 
 func on_dmg():
-	if (stats.invincible_frames.value < 1 && enemies_in_player_collision_area.size() > 0):
+	if (stats.invincible_frames.value < 1):
 		stats.decrement_health()
 		if (stats.health_points.value < 1):
 			dying()
@@ -183,6 +184,8 @@ func on_hurtbox_entered(body):
 			enemies_in_player_collision_area.append(body)
 	elif body.is_in_group("item"):
 		on_picked_item(body)
+	elif body.is_in_group("projectiles"):
+		on_dmg() 	
 		
 func on_picked_item(item: Item):
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	

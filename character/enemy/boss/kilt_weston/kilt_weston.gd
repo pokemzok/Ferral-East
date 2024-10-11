@@ -63,9 +63,17 @@ func _physics_process(delta):
 	if (stats.invincible_frames.value > 0):
 		stats.invincible_frames.decrement_by()
 
+# FIXME AI pomysły
+# 1. znaleźć linię strzału, strzelić i uciec w losowym kierunku, ale tak, by dalej mieć gracza  w linii strzału
+# 2. po trafieniu, pauza na nodzie i teleport w inny spawn point.
+# 3. gdy mało punktów życia (np. 2-3), teleport blisko gracza i kamikaze bieg?
+# 4. jeśli gracz jest pasywny i się skitrał, że nie da się sensownie podejść, przywołać zombie
+
 func attack_player(delta):
 	if player != null:
 		look_at(player.global_position)
+		on_idle()
+		attack(delta)
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -145,11 +153,16 @@ func on_walk():
 func play_stunned():
 	animations.play("stunned")
 
-func attack():
-	var success = weapon.attack_with(self, get_global_mouse_position())
-	audio_pool.play_sound_effect(weapon.get_shoot_audio())
-	if(!success):
-		start_reloading()
+func attack(delta):
+	if (stats.attack_cooldown.value <= 0 && weapon.bullets_in_cylinder.value > 0):
+		var success = weapon.attack_with(self, player.global_position)
+		audio_pool.play_sound_effect(weapon.get_shoot_audio())
+		if(!success):
+			start_reloading()
+		else:
+			stats.attack_cooldown.assign_max_value()
+	else:
+		stats.attack_cooldown.decrement_by(delta)			
 
 func start_reloading():
 	stats.reload_timer.assign_max_value()

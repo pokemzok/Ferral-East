@@ -11,6 +11,7 @@ var accuracy = NumericAttribute.new(1, 1)
 var consumable_cooldown = NumericAttribute.new(0, 0.3)
 var projectiles_dmg_velocity = 100
 var death_score = 1000
+var attack_cooldown = NumericAttribute.new(0.1, 0.3)
 
 var item_actions = {
 	Item.ItemID.PENTAGRAM: "increment_health"
