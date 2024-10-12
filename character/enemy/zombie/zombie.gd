@@ -21,7 +21,6 @@ var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 @onready var audio_pool = $GameAmbientAudioPool
 @onready var navigation_agent = $NavigationAgent2D
 @onready var sprite = $AnimatedSprite2D
-@onready var nav_obstacle = $NavigationObstacle2D
 
 func _ready():
 	stats = ZombieStatsFactory.create(type)

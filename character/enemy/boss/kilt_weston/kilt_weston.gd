@@ -23,7 +23,7 @@ var phasing_counter = 0
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
 @onready var raycast: RayCast2D = $RayCast2D
-
+@onready var navigation_agent = $NavigationAgent2D
 # TODO
 # We might fight this boss 3 times, first time he is just shooting, second he is using items (like his version of bullet time for exampe), third he  is regenerating unless Surbi stops him with some Holy item (Kilton is half skeleton)
 # I can make only half of his face visible, since the other half might be a skeleton
@@ -73,9 +73,14 @@ func _physics_process(delta):
 func attack_player(delta):
 	if player != null:
 		look_at(player.global_position)
-		on_idle()
 		if (raycast_check()):
+			# TODO multiple movement patterns, which can change depending on  how many  HP Kilt has
+			# FIXME he can start from charging and then be more passive and then just try  to find a clear shot
+			
+			charge()
 			attack(delta)
+		else:
+			on_idle()	
 
 func raycast_check():
 	var player_direction = global_position - player.global_position 
@@ -86,6 +91,17 @@ func raycast_check():
 		var collider = raycast.get_collider()
 		return collider.get_parent() == player
 	return false	
+
+func charge():
+	navigation_agent.target_position = player.global_position
+	var direction = navigation_agent.get_next_path_position() - global_position
+	direction = direction.normalized()
+	velocity = direction * stats.speed.value
+	if(velocity.length() > 0):
+		on_walk()
+		move_and_slide()
+	else:
+		on_idle()	
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -158,9 +174,13 @@ func on_idle():
 func on_walk():
 	sound_manager.play_sound(run_audio, walking_audio_player)
 	if(stats.reload_timer.value > 0 ):
-		animations.play("walk_reload")
+		play_animation_no_restart("walk_reload")
 	else:	
-		animations.play("walk")
+		play_animation_no_restart("walk")
+
+func play_animation_no_restart(animation_name: String):
+	if (animations.animation != animation_name || !animations.is_playing()):
+		animations.play(animation_name)
 
 func play_stunned():
 	animations.play("stunned")

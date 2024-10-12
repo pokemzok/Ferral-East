@@ -74,11 +74,11 @@ region = Rect2(384, 0, 128, 128)
 atlas = ExtResource("3_kyh2m")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h860p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_i66ih"]
 atlas = ExtResource("1_a3wdl")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t7xnb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5sxt"]
 atlas = ExtResource("1_a3wdl")
 region = Rect2(256, 0, 128, 128)
 
@@ -177,10 +177,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h860p")
+"texture": SubResource("AtlasTexture_i66ih")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t7xnb")
+"texture": SubResource("AtlasTexture_n5sxt")
 }],
 "loop": true,
 "name": &"walk",
@@ -210,7 +210,7 @@ script = ExtResource("1_22pbn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dgjim")
-animation = &"idle"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -232,5 +232,11 @@ bus = &"SFX"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 collide_with_areas = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 150.0
+max_neighbors = 20
+max_speed = 500.0
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]

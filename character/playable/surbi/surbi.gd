@@ -131,7 +131,7 @@ func on_reload(delta):
 func on_player_actions(delta):
 	look_at(get_global_mouse_position())	
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = direction * 600
+	velocity = direction * stats.speed.value
 	move_and_slide()	
 	if velocity.length() > 0:
 		on_walk()
