@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=36 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://character/playable/surbi/walk-2.png" id="6_ow20m"]
 [ext_resource type="Texture2D" uid="uid://b13b425x3ihry" path="res://character/playable/surbi/walk-reload-1.png" id="7_opaai"]
 [ext_resource type="Texture2D" uid="uid://dnyxgrb62is3s" path="res://character/playable/surbi/Surbi_phasing.png" id="8_2fgmk"]
+[ext_resource type="Texture2D" uid="uid://drr01lyqy6utd" path="res://character/playable/surbi/knockback.png" id="8_7tasq"]
 [ext_resource type="Texture2D" uid="uid://fvjd84dr0m5x" path="res://character/playable/surbi/walk-reload-2.png" id="8_d0rxc"]
 [ext_resource type="Texture2D" uid="uid://cqutqedddansw" path="res://character/playable/surbi/surbi-teleporting.png" id="9_h1ipu"]
 [ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="11_ewde7"]
@@ -21,6 +22,14 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h8wu"]
 atlas = ExtResource("9_h1ipu")
 region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22v48"]
+atlas = ExtResource("8_7tasq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d14yg"]
+atlas = ExtResource("4_w300t")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k81av"]
 atlas = ExtResource("8_2fgmk")
@@ -115,6 +124,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"invisible",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_22v48")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_d14yg")
+}],
+"loop": true,
+"name": &"knockback",
 "speed": 5.0
 }, {
 "frames": [{
@@ -213,7 +233,7 @@ script = ExtResource("1_v6b7d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
-animation = &"stunned"
+animation = &"knockback"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

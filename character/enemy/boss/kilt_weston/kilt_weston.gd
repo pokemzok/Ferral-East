@@ -24,6 +24,8 @@ var phasing_counter = 0
 @onready var audio_pool = $GameAmbientAudioPool
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var navigation_agent = $NavigationAgent2D
+@onready var left_arm = $LeftSkeletonArm
+
 # TODO
 # We might fight this boss 3 times, first time he is just shooting, second he is using items (like his version of bullet time for exampe), third he  is regenerating unless Surbi stops him with some Holy item (Kilton is half skeleton)
 # I can make only half of his face visible, since the other half might be a skeleton
@@ -76,9 +78,10 @@ func attack_player(delta):
 		if (raycast_check()):
 			# TODO multiple movement patterns, which can change depending on  how many  HP Kilt has
 			# FIXME he can start from charging and then be more passive and then just try  to find a clear shot
-			
 			charge()
 			attack(delta)
+			#TODO: use melee atack if surbi is too  close
+			#melee_attack(delta)
 		else:
 			on_idle()	
 
@@ -195,6 +198,13 @@ func attack(delta):
 			stats.attack_cooldown.assign_max_value()
 	else:
 		stats.attack_cooldown.decrement_by(delta)			
+
+func melee_attack(delta):
+	if(stats.melee_attack_cooldown.value <= 0):
+		left_arm.punch()
+		stats.melee_attack_cooldown.assign_max_value()
+	else:
+		stats.melee_attack_cooldown.decrement_by(delta)	
 
 func start_reloading():
 	stats.reload_timer.assign_max_value()

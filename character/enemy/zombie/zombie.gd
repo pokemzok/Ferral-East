@@ -131,6 +131,10 @@ func on_hurtbox_entered(body):
 			body.queue_free()
 			stun()		
 			take_dmg(body.damage)
+	elif body.is_in_group("melee"):
+		# FIXME knockback effect
+		stun()		
+		take_dmg(body.damage)		
 	elif body.is_in_group("player"):
 		attack()						
 

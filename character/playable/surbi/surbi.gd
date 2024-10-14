@@ -60,12 +60,21 @@ func _physics_process(delta):
 		
 		if (stats.dying_timer.value > 0):
 			on_dying(delta)
-		elif stats.stunned_timer.value > 0:
-			on_stun(delta)	
+		elif stats.has_status_effect():
+			on_status_effect(delta)
 		else:
 			if (stats.invincible_frames.value > 0):
 				stats.invincible_frames.decrement_by()
 			on_player_actions(delta)	
+
+func on_status_effect(delta):
+	if stats.knockback_timer.value > 0:
+		on_knockback(delta)	
+	elif stats.stunned_timer.value > 0:
+		on_stun(delta)	
+	else:
+		after_knockback()
+		stats.clear_status()
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -91,21 +100,36 @@ func on_dmg():
 			dying()
 		else:
 			GlobalEventBus.player_damaged.emit()
-			stun()	
+			if(!stats.has_knockback_status()):
+				stun()	
 
 func stun():
 	if (stats.stunned_timer.value <= 0):
-		stats.stunned_timer.assign_max_value()
+		stats.apply_stun()
 		audio_pool.play_sound_effect(grunts_audio.random_element())
 
 func dying():
 	if (stats.dying_timer.value <= 0):
 		stats.dying_timer.assign_max_value()
 		audio_pool.play_sound_effect(death_audio)
+
+func on_knockback(delta):
+	stats.knockback_timer.decrement_by(delta)
+	velocity = stats.knockback_velocity * delta
+	stats.decrease_knockback(delta)
+	play_knockback()	
+	move_and_slide()
+	common_status_effect_action()
+
+func after_knockback():
+	stats.reset_knockback()
 	
 func on_stun(delta):
 	stats.stunned_timer.decrement_by(delta)
 	play_stunned()
+	common_status_effect_action()
+	
+func common_status_effect_action():	
 	walking_audio_player.stop()
 	stats.invincible_frames.assign_max_value()	
 	stats.reload_timer.assign_max_on_more_then_zero()
@@ -113,6 +137,7 @@ func on_stun(delta):
 func on_dying(delta):
 	stats.dying_timer.decrement_by(delta)
 	animations.play("dying")
+	self.z_index = 0
 	if (stats.dying_timer.value <= 0):
 		die()
 
@@ -139,7 +164,6 @@ func on_player_actions(delta):
 		on_idle()	
 	if Input.is_action_just_pressed("attack") && stats.reload_timer.is_lte_zero():
 		attack()
-	
 	if (Input.is_action_just_pressed("consume") && stats.consumable_cooldown.is_lte_zero()):
 		on_consume()
 		stats.consumable_cooldown.assign_max_value()		
@@ -167,6 +191,9 @@ func on_walk():
 func play_stunned():
 	animations.play("stunned")
 
+func play_knockback():
+	animations.play("knockback")
+
 func attack():
 	var success = weapon.attack_with(self, get_global_mouse_position())
 	audio_pool.play_sound_effect(weapon.get_shoot_audio())
@@ -177,15 +204,24 @@ func start_reloading():
 	stats.reload_timer.assign_max_value()
 	reloading = true
 	audio_pool.play_sound_effect(weapon.get_reload_audio())
-
+#TODO Surbi is not detecting enemy hand, therefore couldn't test knockback
 func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):
 		if not enemies_in_player_collision_area.has(body):
 			enemies_in_player_collision_area.append(body)
+	elif body.is_in_group("melee"):
+		knockback_from(body)
 	elif body.is_in_group("item"):
 		on_picked_item(body)
 	elif body.is_in_group("projectiles"):
 		on_dmg() 	
+
+func knockback_from(body):
+	var knockback_direction = (global_position - body.global_position).normalized()
+	var knockback_force = body.get_knockback_force()
+	stats.apply_knockback(knockback_direction * knockback_force)
+	audio_pool.play_sound_effect(grunts_audio.random_element())
+	on_dmg()	
 		
 func on_picked_item(item: Item):
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	

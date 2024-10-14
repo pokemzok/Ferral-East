@@ -3,6 +3,9 @@ class_name PlayerStats
 
 var invincible_frames = NumericAttribute.new(0, 10)
 var stunned_timer = NumericAttribute.new(0, 0.5) 
+var knockback_timer = NumericAttribute.new(0, 0.75) 
+var knockback_velocity  = Vector2.ZERO
+var knockback_decay = 20000
 var dying_timer = NumericAttribute.new(0, 1) 
 var reload_timer = NumericAttribute.new(0, 1) 
 var health_points = NumericAttribute.new(3, 10)
@@ -10,7 +13,7 @@ var accuracy = NumericAttribute.new(1, 5)
 var consumable_cooldown = NumericAttribute.new(0, 0.3)
 var projectiles_dmg_velocity = 100
 var speed = NumericAttribute.new(600, 800)
-
+var status = StatusEffect.Status.NONE
 var kill_count = 0
 var level_threshoulds = [10, 30, 60, 100, 150, 220, 300, 400, 520, 670, 900, 1200, 1700, 2200, 2700, 3200, 3700, 4200, 4700, 5200, 5700, 6200, 6700, 7200, 7700, 8200, 8700, 10000]
 var current_level = 0
@@ -73,3 +76,32 @@ func increment_accuracy():
 			accuracy.increment_by(0.25)
 		else:
 			accuracy.increment_by(0.15)
+
+func has_status_effect():
+	return status != StatusEffect.Status.NONE
+
+func clear_status():
+	status = StatusEffect.Status.NONE	
+
+func apply_stun():
+	stunned_timer.assign_max_value()
+	status = StatusEffect.Status.STUNNED
+
+func apply_knockback(knockback: Vector2):
+	knockback_velocity = knockback
+	status = StatusEffect.Status.KNOCKBACK
+	knockback_timer.assign_max_value()
+
+func decrease_knockback(delta):
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_decay * delta)
+	if knockback_velocity.length() < 10:
+		reset_knockback()
+
+func reset_knockback():
+	if (has_knockback_status()):
+		knockback_velocity = Vector2.ZERO
+		knockback_timer.assign_zero()
+		clear_status()
+
+func has_knockback_status():
+	return status == StatusEffect.Status.KNOCKBACK
