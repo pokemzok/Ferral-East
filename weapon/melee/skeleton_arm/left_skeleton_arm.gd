@@ -2,14 +2,17 @@ extends Area2D
 
 var knockback_force = 50000
 var damage =  1
+var arm_owner: Node2D
 @onready var animations = $AnimatedSprite2D
 @onready var collision_shape = $CollisionShape2D
 
 func _ready():
-	
 	disable_collisions()
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
+
+func add_owner(arm_owner: Node2D):
+	self.arm_owner = arm_owner
 
 func attack():
 	animations.play("materialize_hand")
@@ -36,5 +39,7 @@ func get_knockback_force():
 	return knockback_force
 
 func _on_body_entered(body):
+	if (body == arm_owner):
+		return
 	if (body.is_in_group("player") || body.is_in_group("enemy") || body.is_in_group("character")):
 		body.on_hurtbox_entered(self)

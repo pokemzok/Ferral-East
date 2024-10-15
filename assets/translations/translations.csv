@@ -1,55 +1,56 @@
 key,en,pl
 CANCEL,Cancel,Anuluj
 CATNIP,Catnip,Kocimiautka
-CATNIP_DESCRIPTION,"Try it, if you think life goes too fast.","Spr√≥buj, je≈õli ≈ºycie zbyt szybko przelatuje przed oczami."
-CONTROLS_ATTACK,Attack,Atak
-CONTROLS_CONSUME,Use hotbar item,U≈ºyj przedmiotu z pasku dostƒôpu
-CONTROLS_DOWN,Down,D√≥≈Ç
+CATNIP_DESCRIPTION,"Try it, if you think life goes too fast.","SprÛbuj, jeúli øycie zbyt szybko przelatuje przed oczami."
+CONTROLS_ATTACK,Attack (right hand),Atak (prawa rÍka)
+CONTROLS_SECONDARY_ATTACK,Attack (left hand),Atak (lewa rÍka)
+CONTROLS_CONSUME,Use hotbar item,Uøyj przedmiotu z pasku dostÍpu
+CONTROLS_DOWN,Down,DÛ≥
 CONTROLS_INTERACT,Interact,Akcja
 CONTROLS_LEFT,Left,Lewo
 CONTROLS_MENU,Menu,Menu
 CONTROLS_RIGHT,Right,Prawo
-CONTROLS_ROTATE_HOTBAR_LEFT,Rotate hotbar items to the left ,Zamie≈Ñ aktywny przedmiot na lewy
-CONTROLS_ROTATE_HOTBAR_RIGHT,Rotate hotbar items to the right,Zamie≈Ñ aktywny przedmiot na prawy
-CONTROLS_START_WAVE,Start new wave,Rozpocznij kolejnƒÖ falƒô
-CONTROLS_UP,Up,G√≥ra
+CONTROLS_ROTATE_HOTBAR_LEFT,Rotate hotbar items to the left ,ZamieÒ aktywny przedmiot na lewy
+CONTROLS_ROTATE_HOTBAR_RIGHT,Rotate hotbar items to the right,ZamieÒ aktywny przedmiot na prawy
+CONTROLS_START_WAVE,Start new wave,Rozpocznij kolejnπ falÍ
+CONTROLS_UP,Up,GÛra
 CURRENCY_AMOUNT,{amount} G,{amount} G
-HUD_ENEMIES_LEFT,Enemies Left,Pozosta≈Ço
-HUD_GET_READY,Get Ready!,Przygotuj siƒô!
-HUD_INTERACTION_TUTORIAL,Press ‚Äú{action_key}‚Äù to interact,Interakcja - ‚Äú{action_key}‚Äù
-HUD_NEXT_WAVE_TUTORIAL,Press ‚Äú{action_key}‚Äù when you are ready,Naci≈õnij ‚Äú{action_key}‚Äù gdy bƒôdziesz gotowy.
+HUD_ENEMIES_LEFT,Enemies Left,Pozosta≥o
+HUD_GET_READY,Get Ready!,Przygotuj siÍ!
+HUD_INTERACTION_TUTORIAL,Press ì{action_key}î to interact,Interakcja - ì{action_key}î
+HUD_NEXT_WAVE_TUTORIAL,Press ì{action_key}î when you are ready,Naciúnij ì{action_key}î gdy bÍdziesz gotowy.
 HUD_SCORE,Score,Punkty
 HUD_WAVE,Wave,Fala
-HUD_WAVE_COMPLETED,Wave {wave_nr} Completed!,Fala {wave_nr} Uko≈Ñczona!
-LEVEL_UP,You Leveled Up! ,Nowy Poziom Do≈õwiadczenia! 
-LOADING,LOADING,≈ÅADOWANIE
+HUD_WAVE_COMPLETED,Wave {wave_nr} Completed!,Fala {wave_nr} UkoÒczona!
+LEVEL_UP,You Leveled Up! ,Nowy Poziom Doúwiadczenia! 
+LOADING,LOADING,£ADOWANIE
 OPTIONS,Options,Opcje
 PURCHASE,Purrrchase,Kup
-QUIT,Quit,Wyjd≈∫
-QUIT_TO_MENU,Quit to main menu,Menu G≈Ç√≥wne
+QUIT,Quit,Wyjdü
+QUIT_TO_MENU,Quit to main menu,Menu G≥Ûwne
 RESTART,Restart,Restart
-RESUME,Resume,Wzn√≥w
-REVOLVER_PARTS,Revolver parts,Czƒô≈õci rewolveru
-REVOLVER_PARTS_DESCRIPTION,I've found those on a dead body. You can use it to upgrade your weapon. Probably‚Ä¶,"Znalaz≈Çem je przy ≈õwie≈ºych zw≈Çokach. Mo≈ºesz je u≈ºyƒá, by ulepszyƒá swojƒÖ bro≈Ñ. Chyba‚Ä¶"
+RESUME,Resume,WznÛw
+REVOLVER_PARTS,Revolver parts,CzÍúci rewolveru
+REVOLVER_PARTS_DESCRIPTION,I've found those on a dead body. You can use it to upgrade your weapon. ProbablyÖ,"Znalaz≥em je przy úwieøych zw≥okach. Moøesz je uøyÊ, by ulepszyÊ swojπ broÒ. ChybaÖ"
 SETTINGS_AUDIO,Audio,Audio
 SETTINGS_BACK,Back,Cofnij
 SETTINGS_BORDERLESS,Borderless,Bez obramowania
 SETTINGS_CONTROLS,Controls,Sterowanie
-SETTINGS_FULLSCREEN,Fullscreen,Pe≈Çen Ekran
+SETTINGS_FULLSCREEN,Fullscreen,Pe≥en Ekran
 SETTINGS_MASTER,Master,Master
 SETTINGS_MUSIC,Music,Muzyka
 SETTINGS_SFX,SFX,SFX
 SETTINGS_VIDEO,Video,Wideo
-SETTINGS_VOICES,Voices,G≈Çosy
+SETTINGS_VOICES,Voices,G≥osy
 SETTINGS_VSYNC,Vsync,Vsync
 SPACE,Space,Spacja
 START,Start,Start
-SURBI_WAVE1_MONOLOG,That wasn't all of them. I need to use the  ‚Äú{action_key}‚Äù to attract more.,"To dopiero poczƒÖtek. Muszƒô u≈ºyƒá ‚Äú{action_key}‚Äù, by przyciƒÖgnƒÖƒá kolejnƒÖ hordƒô."
-SURBI_WAVE2_MONOLOG,Usually attracting THEM ten times is enough.,Zwykle hord jest dziesiƒôƒá.
-SURBI_WAVE4_MONOLOG,That was scary. It will only get worse.,"Przera≈ºajƒÖce, a dalej bƒôdzie tylko gorzej."
-SURBI_WAVE6_MONOLOG,Why am I doing this?,Czemu to robiƒô? 
-SURBI_WAVE9_MONOLOG,Maybe I can defeat necromancer after all‚Ä¶,Mo≈ºe jednak dam radƒô pokonaƒá nekromantƒô‚Ä¶
+SURBI_WAVE1_MONOLOG,That wasn't all of them. I need to use the  ì{action_key}î to attract more.,"To dopiero poczπtek. MuszÍ uøyÊ ì{action_key}î, by przyciπgnπÊ kolejnπ hordÍ."
+SURBI_WAVE2_MONOLOG,Usually attracting THEM ten times is enough.,Zwykle hord jest dziesiÍÊ.
+SURBI_WAVE4_MONOLOG,That was scary. It will only get worse.,"Przeraøajπce, a dalej bÍdzie tylko gorzej."
+SURBI_WAVE6_MONOLOG,Why am I doing this?,Czemu to robiÍ? 
+SURBI_WAVE9_MONOLOG,Maybe I can defeat necromancer after allÖ,Moøe jednak dam radÍ pokonaÊ nekromantÍÖ
 WATER,Sharik Water,Woda Szarika
-WATER_DESCRIPTION,Water of my own brand. Don't ask me where I got it.,Woda mojej w≈Çasnej marki. Nie pytaj skƒÖd jƒÖ mam.
-WPN_CAPACITY_UP,Improved revolver capacity!,Ulepszono pojemno≈õƒá rewolweru
+WATER_DESCRIPTION,Water of my own brand. Don't ask me where I got it.,Woda mojej w≥asnej marki. Nie pytaj skπd jπ mam.
+WPN_CAPACITY_UP,Improved revolver capacity!,Ulepszono pojemnoúÊ rewolweru
 WPN_DMG_UP,Improved revolver damage!,Ulepszono rewolwer

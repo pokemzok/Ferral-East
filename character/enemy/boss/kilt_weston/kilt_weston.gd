@@ -36,7 +36,9 @@ func _ready():
 	self.z_index = 1
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
-	left_arm = WeaponArm.new(secondary_weapon.instantiate(), left_arm_container)
+	var weapon_instance = secondary_weapon.instantiate()
+	left_arm = WeaponArm.new(weapon_instance, left_arm_container)
+	weapon_instance.add_owner(self)
 	player = player_detection.get_player()
 	# FIXME adapt so villain can have a conversation with a Surbi
 	#GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
@@ -77,21 +79,27 @@ func _physics_process(delta):
 func attack_player(delta):
 	if player != null:
 		look_at(player.global_position)
+		# TODO multiple movement patterns, which can change depending on  how many  HP Kilt has
+		# FIXME he can start from charging and then be more passive and then just try  to find a clear shot	
+		charge()
+		var distance_to_player = raycast_calc()
 		if (raycast_check()):
-			# TODO multiple movement patterns, which can change depending on  how many  HP Kilt has
-			# FIXME he can start from charging and then be more passive and then just try  to find a clear shot
-			charge()
-			#attack(delta)
-			#TODO: use melee atack if surbi is too  close
-			#secondary_attack(delta)
+			print(distance_to_player)
+			if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
+				attack(delta)
+			else:
+				secondary_attack(delta)
 		else:
 			on_idle()	
 
-func raycast_check():
+func raycast_calc():
 	var player_direction = global_position - player.global_position 
 	var ray_length = player_direction.length()
 	raycast.target_position = Vector2(ray_length, 0)
 	raycast.force_raycast_update()
+	return ray_length
+
+func raycast_check():
 	if (raycast.is_colliding()):
 		var collider = raycast.get_collider()
 		return collider.get_parent() == player
@@ -211,6 +219,7 @@ func start_reloading():
 	reloading = true
 	audio_pool.play_sound_effect(weapon.get_reload_audio())
 
+# FIXME should not fuse with Surbi
 func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):
 		if (body.linear_velocity.length() >= stats.projectiles_dmg_velocity):

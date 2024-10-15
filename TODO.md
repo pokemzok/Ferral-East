@@ -5,6 +5,7 @@ TODO 0
 # 3. I need  AI for Kilt. It should move around a lot and fire on Surbi previous position (some delay, so the player could react). 
 #    Kilt needs to be aware of terrain so he would not be stuck on cactuses.
 # 4. I need a boss spawn, so bosses could appear from the specific places.
+# 5. Secondary weapon - every enemy should have knockback applied. For now only Surbi is knockback.
 
 TODO 1
 # 1. Make Sharik in Blender, so I can try generating resources from it.

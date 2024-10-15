@@ -314,6 +314,11 @@ layout_mode = 2
 size_flags_vertical = 6
 text = "CONTROLS_ATTACK"
 
+[node name="SecondaryAttack" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "CONTROLS_SECONDARY_ATTACK"
+
 [node name="StartWave" type="Label" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
@@ -373,6 +378,11 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_vertical = 7
 action = "attack"
+
+[node name="SecondaryAttack" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
+layout_mode = 2
+size_flags_vertical = 7
+action = "secondary_attack"
 
 [node name="StartWave" parent="ThemeControl/Settings/SETTINGS_CONTROLS/ScrollContainer/MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_i1hiv")]
 layout_mode = 2

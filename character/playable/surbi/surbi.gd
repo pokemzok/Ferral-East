@@ -168,7 +168,6 @@ func on_player_actions(delta):
 		on_idle()	
 	if Input.is_action_just_pressed("attack") && stats.reload_timer.is_lte_zero():
 		attack()
-	#TODO: add this to settings	
 	elif Input.is_action_just_pressed("secondary_attack") && stats.secondary_attack_cooldown.is_lte_zero():
 		secondary_attack() 	
 	if (Input.is_action_just_pressed("consume") && stats.consumable_cooldown.is_lte_zero()):
@@ -216,7 +215,7 @@ func start_reloading():
 	stats.reload_timer.assign_max_value()
 	reloading = true
 	audio_pool.play_sound_effect(weapon.get_reload_audio())
-#TODO Surbi is not detecting enemy hand, therefore couldn't test knockback
+	
 func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):
 		if not enemies_in_player_collision_area.has(body):
@@ -226,7 +225,7 @@ func on_hurtbox_entered(body):
 	elif body.is_in_group("item"):
 		on_picked_item(body)
 	elif body.is_in_group("projectiles"):
-		on_dmg() 	
+		on_dmg()
 
 func knockback_from(body):
 	var knockback_direction = (global_position - body.global_position).normalized()
