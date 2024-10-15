@@ -1,8 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dosm3nqxg0nke"]
+[gd_scene load_steps=12 format=3 uid="uid://dosm3nqxg0nke"]
 
-[ext_resource type="Texture2D" uid="uid://b1u6b0kksw4qg" path="res://weapon/left_arm/skeleton_arm/skeleton_punch.png" id="1_n634s"]
-[ext_resource type="Script" path="res://weapon/left_arm/skeleton_arm/left_skeleton_arm.gd" id="1_y7gdg"]
+[ext_resource type="Texture2D" uid="uid://b1u6b0kksw4qg" path="res://weapon/melee/skeleton_arm/skeleton_punch.png" id="1_n634s"]
+[ext_resource type="Script" path="res://weapon/melee/skeleton_arm/left_skeleton_arm.gd" id="1_y7gdg"]
 [ext_resource type="Texture2D" uid="uid://dnyxgrb62is3s" path="res://character/playable/surbi/Surbi_phasing.png" id="2_mlaat"]
+[ext_resource type="Texture2D" uid="uid://0u65gjysh508" path="res://character/enemy/boss/kilt_weston/kilt_weston_stun.png" id="2_tdges"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1vs2"]
+atlas = ExtResource("2_tdges")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i2h68"]
 atlas = ExtResource("2_mlaat")
@@ -22,19 +27,22 @@ region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3wnr"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1vs2")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.25,
 "texture": SubResource("AtlasTexture_i2h68")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_e4oil")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_4mids")
 }],
 "loop": true,
@@ -42,7 +50,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 5.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_ynqrg")
 }],
 "loop": true,

@@ -4,12 +4,12 @@ var player_detection = PlayerDetectionBehaviour.new(self)
 var player =  null
 var pausable = PausableNodeBehaviour.new(self)
 var weapon = Revolver.new()
+var secondary_weapon = preload("res://weapon/melee/skeleton_arm/left_skeleton_arm.tscn")
 var stats: UndeadShooterStats = KiltStatsFactory.create()
 var wallet: Wallet = Wallet.new()
 var consumables_inventory: PlayerInventory = PlayerInventory.new()
 var enemies_in_player_collision_area =  []
 var is_dead = false
-var is_teleporting = false
 var reloading = false
 var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
@@ -18,13 +18,14 @@ var run_audio = GameSoundManager.Sounds.PLAYER_RUN
 var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 var items_collection = ArrayCollection.new([])
 var phasing_counter = 0
+var left_arm: WeaponArm
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var navigation_agent = $NavigationAgent2D
-@onready var left_arm = $LeftSkeletonArm
+@onready var left_arm_container = $LeftArmContainer
 
 # TODO
 # We might fight this boss 3 times, first time he is just shooting, second he is using items (like his version of bullet time for exampe), third he  is regenerating unless Surbi stops him with some Holy item (Kilton is half skeleton)
@@ -32,9 +33,10 @@ var phasing_counter = 0
 # TODO: events to HUD, so the player can see a boss fight bar?
 # TODO: will need a guaranteed drop, legendary drop would be a phasing_orb (item which would allow Surbi to teleport short distance). 
 func _ready():
-	#FIXME phase in animation
+	self.z_index = 1
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
+	left_arm = WeaponArm.new(secondary_weapon.instantiate(), left_arm_container)
 	player = player_detection.get_player()
 	# FIXME adapt so villain can have a conversation with a Surbi
 	#GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
@@ -54,7 +56,7 @@ func _physics_process(delta):
 	if (phasing_counter > 0):
 		if (!is_dead && !is_phasing_out()):
 			on_reload(delta)
-			
+			stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)	
 			stats.consumable_cooldown.decrement_if_not_zero_by(delta)
 			
 			if (stats.dying_timer.value > 0):
@@ -79,9 +81,9 @@ func attack_player(delta):
 			# TODO multiple movement patterns, which can change depending on  how many  HP Kilt has
 			# FIXME he can start from charging and then be more passive and then just try  to find a clear shot
 			charge()
-			attack(delta)
+			#attack(delta)
 			#TODO: use melee atack if surbi is too  close
-			#melee_attack(delta)
+			#secondary_attack(delta)
 		else:
 			on_idle()	
 
@@ -199,12 +201,10 @@ func attack(delta):
 	else:
 		stats.attack_cooldown.decrement_by(delta)			
 
-func melee_attack(delta):
-	if(stats.melee_attack_cooldown.value <= 0):
-		left_arm.punch()
-		stats.melee_attack_cooldown.assign_max_value()
-	else:
-		stats.melee_attack_cooldown.decrement_by(delta)	
+func secondary_attack(delta):
+	if(stats.secondary_attack_cooldown.value <= 0):
+		left_arm.attack()
+		stats.secondary_attack_cooldown.assign_max_value()
 
 func start_reloading():
 	stats.reload_timer.assign_max_value()
@@ -215,7 +215,10 @@ func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):
 		if (body.linear_velocity.length() >= stats.projectiles_dmg_velocity):
 			dmg_processing(body)
-			body.queue_free()			
+			body.queue_free()
+	elif body.is_in_group("melee"):
+		print("work")
+		dmg_processing(body)					
 
 func dmg_processing(body):
 	if(stats.invincible_frames.value  <= 0):

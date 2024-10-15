@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1u6b0kksw4qg"
-path="res://.godot/imported/skeleton_punch.png-f7ddc4ca02e5522a59124ea76fa67b13.ctex"
+path="res://.godot/imported/skeleton_punch.png-ae042836a208f9c370e488dacd4c06d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://weapon/left_arm/skeleton_arm/skeleton_punch.png"
-dest_files=["res://.godot/imported/skeleton_punch.png-f7ddc4ca02e5522a59124ea76fa67b13.ctex"]
+source_file="res://weapon/melee/skeleton_arm/skeleton_punch.png"
+dest_files=["res://.godot/imported/skeleton_punch.png-ae042836a208f9c370e488dacd4c06d6.ctex"]
 
 [params]
 

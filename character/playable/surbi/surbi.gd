@@ -17,14 +17,17 @@ var pickup_audio = GameSoundManager.Sounds.PLAYER_PICKUP_ITEM
 var teleport_audio = GameSoundManager.Sounds.TELEPORT
 var warp_audio = GameSoundManager.Sounds.WARP
 var items_collection = ArrayCollection.new([])
+var left_arm: WeaponArm
 
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
 @onready var audio_pool = $GameAmbientAudioPool
 @onready var monolog_bubble = $MonologBubble
+@onready var left_arm_container = $LeftArmContainer
 
 func _ready():
+	self.z_index = 1
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
@@ -51,13 +54,14 @@ func on_animation_finished():
 		is_teleporting = false
 	
 func _physics_process(delta):
+	
 	if (!is_dead && !is_teleporting):
 		if(enemies_in_player_collision_area.size() > 0):
 			on_dmg()
 		on_reload(delta)
 		
 		stats.consumable_cooldown.decrement_if_not_zero_by(delta)
-		
+		stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)
 		if (stats.dying_timer.value > 0):
 			on_dying(delta)
 		elif stats.has_status_effect():
@@ -97,6 +101,7 @@ func on_dmg():
 	if (stats.invincible_frames.value < 1):
 		stats.decrement_health()
 		if (stats.health_points.value < 1):
+			self.z_index = 0	
 			dying()
 		else:
 			GlobalEventBus.player_damaged.emit()
@@ -137,7 +142,6 @@ func common_status_effect_action():
 func on_dying(delta):
 	stats.dying_timer.decrement_by(delta)
 	animations.play("dying")
-	self.z_index = 0
 	if (stats.dying_timer.value <= 0):
 		die()
 
@@ -164,6 +168,9 @@ func on_player_actions(delta):
 		on_idle()	
 	if Input.is_action_just_pressed("attack") && stats.reload_timer.is_lte_zero():
 		attack()
+	#TODO: add this to settings	
+	elif Input.is_action_just_pressed("secondary_attack") && stats.secondary_attack_cooldown.is_lte_zero():
+		secondary_attack() 	
 	if (Input.is_action_just_pressed("consume") && stats.consumable_cooldown.is_lte_zero()):
 		on_consume()
 		stats.consumable_cooldown.assign_max_value()		
@@ -200,6 +207,11 @@ func attack():
 	if(!success):
 		start_reloading()
 
+func secondary_attack():
+	if (left_arm != null):
+		left_arm.attack()
+		stats.secondary_attack_cooldown.assign_max_value()
+
 func start_reloading():
 	stats.reload_timer.assign_max_value()
 	reloading = true
@@ -209,7 +221,7 @@ func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):
 		if not enemies_in_player_collision_area.has(body):
 			enemies_in_player_collision_area.append(body)
-	elif body.is_in_group("melee"):
+	elif body.is_in_group("melee") && (left_arm == null || body != left_arm.weapon):
 		knockback_from(body)
 	elif body.is_in_group("item"):
 		on_picked_item(body)

@@ -9,6 +9,7 @@ var knockback_decay = 20000
 var dying_timer = NumericAttribute.new(0, 1) 
 var reload_timer = NumericAttribute.new(0, 1) 
 var health_points = NumericAttribute.new(3, 10)
+var secondary_attack_cooldown = NumericAttribute.new(0, 2)
 var accuracy = NumericAttribute.new(1, 5)
 var consumable_cooldown = NumericAttribute.new(0, 0.3)
 var projectiles_dmg_velocity = 100

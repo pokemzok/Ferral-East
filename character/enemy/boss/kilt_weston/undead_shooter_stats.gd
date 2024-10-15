@@ -12,7 +12,7 @@ var consumable_cooldown = NumericAttribute.new(0, 0.3)
 var projectiles_dmg_velocity = 100
 var death_score = 1000
 var attack_cooldown = NumericAttribute.new(0.1, 0.3)
-var melee_attack_cooldown = NumericAttribute.new(0, 1)
+var secondary_attack_cooldown = NumericAttribute.new(0, 2)
 var speed = NumericAttribute.new(200, 700)
 var item_actions = {
 	Item.ItemID.PENTAGRAM: "increment_health"

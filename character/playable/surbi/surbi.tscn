@@ -231,6 +231,9 @@ radius = 34.4384
 scale = Vector2(1.1, 1.1)
 script = ExtResource("1_v6b7d")
 
+[node name="LeftArmContainer" type="Node2D" parent="."]
+position = Vector2(6.36364, -17.2727)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
 animation = &"knockback"
@@ -256,6 +259,7 @@ bus = &"SFX"
 [node name="ReactiveScript" parent="." instance=ExtResource("14_4qme2")]
 
 [node name="MonologBubble" parent="." instance=ExtResource("14_irqvk")]
+visible = false
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
 [connection signal="body_exited" from="HurtboxArea2D" to="." method="on_hurtbox_leave"]
