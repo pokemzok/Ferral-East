@@ -26,6 +26,7 @@ var sideways_position
 @onready var audio_pool = $GameAmbientAudioPool
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var navigation_agent = $NavigationAgent2D
+@onready var preview_navigation_agent = $PreviewNavigationAgent2D
 @onready var left_arm_container = $LeftArmContainer
 
 # TODO
@@ -70,49 +71,51 @@ func _physics_process(delta):
 		stats.invincible_frames.decrement_by()
 
 # FIXME AI pomysły
-# 1. znaleźć linię strzału, strzelić i uciec w losowym kierunku, ale tak, by dalej mieć gracza  w linii strzału
 # 2. po trafieniu, pauza na nodzie i teleport w inny spawn point.
-# 3. gdy mało punktów życia (np. 2-3), teleport blisko gracza i kamikaze bieg?
 # 4. jeśli gracz jest pasywny i się skitrał, że nie da się sensownie podejść, przywołać zombie
 
 func attack_player(delta):
 	if player != null:
-		# TODO multiple movement patterns, which can change depending on  how many  HP Kilt has
-		# FIXME he can start from charging and then be more passive and then just try  to find a clear shot	
 		var distance_to_player = raycast_calc()
 		on_movement(distance_to_player)
 		look_at(player.global_position)
 		on_attack(delta, distance_to_player)
-
+# TODO: three phases 1 - charge, 2 - move sideways, 3 - teleport on hit while moving sideways
 func on_movement(distance_to_player):
-	#if (sideways_position != null && sideways_position != global_position):
-	#	move_sideways()
-	#	return
-	#else:
-	#	sideways_position = null	
 	if(stats.health_points.max_value/stats.health_points.value >= 2  || distance_to_player > 800):
-		charge()
+		move_sideways()
 	else:
-		on_idle() 
-		#move_sideways()
+		charge()
 
-#FIXME character get stuck when trying to  move	
 func move_sideways():
-	if (sideways_position == null || sideways_position == global_position):
+	if (sideways_position == null || (global_position - sideways_position).length() < 50):
 		sideways_position = pick_reachable_position()
-	move_to(sideways_position)	
 
+	move_to(sideways_position)
+	print("sideways_position:", sideways_position, "global:",global_position)	
+	
 func pick_reachable_position() -> Vector2:
-	var random_offset = Vector2(randf_range(-50, 50), randf_range(-50, 50)) # Pick a random nearby point
-	var new_position = global_position + random_offset
-	var prev_position = navigation_agent.target_position
-	navigation_agent.target_position = new_position
-	# Check if the new position is reachable
-	while not navigation_agent.is_target_reachable():
-		random_offset = Vector2(randf_range(-50, 50), randf_range(-50, 50)) # Pick another random offset
-		navigation_agent.target_position = global_position + random_offset
-	navigation_agent.target_position = prev_position
-	return new_position
+# Try to find a valid reachable position in a given range
+	for i in range(25):
+		# Pick a random direction and distance within the range
+		var angle = randf() * TAU  # Random angle in radians (0 to 2*PI)
+		var distance = random_distance()
+		# Calculate the random target position using polar coordinates
+		var random_position = global_position + Vector2(cos(angle), sin(angle)) * distance
+ 		# Use the navigation agent's get_simple_path to check for reachability
+		preview_navigation_agent.target_position = random_position
+		# If the path is valid and has more than one point, use it
+		if preview_navigation_agent.is_target_reachable():
+			print("random:", random_position, "global:",global_position)
+			return random_position
+		
+	return player.global_position()	
+
+func random_distance() -> float:
+	if randi() % 2 == 0:
+		return randf_range(200, 300)
+	else:
+		return randf_range(-200, -300) 
 			
 func on_attack(delta, distance_to_player):
 	if (raycast_check()):

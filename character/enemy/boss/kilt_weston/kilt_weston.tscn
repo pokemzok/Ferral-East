@@ -242,4 +242,10 @@ radius = 150.0
 max_neighbors = 20
 max_speed = 500.0
 
+[node name="PreviewNavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 150.0
+max_neighbors = 20
+max_speed = 500.0
+
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
