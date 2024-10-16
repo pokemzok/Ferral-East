@@ -221,7 +221,10 @@ func on_hurtbox_entered(body):
 		if not enemies_in_player_collision_area.has(body):
 			enemies_in_player_collision_area.append(body)
 	elif body.is_in_group("melee") && (left_arm == null || body != left_arm.weapon):
-		knockback_from(body)
+		if(body.get_knockback_force() > 0):
+			knockback_from(body)
+		else:
+			on_dmg()	
 	elif body.is_in_group("item"):
 		on_picked_item(body)
 	elif body.is_in_group("projectiles"):

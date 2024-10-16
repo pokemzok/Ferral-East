@@ -19,6 +19,7 @@ var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 var items_collection = ArrayCollection.new([])
 var phasing_counter = 0
 var left_arm: WeaponArm
+var sideways_position
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
@@ -43,8 +44,6 @@ func _ready():
 	# FIXME adapt so villain can have a conversation with a Surbi
 	#GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 	#GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
-	#  FIXME adapt for enemy
-	#GlobalEventBus.connect(GlobalEventBus.WEAPON_NEEDS_RELOAD, start_reloading)
 	on_phasing_in()
 	
 func on_animation_finished():
@@ -78,19 +77,64 @@ func _physics_process(delta):
 
 func attack_player(delta):
 	if player != null:
-		look_at(player.global_position)
 		# TODO multiple movement patterns, which can change depending on  how many  HP Kilt has
 		# FIXME he can start from charging and then be more passive and then just try  to find a clear shot	
-		charge()
 		var distance_to_player = raycast_calc()
-		if (raycast_check()):
-			print(distance_to_player)
+		on_movement(distance_to_player)
+		look_at(player.global_position)
+		on_attack(delta, distance_to_player)
+
+func on_movement(distance_to_player):
+	#if (sideways_position != null && sideways_position != global_position):
+	#	move_sideways()
+	#	return
+	#else:
+	#	sideways_position = null	
+	if(stats.health_points.max_value/stats.health_points.value >= 2  || distance_to_player > 800):
+		charge()
+	else:
+		on_idle() 
+		#move_sideways()
+
+#FIXME character get stuck when trying to  move	
+func move_sideways():
+	if (sideways_position == null || sideways_position == global_position):
+		sideways_position = pick_reachable_position()
+	move_to(sideways_position)	
+
+func pick_reachable_position() -> Vector2:
+	var random_offset = Vector2(randf_range(-50, 50), randf_range(-50, 50)) # Pick a random nearby point
+	var new_position = global_position + random_offset
+	var prev_position = navigation_agent.target_position
+	navigation_agent.target_position = new_position
+	# Check if the new position is reachable
+	while not navigation_agent.is_target_reachable():
+		random_offset = Vector2(randf_range(-50, 50), randf_range(-50, 50)) # Pick another random offset
+		navigation_agent.target_position = global_position + random_offset
+	navigation_agent.target_position = prev_position
+	return new_position
+			
+func on_attack(delta, distance_to_player):
+	if (raycast_check()):
 			if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
 				attack(delta)
 			else:
 				secondary_attack(delta)
-		else:
-			on_idle()	
+
+	
+func charge():
+	move_to(player.global_position)
+
+func move_to(position):
+	navigation_agent.target_position = position
+	var direction = navigation_agent.get_next_path_position() - global_position
+	direction = direction.normalized()
+	velocity = direction * stats.speed.value
+	if(velocity.length() > 0):
+		on_walk()
+		move_and_slide()
+	else:
+		on_idle()	
 
 func raycast_calc():
 	var player_direction = global_position - player.global_position 
@@ -104,17 +148,6 @@ func raycast_check():
 		var collider = raycast.get_collider()
 		return collider.get_parent() == player
 	return false	
-
-func charge():
-	navigation_agent.target_position = player.global_position
-	var direction = navigation_agent.get_next_path_position() - global_position
-	direction = direction.normalized()
-	velocity = direction * stats.speed.value
-	if(velocity.length() > 0):
-		on_walk()
-		move_and_slide()
-	else:
-		on_idle()	
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -220,13 +253,14 @@ func start_reloading():
 	audio_pool.play_sound_effect(weapon.get_reload_audio())
 
 # FIXME should not fuse with Surbi
+# FIXME I should have more behaviours so I can share code more effectivly between Surbi, Kilt and Zombies
 func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):
 		if (body.linear_velocity.length() >= stats.projectiles_dmg_velocity):
 			dmg_processing(body)
 			body.queue_free()
 	elif body.is_in_group("melee"):
-		print("work")
+		# FIXME knockback logic if melee weapon have one
 		dmg_processing(body)					
 
 func dmg_processing(body):
