@@ -26,6 +26,10 @@ func assign_max_value() -> NumericAttribute:
 	self.value = self.max_value
 	return self
 
+func assign_half_of_max_value() -> NumericAttribute:
+	self.value = self.max_value / 2 
+	return self
+
 func randomize_value() -> NumericAttribute:
 	self.value = randf_range(value, max_value)
 	return self
