@@ -1,11 +1,9 @@
 
 TODO 0
-# 1. Maybe a boss as well, basically same guy as Surbi, but more HP.
-# 2. I need all the animations for Kilt Weston.
-# 3. I need  AI for Kilt. It should move around a lot and fire on Surbi previous position (some delay, so the player could react). 
-#    Kilt needs to be aware of terrain so he would not be stuck on cactuses.
-# 4. I need a boss spawn, so bosses could appear from the specific places.
-# 5. Secondary weapon - every enemy should have knockback applied. For now only Surbi is knockback.
+# -1. teleportation logic
+# 1. TODO: complete all tasks beside dialogues in kilt  (with a drop items)
+# 2. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
+# 3. Secondary weapon - every enemy should have knockback applied. For now only Surbi is knockback.
 
 TODO 1
 # 1. Make Sharik in Blender, so I can try generating resources from it.

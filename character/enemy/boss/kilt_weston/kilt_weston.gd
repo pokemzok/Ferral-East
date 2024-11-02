@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
-@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_2
+@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_3
 var phase = BossesMetadata.BossPhase.PHASE_1
 var player_detection = PlayerDetectionBehaviour.new(self)
+var state = CharacterState.State.NORMAL
 var player =  null
 var pausable = PausableNodeBehaviour.new(self)
 var weapon = Revolver.new()
@@ -11,7 +12,6 @@ var stats: UndeadShooterStats = KiltStatsFactory.create()
 var wallet: Wallet = Wallet.new()
 var consumables_inventory: PlayerInventory = PlayerInventory.new()
 var enemies_in_player_collision_area =  []
-var is_dead = false
 var reloading = false
 var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
@@ -53,10 +53,13 @@ func on_animation_finished():
 		queue_free()
 	if  animations.animation == "phasing_in":
 		phasing_counter = phasing_counter + 1
+		clear_teleporting_state()
+	elif animations.animation == "phasing_out":
+		after_phasing_out()	
 	
 func _physics_process(delta):
 	if (phasing_counter > 0):
-		if (!is_dead && !is_phasing_out()):
+		if (state == CharacterState.State.NORMAL && !is_phasing_out()):
 			on_reload(delta)
 			stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)	
 			stats.consumable_cooldown.decrement_if_not_zero_by(delta)
@@ -101,7 +104,7 @@ func level_3_movement(distance_to_player):
 		charge()
 
 func level_2_movement(distance_to_player):
-	if(phase == BossesMetadata.BossPhase.PHASE_2):
+	if(phase != BossesMetadata.BossPhase.PHASE_1):
 		move_sideways()
 	else:
 		charge()
@@ -153,7 +156,6 @@ func on_attack(delta, distance_to_player):
 			else:
 				secondary_attack(delta)
 
-	
 func charge():
 	move_to(player.global_position)
 
@@ -181,6 +183,19 @@ func raycast_check():
 		return collider.get_parent() == player
 	return false	
 
+func after_phasing_out():
+	if (difficulty_level == BossesMetadata.BossDifficulty.LEVEL_3):
+		teleport()
+
+func teleport():
+	state = CharacterState.State.TELEPORTING
+	# FIXME actual teleporting logic
+	pass
+
+func clear_teleporting_state():
+	if (state == CharacterState.State.TELEPORTING):
+		state = CharacterState.State.NORMAL
+
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
 	on_idle()
@@ -207,7 +222,6 @@ func on_phasing_in():
 	animations.play("phasing_in")
 
 func on_phasing_out():
-	# FIXME add teleportation logic
 	stats.invincible_frames.assign_max_value()	
 	animations.stop()
 	animations.play("phasing_out")
@@ -229,7 +243,7 @@ func on_dying(delta):
 		die()
 
 func die():
-	is_dead = true
+	state = CharacterState.State.DEAD
 	animations.play("dying_phasing_out")	
 	
 func on_reload(delta):
