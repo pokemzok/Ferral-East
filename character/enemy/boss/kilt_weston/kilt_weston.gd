@@ -32,8 +32,10 @@ var sideways_position
 @onready var left_arm_container = $LeftArmContainer
 
 # TODO
-# We might fight this boss 3 times, first time he is just shooting, second he is using items (like his version of bullet time for exampe), third he  is regenerating unless Surbi stops him with some Holy item (Kilton is half skeleton)
-# I can make only half of his face visible, since the other half might be a skeleton
+# If player is too passive Kilt should attempt healing via pentagram
+# jeśli gracz jest pasywny i się skitrał, że nie da się sensownie podejść, zacząć dropić heale i się leczyć. Mogę to sprawdzać, przy pomocy raycasta (jak długo minęło od ostatniego momentu, gdy widział gracza.
+
+# I can make only half of his face visible in graphics, since the other half might be a skeleton
 # TODO: events to HUD, so the player can see a boss fight bar?
 # TODO: will need a guaranteed drop, legendary drop would be a phasing_orb (item which would allow Surbi to teleport short distance). 
 func _ready():
@@ -53,7 +55,6 @@ func on_animation_finished():
 		queue_free()
 	if  animations.animation == "phasing_in":
 		phasing_counter = phasing_counter + 1
-		clear_teleporting_state()
 	elif animations.animation == "phasing_out":
 		after_phasing_out()	
 	
@@ -72,10 +73,6 @@ func _physics_process(delta):
 				attack_player(delta)
 	if (stats.invincible_frames.value > 0):
 		stats.invincible_frames.decrement_by()
-
-# FIXME AI pomysły
-# 2. po trafieniu, pauza na nodzie i teleport w inny spawn point.
-# 4. jeśli gracz jest pasywny i się skitrał, że nie da się sensownie podejść, zacząć dropić heale i się leczyć. Mogę to sprawdzać, przy pomocy raycasta (jak długo minęło od ostatniego momentu, gdy widział gracza.
 
 # FIXME Muszę jakoś ogarnąć kod, żeby dobrze współdzielić go między postaciami (na razie mam dużo kopiuj wklej, więc po tym ficzerze przyda się refactor). 
 # FIXME should not fuse with Surbi, I need some way for them to bounce back
@@ -184,13 +181,21 @@ func raycast_check():
 	return false	
 
 func after_phasing_out():
-	if (difficulty_level == BossesMetadata.BossDifficulty.LEVEL_3):
+	if (difficulty_level == BossesMetadata.BossDifficulty.LEVEL_3 && phase == BossesMetadata.BossPhase.PHASE_3):
 		teleport()
+		clear_teleporting_state()
 
 func teleport():
 	state = CharacterState.State.TELEPORTING
-	# FIXME actual teleporting logic
-	pass
+	var distance_to_player = global_position - player.global_position
+	var distance_length = distance_to_player.length()
+	if distance_length > 125:
+		preview_navigation_agent.target_position = global_position - (distance_to_player * 0.5)
+	else:
+		preview_navigation_agent.target_position = global_position + (distance_to_player * 0.5)				
+
+	if preview_navigation_agent.is_target_reachable():
+		global_position = preview_navigation_agent.target_position
 
 func clear_teleporting_state():
 	if (state == CharacterState.State.TELEPORTING):
