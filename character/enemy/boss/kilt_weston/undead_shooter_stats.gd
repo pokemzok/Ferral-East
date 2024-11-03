@@ -1,9 +1,11 @@
 extends Node
 class_name UndeadShooterStats
 
+var state = CharacterState.State.NORMAL
 var type: Enemy.EnemyType
 var invincible_frames = NumericAttribute.new(0, 10)
-var stunned_timer = NumericAttribute.new(0, 0.25) 
+var stunned_timer = NumericAttribute.new(0, 0.25)
+var staggered_timer = NumericAttribute.new(0, 0.35) 
 var dying_timer = NumericAttribute.new(0, 1) 
 var reload_timer = NumericAttribute.new(0, 1) 
 var health_points = NumericAttribute.new(20, 20)
@@ -56,3 +58,10 @@ func decrement_health():
 	# FIXME boss hp instead
 	# GlobalEventBus.player_hp_changed.emit(health_points.value)	
 
+func assign_state(state_to_assign: CharacterState.State):
+	if(self.state != CharacterState.State.DEAD):
+		self.state = state_to_assign
+
+func remove_state(state_to_remove: CharacterState.State):
+	if (self.state == state_to_remove):
+		self.state = CharacterState.State.NORMAL

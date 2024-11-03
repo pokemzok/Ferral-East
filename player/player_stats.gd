@@ -1,8 +1,12 @@
 extends Node
 class_name PlayerStats
 
+var state = CharacterState.State.NORMAL
 var invincible_frames = NumericAttribute.new(0, 10)
 var stunned_timer = NumericAttribute.new(0, 0.5) 
+var staggered_timer = NumericAttribute.new(0, 0.25)
+var stagger_force = 25000
+var stagger_velocity = Vector2.ZERO
 var knockback_timer = NumericAttribute.new(0, 0.75) 
 var knockback_velocity  = Vector2.ZERO
 var knockback_decay = 20000
@@ -88,6 +92,11 @@ func apply_stun():
 	stunned_timer.assign_max_value()
 	status = StatusEffect.Status.STUNNED
 
+func apply_stagger(stagger: Vector2):
+	stagger_velocity = stagger * stagger_force
+	assign_state(CharacterState.State.STAGGERED)
+	staggered_timer.assign_max_value()
+
 func apply_knockback(knockback: Vector2):
 	knockback_velocity = knockback
 	status = StatusEffect.Status.KNOCKBACK
@@ -98,11 +107,28 @@ func decrease_knockback(delta):
 	if knockback_velocity.length() < 10:
 		reset_knockback()
 
+func decrease_stagger(delta):
+	if stagger_velocity.length() < 10:
+		stagger_velocity = stagger_velocity.move_toward(Vector2.ZERO, knockback_decay * delta)
+
 func reset_knockback():
 	if (has_knockback_status()):
 		knockback_velocity = Vector2.ZERO
 		knockback_timer.assign_zero()
 		clear_status()
 
+func reset_stagger():
+	stagger_velocity = Vector2.ZERO
+	staggered_timer.assign_zero()
+	assign_state(CharacterState.State.NORMAL)
+
 func has_knockback_status():
 	return status == StatusEffect.Status.KNOCKBACK
+
+func assign_state(state_to_assign: CharacterState.State):
+	if(self.state != CharacterState.State.DEAD):
+		self.state = state_to_assign
+
+func remove_state(state_to_remove: CharacterState.State):
+	if (self.state == state_to_remove):
+		self.state = CharacterState.State.NORMAL

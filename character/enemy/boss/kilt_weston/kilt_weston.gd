@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_3
 var phase = BossesMetadata.BossPhase.PHASE_1
 var player_detection = PlayerDetectionBehaviour.new(self)
-var state = CharacterState.State.NORMAL
+var taken_hits_for_stun = 0
 var player =  null
 var pausable = PausableNodeBehaviour.new(self)
 var weapon = Revolver.new()
@@ -59,23 +59,22 @@ func on_animation_finished():
 		after_phasing_out()	
 	
 func _physics_process(delta):
+	stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)	
+	stats.consumable_cooldown.decrement_if_not_zero_by(delta)	
+	stats.invincible_frames.decrement_if_not_zero_by()
 	if (phasing_counter > 0):
-		if (state == CharacterState.State.NORMAL && !is_phasing_out()):
+		if (stats.state == CharacterState.State.NORMAL && !is_phasing_out()):
 			on_reload(delta)
-			stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)	
-			stats.consumable_cooldown.decrement_if_not_zero_by(delta)
-			
 			if (stats.dying_timer.value > 0):
 				on_dying(delta)
 			elif stats.stunned_timer.value > 0:
 				on_stun(delta)	
 			else:
 				attack_player(delta)
-	if (stats.invincible_frames.value > 0):
-		stats.invincible_frames.decrement_by()
+		elif(stats.state == CharacterState.State.STAGGERED):
+			on_staggered(delta)		
 
 # FIXME Muszę jakoś ogarnąć kod, żeby dobrze współdzielić go między postaciami (na razie mam dużo kopiuj wklej, więc po tym ficzerze przyda się refactor). 
-# FIXME should not fuse with Surbi, I need some way for them to bounce back
 # FIXME different voices on hit, so the player won't confuse them
 func attack_player(delta):
 	if player != null:
@@ -150,8 +149,10 @@ func on_attack(delta, distance_to_player):
 	if (raycast_check()):
 			if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
 				attack(delta)
+				pass
 			else:
 				secondary_attack(delta)
+				pass
 
 func charge():
 	move_to(player.global_position)
@@ -186,7 +187,7 @@ func after_phasing_out():
 		clear_teleporting_state()
 
 func teleport():
-	state = CharacterState.State.TELEPORTING
+	stats.assign_state(CharacterState.State.TELEPORTING)
 	var distance_to_player = global_position - player.global_position
 	var distance_length = distance_to_player.length()
 	if distance_length > 125:
@@ -198,8 +199,7 @@ func teleport():
 		global_position = preview_navigation_agent.target_position
 
 func clear_teleporting_state():
-	if (state == CharacterState.State.TELEPORTING):
-		state = CharacterState.State.NORMAL
+	stats.remove_state(CharacterState.State.TELEPORTING)
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -241,6 +241,15 @@ func on_stun(delta):
 	walking_audio_player.stop()
 	stats.reload_timer.assign_max_on_more_then_zero()
 
+func on_staggered(delta):
+	play_staggered()
+	stats.invincible_frames.assign_half_of_max_value()
+	walking_audio_player.stop()
+	stats.reload_timer.assign_max_on_more_then_zero()
+	stats.staggered_timer.decrement_by(delta)
+	if(stats.staggered_timer.is_lte_zero()):
+		stats.remove_state(CharacterState.State.STAGGERED)
+
 func on_dying(delta):
 	stats.dying_timer.decrement_by(delta)
 	animations.play("dying")
@@ -248,7 +257,7 @@ func on_dying(delta):
 		die()
 
 func die():
-	state = CharacterState.State.DEAD
+	stats.assign_state(CharacterState.State.DEAD)
 	animations.play("dying_phasing_out")	
 	
 func on_reload(delta):
@@ -284,6 +293,9 @@ func play_animation_no_restart(animation_name: String):
 func play_stunned():
 	animations.play("stunned")
 
+func play_staggered():
+	animations.play("staggered")
+
 func attack(delta):
 	if (stats.attack_cooldown.value <= 0 && weapon.bullets_in_cylinder.value > 0):
 		var success = weapon.attack_with(self, player.global_position)
@@ -311,15 +323,23 @@ func on_hurtbox_entered(body):
 			dmg_processing(body)
 			body.queue_free()
 	elif body.is_in_group("melee"):
-		# FIXME knockback logic if melee weapon have one
-		dmg_processing(body)					
+		# FIXME knockback 
+		dmg_processing(body)
+	elif body.is_in_group("player"):
+		staggered()	
+
+func staggered():
+	stats.staggered_timer.assign_max_value()
+	stats.assign_state(CharacterState.State.STAGGERED)
 
 func dmg_processing(body):
 	if(stats.invincible_frames.value  <= 0):
 		take_dmg(body.damage)
-		if (phase != BossesMetadata.BossPhase.PHASE_3):
+		if (phase != BossesMetadata.BossPhase.PHASE_3 || taken_hits_for_stun > 1):
+			taken_hits_for_stun = 0
 			stun()
 		else:	
+			taken_hits_for_stun += 1
 			on_phasing_out()	
 
 func take_dmg(dmg: float):

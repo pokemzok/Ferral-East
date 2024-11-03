@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=37 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://ct8iv5bptp5wu" path="res://character/playable/surbi/walk-2.png" id="6_ow20m"]
 [ext_resource type="Texture2D" uid="uid://b13b425x3ihry" path="res://character/playable/surbi/walk-reload-1.png" id="7_opaai"]
 [ext_resource type="Texture2D" uid="uid://dnyxgrb62is3s" path="res://character/playable/surbi/Surbi_phasing.png" id="8_2fgmk"]
-[ext_resource type="Texture2D" uid="uid://drr01lyqy6utd" path="res://character/playable/surbi/knockback.png" id="8_7tasq"]
 [ext_resource type="Texture2D" uid="uid://fvjd84dr0m5x" path="res://character/playable/surbi/walk-reload-2.png" id="8_d0rxc"]
+[ext_resource type="Texture2D" uid="uid://drr01lyqy6utd" path="res://character/playable/surbi/knockback.png" id="8_d1cqv"]
 [ext_resource type="Texture2D" uid="uid://cqutqedddansw" path="res://character/playable/surbi/surbi-teleporting.png" id="9_h1ipu"]
 [ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="11_ewde7"]
 [ext_resource type="PackedScene" uid="uid://dd330po85dsde" path="res://character/playable/surbi/script/reactive_script.tscn" id="14_4qme2"]
@@ -23,11 +23,15 @@
 atlas = ExtResource("9_h1ipu")
 region = Rect2(896, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_22v48"]
-atlas = ExtResource("8_7tasq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlvam"]
+atlas = ExtResource("3_6c5iq")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d14yg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylxg8"]
+atlas = ExtResource("8_d1cqv")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5owk"]
 atlas = ExtResource("4_w300t")
 region = Rect2(0, 0, 128, 128)
 
@@ -127,11 +131,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_22v48")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlvam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylxg8")
 }, {
 "duration": 5.0,
-"texture": SubResource("AtlasTexture_d14yg")
+"texture": SubResource("AtlasTexture_o5owk")
 }],
 "loop": true,
 "name": &"knockback",
@@ -236,7 +243,7 @@ position = Vector2(6.36364, -17.2727)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
-animation = &"knockback"
+animation = &"stunned"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -259,7 +266,6 @@ bus = &"SFX"
 [node name="ReactiveScript" parent="." instance=ExtResource("14_4qme2")]
 
 [node name="MonologBubble" parent="." instance=ExtResource("14_irqvk")]
-visible = false
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
 [connection signal="body_exited" from="HurtboxArea2D" to="." method="on_hurtbox_leave"]

@@ -1,5 +1,6 @@
 
 TODO 0
+# 0. Unify stats logic. I think I should have one class called CharacterStats instead of multiple very similar. They share quite a lot. Alternatively I can make current classes a wrapper classes of a character stats.
 # 1. TODO: complete all tasks beside dialogues in kilt  (with a drop items)
 # 2. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
 # 3. Secondary weapon - every enemy should have knockback applied. For now only Surbi is knockback.

@@ -62,7 +62,9 @@ func _physics_process(delta):
 		
 		stats.consumable_cooldown.decrement_if_not_zero_by(delta)
 		stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)
-		if (stats.dying_timer.value > 0):
+		if(stats.state == CharacterState.State.STAGGERED):
+			on_staggered(delta)	
+		elif (stats.dying_timer.value > 0):
 			on_dying(delta)
 		elif stats.has_status_effect():
 			on_status_effect(delta)
@@ -70,7 +72,7 @@ func _physics_process(delta):
 			if (stats.invincible_frames.value > 0):
 				stats.invincible_frames.decrement_by()
 			on_player_actions(delta)	
-
+# FIXME should be unified with a state instead. Both represent the same
 func on_status_effect(delta):
 	if stats.knockback_timer.value > 0:
 		on_knockback(delta)	
@@ -79,6 +81,19 @@ func on_status_effect(delta):
 	else:
 		after_knockback()
 		stats.clear_status()
+
+func on_staggered(delta):
+	play_staggered()
+	stats.invincible_frames.assign_max_on_less_or_zero()
+	stats.reload_timer.assign_max_on_more_then_zero()
+	stats.staggered_timer.decrement_by(delta)
+	
+	velocity = stats.stagger_velocity * delta
+	stats.decrease_stagger(delta)
+	move_and_slide()
+	
+	if(stats.staggered_timer.is_lte_zero()):
+		stats.reset_stagger()
 
 func on_start_conversation_with(npc_name: String):
 	pausable.set_pause(true)
@@ -200,6 +215,9 @@ func play_stunned():
 func play_knockback():
 	animations.play("knockback")
 
+func play_staggered():
+	animations.play("walk_reload")
+	
 func attack():
 	var success = weapon.attack_with(self, get_global_mouse_position())
 	audio_pool.play_sound_effect(weapon.get_shoot_audio())
@@ -220,22 +238,29 @@ func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):
 		if not enemies_in_player_collision_area.has(body):
 			enemies_in_player_collision_area.append(body)
+	elif body.is_in_group("boss"):
+		staggered_by(body)		
 	elif body.is_in_group("melee") && (left_arm == null || body != left_arm.weapon):
 		if(body.get_knockback_force() > 0):
 			knockback_from(body)
-		else:
-			on_dmg()	
+		on_dmg()	
 	elif body.is_in_group("item"):
 		on_picked_item(body)
 	elif body.is_in_group("projectiles"):
 		on_dmg()
+
+func staggered_by(body):
+	if(!is_dead):
+		var staggered_direction = (global_position - body.global_position).normalized()
+		stats.staggered_timer.assign_max_value()
+		stats.apply_stagger(staggered_direction)
+		audio_pool.play_sound_effect(grunts_audio.random_element())
 
 func knockback_from(body):
 	var knockback_direction = (global_position - body.global_position).normalized()
 	var knockback_force = body.get_knockback_force()
 	stats.apply_knockback(knockback_direction * knockback_force)
 	audio_pool.play_sound_effect(grunts_audio.random_element())
-	on_dmg()	
 		
 func on_picked_item(item: Item):
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	
