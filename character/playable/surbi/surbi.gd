@@ -6,7 +6,6 @@ var stats: PlayerStats = SurbiStatsFactory.create()
 var wallet: Wallet = Wallet.new()
 var consumables_inventory: PlayerInventory = PlayerInventory.new()
 var enemies_in_player_collision_area =  []
-var is_dead = false
 var is_teleporting = false
 var reloading = false
 var sound_manager = GameSoundManager.get_instance()
@@ -55,32 +54,26 @@ func on_animation_finished():
 	
 func _physics_process(delta):
 	
-	if (!is_dead && !is_teleporting):
+	if (!stats.is_dead() && !is_teleporting):
 		if(enemies_in_player_collision_area.size() > 0):
 			on_dmg()
 		on_reload(delta)
 		
 		stats.consumable_cooldown.decrement_if_not_zero_by(delta)
 		stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)
-		if(stats.state == CharacterState.State.STAGGERED):
-			on_staggered(delta)	
-		elif (stats.dying_timer.value > 0):
-			on_dying(delta)
-		elif stats.has_status_effect():
-			on_status_effect(delta)
-		else:
-			if (stats.invincible_frames.value > 0):
-				stats.invincible_frames.decrement_by()
-			on_player_actions(delta)	
-# FIXME should be unified with a state instead. Both represent the same
-func on_status_effect(delta):
-	if stats.knockback_timer.value > 0:
-		on_knockback(delta)	
-	elif stats.stunned_timer.value > 0:
-		on_stun(delta)	
-	else:
-		after_knockback()
-		stats.clear_status()
+		stats.invincible_frames.decrement_if_not_zero_by()
+		
+		match(stats.state):
+			CharacterState.State.STAGGERED:
+				on_staggered(delta)
+			CharacterState.State.DYING:
+				on_dying(delta)
+			CharacterState.State.STUNNED:
+				on_stun(delta)	
+			CharacterState.State.KNOCKBACK:
+				on_knockback(delta)
+			CharacterState.State.NORMAL:
+				on_player_actions(delta)
 
 func on_staggered(delta):
 	play_staggered()
@@ -120,17 +113,17 @@ func on_dmg():
 			dying()
 		else:
 			GlobalEventBus.player_damaged.emit()
-			if(!stats.has_knockback_status()):
+			if(!stats.has_knockback()):
 				stun()	
 
 func stun():
-	if (stats.stunned_timer.value <= 0):
+	if (!stats.is_stunned()):
 		stats.apply_stun()
 		audio_pool.play_sound_effect(grunts_audio.random_element())
 
 func dying():
-	if (stats.dying_timer.value <= 0):
-		stats.dying_timer.assign_max_value()
+	if (!stats.is_dying()):
+		stats.dying()
 		audio_pool.play_sound_effect(death_audio)
 
 func on_knockback(delta):
@@ -139,17 +132,18 @@ func on_knockback(delta):
 	stats.decrease_knockback(delta)
 	play_knockback()	
 	move_and_slide()
-	common_status_effect_action()
-
-func after_knockback():
-	stats.reset_knockback()
+	common_irregular_state_action()
+	if(stats.knockback_timer.is_lte_zero()):
+		stats.reset_knockback()
 	
 func on_stun(delta):
-	stats.stunned_timer.decrement_by(delta)
-	play_stunned()
-	common_status_effect_action()
+	play_stunned()	
+	common_irregular_state_action()
+	stats.stunned_timer.decrement_by(delta)	
+	if(stats.stunned_timer.is_lte_zero()):
+		stats.remove_state(CharacterState.State.STUNNED)
 	
-func common_status_effect_action():	
+func common_irregular_state_action():	
 	walking_audio_player.stop()
 	stats.invincible_frames.assign_max_value()	
 	stats.reload_timer.assign_max_on_more_then_zero()
@@ -161,7 +155,7 @@ func on_dying(delta):
 		die()
 
 func die():
-	is_dead = true
+	stats.dead()
 	animations.play("death")	
 	GlobalEventBus.player_death.emit()
 	
@@ -250,17 +244,18 @@ func on_hurtbox_entered(body):
 		on_dmg()
 
 func staggered_by(body):
-	if(!is_dead):
+	if(!stats.is_dead()):
 		var staggered_direction = (global_position - body.global_position).normalized()
 		stats.staggered_timer.assign_max_value()
 		stats.apply_stagger(staggered_direction)
 		audio_pool.play_sound_effect(grunts_audio.random_element())
 
 func knockback_from(body):
-	var knockback_direction = (global_position - body.global_position).normalized()
-	var knockback_force = body.get_knockback_force()
-	stats.apply_knockback(knockback_direction * knockback_force)
-	audio_pool.play_sound_effect(grunts_audio.random_element())
+	if(!stats.is_dead()):
+		var knockback_direction = (global_position - body.global_position).normalized()
+		var knockback_force = body.get_knockback_force()
+		stats.apply_knockback(knockback_direction * knockback_force)
+		audio_pool.play_sound_effect(grunts_audio.random_element())
 		
 func on_picked_item(item: Item):
 	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	

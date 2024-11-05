@@ -18,7 +18,6 @@ var accuracy = NumericAttribute.new(1, 5)
 var consumable_cooldown = NumericAttribute.new(0, 0.3)
 var projectiles_dmg_velocity = 100
 var speed = NumericAttribute.new(600, 800)
-var status = StatusEffect.Status.NONE
 var kill_count = 0
 var level_threshoulds = [10, 30, 60, 100, 150, 220, 300, 400, 520, 670, 900, 1200, 1700, 2200, 2700, 3200, 3700, 4200, 4700, 5200, 5700, 6200, 6700, 7200, 7700, 8200, 8700, 10000]
 var current_level = 0
@@ -82,15 +81,9 @@ func increment_accuracy():
 		else:
 			accuracy.increment_by(0.15)
 
-func has_status_effect():
-	return status != StatusEffect.Status.NONE
-
-func clear_status():
-	status = StatusEffect.Status.NONE	
-
 func apply_stun():
 	stunned_timer.assign_max_value()
-	status = StatusEffect.Status.STUNNED
+	state = CharacterState.State.STUNNED
 
 func apply_stagger(stagger: Vector2):
 	stagger_velocity = stagger * stagger_force
@@ -99,7 +92,7 @@ func apply_stagger(stagger: Vector2):
 
 func apply_knockback(knockback: Vector2):
 	knockback_velocity = knockback
-	status = StatusEffect.Status.KNOCKBACK
+	state = CharacterState.State.KNOCKBACK
 	knockback_timer.assign_max_value()
 
 func decrease_knockback(delta):
@@ -112,23 +105,39 @@ func decrease_stagger(delta):
 		stagger_velocity = stagger_velocity.move_toward(Vector2.ZERO, knockback_decay * delta)
 
 func reset_knockback():
-	if (has_knockback_status()):
+	if (has_knockback()):
 		knockback_velocity = Vector2.ZERO
 		knockback_timer.assign_zero()
-		clear_status()
+		remove_state(CharacterState.State.KNOCKBACK)
 
 func reset_stagger():
 	stagger_velocity = Vector2.ZERO
 	staggered_timer.assign_zero()
 	assign_state(CharacterState.State.NORMAL)
 
-func has_knockback_status():
-	return status == StatusEffect.Status.KNOCKBACK
+func has_knockback():
+	return state == CharacterState.State.KNOCKBACK
 
 func assign_state(state_to_assign: CharacterState.State):
-	if(self.state != CharacterState.State.DEAD):
+	if(!is_dead() && !is_dying() ):
 		self.state = state_to_assign
 
 func remove_state(state_to_remove: CharacterState.State):
 	if (self.state == state_to_remove):
 		self.state = CharacterState.State.NORMAL
+
+func dying():
+	assign_state(CharacterState.State.DYING)
+	dying_timer.assign_max_value()
+
+func dead():
+	state = CharacterState.State.DEAD
+
+func is_dead():
+	return state == CharacterState.State.DEAD	
+
+func is_dying():
+	return state == CharacterState.State.DYING	
+
+func is_stunned():
+	return state == CharacterState.State.STUNNED	

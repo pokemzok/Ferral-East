@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=38 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -23,12 +23,16 @@
 atlas = ExtResource("9_h1ipu")
 region = Rect2(896, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qlvam"]
-atlas = ExtResource("3_6c5iq")
-region = Rect2(0, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ylxg8"]
 atlas = ExtResource("8_d1cqv")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfiup"]
+atlas = ExtResource("7_opaai")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kp1rj"]
+atlas = ExtResource("8_d0rxc")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o5owk"]
@@ -96,7 +100,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_w300t")
 }, {
-"duration": 5.0,
+"duration": 10.0,
 "texture": ExtResource("2_n2k2p")
 }],
 "loop": true,
@@ -132,10 +136,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qlvam")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ylxg8")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_xfiup")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_kp1rj")
 }, {
 "duration": 5.0,
 "texture": SubResource("AtlasTexture_o5owk")
@@ -243,7 +250,7 @@ position = Vector2(6.36364, -17.2727)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
-animation = &"stunned"
+animation = &"dying"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
