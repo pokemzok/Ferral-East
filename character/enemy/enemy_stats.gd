@@ -1,16 +1,12 @@
+extends CharacterStats
 class_name EnemyStats
 
 var type: Enemy.EnemyType
-var health_points: NumericAttribute
-var speed: NumericAttribute
 var dmg_score: int
 var death_score: int
-var stunned_timer = NumericAttribute.new(0, NumericAttribute.new(0.1, 0.3).randomize_value().value)
 var attack_timer = NumericAttribute.new(0, NumericAttribute.new(0.4, 0.6).randomize_value().value)
-var dying_timer = NumericAttribute.new(0, 50)
 var reanimation_timer = NumericAttribute.new(0, 5)
 var speed_increase_factor = 0.5
-var projectiles_dmg_velocity = 100
 var reanimates_times: int
 var starting_health: int
 var path_finding_algo: PathFindingStrategy.PathFindingAlgorithm  
@@ -24,6 +20,8 @@ func _init(type: Enemy.EnemyType, health_points: NumericAttribute, speed: Numeri
 	self.starting_health = self.health_points.value
 	self.speed.randomize_value()
 	self.dmg_score = calculate_score(5, 20)
+	self.dying_timer = NumericAttribute.new(0, 50)
+	self.stunned_timer = NumericAttribute.new(0, NumericAttribute.new(0.1, 0.3).randomize_value().value)
 	var reanimation_multipler = reanimates_times + 1
 	self.death_score = calculate_score(40*reanimation_multipler, 80*reanimation_multipler)
 	self.path_finding_algo = path_finding_algo

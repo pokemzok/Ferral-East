@@ -31,7 +31,7 @@ func _ready():
 
 func _process(delta):
 	growl_on(delta)
-	
+#FIXME rework so it would be using stats like Surbi do, this way I can add knockback as well	
 func _physics_process(delta):
 	if stats.get_dying_timer().value > 0:
 		on_dying(delta)
