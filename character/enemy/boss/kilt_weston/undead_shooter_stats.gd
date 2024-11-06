@@ -1,21 +1,9 @@
-extends Node
+extends CharacterStats
 class_name UndeadShooterStats
 
-var state = CharacterState.State.NORMAL
 var type: Enemy.EnemyType
-var invincible_frames = NumericAttribute.new(0, 10)
-var stunned_timer = NumericAttribute.new(0, 0.25)
-var staggered_timer = NumericAttribute.new(0, 0.35) 
-var dying_timer = NumericAttribute.new(0, 1) 
-var reload_timer = NumericAttribute.new(0, 1) 
-var health_points = NumericAttribute.new(20, 20)
-var accuracy = NumericAttribute.new(1, 1)
-var consumable_cooldown = NumericAttribute.new(0, 0.3)
-var projectiles_dmg_velocity = 100
 var death_score = 1000
-var attack_cooldown = NumericAttribute.new(0.1, 0.3)
-var secondary_attack_cooldown = NumericAttribute.new(0, 2)
-var speed = NumericAttribute.new(400, 700)
+
 var item_actions = {
 	Item.ItemID.PENTAGRAM: "increment_health"
 }
@@ -25,13 +13,17 @@ func _init(
 	invincible_frames: NumericAttribute,
 	stunned_timer: NumericAttribute,
 	reload_timer: NumericAttribute,
-	health_points: NumericAttribute
+	staggered_timer: NumericAttribute,
+	health_points: NumericAttribute,
+	speed: NumericAttribute
 ):
 	self.type = type
 	self.invincible_frames = invincible_frames
 	self.stunned_timer = stunned_timer
 	self.reload_timer = reload_timer
+	self.staggered_timer = staggered_timer
 	self.health_points = health_points
+	self.speed = speed
 	# FIXME boss consume item instead
 	#GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, apply_item)
 	emit_information()
@@ -57,11 +49,3 @@ func decrement_health():
 	health_points.decrement_by()
 	# FIXME boss hp instead
 	# GlobalEventBus.player_hp_changed.emit(health_points.value)	
-
-func assign_state(state_to_assign: CharacterState.State):
-	if(self.state != CharacterState.State.DEAD):
-		self.state = state_to_assign
-
-func remove_state(state_to_remove: CharacterState.State):
-	if (self.state == state_to_remove):
-		self.state = CharacterState.State.NORMAL

@@ -74,7 +74,6 @@ func _physics_process(delta):
 		elif(stats.state == CharacterState.State.STAGGERED):
 			on_staggered(delta)		
 
-# FIXME Muszę jakoś ogarnąć kod, żeby dobrze współdzielić go między postaciami (na razie mam dużo kopiuj wklej, więc po tym ficzerze przyda się refactor). 
 # FIXME different voices on hit, so the player won't confuse them
 func attack_player(delta):
 	if player != null:
