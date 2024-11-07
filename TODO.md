@@ -1,6 +1,7 @@
 
 TODO 0
-# 0. Unify stats logic. I think I should have one class called CharacterStats instead of multiple very similar. They share quite a lot. Alternatively I can make current classes a wrapper classes of a character stats.
+# -1. Rework Kilt Weston similarly to Surbi and zombie, so they would all have the same processing boilerplate.
+# 0. Extract even more common behaviours to stats from Surbi. Then try to reuse it by all the enemies. After that attempt to extract common behaviours so I can do behaviour composition (if it is possible of course).
 # 1. TODO: complete all tasks beside dialogues in kilt  (with a drop items)
 # 2. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
 # 3. Secondary weapon - every enemy should have knockback applied. For now only Surbi is knockback.

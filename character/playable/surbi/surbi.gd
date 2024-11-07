@@ -64,10 +64,10 @@ func _physics_process(delta):
 		stats.invincible_frames.decrement_if_not_zero_by()
 		
 		match(stats.state):
-			CharacterState.State.STAGGERED:
-				on_staggered(delta)
 			CharacterState.State.DYING:
 				on_dying(delta)
+			CharacterState.State.STAGGERED:
+				on_staggered(delta)
 			CharacterState.State.STUNNED:
 				on_stun(delta)	
 			CharacterState.State.KNOCKBACK:
@@ -139,15 +139,13 @@ func on_knockback(delta):
 func on_stun(delta):
 	play_stunned()	
 	common_irregular_state_action()
-	stats.stunned_timer.decrement_by(delta)	
-	if(stats.stunned_timer.is_lte_zero()):
-		stats.remove_state(CharacterState.State.STUNNED)
+	stats.decrease_stun(delta)
 	
 func common_irregular_state_action():	
 	walking_audio_player.stop()
 	stats.invincible_frames.assign_max_value()	
 	stats.reload_timer.assign_max_on_more_then_zero()
-
+#FIXME do the same as you did for stun
 func on_dying(delta):
 	stats.dying_timer.decrement_by(delta)
 	animations.play("dying")

@@ -31,18 +31,18 @@ func _ready():
 
 func _process(delta):
 	growl_on(delta)
-#FIXME rework so it would be using stats like Surbi do, this way I can add knockback as well	
+	
 func _physics_process(delta):
-	if stats.get_dying_timer().value > 0:
-		on_dying(delta)
-	elif stats.get_dying_timer().value < 0:
-		die()	
-	elif stats.stunned_timer.value > 0:		
-		on_stun(delta)
-	elif stats.attack_timer.value > 0:
-		on_attack(delta)	
-	else:
-		hunt_player(delta)
+	match(stats.state):
+		CharacterState.State.DYING:
+			on_dying(delta)
+		CharacterState.State.STUNNED:
+			on_stun(delta)
+		CharacterState.State.NORMAL:
+			if(stats.attack_timer.value > 0):
+				on_attack(delta)	
+			else:
+				hunt_player(delta)		
 
 func on_dying(delta):
 	self.z_index = 0
@@ -52,6 +52,8 @@ func on_dying(delta):
 		played_dying = true
 
 	stats.get_dying_timer().decrement_by(delta)
+	if stats.get_dying_timer().value < 0:
+		die()
 
 func on_animation_finished():
 	if sprite.animation == "dying":
@@ -61,14 +63,14 @@ func on_animation_finished():
 		
 func on_stun(delta):
 	walking_audio_player.stop()
-	stats.stunned_timer.decrement_by(delta)
 	sprite.play("stunned")
+	stats.decrease_stun(delta)
 
 func on_attack(delta):
 	walking_audio_player.stop()
 	stats.attack_timer.decrement_by(delta)
 	sprite.play("idle")		
-# TODO: make it common, so every enemy  could use similar logic. Maybe as a behaviours (composition pattern)?
+
 func growl_on(delta):
 	if stats.get_dying_timer().value > 0:
 		return
@@ -139,8 +141,8 @@ func on_hurtbox_entered(body):
 		attack()						
 
 func stun():
-	if (stats.stunned_timer.value <= 0):
-		stats.stunned_timer.assign_max_value()
+	if (!stats.is_stunned()):
+		stats.apply_stun()
 
 func attack():
 	if (stats.attack_timer.value <= 0):
@@ -154,12 +156,12 @@ func take_dmg(dmg: float):
 		dying()
 	
 func dying():
-	if (stats.get_dying_timer().value <= 0):
+	if (!stats.is_dying()):
 		if (!stats.can_reanimate()):
 			var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
 			GlobalEventBus.enemy_death.emit(death_details)
 		play_death_sound()	
-		stats.get_dying_timer().assign_max_value()
+		stats.dying()
 		$CollisionShape2D.set_deferred("disabled",  true)
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
 
@@ -171,6 +173,7 @@ func die():
 	if (stats.can_reanimate()):
 		reanimate()
 	else:
+		stats.dead()
 		sprite.play("despawn")
 		
 func reanimate():

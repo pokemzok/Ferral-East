@@ -5,10 +5,7 @@ var type: Enemy.EnemyType
 var dmg_score: int
 var death_score: int
 var attack_timer = NumericAttribute.new(0, NumericAttribute.new(0.4, 0.6).randomize_value().value)
-var reanimation_timer = NumericAttribute.new(0, 5)
 var speed_increase_factor = 0.5
-var reanimates_times: int
-var starting_health: int
 var path_finding_algo: PathFindingStrategy.PathFindingAlgorithm  
 	
 func _init(type: Enemy.EnemyType, health_points: NumericAttribute, speed: NumericAttribute, reanimates_times: int, path_finding_algo: PathFindingStrategy.PathFindingAlgorithm):
@@ -34,15 +31,3 @@ func calculate_score(min: int, max: int):
 	var score = min + (weighted_average * (max - min))
 	return round(score)
 
-func can_reanimate() -> bool:
-	return self.reanimates_times > 0
-	
-func reanimated():
-	self.reanimates_times -= 1
-	self.health_points.value = starting_health
-
-func get_dying_timer() -> NumericAttribute:
-	if (can_reanimate()):
-		return reanimation_timer
-	else:
-		return dying_timer	
