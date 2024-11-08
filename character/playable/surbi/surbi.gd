@@ -6,7 +6,6 @@ var stats: PlayerStats = SurbiStatsFactory.create()
 var wallet: Wallet = Wallet.new()
 var consumables_inventory: PlayerInventory = PlayerInventory.new()
 var enemies_in_player_collision_area =  []
-var is_teleporting = false
 var reloading = false
 var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
@@ -43,18 +42,17 @@ func on_new_level(level: LevelManager.Levels):
 	GlobalEventBus.player_consumables.emit(consumables_inventory)
 
 func on_animation_finished():
+	animations.stop()
 	if animations.animation == "teleporting":
-		animations.stop()			
 		animations.play("invisible")
 		GlobalEventBus.player_teleported.emit()
 	elif animations.animation == "phasing":	
-		animations.stop()
 		on_idle()		
-		is_teleporting = false
+		stats.remove_state(CharacterState.State.TELEPORTING)
 	
 func _physics_process(delta):
 	
-	if (!stats.is_dead() && !is_teleporting):
+	if (!stats.is_dead() && !stats.is_teleporting()):
 		if(enemies_in_player_collision_area.size() > 0):
 			on_dmg()
 		on_reload(delta)
@@ -97,7 +95,7 @@ func on_finish_conversation():
 
 func on_player_enters_shop(shop_level):
 	animations.play("teleporting")
-	is_teleporting = true	
+	stats.assign_state(CharacterState.State.TELEPORTING)
 	audio_pool.play_sound_effect(teleport_audio)
 
 func on_player_left_shop():
@@ -145,10 +143,10 @@ func common_irregular_state_action():
 	walking_audio_player.stop()
 	stats.invincible_frames.assign_max_value()	
 	stats.reload_timer.assign_max_on_more_then_zero()
-#FIXME do the same as you did for stun
+
 func on_dying(delta):
-	stats.dying_timer.decrement_by(delta)
 	animations.play("dying")
+	stats.dying_timer.decrement_by(delta)
 	if (stats.dying_timer.value <= 0):
 		die()
 

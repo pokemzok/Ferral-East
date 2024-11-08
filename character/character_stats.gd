@@ -87,6 +87,9 @@ func is_dead():
 func is_dying():
 	return state == CharacterState.State.DYING	
 
+func is_teleporting():
+	return state == CharacterState.State.TELEPORTING
+
 func is_stunned():
 	return state == CharacterState.State.STUNNED	
 	
