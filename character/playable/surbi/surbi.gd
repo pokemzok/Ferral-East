@@ -6,7 +6,6 @@ var stats: PlayerStats = SurbiStatsFactory.create()
 var wallet: Wallet = Wallet.new()
 var consumables_inventory: PlayerInventory = PlayerInventory.new()
 var enemies_in_player_collision_area =  []
-var reloading = false
 var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
 var death_audio = GameSoundManager.Sounds.SURBI_DEATH
@@ -55,7 +54,6 @@ func _physics_process(delta):
 	if (!stats.is_dead() && !stats.is_teleporting()):
 		if(enemies_in_player_collision_area.size() > 0):
 			on_dmg()
-		on_reload(delta)
 		
 		stats.consumable_cooldown.decrement_if_not_zero_by(delta)
 		stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)
@@ -70,6 +68,9 @@ func _physics_process(delta):
 				on_stun(delta)	
 			CharacterState.State.KNOCKBACK:
 				on_knockback(delta)
+			CharacterState.State.RELOADING:
+				on_reload(delta)
+				on_player_actions(delta)	
 			CharacterState.State.NORMAL:
 				on_player_actions(delta)
 
@@ -154,13 +155,11 @@ func die():
 	stats.dead()
 	animations.play("death")	
 	GlobalEventBus.player_death.emit()
-	
+
 func on_reload(delta):
-	if(stats.reload_timer.value > 0 ):
-		stats.reload_timer.decrement_by(delta)
-	elif(stats.reload_timer.value <= 0 && reloading):
-		weapon.reload_with(self)
-		reloading = false
+	var is_completed = stats.complete_reloading(delta)
+	if(is_completed):
+		weapon.reload_with(self)	
 
 func on_player_actions(delta):
 	look_at(get_global_mouse_position())	
@@ -220,8 +219,7 @@ func secondary_attack():
 		stats.secondary_attack_cooldown.assign_max_value()
 
 func start_reloading():
-	stats.reload_timer.assign_max_value()
-	reloading = true
+	stats.reloading()
 	audio_pool.play_sound_effect(weapon.get_reload_audio())
 	
 func on_hurtbox_entered(body):

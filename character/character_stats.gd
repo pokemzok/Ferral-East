@@ -62,6 +62,17 @@ func reset_stagger():
 	staggered_timer.assign_zero()
 	assign_state(CharacterState.State.NORMAL)
 
+func reloading():
+	reload_timer.assign_max_value()
+	assign_state(CharacterState.State.RELOADING)
+
+func complete_reloading(delta) -> bool:
+	reload_timer.decrement_by(delta)
+	if(reload_timer.value <= 0):
+		remove_state(CharacterState.State.RELOADING)
+		return true
+	return false	
+
 func has_knockback():
 	return state == CharacterState.State.KNOCKBACK
 

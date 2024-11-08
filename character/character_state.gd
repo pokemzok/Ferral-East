@@ -6,6 +6,7 @@ enum State {
 	STAGGERED,
 	STUNNED,
 	KNOCKBACK,
+	RELOADING,
 	DYING,
 	DEAD
 }
