@@ -15,6 +15,7 @@ var teleport_audio = GameSoundManager.Sounds.TELEPORT
 var warp_audio = GameSoundManager.Sounds.WARP
 var items_collection = ArrayCollection.new([])
 var left_arm: WeaponArm
+var reloading = false
 
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
@@ -68,16 +69,14 @@ func _physics_process(delta):
 				on_stun(delta)	
 			CharacterState.State.KNOCKBACK:
 				on_knockback(delta)
-			CharacterState.State.RELOADING:
-				on_reload(delta)
-				on_player_actions(delta)	
 			CharacterState.State.NORMAL:
+				on_reload(delta)				
 				on_player_actions(delta)
 
 func on_staggered(delta):
 	play_staggered()
+	retry_reload_if_needed()	
 	stats.invincible_frames.assign_max_on_less_or_zero()
-	stats.reload_timer.assign_max_on_more_then_zero()
 	stats.staggered_timer.decrement_by(delta)
 	
 	velocity = stats.stagger_velocity * delta
@@ -143,7 +142,11 @@ func on_stun(delta):
 func common_irregular_state_action():	
 	walking_audio_player.stop()
 	stats.invincible_frames.assign_max_value()	
-	stats.reload_timer.assign_max_on_more_then_zero()
+	retry_reload_if_needed()
+
+func retry_reload_if_needed():
+	if(stats.reload_timer.is_gt_zero()):
+		start_reloading()
 
 func on_dying(delta):
 	animations.play("dying")
@@ -157,9 +160,11 @@ func die():
 	GlobalEventBus.player_death.emit()
 
 func on_reload(delta):
-	var is_completed = stats.complete_reloading(delta)
-	if(is_completed):
-		weapon.reload_with(self)	
+	if(reloading):
+		var is_completed = stats.complete_reloading(delta)
+		if(is_completed):
+			weapon.reload_with(self)
+			reloading = false			
 
 func on_player_actions(delta):
 	look_at(get_global_mouse_position())	
@@ -208,10 +213,11 @@ func play_staggered():
 	animations.play("walk_reload")
 	
 func attack():
-	var success = weapon.attack_with(self, get_global_mouse_position())
-	audio_pool.play_sound_effect(weapon.get_shoot_audio())
-	if(!success):
-		start_reloading()
+	if(!reloading):
+		var success = weapon.attack_with(self, get_global_mouse_position())
+		audio_pool.play_sound_effect(weapon.get_shoot_audio())
+		if(!success):
+			start_reloading()
 
 func secondary_attack():
 	if (left_arm != null):
@@ -220,7 +226,8 @@ func secondary_attack():
 
 func start_reloading():
 	stats.reloading()
-	audio_pool.play_sound_effect(weapon.get_reload_audio())
+	reloading = true
+	sound_manager.play_inerrupt_sound(weapon.get_reload_audio(), effects_audio_player)	
 	
 func on_hurtbox_entered(body):
 	if body.is_in_group("enemy"):

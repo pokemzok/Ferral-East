@@ -13,6 +13,7 @@ var wallet: Wallet = Wallet.new()
 var consumables_inventory: PlayerInventory = PlayerInventory.new()
 var enemies_in_player_collision_area =  []
 var reloading = false
+var retry_reload_counter = 0
 var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
 var death_audio = GameSoundManager.Sounds.SURBI_DEATH
@@ -62,17 +63,18 @@ func _physics_process(delta):
 	stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)	
 	stats.consumable_cooldown.decrement_if_not_zero_by(delta)	
 	stats.invincible_frames.decrement_if_not_zero_by()
-	if (phasing_counter > 0):
-		if (stats.state == CharacterState.State.NORMAL && !is_phasing_out()):
-			on_reload(delta)
-			if (stats.dying_timer.value > 0):
+	if (phasing_counter > 0 && !is_phasing_out()):
+
+		match(stats.state):
+			CharacterState.State.DYING:
 				on_dying(delta)
-			elif stats.stunned_timer.value > 0:
-				on_stun(delta)	
-			else:
+			CharacterState.State.STUNNED:
+				on_stun(delta)
+			CharacterState.State.STAGGERED:		
+				on_staggered(delta)
+			CharacterState.State.NORMAL:
+				on_reload(delta)
 				attack_player(delta)
-		elif(stats.state == CharacterState.State.STAGGERED):
-			on_staggered(delta)		
 
 # FIXME different voices on hit, so the player won't confuse them
 func attack_player(delta):
@@ -147,7 +149,7 @@ func random_distance() -> float:
 func on_attack(delta, distance_to_player):
 	if (raycast_check()):
 			if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
-				attack(delta)
+				#attack(delta)
 				pass
 			else:
 				secondary_attack(delta)
@@ -208,16 +210,16 @@ func on_finish_conversation():
 	pausable.set_pause(false)
 
 func stun():
-	if (stats.stunned_timer.value <= 0):
-		stats.stunned_timer.assign_max_value()
+	if (!stats.is_stunned()):
+		stats.apply_stun()
 		audio_pool.play_sound_effect(grunts_audio.random_element())
 
 func dying():
-	if (stats.dying_timer.value <= 0):
+	if (!stats.is_dying()):
+		stats.dying()
 		self.z_index = 0
 		$CollisionShape2D.set_deferred("disabled",  true)
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
-		stats.dying_timer.assign_max_value()
 		audio_pool.play_sound_effect(death_audio)
 		var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
 		GlobalEventBus.enemy_death.emit(death_details)
@@ -234,20 +236,25 @@ func is_phasing_out() -> bool:
 	return animations.animation == "phasing_out" && animations.is_playing()
 	
 func on_stun(delta):
-	stats.stunned_timer.decrement_by(delta)
 	play_stunned()	
-	stats.invincible_frames.assign_max_value()	
 	walking_audio_player.stop()
-	stats.reload_timer.assign_max_on_more_then_zero()
+	stats.invincible_frames.assign_max_value()	
+	retry_reload_if_needed()
+	stats.decrease_stun(delta)	
 
 func on_staggered(delta):
 	play_staggered()
 	stats.invincible_frames.assign_half_of_max_value()
 	walking_audio_player.stop()
-	stats.reload_timer.assign_max_on_more_then_zero()
+	retry_reload_if_needed()
 	stats.staggered_timer.decrement_by(delta)
 	if(stats.staggered_timer.is_lte_zero()):
 		stats.remove_state(CharacterState.State.STAGGERED)
+
+func retry_reload_if_needed():
+	if(stats.reload_timer.is_gt_zero()):
+		retry_reload_counter += 1
+		start_reloading()
 
 func on_dying(delta):
 	stats.dying_timer.decrement_by(delta)
@@ -256,15 +263,15 @@ func on_dying(delta):
 		die()
 
 func die():
-	stats.assign_state(CharacterState.State.DEAD)
+	stats.dead()
 	animations.play("dying_phasing_out")	
 	
 func on_reload(delta):
-	if(stats.reload_timer.value > 0 ):
-		stats.reload_timer.decrement_by(delta)
-	elif(stats.reload_timer.value <= 0 && reloading):
-		weapon.reload_with(self)
-		reloading = false
+	if(reloading):
+		var is_completed = stats.complete_reloading(delta)
+		if(is_completed || retry_reload_counter > 1):
+			weapon.reload_with(self)
+			reloading = false			
 
 func on_consume():
 	var item = consumables_inventory.get_quick_access_item()
@@ -312,9 +319,9 @@ func secondary_attack(delta):
 		stats.secondary_attack_cooldown.assign_max_value()
 
 func start_reloading():
-	stats.reload_timer.assign_max_value()
+	stats.reloading()
 	reloading = true
-	audio_pool.play_sound_effect(weapon.get_reload_audio())
+	sound_manager.play_inerrupt_sound(weapon.get_reload_audio(), effects_audio_player)	
 
 func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):
