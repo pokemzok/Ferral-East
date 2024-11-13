@@ -15,9 +15,9 @@ var enemies_in_player_collision_area =  []
 var reloading = false
 var retry_reload_counter = 0
 var sound_manager = GameSoundManager.get_instance()
-var grunts_audio = sound_manager.surbi_grunts
-var death_audio = GameSoundManager.Sounds.SURBI_DEATH
-var run_audio = GameSoundManager.Sounds.PLAYER_RUN
+var grunt_audio_res = preload("res://audio/enemies/kilt/kilt-grunt.wav")
+var death_audio_res = preload("res://audio/enemies/kilt/kilt-death.wav")
+var run_audio = GameSoundManager.Sounds.RUN 
 var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 var items_collection = ArrayCollection.new([])
 var phasing_counter = 0
@@ -76,7 +76,6 @@ func _physics_process(delta):
 				on_reload(delta)
 				attack_player(delta)
 
-# FIXME different voices on hit, so the player won't confuse them
 func attack_player(delta):
 	if player != null:
 		var distance_to_player = raycast_calc()
@@ -149,7 +148,7 @@ func random_distance() -> float:
 func on_attack(delta, distance_to_player):
 	if (raycast_check()):
 			if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
-				#attack(delta)
+				attack(delta)
 				pass
 			else:
 				secondary_attack(delta)
@@ -212,7 +211,7 @@ func on_finish_conversation():
 func stun():
 	if (!stats.is_stunned()):
 		stats.apply_stun()
-		audio_pool.play_sound_effect(grunts_audio.random_element())
+		sound_manager.play_interrupt_sound_resource(grunt_audio_res, effects_audio_player)	
 
 func dying():
 	if (!stats.is_dying()):
@@ -220,7 +219,7 @@ func dying():
 		self.z_index = 0
 		$CollisionShape2D.set_deferred("disabled",  true)
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
-		audio_pool.play_sound_effect(death_audio)
+		sound_manager.play_interrupt_sound_resource(death_audio_res, effects_audio_player)	
 		var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
 		GlobalEventBus.enemy_death.emit(death_details)
 
@@ -269,7 +268,10 @@ func die():
 func on_reload(delta):
 	if(reloading):
 		var is_completed = stats.complete_reloading(delta)
-		if(is_completed || retry_reload_counter > 1):
+		if(retry_reload_counter  > 1):
+			stats.force_complete_reloading()
+			is_completed  = true
+		if(is_completed):
 			weapon.reload_with(self)
 			reloading = false			
 

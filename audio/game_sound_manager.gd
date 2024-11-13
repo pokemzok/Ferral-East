@@ -13,13 +13,15 @@ enum Sounds {
 	ZOMBIE_DEATH_2,
 	ZOMBIE_DEATH_3,
 	ZOMBIE_DEATH_4,
-	PLAYER_RUN,
+	RUN,
 	PLAYER_PICKUP_ITEM,
 	SURBI_GRUNT_1,
 	SURBI_GRUNT_2,
 	SURBI_GRUNT_3,
 	SURBI_GRUNT_4,
 	SURBI_DEATH,
+	KILT_GRUNT,
+	KILT_DEATH,
 	BULLET_HIT_BODY,
 	DRUMS,
 	WAVE_END,
@@ -60,7 +62,7 @@ var sound_files = {
 	Sounds.ZOMBIE_DEATH_2: preload("res://audio/enemies/zombie/zombie-death-2.mp3"),
 	Sounds.ZOMBIE_DEATH_3: preload("res://audio/enemies/zombie/zombie-death-3.mp3"),
 	Sounds.ZOMBIE_DEATH_4: preload("res://audio/enemies/zombie/zombie-death-4.mp3"),
-	Sounds.PLAYER_RUN: preload("res://audio/player/running-on-grass.mp3"),
+	Sounds.RUN: preload("res://audio/player/running-on-grass.mp3"),
 	Sounds.PLAYER_PICKUP_ITEM: preload("res://audio/effects/pickup.mp3"),
 	Sounds.SURBI_GRUNT_1: preload("res://audio/player/surbi/grunt-1.wav"),
 	Sounds.SURBI_GRUNT_2: preload("res://audio/player/surbi/grunt-2.wav"),
@@ -75,6 +77,11 @@ var sound_files = {
 	Sounds.PURCHASE: preload("res://audio/effects/purchase.mp3"),
 	Sounds.ROTATE_INVENTORY: preload("res://audio/effects/rotate_inventory.mp3"),
 	Sounds.DRINKING: preload("res://audio/effects/drinking.mp3")
+}
+
+var kilt_res = {
+	Sounds.KILT_GRUNT: "res://audio/enemies/kilt/kilt-grunt.wav",
+	Sounds.KILT_DEATH: "res://audio/enemies/kilt/kilt-death.wav"
 }
 
 var music_res = {
@@ -117,12 +124,21 @@ func play_sound(sound_type: Sounds, sound_player: Node):
 
 func play_inerrupt_sound(sound_type: Sounds, sound_player: Node):
 	if  (sound_files.has(sound_type)):
-		if (!sound_player.is_playing()):
+		if (sound_player.is_playing()):
 			sound_player.stop()
 		sound_player.stream = sound_files[sound_type]
 		sound_player.play()
 	else:
 		print("Sound type not found: ", sound_type)	
+
+func play_interrupt_sound_resource(res, sound_player: Node):
+		if (sound_player.is_playing()):
+			print("stopping playing")
+			sound_player.stop()
+		sound_player.stream = res
+		
+		print("starting playing")
+		sound_player.play()
 
 func survival_music_keys() -> Array:
 	if(slow_music_loops_keys.is_empty() || fast_music_loops_keys.is_empty() || long_music_loops_keys.is_empty()):

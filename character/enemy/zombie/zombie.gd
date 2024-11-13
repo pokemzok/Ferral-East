@@ -13,7 +13,7 @@ var played_dying = false
 var sound_manager = GameSoundManager.get_instance()
 var voices = sound_manager.zombie_voices
 var death_sounds = sound_manager.zombie_death
-var run_audio = GameSoundManager.Sounds.PLAYER_RUN
+var run_audio = GameSoundManager.Sounds.RUN
 var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 
 @onready var voice_audio_player = $VoiceAudioStreamPlayer

@@ -71,6 +71,9 @@ func complete_reloading(delta) -> bool:
 		return true
 	return false	
 
+func force_complete_reloading():
+	reload_timer.assign_zero()
+
 func has_knockback():
 	return state == CharacterState.State.KNOCKBACK
 
