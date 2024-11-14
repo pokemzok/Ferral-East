@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://vrn47lsvmkn0"]
+[gd_scene load_steps=23 format=3 uid="uid://vrn47lsvmkn0"]
 
 [ext_resource type="Script" path="res://character/enemy/zombie/zombie.gd" id="1_f5tjh"]
 [ext_resource type="Texture2D" uid="uid://j54g03mw4u4q" path="res://character/enemy/zombie/fast/fast-zombie-despawn.png" id="3_x626y"]
@@ -39,6 +39,22 @@ region = Rect2(256, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfvu6"]
 atlas = ExtResource("7_vbt4r")
 region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebd5o"]
+atlas = ExtResource("5_yrm5s")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeqi0"]
+atlas = ExtResource("7_vbt4r")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vima"]
+atlas = ExtResource("7_vbt4r")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se6v1"]
+atlas = ExtResource("5_yrm5s")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gxpai"]
 atlas = ExtResource("7_vbt4r")
@@ -96,6 +112,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ebd5o")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_aeqi0")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_0vima")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_se6v1")
+}],
+"loop": true,
+"name": &"knockback",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("8_bljfo")
 }, {
 "duration": 1.0,
@@ -124,7 +157,7 @@ type = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
-animation = &"walk"
+animation = &"knockback"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 light_mask = 0

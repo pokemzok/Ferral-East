@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cdokidrekqjas"]
+[gd_scene load_steps=38 format=3 uid="uid://cdokidrekqjas"]
 
 [ext_resource type="Script" path="res://character/enemy/boss/kilt_weston/kilt_weston.gd" id="1_22pbn"]
 [ext_resource type="Texture2D" uid="uid://dsw8wjvejj44y" path="res://character/enemy/boss/kilt_weston/kilt_weston_moving.png" id="1_a3wdl"]
@@ -37,6 +37,22 @@ region = Rect2(0, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_k0lee"]
 atlas = ExtResource("3_ri6u5")
 region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6a5a"]
+atlas = ExtResource("2_0aax4")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgw2t"]
+atlas = ExtResource("5_0beg6")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7s1h"]
+atlas = ExtResource("5_0beg6")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlk28"]
+atlas = ExtResource("2_0aax4")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rb8gn"]
 atlas = ExtResource("3_v6adg")
@@ -138,6 +154,23 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6a5a")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_cgw2t")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_v7s1h")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_hlk28")
+}],
+"loop": true,
+"name": &"knockback",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 0.25,
 "texture": SubResource("AtlasTexture_rb8gn")
 }, {
@@ -224,7 +257,7 @@ script = ExtResource("1_22pbn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dgjim")
-animation = &"staggered"
+animation = &"knockback"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

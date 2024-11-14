@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c3pei7q6t28io"]
+[gd_scene load_steps=23 format=3 uid="uid://c3pei7q6t28io"]
 
 [ext_resource type="Script" path="res://character/enemy/zombie/zombie.gd" id="1_wiae2"]
 [ext_resource type="Texture2D" uid="uid://c1ig5aspasl0t" path="res://character/enemy/zombie/reanimating/reanimating-zombie-despawn.png" id="2_y1ty3"]
@@ -39,6 +39,22 @@ region = Rect2(256, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_78f0w"]
 atlas = ExtResource("5_s64wo")
 region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsqpq"]
+atlas = ExtResource("4_1g8ip")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mb4c"]
+atlas = ExtResource("5_s64wo")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow41l"]
+atlas = ExtResource("5_s64wo")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rujj"]
+atlas = ExtResource("4_1g8ip")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6gle4"]
 atlas = ExtResource("5_s64wo")
@@ -96,6 +112,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vsqpq")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_7mb4c")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ow41l")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_1rujj")
+}],
+"loop": true,
+"name": &"knockback",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("5_nxqfp")
 }, {
 "duration": 1.0,
@@ -124,7 +157,7 @@ type = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
-animation = &"despawn"
+animation = &"knockback"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 light_mask = 0

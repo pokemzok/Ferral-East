@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2tfu8bbgndoa"]
+[gd_scene load_steps=18 format=3 uid="uid://b2tfu8bbgndoa"]
 
 [ext_resource type="Script" path="res://character/enemy/zombie/zombie.gd" id="1_t34le"]
 [ext_resource type="Texture2D" uid="uid://bbsa4kg12nfnm" path="res://character/enemy/zombie/default/zombie-dying-3.png" id="2_terlf"]
@@ -12,6 +12,22 @@
 [ext_resource type="Texture2D" uid="uid://b1wwfvj7elxi6" path="res://character/enemy/zombie/default/zombie--walk-1.png" id="10_hyh6m"]
 [ext_resource type="Texture2D" uid="uid://bu60mg2gmv2vs" path="res://character/enemy/zombie/default/zombie--walk-2.png" id="11_72cx2"]
 [ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="12_i7byk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmhqe"]
+atlas = ExtResource("8_6okka")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghjpv"]
+atlas = ExtResource("10_hyh6m")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amvt5"]
+atlas = ExtResource("11_72cx2")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ple6o"]
+atlas = ExtResource("2_terlf")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nct2"]
 animations = [{
@@ -61,6 +77,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hmhqe")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ghjpv")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_amvt5")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_ple6o")
+}],
+"loop": true,
+"name": &"knockback",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("8_6okka")
 }, {
 "duration": 1.0,
@@ -88,7 +121,7 @@ script = ExtResource("1_t34le")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nct2")
-animation = &"dying"
+animation = &"knockback"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 light_mask = 0

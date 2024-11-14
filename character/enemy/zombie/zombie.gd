@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var type: Enemy.EnemyType
 var stats: EnemyStats
-
 var player_detection = PlayerDetectionBehaviour.new(self)
 var player =  null
 var motion = Vector2()
@@ -36,6 +35,8 @@ func _physics_process(delta):
 	match(stats.state):
 		CharacterState.State.DYING:
 			on_dying(delta)
+		CharacterState.State.KNOCKBACK:
+			on_knockback(delta)	
 		CharacterState.State.STUNNED:
 			on_stun(delta)
 		CharacterState.State.NORMAL:
@@ -54,6 +55,17 @@ func on_dying(delta):
 	stats.get_dying_timer().decrement_by(delta)
 	if stats.get_dying_timer().value < 0:
 		die()
+
+func on_knockback(delta):
+	stats.knockback_timer.decrement_by(delta)
+	velocity = stats.knockback_velocity * delta
+	stats.decrease_knockback(delta)
+	play_knockback()	
+	move_and_slide()
+	walking_audio_player.stop()
+	stats.invincible_frames.assign_max_value()	
+	if(stats.knockback_timer.is_lte_zero()):
+		stats.reset_knockback()
 
 func on_animation_finished():
 	if sprite.animation == "dying":
@@ -133,12 +145,21 @@ func on_hurtbox_entered(body):
 			body.queue_free()
 			stun()		
 			take_dmg(body.damage)
+	elif body.is_in_group("enemy") || body.is_in_group("boss"):
+		on_character_colision(body)
 	elif body.is_in_group("melee"):
-		# FIXME knockback effect
-		stun()		
+		if(body.get_knockback_force() > 0):
+			knockback_from(body)
+		else:
+			stun()		
 		take_dmg(body.damage)		
 	elif body.is_in_group("player"):
+		on_character_colision(body)
 		attack()						
+
+func on_character_colision(body):
+	if(body.stats.has_knockback()):
+		knockback_from(body)
 
 func stun():
 	if (!stats.is_stunned()):
@@ -147,6 +168,13 @@ func stun():
 func attack():
 	if (stats.attack_timer.value <= 0):
 		stats.attack_timer.assign_max_value()
+
+func knockback_from(body):
+	if(!stats.is_dead() && !stats.has_knockback()):
+		var knockback_direction = (global_position - body.global_position).normalized()
+		var knockback_force = body.get_knockback_force()
+		stats.assign_character_knockback_force(knockback_force/2)
+		stats.apply_knockback(knockback_direction * knockback_force)
 
 func take_dmg(dmg: float):
 	audio_pool.play_sound_effect(bullet_hit_audio)	
@@ -182,3 +210,9 @@ func reanimate():
 	stats.reanimated()
 	self.z_index = 1
 	played_dying = false
+
+func play_knockback():
+	sprite.play("knockback")
+
+func get_knockback_force():
+	return stats.get_character_knockback_force()

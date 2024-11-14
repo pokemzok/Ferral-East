@@ -1,6 +1,6 @@
 extends Node
 class_name CharacterStats
-
+var character_knockback_force = 2
 var state = CharacterState.State.NORMAL
 var invincible_frames = NumericAttribute.new(0, 10)
 var stunned_timer = NumericAttribute.new(0, 0.5) 
@@ -55,6 +55,7 @@ func reset_knockback():
 	if (has_knockback()):
 		knockback_velocity = Vector2.ZERO
 		knockback_timer.assign_zero()
+		character_knockback_force = 2
 		remove_state(CharacterState.State.KNOCKBACK)
 
 func reset_stagger():
@@ -104,6 +105,9 @@ func is_teleporting():
 
 func is_stunned():
 	return state == CharacterState.State.STUNNED	
+
+func is_staggered():
+	return state == CharacterState.State.STAGGERED	
 	
 func can_reanimate() -> bool:
 	return self.reanimates_times > 0
@@ -118,4 +122,9 @@ func get_dying_timer() -> NumericAttribute:
 		return reanimation_timer
 	else:
 		return dying_timer	
+
+func assign_character_knockback_force(force):
+	character_knockback_force = force
 	
+func get_character_knockback_force():
+	return character_knockback_force

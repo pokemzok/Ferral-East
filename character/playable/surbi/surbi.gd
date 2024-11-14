@@ -28,6 +28,7 @@ func _ready():
 	self.z_index = 1
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
+	
 	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_MONOLOG, monolog_bubble.show_bubble)
@@ -230,11 +231,8 @@ func start_reloading():
 	sound_manager.play_inerrupt_sound(weapon.get_reload_audio(), effects_audio_player)	
 	
 func on_hurtbox_entered(body):
-	if body.is_in_group("enemy"):
-		if not enemies_in_player_collision_area.has(body):
-			enemies_in_player_collision_area.append(body)
-	elif body.is_in_group("boss"):
-		staggered_by(body)		
+	if body.is_in_group("enemy") ||  body.is_in_group("boss"):
+		on_enemy_character_colision(body)
 	elif body.is_in_group("melee") && (left_arm == null || body != left_arm.weapon):
 		if(body.get_knockback_force() > 0):
 			knockback_from(body)
@@ -244,18 +242,26 @@ func on_hurtbox_entered(body):
 	elif body.is_in_group("projectiles"):
 		on_dmg()
 
+func on_enemy_character_colision(body):
+	if(body.stats.has_knockback()):
+		knockback_from(body)
+	elif (body.is_in_group("boss")):
+		staggered_by(body)
+	elif not enemies_in_player_collision_area.has(body):
+		enemies_in_player_collision_area.append(body)
+			
 func staggered_by(body):
 	if(!stats.is_dead()):
 		var staggered_direction = (global_position - body.global_position).normalized()
 		stats.staggered_timer.assign_max_value()
 		stats.apply_stagger(staggered_direction)
-		audio_pool.play_sound_effect(grunts_audio.random_element())
 
 func knockback_from(body):
 	if(!stats.is_dead()):
 		var knockback_direction = (global_position - body.global_position).normalized()
 		var knockback_force = body.get_knockback_force()
 		stats.apply_knockback(knockback_direction * knockback_force)
+		stats.assign_character_knockback_force(knockback_force/2)
 		audio_pool.play_sound_effect(grunts_audio.random_element())
 		
 func on_picked_item(item: Item):
@@ -284,3 +290,5 @@ func on_hurtbox_leave(body):
 	if enemies_in_player_collision_area.has(body):
 		enemies_in_player_collision_area.erase(body)
 
+func get_knockback_force():
+	return stats.get_character_knockback_force()

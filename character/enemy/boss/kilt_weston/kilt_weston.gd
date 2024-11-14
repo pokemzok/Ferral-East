@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_3
 var phase = BossesMetadata.BossPhase.PHASE_1
+
 var player_detection = PlayerDetectionBehaviour.new(self)
 var taken_hits_for_stun = 0
 var player =  null
@@ -68,6 +69,8 @@ func _physics_process(delta):
 		match(stats.state):
 			CharacterState.State.DYING:
 				on_dying(delta)
+			CharacterState.State.KNOCKBACK:
+				on_knockback(delta)	
 			CharacterState.State.STUNNED:
 				on_stun(delta)
 			CharacterState.State.STAGGERED:		
@@ -84,6 +87,21 @@ func attack_player(delta):
 		look_at(player.global_position)
 		on_attack(delta, distance_to_player)
 
+func on_knockback(delta):
+	stats.knockback_timer.decrement_by(delta)
+	velocity = stats.knockback_velocity * delta
+	stats.decrease_knockback(delta)
+	play_knockback()	
+	move_and_slide()
+	common_irregular_state_action()
+	if(stats.knockback_timer.is_lte_zero()):
+		stats.reset_knockback()
+
+func common_irregular_state_action():	
+	walking_audio_player.stop()
+	stats.invincible_frames.assign_max_value()	
+	retry_reload_if_needed()
+	
 func on_movement(distance_to_player):
 	match difficulty_level:
 		BossesMetadata.BossDifficulty.LEVEL_1:
@@ -329,20 +347,42 @@ func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):
 		if (body.linear_velocity.length() >= stats.projectiles_dmg_velocity):
 			dmg_processing(body)
+			stun_processing()
 			body.queue_free()
 	elif body.is_in_group("melee"):
-		# FIXME knockback 
+		if(body.get_knockback_force() > 0):
+			knockback_from(body)
+		else:
+			stun_processing()	
 		dmg_processing(body)
-	elif body.is_in_group("player"):
-		staggered()	
+	elif body.is_in_group("player") || body.is_in_group("enemy"):
+		on_character_collision(body)
+
+func on_character_collision(body):
+		if(body.stats.has_knockback()):
+			knockback_from(body)
+		else:	
+			staggered()	
+
+func knockback_from(body):
+	if(!stats.is_dead()):
+		var knockback_direction = (global_position - body.global_position).normalized()
+		var knockback_force = body.get_knockback_force()
+		stats.assign_character_knockback_force(knockback_force/2)
+		stats.apply_knockback(knockback_direction * knockback_force)		
+		sound_manager.play_interrupt_sound_resource(grunt_audio_res, effects_audio_player)	
 
 func staggered():
-	stats.staggered_timer.assign_max_value()
-	stats.assign_state(CharacterState.State.STAGGERED)
+	if(!stats.has_knockback() && !stats.is_staggered()):
+		stats.staggered_timer.assign_max_value()
+		stats.assign_state(CharacterState.State.STAGGERED)
 
 func dmg_processing(body):
 	if(stats.invincible_frames.value  <= 0):
 		take_dmg(body.damage)
+		
+func stun_processing():	
+	if(stats.invincible_frames.value  <= 0):
 		if (phase != BossesMetadata.BossPhase.PHASE_3 || taken_hits_for_stun > 1):
 			taken_hits_for_stun = 0
 			stun()
@@ -355,3 +395,9 @@ func take_dmg(dmg: float):
 	stats.health_points.decrement_by(dmg)
 	if stats.health_points.value <= 0:
 		dying()
+
+func play_knockback():
+	animations.play("knockback")
+
+func get_knockback_force():
+	return stats.get_character_knockback_force()

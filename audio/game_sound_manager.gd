@@ -137,7 +137,6 @@ func play_interrupt_sound_resource(res, sound_player: Node):
 			sound_player.stop()
 		sound_player.stream = res
 		
-		print("starting playing")
 		sound_player.play()
 
 func survival_music_keys() -> Array:
