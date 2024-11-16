@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_3
+@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_1
 var phase = BossesMetadata.BossPhase.PHASE_1
 
 var player_detection = PlayerDetectionBehaviour.new(self)
@@ -38,7 +38,6 @@ var sideways_position
 # jeśli gracz jest pasywny i się skitrał, że nie da się sensownie podejść, zacząć dropić heale i się leczyć. Mogę to sprawdzać, przy pomocy raycasta (jak długo minęło od ostatniego momentu, gdy widział gracza.
 
 # I can make only half of his face visible in graphics, since the other half might be a skeleton
-# TODO: events to HUD, so the player can see a boss fight bar?
 # TODO: will need a guaranteed drop, legendary drop would be a phasing_orb (item which would allow Surbi to teleport short distance). 
 func _ready():
 	self.z_index = 1
@@ -227,7 +226,7 @@ func on_finish_conversation():
 	pausable.set_pause(false)
 
 func stun():
-	if (!stats.is_stunned()):
+	if (stats.is_normal()):
 		stats.apply_stun()
 		sound_manager.play_interrupt_sound_resource(grunt_audio_res, effects_audio_player)	
 
@@ -382,7 +381,7 @@ func dmg_processing(body):
 		take_dmg(body.damage)
 		
 func stun_processing():	
-	if(stats.invincible_frames.value  <= 0):
+	if(stats.invincible_frames.value <= 0 && stats.is_normal()):
 		if (phase != BossesMetadata.BossPhase.PHASE_3 || taken_hits_for_stun > 1):
 			taken_hits_for_stun = 0
 			stun()
@@ -392,7 +391,7 @@ func stun_processing():
 
 func take_dmg(dmg: float):
 	audio_pool.play_sound_effect(bullet_hit_audio)	
-	stats.health_points.decrement_by(dmg)
+	stats.decrement_health_by(dmg)
 	if stats.health_points.value <= 0:
 		dying()
 

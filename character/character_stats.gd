@@ -94,6 +94,9 @@ func dying():
 func dead():
 	state = CharacterState.State.DEAD
 
+func is_normal():
+	return state == CharacterState.State.NORMAL	
+
 func is_dead():
 	return state == CharacterState.State.DEAD	
 

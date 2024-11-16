@@ -22,12 +22,12 @@ func fade_in_out_component(component: Node, component_tween: Tween):
 		component_tween.tween_property(component, "modulate:a", 1, 2)
 		component_tween.tween_property(component, "modulate:a", 0, 2)
 
-func fade_in_component(component: Node, component_tween: Tween):
+func fade_in_component(component: Node, component_tween: Tween, fade_time: float = 0.3):
 	if component && component_tween:
-		component_tween.tween_property(component, "modulate:a", 1, 0.3)
+		component_tween.tween_property(component, "modulate:a", 1, fade_time)
 
-func fade_out_component(component: Node, component_tween: Tween):
+func fade_out_component(component: Node, component_tween: Tween, fade_time: float = 0.3):
 	if component && component_tween:
-		component_tween.tween_property(component, "modulate:a", 0, 0.3)		
+		component_tween.tween_property(component, "modulate:a", 0, fade_time)		
 
 	

@@ -26,12 +26,10 @@ func _init(
 	self.speed = speed
 	# FIXME boss consume item instead
 	#GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, apply_item)
-	emit_information()
+	emit_hp_information()
 
-func emit_information():
-	# FIXME emit boss HP instead 
-	# GlobalEventBus.player_hp_changed.emit(health_points.value)
-	pass
+func emit_hp_information():
+	GlobalEventBus.boss_enemy_hp_changed.emit(health_points.value)
 
 func apply_item(item: Item) -> bool:
 	if(item_actions.has(item.id)):
@@ -45,7 +43,6 @@ func increment_health():
 		#FIXME boss HP instead		
 		# GlobalEventBus.player_hp_changed.emit(health_points.value)	
 
-func decrement_health():
-	health_points.decrement_by()
-	# FIXME boss hp instead
-	# GlobalEventBus.player_hp_changed.emit(health_points.value)	
+func decrement_health_by(value):
+	health_points.decrement_by(value)
+	emit_hp_information()

@@ -53,14 +53,17 @@ const PLAYER_CLICKED_SHOP_ITEM = "player_clicked_shop_item"
 const PLAYER_CONSUMED_ITEM = "player_consumed_item"
 const PLAYER_PUT_CONSUMABLE_ITEM_INTO_INVENTORY = "player_put_consumable_item_into_inventory"
 const PLAYER_CONSUMABLES = "player_consumables"
+
 #trader
 signal trader_damaged
 #signal_names
 const TRADER_DAMAGED = "trader_damaged"
 #enemy
+signal boss_enemy_hp_changed 
 signal enemy_damaged
 signal enemy_death 
 # signal_names
+const BOSS_ENEMY_HP_CHANGED = "boss_enemy_hp_changed"
 const ENEMY_DAMAGED = "enemy_damaged"
 const ENEMY_DEATH = "enemy_death"
 
