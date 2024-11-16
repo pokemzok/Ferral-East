@@ -25,8 +25,10 @@ func on_wave_started(wave_nr, enemies_left):
 		wave_info_tween.stop()
 		wave_info_tween.kill()
 	self.enemies_left = enemies_left
-	if (enemies_left != 1): #do not show on boss fights
-		enemies_left_label.show()
+	if (enemies_left == 1):
+		enemies_left_label.hide() # hide cause it is a boss fights
+	else:
+		enemies_left_label.show()	
 	update_enemies_left_label_text()	
 	show_wave_started_message(wave_nr)	
 	if (wave_nr == 1):

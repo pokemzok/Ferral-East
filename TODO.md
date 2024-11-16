@@ -3,8 +3,9 @@ TODO 0
 # 0. Kilt weston drops
 # 1. TODO: complete all tasks beside dialogues in kilt  (with a drop items)
 # 2. Make items dissapear after some time, best case on next wave they all start bliping (fading in and fading out) and dissapear. This way player can avoid accidental pick up of untwanted weapon. Alternatively I can make press 'F' to pickup some items (basically everything else beside a coin).
-# 2. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
-# 3. Secondary weapon - every enemy should have knockback applied. For now only Surbi is knockback.
+# 3. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
+# 4. Secondary weapon - every enemy should have knockback applied. For now only Surbi is knockback.
+# 5. Some limited way to bail when surrounded
 
 TODO 1
 # 1. Make Sharik in Blender, so I can try generating resources from it.
