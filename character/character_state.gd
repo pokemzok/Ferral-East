@@ -2,6 +2,8 @@ class_name CharacterState
 
 enum State {
 	NORMAL,
+	DROPPING_HEAL_ITEM,
+	HEALING,
 	TELEPORTING,
 	STAGGERED,
 	STUNNED,

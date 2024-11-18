@@ -24,6 +24,10 @@ var items_collection = ArrayCollection.new([])
 var phasing_counter = 0
 var left_arm: WeaponArm
 var sideways_position
+var idle_time_counter = 0
+var healing_item_position = null
+var healing_time_counter = 0
+var healing_delay = NumericAttribute.new(0, 1)
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
@@ -32,10 +36,6 @@ var sideways_position
 @onready var navigation_agent = $NavigationAgent2D
 @onready var preview_navigation_agent = $PreviewNavigationAgent2D
 @onready var left_arm_container = $LeftArmContainer
-
-# TODO
-# If player is too passive Kilt should attempt healing via pentagram
-# jeśli gracz jest pasywny i się skitrał, że nie da się sensownie podejść, zacząć dropić heale i się leczyć. Mogę to sprawdzać, przy pomocy raycasta (jak długo minęło od ostatniego momentu, gdy widział gracza.
 
 # I can make only half of his face visible in graphics, since the other half might be a skeleton
 # TODO: will need a guaranteed drop, legendary drop would be a phasing_orb (item which would allow Surbi to teleport short distance). 
@@ -48,7 +48,11 @@ func _ready():
 	# FIXME adapt so villain can have a conversation with a Surbi
 	#GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
 	#GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+	ready_events()
 	on_phasing_in()
+
+func ready_events():
+	GlobalEventBus.connect(GlobalEventBus.EVIL_HEAL_ITEM_READY, on_heal_item_ready)
 	
 func on_animation_finished():
 	animations.stop()
@@ -58,11 +62,20 @@ func on_animation_finished():
 		phasing_counter = phasing_counter + 1
 	elif animations.animation == "phasing_out":
 		after_phasing_out()	
+
+func on_heal_item_ready(position: Vector2):
+	healing_item_position = position
+	healing_delay.assign_max_on_less_or_zero()
 	
 func _physics_process(delta):
 	stats.secondary_attack_cooldown.decrement_if_not_zero_by(delta)	
 	stats.consumable_cooldown.decrement_if_not_zero_by(delta)	
 	stats.invincible_frames.decrement_if_not_zero_by()
+	healing_delay.decrement_by(delta)
+	
+	if(healing_delay.is_lte_zero() && healing_item_position != null):
+		stats.assign_state(CharacterState.State.HEALING)
+		
 	if (phasing_counter > 0 && !is_phasing_out()):
 
 		match(stats.state):
@@ -74,9 +87,29 @@ func _physics_process(delta):
 				on_stun(delta)
 			CharacterState.State.STAGGERED:		
 				on_staggered(delta)
+			CharacterState.State.DROPPING_HEAL_ITEM:
+				on_dropping_heal_item(delta)
+			CharacterState.State.HEALING:
+				on_healing(delta)
 			CharacterState.State.NORMAL:
 				on_reload(delta)
 				attack_player(delta)
+
+# FIXME stomp animation, so it would look like he actually summoned healing item
+# FIXME I might even shake the screen a bit to signify that
+# FIXME Heal item sometimes heals too  much, it should never go over boss max HP
+# FIXME I might want to  move heal logic into Undead Shooter stats
+func on_dropping_heal_item(delta):
+	idle_time_counter = 0
+	stats.remove_state(CharacterState.State.DROPPING_HEAL_ITEM)
+	GlobalEventBus.enemy_heal.emit(global_position)
+
+func on_healing(delta):
+	healing_time_counter = healing_time_counter + delta
+	if(healing_item_position != null):
+		move_to(healing_item_position)
+	if(global_position == healing_item_position || healing_time_counter > 4 || healing_item_position == null):
+		stats.remove_state(CharacterState.State.HEALING)
 
 func attack_player(delta):
 	if player != null:
@@ -84,7 +117,7 @@ func attack_player(delta):
 		determine_boss_phase()
 		on_movement(distance_to_player)
 		look_at(player.global_position)
-		on_attack(delta, distance_to_player)
+		determine_action(delta, distance_to_player)
 
 func on_knockback(delta):
 	stats.knockback_timer.decrement_by(delta)
@@ -162,14 +195,19 @@ func random_distance() -> float:
 	else:
 		return randf_range(-200, -300) 
 			
-func on_attack(delta, distance_to_player):
+func determine_action(delta, distance_to_player):
 	if (raycast_check()):
-			if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
-				attack(delta)
-				pass
-			else:
-				secondary_attack(delta)
-				pass
+		idle_time_counter = 0
+		if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
+			attack(delta)
+			pass
+		else:
+			secondary_attack(delta)
+			pass
+	elif(difficulty_level != BossesMetadata.BossDifficulty.LEVEL_1):
+		idle_time_counter = idle_time_counter + delta
+		if(idle_time_counter > 8):
+			stats.assign_state(CharacterState.State.DROPPING_HEAL_ITEM)
 
 func charge():
 	move_to(player.global_position)
@@ -292,11 +330,6 @@ func on_reload(delta):
 			weapon.reload_with(self)
 			reloading = false			
 
-func on_consume():
-	var item = consumables_inventory.get_quick_access_item()
-	if (item != null):
-		item.use()
-
 func on_idle():
 	walking_audio_player.stop()
 	if(stats.reload_timer.value > 0 ):
@@ -354,8 +387,18 @@ func on_hurtbox_entered(body):
 		else:
 			stun_processing()	
 		dmg_processing(body)
+	elif body.is_in_group("item"):
+		on_picked_item(body)		
 	elif body.is_in_group("player") || body.is_in_group("enemy"):
 		on_character_collision(body)
+
+# FIXME heal animation
+func on_picked_item(item: Item):
+	if (!item.is_consumable()):
+		stats.apply_item(item)
+		if (item.position == healing_item_position):
+			healing_item_position = null
+	item.queue_free()
 
 func on_character_collision(body):
 		if(body.stats.has_knockback()):

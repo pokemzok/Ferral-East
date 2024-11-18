@@ -1,7 +1,7 @@
 extends Node2D
 
 var current_item_resource: SingleResource
-var current_enemy_death_details: EnemyDeathDetails
+var drop_position = null
 var item_spawn_delay = NumericAttribute.new(0.5, 0.5)
 var items: DropItems = DropItems.get_instance()
 var item_instance
@@ -9,19 +9,23 @@ var drop_chance_increase = 0
 
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
+	GlobalEventBus.connect(GlobalEventBus.ENEMY_HEAL, on_enemy_heal)
 
 func _process(delta):
 	on_loading_resource()
 	on_loading_completed(delta)
 	
 func on_loading_resource():
-	if(current_item_resource != null && current_enemy_death_details != null):
+	if(current_item_resource != null && drop_position != null):
 		if( current_item_resource.is_loaded()):
+			var item_id = current_item_resource.resource_key
 			var item = current_item_resource.get_loaded_resource()
 			item_instance = item.instantiate()
-			item_instance.global_position = current_enemy_death_details.death_position
+			item_instance.global_position = drop_position
 			current_item_resource = null
-			current_enemy_death_details = null
+			drop_position = null
+			if item_id == Item.ItemID.PENTAGRAM:
+				GlobalEventBus.evil_heal_item_ready.emit(item_instance.global_position)
 		else:
 			current_item_resource.load_resource()		
 
@@ -40,12 +44,16 @@ func on_enemy_death(enemy_death_details: EnemyDeathDetails):
 	var drop_chance = base_drop_chance + score_factor + drop_chance_increase
 	var drawn_chance = randf()
 	if  (drawn_chance < drop_chance):
-		current_enemy_death_details = enemy_death_details
+		drop_position = enemy_death_details.death_position
 		drop_item(select_item(drawn_chance, drop_chance, enemy_death_details.enemy_type))
 		drop_chance_increase = -0.03
 	else:
 		if(drop_chance_increase < 0.15):
 			drop_chance_increase += 0.015	
+
+func on_enemy_heal(position: Vector2):
+	drop_position = position
+	drop_item(Item.ItemID.PENTAGRAM)
 
 func calculate_score_factor(score: int) -> float:
 	var max_drop_chance = 1

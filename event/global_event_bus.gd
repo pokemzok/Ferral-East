@@ -61,17 +61,23 @@ const TRADER_DAMAGED = "trader_damaged"
 #enemy
 signal boss_enemy_hp_changed 
 signal enemy_damaged
-signal enemy_death 
+signal enemy_death
+signal enemy_heal
 # signal_names
 const BOSS_ENEMY_HP_CHANGED = "boss_enemy_hp_changed"
 const ENEMY_DAMAGED = "enemy_damaged"
 const ENEMY_DEATH = "enemy_death"
+const ENEMY_HEAL = "enemy_heal"
+
+#item
+signal evil_heal_item_ready
+#signal_names
+const EVIL_HEAL_ITEM_READY = "evil_heal_item_ready"
 
 #score
 signal score_changed
 #signal_names
 const SCORE_CHANGED = "score_changed"
-
 #surival
 signal wave_started
 signal wave_completed

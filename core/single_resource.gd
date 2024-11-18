@@ -3,8 +3,10 @@ extends Node
 class_name SingleResource
 
 var resources_group: ResourcesGroup
+var resource_key
 
 func _init(resource_key, resource_dictionary):
+	self.resource_key = resource_key
 	resources_group = ResourcesGroup.new([resource_key], resource_dictionary)
 
 func load_resource():

@@ -24,8 +24,6 @@ func _init(
 	self.staggered_timer = staggered_timer
 	self.health_points = health_points
 	self.speed = speed
-	# FIXME boss consume item instead
-	#GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, apply_item)
 	emit_hp_information()
 
 func emit_hp_information():
@@ -39,9 +37,8 @@ func apply_item(item: Item) -> bool:
 		
 func increment_health():
 	if (!health_points.is_max_value()):
-		health_points.increment_by()
-		#FIXME boss HP instead		
-		# GlobalEventBus.player_hp_changed.emit(health_points.value)	
+		health_points.increment_by(3)
+		emit_hp_information()	
 
 func decrement_health_by(value):
 	health_points.decrement_by(value)
