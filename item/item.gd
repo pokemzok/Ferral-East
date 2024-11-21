@@ -32,6 +32,9 @@ func is_coin() -> bool:
 func is_consumable() -> bool:
 	return type == ItemType.CONSUMABLE
 
+func is_evil() -> bool:
+	return false	
+
 func increment_quantity():
 	quantity += 1
 	

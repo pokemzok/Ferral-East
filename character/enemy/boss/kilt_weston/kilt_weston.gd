@@ -1,12 +1,13 @@
 extends CharacterBody2D
 
-@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_1
+@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_2
 var phase = BossesMetadata.BossPhase.PHASE_1
 
 var player_detection = PlayerDetectionBehaviour.new(self)
 var taken_hits_for_stun = 0
 var player =  null
 var pausable = PausableNodeBehaviour.new(self)
+var tween_behaviour = CustomTweenBehaviour.new(self)
 var weapon = Revolver.new()
 var secondary_weapon = preload("res://weapon/melee/skeleton_arm/left_skeleton_arm.tscn")
 var stats: UndeadShooterStats = KiltStatsFactory.create()
@@ -18,6 +19,7 @@ var retry_reload_counter = 0
 var sound_manager = GameSoundManager.get_instance()
 var grunt_audio_res = preload("res://audio/enemies/kilt/kilt-grunt.wav")
 var death_audio_res = preload("res://audio/enemies/kilt/kilt-death.wav")
+var pickup_audio = GameSoundManager.Sounds.PICKUP_EVIL_ITEM
 var run_audio = GameSoundManager.Sounds.RUN 
 var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
 var items_collection = ArrayCollection.new([])
@@ -28,6 +30,7 @@ var idle_time_counter = 0
 var healing_item_position = null
 var healing_time_counter = 0
 var healing_delay = NumericAttribute.new(0, 1)
+var heal_tween: Tween
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 @onready var animations = $AnimatedSprite2D
@@ -98,7 +101,6 @@ func _physics_process(delta):
 # FIXME stomp animation, so it would look like he actually summoned healing item
 # FIXME I might even shake the screen a bit to signify that
 # FIXME Heal item sometimes heals too  much, it should never go over boss max HP
-# FIXME I might want to  move heal logic into Undead Shooter stats
 func on_dropping_heal_item(delta):
 	idle_time_counter = 0
 	stats.remove_state(CharacterState.State.DROPPING_HEAL_ITEM)
@@ -199,10 +201,10 @@ func determine_action(delta, distance_to_player):
 	if (raycast_check()):
 		idle_time_counter = 0
 		if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
-			attack(delta)
+			#attack(delta)
 			pass
 		else:
-			secondary_attack(delta)
+			#secondary_attack(delta)
 			pass
 	elif(difficulty_level != BossesMetadata.BossDifficulty.LEVEL_1):
 		idle_time_counter = idle_time_counter + delta
@@ -392,13 +394,18 @@ func on_hurtbox_entered(body):
 	elif body.is_in_group("player") || body.is_in_group("enemy"):
 		on_character_collision(body)
 
-# FIXME heal animation
 func on_picked_item(item: Item):
 	if (!item.is_consumable()):
+		sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)
+		evil_heal_effect()
 		stats.apply_item(item)
 		if (item.position == healing_item_position):
 			healing_item_position = null
 	item.queue_free()
+
+func evil_heal_effect():
+	heal_tween = tween_behaviour.clear_tween(heal_tween)
+	tween_behaviour.modulate_to_red_and_out(animations, heal_tween)
 
 func on_character_collision(body):
 		if(body.stats.has_knockback()):

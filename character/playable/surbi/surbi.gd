@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var pausable = PausableNodeBehaviour.new(self)
+var tween_behaviour = CustomTweenBehaviour.new(self)
 var weapon = Revolver.new()
 var stats: PlayerStats = SurbiStatsFactory.create()
 var wallet: Wallet = Wallet.new()
@@ -10,12 +11,14 @@ var sound_manager = GameSoundManager.get_instance()
 var grunts_audio = sound_manager.surbi_grunts
 var death_audio = GameSoundManager.Sounds.SURBI_DEATH
 var run_audio = GameSoundManager.Sounds.RUN
-var pickup_audio = GameSoundManager.Sounds.PLAYER_PICKUP_ITEM
+var pickup_audio = GameSoundManager.Sounds.PICKUP_ITEM
+var evil_pickup_audio = GameSoundManager.Sounds.PICKUP_EVIL_ITEM
 var teleport_audio = GameSoundManager.Sounds.TELEPORT
 var warp_audio = GameSoundManager.Sounds.WARP
 var items_collection = ArrayCollection.new([])
 var left_arm: WeaponArm
 var reloading = false
+var evil_tween: Tween
 
 @onready var walking_audio_player = $WalkingAudioStreamPlayer
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
@@ -265,12 +268,21 @@ func knockback_from(body):
 		audio_pool.play_sound_effect(grunts_audio.random_element())
 		
 func on_picked_item(item: Item):
-	sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	
+	if (item.is_evil()):
+		sound_manager.play_inerrupt_sound(evil_pickup_audio, effects_audio_player)
+		consumed_evil_effect()
+	else:	
+		sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	
 	if (item.is_consumable()):
 		on_consumable_item(item)
 	else:
 		on_immediate_item(item)
 	item.queue_free()
+
+func consumed_evil_effect():
+	evil_tween = tween_behaviour.clear_tween(evil_tween)
+	tween_behaviour.modulate_to_red_and_out(animations, evil_tween)
+
 
 func on_consumable_item(item: Item):
 	var item_copy = item.duplicate()

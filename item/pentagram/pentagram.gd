@@ -8,3 +8,6 @@ func _ready():
 
 func _process(delta):
 	animation.play("glow")	
+
+func is_evil() -> bool:
+	return true
