@@ -19,6 +19,7 @@ var retry_reload_counter = 0
 var sound_manager = GameSoundManager.get_instance()
 var grunt_audio_res = preload("res://audio/enemies/kilt/kilt-grunt.wav")
 var death_audio_res = preload("res://audio/enemies/kilt/kilt-death.wav")
+var stomp_audio_res = preload("res://audio/effects/stomp.wav")
 var pickup_audio = GameSoundManager.Sounds.PICKUP_EVIL_ITEM
 var run_audio = GameSoundManager.Sounds.RUN 
 var bullet_hit_audio = GameSoundManager.Sounds.BULLET_HIT_BODY
@@ -91,21 +92,27 @@ func _physics_process(delta):
 			CharacterState.State.STAGGERED:		
 				on_staggered(delta)
 			CharacterState.State.DROPPING_HEAL_ITEM:
-				on_dropping_heal_item(delta)
+				stomp()
 			CharacterState.State.HEALING:
 				on_healing(delta)
 			CharacterState.State.NORMAL:
 				on_reload(delta)
 				attack_player(delta)
 
-# FIXME stomp animation, so it would look like he actually summoned healing item
-# FIXME I might even shake the screen a bit to signify that
-# FIXME Heal item sometimes heals too  much, it should never go over boss max HP
 func on_dropping_heal_item(delta):
-	idle_time_counter = 0
-	stats.remove_state(CharacterState.State.DROPPING_HEAL_ITEM)
-	GlobalEventBus.enemy_heal.emit(global_position)
+	stomp()
 
+func stomp():
+	#FIXME stomp animation, then after stomp is done, execute after_stomp function
+	after_stomp()
+
+func after_stomp():
+	idle_time_counter = 0
+	sound_manager.play_interrupt_sound_resource(stomp_audio_res, effects_audio_player)
+	GlobalEventBus.shake_camera.emit()
+	GlobalEventBus.enemy_heal.emit(global_position)
+	stats.remove_state(CharacterState.State.DROPPING_HEAL_ITEM)	
+	
 func on_healing(delta):
 	healing_time_counter = healing_time_counter + delta
 	if(healing_item_position != null):

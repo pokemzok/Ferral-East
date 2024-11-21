@@ -17,13 +17,21 @@ var wave_line_filter_shader_material: ShaderMaterial
 var bullet_time_tween: Tween
 var flash_effect_tween: Tween
 
+var camera_shake_timer = NumericAttribute.new(0, 0.5)
+var camera_shake_intensity = 10
+var camera_original_position
+
 func _ready():
 	handle_events()
 	load_shaders()
 	prepare_effects()
 
+func _process(delta: float):
+	camera_shake(delta)
+
 func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, on_player_consumed_item)
+	GlobalEventBus.connect(GlobalEventBus.SHAKE_CAMERA, initiate_camera_shake)
 
 func load_shaders():
 	var invert_shader = load(INVERT_SHADER_PATH)
@@ -95,3 +103,19 @@ func on_heal():
 	flash_effect_tween.tween_property(flash_color_rect, "modulate:a", 0.75, 0.15)
 	flash_effect_tween.tween_property(flash_color_rect, "modulate:a", 0, 0.15)
 	flash_effect_tween.tween_callback(flash_color_rect.hide)
+
+func initiate_camera_shake():
+	camera_shake_timer.assign_max_value()
+	camera_original_position = get_parent().get_used_level().position
+
+func camera_shake(delta):
+	if(camera_shake_timer.is_gt_zero()):
+		var level = get_parent().get_used_level()
+		level.position = camera_original_position + Vector2(
+			randf_range(-camera_shake_intensity, camera_shake_intensity),
+			randf_range(-camera_shake_intensity, camera_shake_intensity),
+		)
+		camera_shake_timer.decrement_by(delta)
+		if (camera_shake_timer.is_lte_zero()):
+			level.position = camera_original_position
+	

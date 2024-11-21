@@ -101,6 +101,11 @@ signal weapon_needs_reload
 #signal_names
 const WEAPON_NEEDS_RELOAD = "weapon_needs_reload"
 
+#effects
+signal shake_camera
+#signal_names
+const SHAKE_CAMERA = "shake_camera"
+
 func emit_signal_for(signal_name):
 	var name = signal_name.to_lower()
 	if has_signal(name):

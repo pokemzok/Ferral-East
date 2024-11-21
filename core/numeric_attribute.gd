@@ -11,6 +11,8 @@ func _init(value: float, max_value: float):
 func increment_by(delta: float = 1) -> NumericAttribute:
 	if(self.value < self.max_value):
 		self.value += delta
+		if(self.value > self.max_value):
+			self.assign_max_value()
 	return self
 
 func decrement_if_not_zero_by(delta: float = 1) ->NumericAttribute:

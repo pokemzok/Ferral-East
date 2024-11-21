@@ -199,6 +199,11 @@ func on_player_left_shop():
 	shop_level_instance = null	
 	player_ready_for_shop_level = false
 
+func get_used_level():
+	if (current_level_instance != null):
+		return current_level_instance
+	elif (shop_level_instance != null):
+		return shop_level_instance	
 "
 
 [node name="Game" type="Node"]
