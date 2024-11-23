@@ -135,7 +135,6 @@ func play_inerrupt_sound(sound_type: Sounds, sound_player: Node):
 
 func play_interrupt_sound_resource(res, sound_player: Node):
 		if (sound_player.is_playing()):
-			print("stopping playing")
 			sound_player.stop()
 		sound_player.stream = res
 		

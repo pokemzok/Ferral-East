@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_2
+@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_3
 var phase = BossesMetadata.BossPhase.PHASE_1
 
 var player_detection = PlayerDetectionBehaviour.new(self)
@@ -208,7 +208,7 @@ func determine_action(delta, distance_to_player):
 		else:
 			secondary_attack(delta)
 			pass
-	elif(difficulty_level != BossesMetadata.BossDifficulty.LEVEL_1):
+	elif(difficulty_level == BossesMetadata.BossDifficulty.LEVEL_3):
 		idle_time_counter = idle_time_counter + delta
 		if(idle_time_counter > 8):
 			stats.assign_state(CharacterState.State.DROPPING_HEAL_ITEM)
