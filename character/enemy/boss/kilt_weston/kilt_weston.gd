@@ -66,6 +66,8 @@ func on_animation_finished():
 		phasing_counter = phasing_counter + 1
 	elif animations.animation == "phasing_out":
 		after_phasing_out()	
+	elif animations.animation == "stomp":
+		after_stomp()
 
 func on_heal_item_ready(position: Vector2):
 	healing_item_position = position
@@ -92,22 +94,15 @@ func _physics_process(delta):
 			CharacterState.State.STAGGERED:		
 				on_staggered(delta)
 			CharacterState.State.DROPPING_HEAL_ITEM:
-				stomp()
+				play_stomp()
 			CharacterState.State.HEALING:
 				on_healing(delta)
 			CharacterState.State.NORMAL:
 				on_reload(delta)
 				attack_player(delta)
 
-func on_dropping_heal_item(delta):
-	stomp()
-
-func stomp():
-	#FIXME stomp animation, then after stomp is done, execute after_stomp function
-	after_stomp()
-
 func after_stomp():
-	idle_time_counter = 0
+	#FIXME add some shaders/ particles under the guy so it would look nice
 	sound_manager.play_interrupt_sound_resource(stomp_audio_res, effects_audio_player)
 	GlobalEventBus.shake_camera.emit()
 	GlobalEventBus.enemy_heal.emit(global_position)
@@ -208,15 +203,16 @@ func determine_action(delta, distance_to_player):
 	if (raycast_check()):
 		idle_time_counter = 0
 		if(distance_to_player > 200 || stats.secondary_attack_cooldown.value > 0):
-			#attack(delta)
+			attack(delta)
 			pass
 		else:
-			#secondary_attack(delta)
+			secondary_attack(delta)
 			pass
 	elif(difficulty_level != BossesMetadata.BossDifficulty.LEVEL_1):
 		idle_time_counter = idle_time_counter + delta
 		if(idle_time_counter > 8):
 			stats.assign_state(CharacterState.State.DROPPING_HEAL_ITEM)
+			idle_time_counter  = 0
 
 func charge():
 	move_to(player.global_position)
@@ -454,6 +450,9 @@ func take_dmg(dmg: float):
 
 func play_knockback():
 	animations.play("knockback")
+
+func play_stomp():
+	animations.play("stomp")
 
 func get_knockback_force():
 	return stats.get_character_knockback_force()
