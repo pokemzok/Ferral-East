@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxvuf1208cd7r"]
+
+[ext_resource type="Script" path="res://game/effects/explosion/one_shot_particles_effect.gd" id="1_lamgm"]
+[ext_resource type="Texture2D" uid="uid://bvr380l45s02a" path="res://game/effects/explosion/skull_particle.png" id="2_1dfo3"]
+
+[sub_resource type="Curve" id="Curve_vor2a"]
+_data = [Vector2(0, 0.373626), 0.0, 0.0, 0, 0, Vector2(1, 0.043956), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="EvilExplosionEffect" type="Node2D"]
+script = ExtResource("1_lamgm")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 120
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("2_1dfo3")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_vor2a")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cdokidrekqjas"]
+[gd_scene load_steps=45 format=3 uid="uid://cdokidrekqjas"]
 
 [ext_resource type="Script" path="res://character/enemy/boss/kilt_weston/kilt_weston.gd" id="1_22pbn"]
 [ext_resource type="Texture2D" uid="uid://dsw8wjvejj44y" path="res://character/enemy/boss/kilt_weston/kilt_weston_moving.png" id="1_a3wdl"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d278iyc51xtfe" path="res://character/enemy/boss/kilt_weston/kilt_weston_phasing.png" id="3_v6adg"]
 [ext_resource type="Texture2D" uid="uid://bhmaiypxpdd0u" path="res://character/enemy/boss/kilt_weston/kilt_weston_walking_reload.png" id="5_0beg6"]
 [ext_resource type="Texture2D" uid="uid://b0htg2ynwdtg4" path="res://character/enemy/boss/kilt_weston/kilt_weston_stomp.png" id="8_7w4c1"]
+[ext_resource type="PackedScene" uid="uid://cxvuf1208cd7r" path="res://game/effects/explosion/evil_explosion_effect.tscn" id="11_x0r4m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_03npb"]
 atlas = ExtResource("2_0aax4")
@@ -293,6 +294,8 @@ radius = 34.4384
 
 [node name="KiltWeston" type="CharacterBody2D" groups=["boss", "character"]]
 script = ExtResource("1_22pbn")
+
+[node name="EvilExplosionEffect" parent="." instance=ExtResource("11_x0r4m")]
 
 [node name="LeftArmContainer" type="Node2D" parent="."]
 

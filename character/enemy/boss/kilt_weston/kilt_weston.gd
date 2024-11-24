@@ -40,6 +40,7 @@ var heal_tween: Tween
 @onready var navigation_agent = $NavigationAgent2D
 @onready var preview_navigation_agent = $PreviewNavigationAgent2D
 @onready var left_arm_container = $LeftArmContainer
+@onready var evil_explosion_effect = $EvilExplosionEffect
 
 # I can make only half of his face visible in graphics, since the other half might be a skeleton
 # TODO: will need a guaranteed drop, legendary drop would be a phasing_orb (item which would allow Surbi to teleport short distance). 
@@ -102,7 +103,7 @@ func _physics_process(delta):
 				attack_player(delta)
 
 func after_stomp():
-	#FIXME add some shaders/ particles under the guy so it would look nice
+	evil_explosion_effect.turn_on(global_position)
 	sound_manager.play_interrupt_sound_resource(stomp_audio_res, effects_audio_player)
 	GlobalEventBus.shake_camera.emit()
 	GlobalEventBus.enemy_heal.emit(global_position)
