@@ -4,7 +4,8 @@ class_name DropItems
 static var res_dictionary  = {
 	Item.ItemID.COIN: "res://item/coin/coin.tscn",
 	Item.ItemID.PENTAGRAM: "res://item/pentagram/pentagram.tscn",
-	Item.ItemID.CYLINDER: "res://item/cylinder/cylinder.tscn"
+	Item.ItemID.CYLINDER: "res://item/cylinder/cylinder.tscn",
+	Item.ItemID.SKELETON_ARM: "res://item/weapons/skeleton_arm/skeleton_arm_item.tscn"
 }
 
 static var drop_chances = {
@@ -18,21 +19,21 @@ static var common_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.COIN,
-	Enemy.EnemyType.KILT_WESTON: Item.ItemID.COIN
+	Enemy.EnemyType.KILT_WESTON: Item.ItemID.SKELETON_ARM
 }
 
 static var rare_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.PENTAGRAM,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.CYLINDER,
-	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PENTAGRAM  #FIXME different item
+	Enemy.EnemyType.KILT_WESTON: Item.ItemID.SKELETON_ARM
 }
 
 static var legendary_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.CYLINDER,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.PENTAGRAM,
-	Enemy.EnemyType.KILT_WESTON: Item.ItemID.CYLINDER  #FIXME different item
+	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PENTAGRAM
 }
 
 static var instance = null

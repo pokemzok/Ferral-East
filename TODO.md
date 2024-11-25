@@ -14,6 +14,8 @@ TODO 2
 # 5. I might need to rework my SurvivalGameMode to extract spawning algorithm.
 # 6. I can also trigger dialogue between both guys. 
 # 7. TODO learn blender so I can make more realistic animations.
+# 8. I plan to make each wave on different screen and move through to them just so the player is not bored. Maybe even loot boxes and dropping tools to open them.
+# 9. Because of 8 I now wonder if i don't want to have procedural level generation.
 
 TODO 3
 # 0. After 10th wave go to Balbir for the summary.

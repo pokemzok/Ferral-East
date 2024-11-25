@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwg5hv0yig1t2"]
+
+[ext_resource type="Script" path="res://item/weapons/skeleton_arm/skeleton_arm_item.gd" id="1_ffnn5"]
+[ext_resource type="Texture2D" uid="uid://ckrg3yrg1oryp" path="res://item/weapons/skeleton_arm/skeleton_arm_item.png" id="1_hic5n"]
+
+[sub_resource type="Environment" id="Environment_dqqvi"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.53
+glow_strength = 0.92
+glow_blend_mode = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t60nx"]
+atlas = ExtResource("1_hic5n")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6e1j4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t60nx")
+}],
+"loop": true,
+"name": &"glow",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qvsdo"]
+radius = 15.0
+height = 45.0
+
+[node name="SkeletonArmItem" type="StaticBody2D"]
+script = ExtResource("1_ffnn5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dqqvi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(4, 1, 1, 1)
+sprite_frames = SubResource("SpriteFrames_6e1j4")
+animation = &"glow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(35, -12)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_qvsdo")

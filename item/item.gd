@@ -4,7 +4,8 @@ class_name Item
 enum ItemType {
 	NONE,
 	IMMEDIATE,
-	CONSUMABLE
+	CONSUMABLE,
+	LEFT_HAND_ITEM
 }
 
 enum ItemID {
@@ -14,7 +15,8 @@ enum ItemID {
 	CYLINDER,
 	REVOLVER_PARTS,
 	WATER,
-	CATNIP
+	CATNIP,
+	SKELETON_ARM
 }
 
 @export var type = ItemType.NONE
@@ -31,6 +33,9 @@ func is_coin() -> bool:
 
 func is_consumable() -> bool:
 	return type == ItemType.CONSUMABLE
+
+func is_for_left_hand() -> bool:
+	return type == ItemType.LEFT_HAND_ITEM
 
 func is_evil() -> bool:
 	return false	
