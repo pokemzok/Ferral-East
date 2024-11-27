@@ -1,6 +1,7 @@
 extends Item
 
 @onready var animation = $AnimatedSprite2D
+var item_to_initialize = preload("res://weapon/melee/skeleton_arm/left_skeleton_arm.tscn")
 var red = 4.0
 var increasing = false
 
@@ -23,3 +24,6 @@ func glow(delta):
 
 func is_evil() -> bool:
 	return true
+
+func instantiate():
+	return item_to_initialize.instantiate()

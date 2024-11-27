@@ -273,16 +273,19 @@ func on_picked_item(item: Item):
 		consumed_evil_effect()
 	else:	
 		sound_manager.play_inerrupt_sound(pickup_audio, effects_audio_player)	
-	if (item.is_consumable()):
-		on_consumable_item(item)
-	else:
-		on_immediate_item(item)
+
+	match item.type:
+		Item.ItemType.CONSUMABLE:
+			on_consumable_item(item)
+		Item.ItemType.IMMEDIATE:
+			on_immediate_item(item)
+		Item.ItemType.LEFT_HAND_ITEM:
+			on_left_hand_item(item)	
 	item.queue_free()
 
 func consumed_evil_effect():
 	evil_tween = tween_behaviour.clear_tween(evil_tween)
 	tween_behaviour.modulate_to_red_and_out(animations, evil_tween)
-
 
 func on_consumable_item(item: Item):
 	var item_copy = item.duplicate()
@@ -297,7 +300,12 @@ func on_immediate_item(item: Item):
 		weapon.apply_item(item)
 	else:
 		wallet.add(item)
-		
+
+func on_left_hand_item(item: Item):
+	#TODO show dialogic dialog to confirm
+	left_arm = WeaponArm.new(item.instantiate(), self, left_arm_container)
+	
+			
 func on_hurtbox_leave(body):
 	if enemies_in_player_collision_area.has(body):
 		enemies_in_player_collision_area.erase(body)

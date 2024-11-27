@@ -29,7 +29,7 @@ animations = [{
 radius = 15.0
 height = 45.0
 
-[node name="SkeletonArmItem" type="StaticBody2D"]
+[node name="SkeletonArmItem" type="StaticBody2D" groups=["item"]]
 script = ExtResource("1_ffnn5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
