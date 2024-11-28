@@ -17,8 +17,8 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMABLES, on_player_consumables)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, on_consumed_item)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_PUT_CONSUMABLE_ITEM_INTO_INVENTORY, on_new_item)
-	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_conversation_started)
-	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_conversation_finnished)
+	GlobalEventBus.connect(GlobalEventBus.START_INTERACTION_WITH, on_conversation_started)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_INTERACTION, on_conversation_finnished)
 
 func _process(delta):
 	handle_inputs(delta)

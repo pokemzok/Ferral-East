@@ -39,7 +39,9 @@ directories/dtl_directory={
 "Sharik_exit_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_exit_shop_timeline.dtl",
 "Sharik_sale_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_sale_timeline.dtl",
 "Sharik_sharik_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_sharik_shop_timeline.dtl",
-"Sharik_shop_first_conversation_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_first_conversation_timeline.dtl"
+"Sharik_shop_first_conversation_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_first_conversation_timeline.dtl",
+"Skeleton_arm_abandoned_farm_timeline": "res://dialogs/dialogic/items/skeleton_arm/Skeleton_arm_abandoned_farm_timeline.dtl",
+"Skeleton_arm_pickup_info_timeline": "res://dialogs/dialogic/items/skeleton_arm/Skeleton_arm_pickup_info_timeline.dtl"
 }
 layout/style_list=["res://dialogs/dialogic/dialogue-style.tres"]
 layout/default_style="res://dialogs/dialogic/dialogue-style.tres"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwg5hv0yig1t2"]
+[gd_scene load_steps=8 format=3 uid="uid://bwg5hv0yig1t2"]
 
 [ext_resource type="Script" path="res://item/weapons/skeleton_arm/skeleton_arm_item.gd" id="1_ffnn5"]
 [ext_resource type="Texture2D" uid="uid://ckrg3yrg1oryp" path="res://item/weapons/skeleton_arm/skeleton_arm_item.png" id="1_hic5n"]
@@ -29,7 +29,10 @@ animations = [{
 radius = 15.0
 height = 45.0
 
-[node name="SkeletonArmItem" type="StaticBody2D" groups=["item"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_rk61q"]
+radius = 55.0091
+
+[node name="SkeletonArmItem" type="StaticBody2D" groups=["left_arm_item"]]
 script = ExtResource("1_ffnn5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -41,7 +44,17 @@ sprite_frames = SubResource("SpriteFrames_6e1j4")
 animation = &"glow"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(35, -12)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_qvsdo")
+
+[node name="InterractionBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractionBox"]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(34, -13)
+shape = SubResource("CircleShape2D_rk61q")
+
+[connection signal="body_entered" from="InterractionBox" to="." method="_on_interraction_box_body_entered"]
+[connection signal="body_exited" from="InterractionBox" to="." method="_on_interraction_box_body_exited"]

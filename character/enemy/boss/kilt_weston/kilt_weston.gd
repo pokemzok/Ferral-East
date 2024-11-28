@@ -51,8 +51,8 @@ func _ready():
 	left_arm = WeaponArm.new(secondary_weapon.instantiate(), self, left_arm_container)
 	player = player_detection.get_player()
 	# FIXME adapt so villain can have a conversation with a Surbi
-	#GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
-	#GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+	#GlobalEventBus.connect(GlobalEventBus.START_INTERACTION_WITH, on_start_interaction_with)
+	#GlobalEventBus.connect(GlobalEventBus.FINISH_INTERACTION, on_finish_interaction)
 	ready_events()
 	on_phasing_in()
 
@@ -262,11 +262,11 @@ func teleport():
 func clear_teleporting_state():
 	stats.remove_state(CharacterState.State.TELEPORTING)
 
-func on_start_conversation_with(npc_name: String):
+func on_start_interaction_with(npc_name: String):
 	pausable.set_pause(true)
 	on_idle()
 
-func on_finish_conversation():
+func on_finish_interaction():
 	pausable.set_pause(false)
 
 func stun():

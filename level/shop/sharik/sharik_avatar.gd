@@ -27,4 +27,4 @@ func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			input_pickable = false
-			GlobalEventBus.start_conversation_with.emit(character_name)
+			GlobalEventBus.start_interaction_with.emit(character_name)

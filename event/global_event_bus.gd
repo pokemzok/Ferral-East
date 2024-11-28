@@ -88,13 +88,13 @@ const WAVE_COMPLETED = "wave_completed"
 #interactions
 signal interaction_hint
 signal interaction_hint_hide
-signal start_conversation_with
-signal finish_conversation
+signal start_interaction_with
+signal finish_interaction
 #signal_names
 const INTERACTION_HINT = "interaction_hint"
 const INTERACTION_HINT_HIDE = "interaction_hint_hide"
-const START_CONVERSATION_WITH = "start_conversation_with"
-const FINISH_CONVERSATION = "finish_conversation"
+const START_INTERACTION_WITH = "start_interaction_with"
+const FINISH_INTERACTION = "finish_interaction"
 
 #weapon
 signal weapon_needs_reload

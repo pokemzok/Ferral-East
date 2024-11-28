@@ -6,7 +6,7 @@ static var warp_locations = {
 
 func _ready():
 	GlobalEventBus.connect(GlobalEventBus.TRADER_DAMAGED, on_trader_damaged)
-	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
+	GlobalEventBus.connect(GlobalEventBus.START_INTERACTION_WITH, on_start_interaction_with)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_enered_shop)
 	Dialogic.signal_event.connect(_on_dialogic_signal)
 
@@ -14,18 +14,18 @@ func on_trader_damaged(trader_name: String):
 	Dialogic.VAR.player.attacked_trader_count += 1
 
 func on_enered_shop(character_name: String):
-	on_start_conversation_with(character_name+"_shop")
+	on_start_interaction_with(character_name+"_shop")
 
-func on_start_conversation_with(character_name: String):
+func on_start_interaction_with(interractable: String):
 	Dialogic.Styles.load_style("textbox")
 	if (Dialogic.current_timeline != null):
 		return
 	Dialogic.timeline_ended.connect(on_timeline_ended)
 	var location = PlayerLog.current_location	
-	Dialogic.start(character_name+"_"+location+"_timeline")
+	Dialogic.start(interractable+"_"+location+"_timeline")
 
 func on_timeline_ended():
-	GlobalEventBus.finish_conversation.emit()
+	GlobalEventBus.finish_interaction.emit()
 	Dialogic.timeline_ended.disconnect(on_timeline_ended)		
 
 func toggle_dialogs():

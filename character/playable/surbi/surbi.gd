@@ -32,8 +32,8 @@ func _ready():
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
 	
-	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
-	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+	GlobalEventBus.connect(GlobalEventBus.START_INTERACTION_WITH, on_start_interaction_with)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_INTERACTION, on_finish_interaction)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_MONOLOG, monolog_bubble.show_bubble)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_LEFT_SHOP, on_player_left_shop)
@@ -90,11 +90,11 @@ func on_staggered(delta):
 	if(stats.staggered_timer.is_lte_zero()):
 		stats.reset_stagger()
 
-func on_start_conversation_with(npc_name: String):
+func on_start_interaction_with(npc_name: String):
 	pausable.set_pause(true)
 	on_idle()
 
-func on_finish_conversation():
+func on_finish_interaction():
 	pausable.set_pause(false)
 
 func on_player_enters_shop(shop_level):

@@ -14,22 +14,17 @@ var teleport_audio = GameSoundManager.Sounds.TELEPORT
 func _ready():
 	animations.connect("animation_looped", on_animation_finished)
 	GlobalEventBus.connect(GlobalEventBus.WAVE_STARTED, on_wave_started)
-	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, conversation_started)
-	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, conversation_ended)
+	GlobalEventBus.connect(GlobalEventBus.START_INTERACTION_WITH, conversation_started)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_INTERACTION, conversation_ended)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
 	
 func _process(delta):
-	process_interaction(character_name)
+	interaction_behaviour.process_interaction(character_name)
 
 func _physics_process(delta):
-	_interaction_cooldown(delta)		
+	interaction_behaviour.process_interaction_cooldown(delta)		
 	on_player_actions(delta)
 
-func _interaction_cooldown(delta):
-	if(interaction_info_cooldown.is_gt_zero()):
-		interaction_info_cooldown.decrement_by(delta)
-	if(interaction_cooldown.is_gt_zero()):
-		interaction_cooldown.decrement_by(delta)	
 
 func on_player_actions(delta):
 	if (phasing_into):
@@ -95,6 +90,6 @@ func conversation_started(npc_name: String):
 	on_idle(0)
 
 func conversation_ended():
-	interaction_cooldown.assign_max_on_less_or_zero()
+	interaction_behaviour.max_interaction_cooldown()
 	pausable.set_pause(false)
 

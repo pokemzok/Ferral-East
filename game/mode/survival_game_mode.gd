@@ -21,14 +21,14 @@ func _init(spawn_points: ArrayCollection, music: SurvivalModeMusic, enemies: Sur
 	self.enemies_to_spawn = enemies.nr_enemies_per_wave[wave_index]
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.wave_started.emit(wave_index+1, enemies_to_kill)	
-	GlobalEventBus.connect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
-	GlobalEventBus.connect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+	GlobalEventBus.connect(GlobalEventBus.START_INTERACTION_WITH, on_start_interaction_with)
+	GlobalEventBus.connect(GlobalEventBus.FINISH_INTERACTION, on_finish_interaction)
 	
 
 func clear_event_subscriptions():
 	GlobalEventBus.disconnect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
-	GlobalEventBus.disconnect(GlobalEventBus.START_CONVERSATION_WITH, on_start_conversation_with)
-	GlobalEventBus.disconnect(GlobalEventBus.FINISH_CONVERSATION, on_finish_conversation)
+	GlobalEventBus.disconnect(GlobalEventBus.START_INTERACTION_WITH, on_start_interaction_with)
+	GlobalEventBus.disconnect(GlobalEventBus.FINISH_INTERACTION, on_finish_interaction)
 	
 func _process(delta):
 	if(!pause):
@@ -97,8 +97,8 @@ func increase_difficulty():
 		spawn_time.decrement_max_value()
 		return
 	
-func on_start_conversation_with(npc_name: String):
+func on_start_interaction_with(npc_name: String):
 	pause = true
 	
-func on_finish_conversation():
+func on_finish_interaction():
 	pause = false	
