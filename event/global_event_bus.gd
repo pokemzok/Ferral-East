@@ -34,6 +34,7 @@ signal player_clicked_shop_item
 signal player_consumed_item
 signal player_consumables
 signal player_put_consumable_item_into_inventory
+signal player_picked_up_left_arm_item
 # signal_names
 const PLAYER_SELECTED = "player_selected"
 const PLAYER_DEATH = "player_death"
@@ -53,6 +54,7 @@ const PLAYER_CLICKED_SHOP_ITEM = "player_clicked_shop_item"
 const PLAYER_CONSUMED_ITEM = "player_consumed_item"
 const PLAYER_PUT_CONSUMABLE_ITEM_INTO_INVENTORY = "player_put_consumable_item_into_inventory"
 const PLAYER_CONSUMABLES = "player_consumables"
+const PLAYER_PICKED_UP_LEFT_ARM_ITEM = "player_picked_up_left_arm_item"
 
 #trader
 signal trader_damaged
@@ -106,9 +108,12 @@ signal shake_camera
 #signal_names
 const SHAKE_CAMERA = "shake_camera"
 
-func emit_signal_for(signal_name):
+func emit_signal_for(signal_name: String, param: Variant = null):
 	var name = signal_name.to_lower()
 	if has_signal(name):
-		call_deferred("emit_signal", name)
+		if (param != null):
+			call_deferred("emit_signal", name, param)
+		else:	
+			call_deferred("emit_signal", name)
 	else:
 		print("No such signal")

@@ -40,6 +40,11 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ARRIVED_TO_LEVEL, on_new_level)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_picked_item)
 	GlobalEventBus.connect(GlobalEventBus.WEAPON_NEEDS_RELOAD, start_reloading)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_PICKED_UP_LEFT_ARM_ITEM, on_test)
+
+#FIXME needs to work
+func on_test(item_name):
+	print("Surbi just picked ",item_name)
 
 func on_new_level(level: LevelManager.Levels):
 	stats.emit_information()

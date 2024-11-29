@@ -1,5 +1,11 @@
 It is a big skeleton hand.
 Looks kind of evil...
 - Pick up
+	As soon as you touch it, it attach itself to your chest. The process is quick, but so painful you want to puke.
+	Somehow you manage to stay on your feet. You now have three arms, but your left arm is barely moving. You almost can't feel it.
+	You can still use it to reload your weapon, but thats about it.
 - Stay away
+	jump the_end
+label the_end
+[signal arg="{"signal_name":"PLAYER_PICKED_UP_LEFT_ARM_ITEM", "item":"SKELETON_ARM" }"]
 [end_timeline]

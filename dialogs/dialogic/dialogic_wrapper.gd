@@ -1,5 +1,7 @@
 extends Node
 
+var json_parser = JSON.new()
+
 static var warp_locations = {
 	LevelManager.Levels.SHARIK_SHOP: GlobalEventBus.player_enters_shop
 }
@@ -57,11 +59,23 @@ func reset_all_params():
 	Dialogic.VAR.reset()
 
 func _on_dialogic_signal(arg: String):
+	if "{" in arg:
+		process_json_signal(arg)
+	else:	
+		process_signal(arg)
+	
+func process_json_signal(json: String):
+	var data = json_parser.parse_string(json)
+	process_signal(data.signal_name, data.item)
+
+func process_signal(arg: String, param: Variant = null):	
 	var signal_name = arg.to_lower()
 	if (GlobalEventBus.has_signal(signal_name)):
-		GlobalEventBus.emit_signal_for(signal_name)
+		GlobalEventBus.emit_signal_for(signal_name, param)
 	else:	
-		var enum_value = LevelManager.Levels.get(arg)
-		if(warp_locations.has(enum_value)):
-			warp_locations.get(enum_value).emit(enum_value)
-	
+		process_level_warp_signal(arg)
+
+func process_level_warp_signal(arg: String):
+	var enum_value = LevelManager.Levels.get(arg)
+	if(warp_locations.has(enum_value)):
+		warp_locations.get(enum_value).emit(enum_value)
