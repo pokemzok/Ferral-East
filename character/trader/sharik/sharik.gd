@@ -77,7 +77,7 @@ func on_animation_finished():
 		phasing_into = false
 		on_idle(0)
 
-func _on_hurtbox_body_entered(body):
+func on_hurtbox_entered(body):
 	if body.is_in_group("projectiles"):
 		if (phasing_period.is_lte_zero()):
 			transgression_count.increment_by()

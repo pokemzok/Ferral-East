@@ -66,7 +66,7 @@ func _on_dialogic_signal(arg: String):
 	
 func process_json_signal(json: String):
 	var data = json_parser.parse_string(json)
-	process_signal(data.signal_name, data.item)
+	process_signal(data.signal_name, data.interaction_name)
 
 func process_signal(arg: String, param: Variant = null):	
 	var signal_name = arg.to_lower()
