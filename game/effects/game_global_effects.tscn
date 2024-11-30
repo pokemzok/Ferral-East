@@ -32,5 +32,11 @@ custom_minimum_size = Vector2(1920, 1080)
 offset_right = 1920.0
 offset_bottom = 1080.0
 
+[node name="PainfulColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.0874548, 0.0047228, 0.0013713, 1)
+
 [node name="EffectsAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"

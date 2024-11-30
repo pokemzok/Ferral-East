@@ -105,8 +105,10 @@ const WEAPON_NEEDS_RELOAD = "weapon_needs_reload"
 
 #effects
 signal shake_camera
+signal painful_interaction
 #signal_names
 const SHAKE_CAMERA = "shake_camera"
+const PAINFUL_INTERACTION = "painful_interaction"
 
 func emit_signal_for(signal_name: String, param: Variant = null):
 	var name = signal_name.to_lower()

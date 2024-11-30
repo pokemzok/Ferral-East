@@ -40,6 +40,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ARRIVED_TO_LEVEL, on_new_level)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_picked_item)
 	GlobalEventBus.connect(GlobalEventBus.WEAPON_NEEDS_RELOAD, start_reloading)
+	GlobalEventBus.connect(GlobalEventBus.PAINFUL_INTERACTION, on_painful_interaction)
 
 func on_new_level(level: LevelManager.Levels):
 	stats.emit_information()
@@ -311,3 +312,8 @@ func on_hurtbox_leave(body):
 
 func get_knockback_force():
 	return stats.get_character_knockback_force()
+
+#TODO: make skeleton hand invicisble when player accepts  it (just toggle visibility)
+func on_painful_interaction():
+	play_stunned()
+	audio_pool.play_sound_effect(grunts_audio.random_element())

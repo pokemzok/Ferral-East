@@ -6,9 +6,11 @@ extends Node2D
 @onready var invert_filter = $BFilterContainer/InvertFilter
 @onready var wave_line_filter = $BFilterContainer/BackBufferCopy/WaveLineFilter
 @onready var flash_color_rect = $FlashColorRect
+@onready var painful_color_rect = $PainfulColorRect
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
 var sound_manager = GameSoundManager.get_instance()
 var drinking_audio = GameSoundManager.Sounds.DRINKING
+var painful_interaction_audio = GameSoundManager.Sounds.PAINFUL_INTERACTION
 
 const INVERT_SHADER_PATH = "res://shaders/invert.gdshader"
 const WAVE_LINE_SHADER_PATH = "res://shaders/wave_line.gdshader"
@@ -32,6 +34,7 @@ func _process(delta: float):
 func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, on_player_consumed_item)
 	GlobalEventBus.connect(GlobalEventBus.SHAKE_CAMERA, initiate_camera_shake)
+	GlobalEventBus.connect(GlobalEventBus.PAINFUL_INTERACTION, on_painful_interaction)
 
 func load_shaders():
 	var invert_shader = load(INVERT_SHADER_PATH)
@@ -44,6 +47,7 @@ func load_shaders():
 
 func prepare_effects():
 	flash_color_rect.modulate.a = 0
+	painful_color_rect.modulate.a = 0
 
 func on_player_consumed_item(item: ShopItem):
 	match item.id:
@@ -95,7 +99,6 @@ func clear_bullet_time_shaders(value: float):
 		invert_filter.material = null
 		wave_line_filter.material = null
 
-
 func on_heal():
 	flash_color_rect.show()
 	flash_effect_tween = clear_tween(flash_effect_tween)
@@ -119,3 +122,10 @@ func camera_shake(delta):
 		if (camera_shake_timer.is_lte_zero()):
 			level.position = camera_original_position
 	
+func on_painful_interaction():
+	painful_color_rect.show()
+	sound_manager.play_inerrupt_sound(painful_interaction_audio, effects_audio_player)
+	flash_effect_tween = clear_tween(flash_effect_tween)
+	flash_effect_tween.tween_property(painful_color_rect, "modulate:a", 1, 0.15)
+	flash_effect_tween.tween_property(painful_color_rect, "modulate:a", 0, 3)
+	flash_effect_tween.tween_callback(painful_color_rect.hide)
