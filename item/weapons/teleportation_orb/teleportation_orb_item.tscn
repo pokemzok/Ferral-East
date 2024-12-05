@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpr8ruwx1rh12"]
+
+[ext_resource type="Script" path="res://item/weapons/teleportation_orb/teleportation_orb_item.gd" id="1_hr5yx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3y2j"]
+radius = 15.4632
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfhtm"]
+radius = 43.0323
+
+[sub_resource type="Curve" id="Curve_batwp"]
+_data = [Vector2(0.0219298, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0659341), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_db75c"]
+offsets = PackedFloat32Array(0.01, 0.31, 0.635, 0.995)
+colors = PackedColorArray(1, 0, 0.172549, 1, 0, 0.0117647, 0, 1, 1, 1, 0, 1, 1, 0.0784314, 0.960784, 1)
+
+[node name="TeleporationOrb" type="StaticBody2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_hr5yx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b3y2j")
+
+[node name="InterractionBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractionBox"]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_yfhtm")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 2000
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 10.0
+gravity = Vector2(0, -10)
+radial_accel_min = -50.0
+radial_accel_max = -40.0
+scale_amount_min = 0.5
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_batwp")
+color_ramp = SubResource("Gradient_db75c")
+
+[connection signal="body_entered" from="InterractionBox" to="." method="_on_interraction_box_body_entered"]
+[connection signal="body_exited" from="InterractionBox" to="." method="_on_interraction_box_body_exited"]

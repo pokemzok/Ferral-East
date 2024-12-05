@@ -16,6 +16,7 @@ var evil_pickup_audio = GameSoundManager.Sounds.PICKUP_EVIL_ITEM
 var teleport_audio = GameSoundManager.Sounds.TELEPORT
 var warp_audio = GameSoundManager.Sounds.WARP
 var items_collection = ArrayCollection.new([])
+var phasing_out_position
 var left_arm: WeaponArm
 var reloading = false
 var evil_tween: Tween
@@ -51,9 +52,11 @@ func on_animation_finished():
 	if animations.animation == "teleporting":
 		animations.play("invisible")
 		GlobalEventBus.player_teleported.emit()
-	elif animations.animation == "phasing":	
+	elif animations.animation == "phasing" || animations.animation == "phasing_out":	
+		if(animations.animation == "phasing_out"):
+			after_phasing_out()
+		stats.remove_state(CharacterState.State.TELEPORTING)	
 		on_idle()		
-		stats.remove_state(CharacterState.State.TELEPORTING)
 	
 func _physics_process(delta):
 	
@@ -313,7 +316,19 @@ func on_hurtbox_leave(body):
 func get_knockback_force():
 	return stats.get_character_knockback_force()
 
-#TODO: make skeleton hand invicisble when player accepts  it (just toggle visibility)
 func on_painful_interaction():
 	play_stunned()
 	audio_pool.play_sound_effect(grunts_audio.random_element())
+
+func on_phasing_out(new_position):
+	play_phasing_out()
+	stats.assign_state(CharacterState.State.TELEPORTING)
+	audio_pool.play_sound_effect(warp_audio)
+	phasing_out_position = new_position
+
+func after_phasing_out():
+	self.global_position = phasing_out_position
+	phasing_out_position = null
+
+func play_phasing_out():
+	animations.play("phasing_out")

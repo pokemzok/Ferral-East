@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=41 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://drr01lyqy6utd" path="res://character/playable/surbi/knockback.png" id="8_d1cqv"]
 [ext_resource type="Texture2D" uid="uid://cqutqedddansw" path="res://character/playable/surbi/surbi-teleporting.png" id="9_h1ipu"]
 [ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="11_ewde7"]
+[ext_resource type="Texture2D" uid="uid://b7grbvc3gho45" path="res://character/playable/surbi/Surbi_phasing-vertical.png" id="12_k1h42"]
 [ext_resource type="PackedScene" uid="uid://dd330po85dsde" path="res://character/playable/surbi/script/reactive_script.tscn" id="14_4qme2"]
 [ext_resource type="PackedScene" uid="uid://c2gnl54ls056d" path="res://dialogs/monolog/monolog_bubble.tscn" id="14_irqvk"]
 
@@ -54,6 +55,14 @@ region = Rect2(768, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nypl4"]
 atlas = ExtResource("8_2fgmk")
 region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lc3l"]
+atlas = ExtResource("12_k1h42")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pojdj"]
+atlas = ExtResource("12_k1h42")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_caivf"]
 atlas = ExtResource("9_h1ipu")
@@ -169,6 +178,17 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_2lc3l")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_pojdj")
+}],
+"loop": true,
+"name": &"phasing_out",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_iqhs7")
 }, {
@@ -250,7 +270,7 @@ position = Vector2(0.909095, -6.36361)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dp80f")
-animation = &"idle"
+animation = &"phasing_out"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

@@ -33,6 +33,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="PainfulColorRect" type="ColorRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 1920.0
 offset_bottom = 1080.0

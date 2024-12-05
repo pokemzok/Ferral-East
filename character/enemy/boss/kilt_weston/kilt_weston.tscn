@@ -301,7 +301,7 @@ script = ExtResource("1_22pbn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dgjim")
-animation = &"stomp"
+animation = &"phasing_out"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
