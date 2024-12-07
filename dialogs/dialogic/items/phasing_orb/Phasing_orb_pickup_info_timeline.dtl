@@ -1,7 +1,7 @@
 It is a weird glowing orb.
 - Pick up
 	[signal arg="MAGICAL_INTERACTION"]
-	[signal arg="{"signal_name":"PLAYER_PICKED_UP_LEFT_ARM_ITEM", "interaction_name":"Teleportation_orb" }"]
+	[signal arg="{"signal_name":"PLAYER_PICKED_UP_LEFT_ARM_ITEM", "interaction_name":"Phasing_orb" }"]
 	jump the_end
 - Stay away
 	jump the_end

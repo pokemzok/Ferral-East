@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cpr8ruwx1rh12"]
 
-[ext_resource type="Script" path="res://item/weapons/teleportation_orb/teleportation_orb_item.gd" id="1_hr5yx"]
+[ext_resource type="Script" path="res://item/weapons/phasing_orb/phasing_orb_item.gd" id="1_hr5yx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b3y2j"]
 radius = 15.4632

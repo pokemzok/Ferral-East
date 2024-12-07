@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://do1dgbpr1gimw"]
-
-[ext_resource type="Script" path="res://weapon/magic/teleportation_orb/teleportation_orb.gd" id="1_h01rd"]
-
-[node name="TeleportationOrb" type="Node2D"]
-script = ExtResource("1_h01rd")

@@ -6,7 +6,7 @@ static var res_dictionary  = {
 	Item.ItemID.PENTAGRAM: "res://item/pentagram/pentagram.tscn",
 	Item.ItemID.CYLINDER: "res://item/cylinder/cylinder.tscn",
 	Item.ItemID.SKELETON_ARM: "res://item/weapons/skeleton_arm/skeleton_arm_item.tscn",
-	Item.ItemID.TELEPORTATION_ORB: "res://item/weapons/teleportation_orb/teleportation_orb_item.tscn"
+	Item.ItemID.PHASING_ORB: "res://item/weapons/phasing_orb/phasing_orb_item.tscn"
 }
 
 static var drop_chances = {
@@ -20,7 +20,7 @@ static var common_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.COIN,
-	Enemy.EnemyType.KILT_WESTON: Item.ItemID.TELEPORTATION_ORB
+	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PHASING_ORB
 }
 
 static var rare_items = {

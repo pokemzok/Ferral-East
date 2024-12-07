@@ -17,7 +17,7 @@ enum ItemID {
 	WATER,
 	CATNIP,
 	SKELETON_ARM,
-	TELEPORTATION_ORB
+	PHASING_ORB
 }
 
 @export var type = ItemType.NONE

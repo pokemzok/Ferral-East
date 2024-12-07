@@ -33,6 +33,8 @@ directories/dch_directory={
 "sharik": "res://dialogs/dialogic/sharik/sharik.dch"
 }
 directories/dtl_directory={
+"Phasing_orb_abandoned_farm_timeline": "res://dialogs/dialogic/items/phasing_orb/Phasing_orb_abandoned_farm_timeline.dtl",
+"Phasing_orb_pickup_info_timeline": "res://dialogs/dialogic/items/phasing_orb/Phasing_orb_pickup_info_timeline.dtl",
 "Sharik_abandoned_farm_first_conversation_timeline": "res://dialogs/dialogic/sharik/abandoned_farm/Sharik_abandoned_farm_first_conversation_timeline.dtl",
 "Sharik_abandoned_farm_next_conversation_timeline": "res://dialogs/dialogic/sharik/abandoned_farm/Sharik_abandoned_farm_next_conversation_timeline.dtl",
 "Sharik_abandoned_farm_timeline": "res://dialogs/dialogic/sharik/abandoned_farm/Sharik_abandoned_farm_timeline.dtl",
@@ -41,9 +43,7 @@ directories/dtl_directory={
 "Sharik_sharik_shop_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_sharik_shop_timeline.dtl",
 "Sharik_shop_first_conversation_timeline": "res://dialogs/dialogic/sharik/shop/Sharik_shop_first_conversation_timeline.dtl",
 "Skeleton_arm_abandoned_farm_timeline": "res://dialogs/dialogic/items/skeleton_arm/Skeleton_arm_abandoned_farm_timeline.dtl",
-"Skeleton_arm_pickup_info_timeline": "res://dialogs/dialogic/items/skeleton_arm/Skeleton_arm_pickup_info_timeline.dtl",
-"Teleportation_orb_abandoned_farm_timeline": "res://dialogs/dialogic/items/teleportation_orb/Teleportation_orb_abandoned_farm_timeline.dtl",
-"Teleportation_orb_pickup_info_timeline": "res://dialogs/dialogic/items/teleportation_orb/Teleportation_orb_pickup_info_timeline.dtl"
+"Skeleton_arm_pickup_info_timeline": "res://dialogs/dialogic/items/skeleton_arm/Skeleton_arm_pickup_info_timeline.dtl"
 }
 layout/style_list=["res://dialogs/dialogic/dialogue-style.tres"]
 layout/default_style="res://dialogs/dialogic/dialogue-style.tres"
