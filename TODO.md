@@ -1,6 +1,7 @@
 
 TODO 0
-# -1. somethign is  wrong with enemies counter  - to fix
+# -1. somethign is  wrong with enemies waves. It seems like not all enemies counter, but events are behaving weirdly. I encountered scenario  where nothing didn't spawn at the end.
+# 0. Prepare demo, I need a trailer as well.
 # 0. Teleportation effects - maybe I can show some magic shit on the teleportation position.
 # 2. Make items dissapear after some time, best case on next wave they all start bliping (fading in and fading out) and dissapear. This way player can avoid accidental pick up of untwanted weapon. Alternatively I can make press 'F' to pickup some items (basically everything else beside a coin).
 # 3. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
