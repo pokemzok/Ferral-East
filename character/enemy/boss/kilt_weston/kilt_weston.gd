@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_3
+@export var difficulty_level = BossesMetadata.BossDifficulty.LEVEL_2
 var phase = BossesMetadata.BossPhase.PHASE_1
 
 var player_detection = PlayerDetectionBehaviour.new(self)

@@ -17,8 +17,8 @@ CONTROLS_UP,Up,Góra
 CURRENCY_AMOUNT,{amount} G,{amount} G
 HUD_ENEMIES_LEFT,Enemies Left,Pozosta³o
 HUD_GET_READY,Get Ready!,Przygotuj siê!
-HUD_INTERACTION_TUTORIAL,Press “{action_key}” to interact,Interakcja - “{action_key}”
-HUD_NEXT_WAVE_TUTORIAL,Press “{action_key}” when you are ready,Naciœnij “{action_key}” gdy bêdziesz gotowy.
+HUD_INTERACTION_TUTORIAL,Press {action_key} to interact,Interakcja – {action_key}
+HUD_NEXT_WAVE_TUTORIAL,Press {action_key} when you are ready,Naciœnij {action_key} gdy bêdziesz gotowy.
 HUD_SCORE,Score,Punkty
 HUD_WAVE,Wave,Fala
 HUD_WAVE_COMPLETED,Wave {wave_nr} Completed!,Fala {wave_nr} Ukoñczona!
@@ -45,7 +45,7 @@ SETTINGS_VOICES,Voices,G³osy
 SETTINGS_VSYNC,Vsync,Vsync
 SPACE,Space,Spacja
 START,Start,Start
-SURBI_WAVE1_MONOLOG,That wasn't all of them. I need to use the  “{action_key}” to attract more.,"To dopiero pocz¹tek. Muszê u¿yæ “{action_key}”, by przyci¹gn¹æ kolejn¹ hordê."
+SURBI_WAVE1_MONOLOG,That wasn't all of them. I need to use the  {action_key} to attract more.,"To dopiero pocz¹tek. Muszê u¿yæ “{action_key}”, by przyci¹gn¹æ kolejn¹ hordê."
 SURBI_WAVE2_MONOLOG,Usually attracting THEM ten times is enough.,Zwykle hord jest dziesiêæ.
 SURBI_WAVE4_MONOLOG,That was scary. It will only get worse.,"Przera¿aj¹ce, a dalej bêdzie tylko gorzej."
 SURBI_WAVE6_MONOLOG,Why am I doing this?,Czemu to robiê? 
