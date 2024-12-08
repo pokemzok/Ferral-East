@@ -8,9 +8,11 @@ extends Node2D
 @onready var flash_color_rect = $FlashColorRect
 @onready var painful_color_rect = $PainfulColorRect
 @onready var effects_audio_player = $EffectsAudioStreamPlayer
+
 var sound_manager = GameSoundManager.get_instance()
 var drinking_audio = GameSoundManager.Sounds.DRINKING
 var painful_interaction_audio = GameSoundManager.Sounds.PAINFUL_INTERACTION
+var player_destroyed_item = GameSoundManager.Sounds.REVOLVER_SHOOT
 
 const INVERT_SHADER_PATH = "res://shaders/invert.gdshader"
 const WAVE_LINE_SHADER_PATH = "res://shaders/wave_line.gdshader"
@@ -35,6 +37,7 @@ func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, on_player_consumed_item)
 	GlobalEventBus.connect(GlobalEventBus.SHAKE_CAMERA, initiate_camera_shake)
 	GlobalEventBus.connect(GlobalEventBus.PAINFUL_INTERACTION, on_painful_interaction)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_DESTROYED_ITEM, on_player_destroyed_item)
 
 func load_shaders():
 	var invert_shader = load(INVERT_SHADER_PATH)
@@ -129,3 +132,6 @@ func on_painful_interaction():
 	flash_effect_tween.tween_property(painful_color_rect, "modulate:a", 1, 0.15)
 	flash_effect_tween.tween_property(painful_color_rect, "modulate:a", 0, 3)
 	flash_effect_tween.tween_callback(painful_color_rect.hide)
+
+func on_player_destroyed_item(arg):
+	sound_manager.play_inerrupt_sound(player_destroyed_item, effects_audio_player)

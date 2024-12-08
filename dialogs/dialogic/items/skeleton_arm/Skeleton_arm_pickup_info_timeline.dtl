@@ -6,8 +6,10 @@ Looks kind of evil...
 	As soon as you touch it, it jumps onto your chest and attaches itself, quickly reaching your heart. The process is fast, but at the same time, it is the most painful experience of your life.
 	Somehow, you manage to stay conscious. You now have three arms, but your left arm is barely moving. You can hardly feel it.
 	You can still use it to reload your weapon, but that's about it.
-
 - Stay away
+	jump the_end
+- Destroy!
+	[signal arg="{"signal_name":"PLAYER_DESTROYED_ITEM", "interaction_name":"Skeleton_arm" }"]
 	jump the_end
 label the_end
 [end_timeline]

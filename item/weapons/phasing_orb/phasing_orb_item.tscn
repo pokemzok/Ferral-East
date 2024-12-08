@@ -12,6 +12,11 @@ radius = 43.0323
 [node name="PhasingOrb" type="StaticBody2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_hr5yx")
+type = null
+price = null
+id = null
+quantity = null
+inventory_texture_path = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b3y2j")

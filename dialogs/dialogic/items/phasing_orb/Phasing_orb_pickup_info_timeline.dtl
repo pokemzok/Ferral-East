@@ -5,5 +5,7 @@ It is a weird glowing orb.
 	jump the_end
 - Stay away
 	jump the_end
+- Destroy!
+	[signal arg="{"signal_name":"PLAYER_DESTROYED_ITEM", "interaction_name":"Phasing_orb" }"]	
 label the_end
 [end_timeline]
