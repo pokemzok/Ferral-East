@@ -1,9 +1,8 @@
 
 TODO 0
-# 0. Effects in teleport, plus maybe a rename from teleporting orb to a phasing orb so the naming would be consistent. Phasing is short for phasing teleportation, so short form of a teleportation with passing through objects on the way.
+# 0. Teleportation effects - maybe I can show some magic shit on the teleportation position.
 # 2. Make items dissapear after some time, best case on next wave they all start bliping (fading in and fading out) and dissapear. This way player can avoid accidental pick up of untwanted weapon. Alternatively I can make press 'F' to pickup some items (basically everything else beside a coin).
 # 3. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
-# 4. Secondary weapon - every enemy should have knockback applied. For now only Surbi is knockback.
 # 5. Some limited way to bail when surrounded
 
 TODO 1
@@ -33,10 +32,11 @@ TODO 4
 # 9. Fix Sharik dialogues, when I finally have everything
 
 TODO 5
+# 0. Pad support
 # 1. Make user only have 3 pockets (currently it is not limited) and add "threads and needles" item to increase pocket nr.
 # 2. Make user have a limit of how much he can carry.
 # 1. Find a way to prevent animation from looping on death (zombie does not need looping when they die, or Surbi) 
-# 2. limit fire rate (maybe this would help for reload glitch)
+# 2. limit fire rate.
 # 3. Make whistle sound (end of the wave) louder.
 # 4. Make cactus hurt player and enemy
 # 2. Cat should try to reach the coins if there are any (later on, when I would have a pathfinding)

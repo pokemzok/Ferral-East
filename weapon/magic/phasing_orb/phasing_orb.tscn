@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://do1dgbpr1gimw"]
+[gd_scene load_steps=3 format=3 uid="uid://do1dgbpr1gimw"]
 
 [ext_resource type="Script" path="res://weapon/magic/phasing_orb/phasing_orb.gd" id="1_cqb5n"]
+[ext_resource type="PackedScene" uid="uid://4t21aqrmktya" path="res://game/effects/orb/phasing_orb_effect.tscn" id="2_lprfa"]
 
 [node name="PhasingOrb" type="Node2D"]
 script = ExtResource("1_cqb5n")
+
+[node name="PhasingOrbEffect" parent="." instance=ExtResource("2_lprfa")]
+lifetime = 0.15
