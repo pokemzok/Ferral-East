@@ -74,7 +74,7 @@ func on_enemies_loaded():
 		level_enemies =  SurvivalModeEnemies.new(
 			enemies_resources_group.sort().get_loaded_resources(),
 			bosses_resource_group.sort().get_loaded_resources(),
-			[5, 10, 15, 18, 20, 22, 25, 27, 30, 1, 50]
+			[5, 10, 15, 18, 20, 22, 25, 27, 30, 1, 50, 100, 200, 400]
 		)
 	
 func destroy():
