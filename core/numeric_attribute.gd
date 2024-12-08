@@ -24,6 +24,12 @@ func decrement_by(delta: float = 1) -> NumericAttribute:
 	self.value -= delta	
 	return self	
 
+func decrement_till_zero_by(delta: float = 1) -> NumericAttribute:
+	self.value -= delta	
+	if(self.is_lte_zero()):
+		self.value = 0
+	return self	
+
 func assign_max_value() -> NumericAttribute:
 	self.value = self.max_value
 	return self

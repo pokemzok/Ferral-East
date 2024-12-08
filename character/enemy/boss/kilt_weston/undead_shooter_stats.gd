@@ -41,5 +41,5 @@ func increment_health():
 		emit_hp_information()	
 
 func decrement_health_by(value):
-	health_points.decrement_by(value)
+	health_points.decrement_till_zero_by(value)
 	emit_hp_information()
