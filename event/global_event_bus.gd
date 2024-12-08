@@ -35,6 +35,8 @@ signal player_consumed_item
 signal player_consumables
 signal player_put_consumable_item_into_inventory
 signal player_picked_up_left_arm_item
+signal player_destroyed_item
+
 # signal_names
 const PLAYER_SELECTED = "player_selected"
 const PLAYER_DEATH = "player_death"
@@ -55,6 +57,7 @@ const PLAYER_CONSUMED_ITEM = "player_consumed_item"
 const PLAYER_PUT_CONSUMABLE_ITEM_INTO_INVENTORY = "player_put_consumable_item_into_inventory"
 const PLAYER_CONSUMABLES = "player_consumables"
 const PLAYER_PICKED_UP_LEFT_ARM_ITEM = "player_picked_up_left_arm_item"
+const PLAYER_DESTROYED_ITEM = "player_destroyed_item"
 
 #trader
 signal trader_damaged

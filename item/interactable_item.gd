@@ -25,3 +25,7 @@ func _on_interraction_box_body_exited(body):
 func interaction_ended():
 	character_interacting = null
 	interaction_behaviour.max_interaction_cooldown()
+
+func on_destroy(arg):
+	if (interaction_name == arg && character_interacting != null):
+		queue_free()

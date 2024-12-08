@@ -12,6 +12,7 @@ func _ready():
 	animation.self_modulate = Color(red, 1.0, 1.0, 1.0)
 	GlobalEventBus.connect(GlobalEventBus.FINISH_INTERACTION, interaction_ended)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_PICKED_UP_LEFT_ARM_ITEM, on_pickup)
+	GlobalEventBus.connect(GlobalEventBus.PLAYER_DESTROYED_ITEM, on_destroy)
 
 func _process(delta):
 	glow(delta)
