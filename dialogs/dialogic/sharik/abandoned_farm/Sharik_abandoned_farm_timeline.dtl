@@ -1,4 +1,2 @@
-if {sharik.shop_state} != "NEVER_VISITED":
-	jump Sharik_abandoned_farm_next_conversation_timeline/
-else:
-	jump Sharik_abandoned_farm_first_conversation_timeline/
+jump Sharik_abandoned_farm_next_conversation_timeline/
+
