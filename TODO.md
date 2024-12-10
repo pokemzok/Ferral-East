@@ -1,17 +1,14 @@
 
 TODO 0
-# 0. Prepare demo, I need a trailer as well.
 # 0. Teleportation effects - maybe I can show some magic shit on the teleportation position.
-# 2. Make items dissapear after some time, best case on next wave they all start bliping (fading in and fading out) and dissapear. This way player can avoid accidental pick up of untwanted weapon. Alternatively I can make press 'F' to pickup some items (basically everything else beside a coin).
-# 3. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
-# 5. Some limited way to bail when surrounded
+# 1. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
+# 2. Some limited way to bail when surrounded
 
 TODO 1
 # 1. Make Sharik in Blender, so I can try generating resources from it.
 
 TODO 2
 # 5. I might need to rework my SurvivalGameMode to extract spawning algorithm.
-# 6. I can also trigger dialogue between both guys. 
 # 7. TODO learn blender so I can make more realistic animations.
 # 8. I plan to make each wave on different screen and move through to them just so the player is not bored. Maybe even loot boxes and dropping tools to open them.
 # 9. Because of 8 I now wonder if i don't want to have procedural level generation.
