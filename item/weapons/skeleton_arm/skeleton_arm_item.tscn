@@ -33,6 +33,8 @@ height = 45.0
 radius = 55.0091
 
 [node name="SkeletonArmItem" type="StaticBody2D" groups=["left_arm_item"]]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_ffnn5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

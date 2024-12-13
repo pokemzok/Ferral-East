@@ -61,7 +61,7 @@ func spawn_enemies(delta):
 			if(enemies_to_spawn <= 0):
 				break
 			var spawner = spawners[i]	
-			var enemy = enemies.get_boss() if enemies.nr_enemies_per_wave[wave_index] == 1 else enemies.get_enemy_for_wave(wave_index)
+			var enemy = enemies.get_enemy_for_wave(wave_index)
 			spawner.add_child(enemy.instantiate())
 			enemies_to_spawn -= 1		
 
