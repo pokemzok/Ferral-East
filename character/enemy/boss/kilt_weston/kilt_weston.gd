@@ -281,7 +281,7 @@ func dying():
 		$CollisionShape2D.set_deferred("disabled",  true)
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
 		sound_manager.play_interrupt_sound_resource(death_audio_res, effects_audio_player)	
-		var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
+		var death_details = EnemyDeathDetails.new(self)
 		GlobalEventBus.enemy_death.emit(death_details)
 
 func on_phasing_in():

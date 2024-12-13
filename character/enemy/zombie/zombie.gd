@@ -186,7 +186,7 @@ func take_dmg(dmg: float):
 func dying():
 	if (!stats.is_dying()):
 		if (!stats.can_reanimate()):
-			var death_details = EnemyDeathDetails.new(stats.type, stats.death_score, global_position)
+			var death_details = EnemyDeathDetails.new(self)
 			GlobalEventBus.enemy_death.emit(death_details)
 		play_death_sound()	
 		stats.dying()

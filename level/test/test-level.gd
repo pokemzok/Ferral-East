@@ -1,4 +1,4 @@
-extends Node
+extends PlayableLevel
 
 var spawn_points: ArrayCollection
 var game_mode: GameMode 
@@ -35,10 +35,12 @@ func _ready():
 	)
 	enemies_resources_group = ResourcesGroup.new(enemies_manager.zombie_keys, enemies_manager.enemy_res)
 	bosses_resource_group = ResourcesGroup.new(enemies_manager.bosses_keys, enemies_manager.bosses_res)
-	
 	resources = [victory_music_resources_group, survival_music_resources_group, enemies_resources_group, bosses_resource_group]
 	
+	dead_enemies_container = $DeadEnemiesContainer
 	GlobalEventBus.player_arrived_to_level.emit(LevelManager.Levels.ABANDONED_FARM)
+	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, place_dead_in_same_container)
+	
 
 func _process(delta):
 	if(game_mode != null):
