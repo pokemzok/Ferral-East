@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5qccnw6rbyx0"]
+
+[ext_resource type="Script" path="res://game/day/day_night_cycle.gd" id="1_obokn"]
+
+[node name="DayNightCycle" type="CanvasModulate"]
+color = Color(1, 0.27451, 0.878431, 1)
+script = ExtResource("1_obokn")
