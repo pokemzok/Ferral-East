@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://o2x8w13lasm1"]
+[gd_scene load_steps=39 format=3 uid="uid://o2x8w13lasm1"]
 
 [ext_resource type="Script" path="res://level/test/test-level.gd" id="1_085m1"]
 [ext_resource type="Texture2D" uid="uid://bqmifa0j6hwwm" path="res://assets/tiles/free-2d-rpg-desert-tileset/PNG/bg.png" id="2_0wx2i"]
@@ -9136,6 +9136,21 @@ sources/28 = SubResource("TileSetAtlasSource_phiig")
 sources/29 = SubResource("TileSetAtlasSource_kldvo")
 sources/30 = SubResource("TileSetAtlasSource_umb7k")
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_08kxx"]
+polygon = PackedVector2Array(684, 215, 696, 207, 706, 204, 713, 204, 717, 208, 726, 214, 743, 216, 756, 218, 759, 224, 757, 230, 755, 234, 748, 234, 741, 236, 730, 237, 727, 240, 720, 246, 711, 251, 699, 251, 688, 246, 680, 240, 667, 239, 660, 240, 652, 238, 648, 230, 650, 224, 654, 221, 665, 219, 676, 219)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u6vkc"]
+polygon = PackedVector2Array(180, 1, 189, -3, 206, -1, 218, 0, 225, -8, 241, -14, 252, -13, 258, -6, 270, 1, 281, 3, 290, 8, 291, 14, 284, 23, 277, 24, 264, 27, 254, 29, 247, 34, 239, 37, 230, 33, 224, 27, 214, 21, 204, 20, 188, 19, 182, 13)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_atci6"]
+polygon = PackedVector2Array(13, 200, 13, 196, 15, 187, 22, 185, 30, 185, 34, 194, 34, 200, 34, 210, 33, 217, 40, 223, 47, 232, 51, 240, 51, 245, 47, 254, 41, 259, 38, 267, 38, 273, 36, 285, 34, 291, 30, 295, 20, 295, 20, 291, 19, 283, 17, 278, 13, 272, 12, 264, 8, 259, 3, 252, 1, 245, 2, 235, 6, 227, 15, 218, 13, 210)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ga7s1"]
+polygon = PackedVector2Array(13, 374, 13, 370, 13, 363, 19, 360, 28, 360, 32, 362, 34, 369, 34, 376, 33, 385, 33, 392, 37, 397, 44, 402, 48, 412, 50, 417, 51, 423, 50, 428, 45, 431, 41, 436, 40, 442, 37, 448, 36, 454, 36, 458, 36, 463, 34, 468, 30, 470, 25, 471, 21, 470, 20, 463, 18, 458, 17, 451, 15, 445, 14, 438, 6, 434, 2, 427, -1, 418, 1, 414, 5, 406, 11, 398, 14, 395, 14, 389, 14, 384, 14, 378)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ixo66"]
+polygon = PackedVector2Array(159, 1037, 158, 1024, 235, 1023, 1710, 1025, 1710, 1035, 1708, 1040, 159, 1040)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r7kk6"]
 vertices = PackedVector2Array(3, -8, 160, 22, 159, 22, 27, 120, 27, 121, 2, 45, 1931, 9, 1964, 1147, 1735, 775, 1733, 210, 1716, 832, 1822, 1035, 1765, 974, 1756, 1137, 470, 983, 1319, 830, 1282, 788, 96, 988, 130, 1127, 13, 1126, -17, 1000, 74, 216, 260, 55, 565, 249, 838, 223, 1267, 203, 1261, 275, 795, 311, -7, 523, 51, 350, 15, 346, 15, 312, 49, 303, 1293, 447, 74, 429, 657, 301, 342, 27, 634, 146, 786, 150, 1660, 191)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 8, 7, 11, 12), PackedInt32Array(7, 13, 11), PackedInt32Array(10, 12, 14, 15), PackedInt32Array(16, 15, 14), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 3, 5, 0, 2, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(17, 20, 28), PackedInt32Array(29, 30, 31, 32, 23), PackedInt32Array(26, 33, 16, 14, 17, 28, 34, 27), PackedInt32Array(35, 27, 34), PackedInt32Array(23, 35, 34, 29), PackedInt32Array(23, 32, 21), PackedInt32Array(23, 22, 36, 37), PackedInt32Array(37, 36, 6, 38), PackedInt32Array(24, 38, 6, 25), PackedInt32Array(39, 25, 6), PackedInt32Array(39, 6, 9)])
@@ -9178,6 +9193,24 @@ position = Vector2(1173, 446)
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(897, 457)
 
+[node name="LightOccluders" type="Node" parent="."]
+
+[node name="CactusLightOccluder2D" type="LightOccluder2D" parent="LightOccluders"]
+position = Vector2(-2, 0)
+occluder = SubResource("OccluderPolygon2D_08kxx")
+
+[node name="Cactus2LightOccluder2D" type="LightOccluder2D" parent="LightOccluders"]
+occluder = SubResource("OccluderPolygon2D_u6vkc")
+
+[node name="Cactus3LightOccluder2D" type="LightOccluder2D" parent="LightOccluders"]
+occluder = SubResource("OccluderPolygon2D_atci6")
+
+[node name="Cactus4LightOccluder2D" type="LightOccluder2D" parent="LightOccluders"]
+occluder = SubResource("OccluderPolygon2D_ga7s1")
+
+[node name="FenceLightOccluder2D" type="LightOccluder2D" parent="LightOccluders"]
+occluder = SubResource("OccluderPolygon2D_ixo66")
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_r7kk6")
 
@@ -9196,7 +9229,7 @@ polygon = PackedVector2Array(-2, 4, 3, 216, 24, 194, 48, 244, 31, 288, 0, 272, 7
 polygon = PackedVector2Array(684, 216, 701, 202, 713, 202, 723, 209, 735, 211, 752, 214, 759, 224, 756, 236, 749, 236, 736, 240, 727, 241, 720, 252, 708, 253, 691, 249, 679, 239, 667, 240, 652, 238, 646, 223, 650, 219, 659, 219, 673, 218)
 
 [node name="Fence" type="CollisionPolygon2D" parent="Colisions"]
-polygon = PackedVector2Array(162, 1029, 164, 1022, 363, 1025, 596, 1022, 702, 1022, 1714, 1023, 1714, 1037, 1710, 1042, 160, 1040, 158, 1033)
+polygon = PackedVector2Array(159, 1025, 164, 1022, 363, 1025, 596, 1022, 702, 1022, 1714, 1023, 1714, 1037, 1710, 1042, 160, 1040, 158, 1033)
 
 [node name="House" type="CollisionPolygon2D" parent="Colisions"]
 polygon = PackedVector2Array(1660, 657, 1661, 757, 1356, 755, 1343, 724, 1337, 474, 1334, 370, 1326, 248, 1657, 251, 1669, 263, 1666, 510)

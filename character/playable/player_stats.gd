@@ -20,6 +20,7 @@ func _init(
 	self.stunned_timer = stunned_timer
 	self.reload_timer = reload_timer
 	self.health_points = health_points
+	self.projectiles_dmg_velocity = 250
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, increment_kill_count)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, apply_item)
 	emit_information()

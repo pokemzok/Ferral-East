@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://hbk7utcery1m"]
+[gd_scene load_steps=48 format=3 uid="uid://hbk7utcery1m"]
 
 [ext_resource type="Script" path="res://character/trader/sharik/sharik.gd" id="1_0vupu"]
 [ext_resource type="Texture2D" uid="uid://ds03bo7qikkg4" path="res://character/trader/sharik/sharik-idle.png" id="2_67b62"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dfc32e28havov" path="res://character/trader/sharik/sharik-phase-into.png" id="4_wtoga"]
 [ext_resource type="Texture2D" uid="uid://jb8h2eodkcmn" path="res://character/trader/sharik/sharik-phasing-walk.png" id="5_k4kf4"]
 [ext_resource type="PackedScene" uid="uid://d2h0ghjruw1gg" path="res://audio/game_ambient_audio_pool.tscn" id="8_2tsjd"]
+[ext_resource type="Texture2D" uid="uid://hds3wovec01b" path="res://assets/textures/light.png" id="9_uek0d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkr2s"]
 atlas = ExtResource("2_67b62")
@@ -352,6 +353,13 @@ visibility_layer = 4
 shape = SubResource("CircleShape2D_sndey")
 
 [node name="GameAmbientAudioPool" parent="." instance=ExtResource("8_2tsjd")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+color = Color(1, 0.647059, 1, 1)
+blend_mode = 2
+texture = ExtResource("9_uek0d")
+texture_scale = 0.6
 
 [connection signal="body_entered" from="HurtBox" to="." method="on_hurtbox_entered"]
 [connection signal="body_entered" from="InterractionBox" to="." method="_on_interraction_box_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cdokidrekqjas"]
+[gd_scene load_steps=46 format=3 uid="uid://cdokidrekqjas"]
 
 [ext_resource type="Script" path="res://character/enemy/boss/kilt_weston/kilt_weston.gd" id="1_22pbn"]
 [ext_resource type="Texture2D" uid="uid://dsw8wjvejj44y" path="res://character/enemy/boss/kilt_weston/kilt_weston_moving.png" id="1_a3wdl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bhmaiypxpdd0u" path="res://character/enemy/boss/kilt_weston/kilt_weston_walking_reload.png" id="5_0beg6"]
 [ext_resource type="Texture2D" uid="uid://b0htg2ynwdtg4" path="res://character/enemy/boss/kilt_weston/kilt_weston_stomp.png" id="8_7w4c1"]
 [ext_resource type="PackedScene" uid="uid://cxvuf1208cd7r" path="res://game/effects/explosion/evil_explosion_effect.tscn" id="11_x0r4m"]
+[ext_resource type="Texture2D" uid="uid://hds3wovec01b" path="res://assets/textures/light.png" id="12_h5gac"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_03npb"]
 atlas = ExtResource("2_0aax4")
@@ -336,5 +337,13 @@ avoidance_enabled = true
 radius = 150.0
 max_neighbors = 20
 max_speed = 500.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.647059, 1, 1)
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.180392)
+texture = ExtResource("12_h5gac")
+texture_scale = 0.6
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
