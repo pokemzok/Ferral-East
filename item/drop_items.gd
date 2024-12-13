@@ -27,13 +27,13 @@ static var rare_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.PENTAGRAM,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.CYLINDER,
-	Enemy.EnemyType.KILT_WESTON: Item.ItemID.SKELETON_ARM
+	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PHASING_ORB
 }
 
 static var legendary_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.PHASING_ORB,
-	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.SKELETON_ARM,
+	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.PHASING_ORB,
 	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PHASING_ORB
 }
 

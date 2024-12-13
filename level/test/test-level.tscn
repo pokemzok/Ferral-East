@@ -9246,3 +9246,6 @@ bus = &"Music"
 
 [node name="LoadingScreen" parent="." instance=ExtResource("14_jhdgt")]
 visible = false
+
+[node name="DayNightModulate" type="CanvasModulate" parent="."]
+color = Color(1, 0.27451, 0.878431, 1)
