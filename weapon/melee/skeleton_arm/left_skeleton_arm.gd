@@ -39,6 +39,7 @@ func get_knockback_force():
 	return knockback_force
 
 func _on_body_entered(body):
+	print(body)
 	if (body == arm_owner):
 		return
 	if (body.is_in_group("player") || body.is_in_group("enemy") || body.is_in_group("character")):

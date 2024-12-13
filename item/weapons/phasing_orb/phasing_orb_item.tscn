@@ -11,6 +11,8 @@ radius = 43.0323
 
 [node name="PhasingOrb" type="StaticBody2D"]
 scale = Vector2(1.5, 1.5)
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_hr5yx")
 type = null
 price = null

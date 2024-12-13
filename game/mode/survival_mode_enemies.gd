@@ -18,6 +18,12 @@ func _init(regular_enemies: ArrayCollection, bosses: ArrayCollection, nr_enemies
 	enemies_precondition()
 	calculate_base_probabilities()	
 
+func is_boss_wave(wave_index):
+	if(nr_enemies_per_wave.size() <= wave_index):
+		return nr_enemies_per_wave[nr_enemies_per_wave.size()-1]
+	else:
+		return nr_enemies_per_wave[wave_index] == 1
+
 func enemies_precondition():
 	num_enemies = regular_enemies.size()
 	if num_enemies == 0:
@@ -85,6 +91,9 @@ func calculate_wave_adjusted_probabilities(wave_index: int) -> Array:
 	return adjusted_probabilities
 		
 func get_enemy_for_wave(wave_index: int):
+	return get_boss() if is_boss_wave(wave_index) else get_regular_enemy_for_wave(wave_index)
+
+func get_regular_enemy_for_wave(wave_index: int):
 	var adjusted_probabilities = calculate_wave_adjusted_probabilities(wave_index)
 	var random_value = randf()
 	var cumulative_probability = 0.0
@@ -97,6 +106,8 @@ func get_boss():
 	if (bosses.size() > boss_index):
 		var boss = bosses.collection[boss_index]
 		boss_index = boss_index + 1
+		if(bosses.size() == boss_index):
+			boss_index = 0
 		return boss
 	else:
 		push_error("All bosses were used up")	
