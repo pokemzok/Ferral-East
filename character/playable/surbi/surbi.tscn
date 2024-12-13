@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://clysw1qytpyii"]
+[gd_scene load_steps=42 format=3 uid="uid://clysw1qytpyii"]
 
 [ext_resource type="Script" path="res://character/playable/surbi/surbi.gd" id="1_v6b7d"]
 [ext_resource type="Texture2D" uid="uid://bmashr2yck3gv" path="res://character/playable/surbi/idle-1.png" id="2_ahcha"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b7grbvc3gho45" path="res://character/playable/surbi/Surbi_phasing-vertical.png" id="12_k1h42"]
 [ext_resource type="PackedScene" uid="uid://dd330po85dsde" path="res://character/playable/surbi/script/reactive_script.tscn" id="14_4qme2"]
 [ext_resource type="PackedScene" uid="uid://c2gnl54ls056d" path="res://dialogs/monolog/monolog_bubble.tscn" id="14_irqvk"]
+[ext_resource type="Texture2D" uid="uid://hds3wovec01b" path="res://assets/textures/light.png" id="20_vqfpp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h8wu"]
 atlas = ExtResource("9_h1ipu")
@@ -293,6 +294,15 @@ bus = &"SFX"
 [node name="ReactiveScript" parent="." instance=ExtResource("14_4qme2")]
 
 [node name="MonologBubble" parent="." instance=ExtResource("14_irqvk")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.647059, 1, 1)
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_filter_smooth = 12.0
+texture = ExtResource("20_vqfpp")
+texture_scale = 0.6
 
 [connection signal="body_entered" from="HurtboxArea2D" to="." method="on_hurtbox_entered"]
 [connection signal="body_exited" from="HurtboxArea2D" to="." method="on_hurtbox_leave"]

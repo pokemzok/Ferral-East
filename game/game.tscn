@@ -234,3 +234,6 @@ color = Color(0.67451, 0.0666667, 0.807843, 1)
 
 [node name="DeathMenu" parent="." instance=ExtResource("2_fckys")]
 visible = false
+
+[node name="DayNightModulate" type="CanvasModulate" parent="."]
+color = Color(1, 0.27451, 0.878431, 1)
