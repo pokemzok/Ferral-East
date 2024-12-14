@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://njq1aabi1byo"]
+
+[ext_resource type="PackedScene" uid="uid://cpw4hf2ke7wmn" path="res://game/weather/clouds/clouds.tscn" id="1_0gr0h"]
+[ext_resource type="PackedScene" uid="uid://cooinyyy1uga2" path="res://game/weather/fog/fog.tscn" id="1_80pka"]
+[ext_resource type="Script" path="res://game/weather/weather.gd" id="1_b504f"]
+
+[node name="Weather" type="Node2D"]
+script = ExtResource("1_b504f")
+
+[node name="Clouds" parent="." instance=ExtResource("1_0gr0h")]
+visible = false
+
+[node name="Fog" parent="." instance=ExtResource("1_80pka")]
+visible = false
