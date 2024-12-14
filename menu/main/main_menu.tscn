@@ -12,6 +12,7 @@
 
 [node name="MainMenu" type="CanvasLayer"]
 process_mode = 3
+layer = 2
 script = ExtResource("1_vatmt")
 
 [node name="ColorRect" type="ColorRect" parent="."]
