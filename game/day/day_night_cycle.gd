@@ -1,24 +1,37 @@
+class_name DayNightCycle
 extends CanvasModulate
 
-@export var day_duration: float = 480.0
+enum DayTime  {
+	MORNING,
+	NOON,
+	AFTERNOON,
+	EVENING,
+	NIGHT,
+	MIDNIGHT,
+	DAWN
+}
 
+@export var day_duration: float = 240.0
 var current_color_index = 0
 var current_color_duration = 0
 
 var colors = [
-	Color("FFD580"),  # Morning
+	Color("ffe9a6"),  # Morning
 	Color("FFFFFF"),  # Noon
+	Color("ffc36c"),  # Afternoon
 	Color("FF46E0"),  # Evening
-	Color("001A57")   # Night
+	Color("001A57"),  # Night
+	Color("09071a"),  # Midnight
+	Color("47354b")	  # Dawn
 ]
-var color_durations = [0.25, 0.5, 0.25, 0.5]
+var color_durations = [0.3, 0.4, 0.3, 0.3, 0.2, 0.3, 0.2]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	color = get_current_color(delta)
+	color = process_current_color(delta)
 
-func get_current_color(delta) -> Color:
+func process_current_color(delta) -> Color:
 	# Find which segment of the day we're in
+	emit_day_time_event()
 	current_color_duration += delta / day_duration
 	var segment_duration = color_durations[current_color_index]
 	var local_time = (current_color_duration) / segment_duration
@@ -29,4 +42,8 @@ func get_current_color(delta) -> Color:
 	else:
 		current_color_index = next_color_index
 		current_color_duration = 0
-		return get_current_color(delta)	
+		return process_current_color(delta)	
+
+func emit_day_time_event():
+	if  (current_color_duration == 0):
+		GlobalEventBus.day_time.emit(current_color_index)

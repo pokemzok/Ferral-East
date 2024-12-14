@@ -113,6 +113,11 @@ signal painful_interaction
 const SHAKE_CAMERA = "shake_camera"
 const PAINFUL_INTERACTION = "painful_interaction"
 
+#day time
+signal day_time
+#names
+const DAY_TIME = "day_time"
+
 func emit_signal_for(signal_name: String, param: Variant = null):
 	var name = signal_name.to_lower()
 	if has_signal(name):

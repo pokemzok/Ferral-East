@@ -15,6 +15,8 @@ var pickup_audio = GameSoundManager.Sounds.PICKUP_ITEM
 var evil_pickup_audio = GameSoundManager.Sounds.PICKUP_EVIL_ITEM
 var teleport_audio = GameSoundManager.Sounds.TELEPORT
 var warp_audio = GameSoundManager.Sounds.WARP
+var lights_on_audio = GameSoundManager.Sounds.TURN_ON_MAGIC_LIGHT
+var lights_off_audio = GameSoundManager.Sounds.TURN_OFF_MAGIC_LIGHT
 var items_collection = ArrayCollection.new([])
 var phasing_out_position
 var left_arm: WeaponArm
@@ -27,6 +29,7 @@ var evil_tween: Tween
 @onready var audio_pool = $GameAmbientAudioPool
 @onready var monolog_bubble = $MonologBubble
 @onready var left_arm_container = $LeftArmContainer
+@onready var light_source = $PointLight2D
 
 func _ready():
 	self.z_index = 1
@@ -42,6 +45,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_BOUGHT_ITEM, on_picked_item)
 	GlobalEventBus.connect(GlobalEventBus.WEAPON_NEEDS_RELOAD, start_reloading)
 	GlobalEventBus.connect(GlobalEventBus.PAINFUL_INTERACTION, on_painful_interaction)
+	GlobalEventBus.connect(GlobalEventBus.DAY_TIME, on_day_time_change)
 
 func on_new_level(level: LevelManager.Levels):
 	stats.emit_information()
@@ -333,3 +337,19 @@ func after_phasing_out():
 
 func play_phasing_out():
 	animations.play("phasing_out")
+
+func on_day_time_change(period: DayNightCycle.DayTime):
+	match(period):
+		DayNightCycle.DayTime.DAWN:
+			on_dawn()
+		DayNightCycle.DayTime.NIGHT:
+			on_night()
+
+func on_dawn():
+	if(light_source.visible):
+		light_source.hide()
+		audio_pool.play_sound_effect(lights_off_audio)
+
+func on_night():
+	light_source.show()	
+	audio_pool.play_sound_effect(lights_on_audio)

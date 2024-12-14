@@ -32,7 +32,9 @@ enum Sounds {
 	PURCHASE,
 	ROTATE_INVENTORY,
 	DRINKING,
-	PAINFUL_INTERACTION
+	PAINFUL_INTERACTION,
+	TURN_ON_MAGIC_LIGHT,
+	TURN_OFF_MAGIC_LIGHT
 }
 enum Music {
 	SLOW_LOOP_1,
@@ -80,7 +82,9 @@ var sound_files = {
 	Sounds.PURCHASE: preload("res://audio/effects/purchase.mp3"),
 	Sounds.ROTATE_INVENTORY: preload("res://audio/effects/rotate_inventory.mp3"),
 	Sounds.DRINKING: preload("res://audio/effects/drinking.mp3"),
-	Sounds.PAINFUL_INTERACTION: preload("res://audio/effects/painful-interaction.mp3")
+	Sounds.PAINFUL_INTERACTION: preload("res://audio/effects/painful-interaction.mp3"),
+	Sounds.TURN_ON_MAGIC_LIGHT: preload("res://audio/effects/turn_on_magic_light.wav"),
+	Sounds.TURN_OFF_MAGIC_LIGHT: preload("res://audio/effects/turn_off_magic_light.wav"),
 }
 
 var kilt_res = {
