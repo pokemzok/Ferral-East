@@ -1,6 +1,6 @@
 
 TODO 0
-# -2. Fix  evil hand (it crashes the game on  kill). 
+# 0. Neither Surbi or Kilt should die from skeleton arm
 # 1. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
 # 2. Some limited way to bail when surrounded, maybe default action on right click?
 

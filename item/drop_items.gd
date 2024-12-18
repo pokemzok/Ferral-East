@@ -20,7 +20,7 @@ static var common_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.COIN,
-	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PHASING_ORB
+	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PENTAGRAM
 }
 
 static var rare_items = {
@@ -34,7 +34,7 @@ static var legendary_items = {
 	Enemy.EnemyType.DEFAULT_ZOMBIE: Item.ItemID.COIN,
 	Enemy.EnemyType.REANIMATING_ZOMBIE: Item.ItemID.CYLINDER,
 	Enemy.EnemyType.FAST_ZOMBIE: Item.ItemID.PENTAGRAM,
-	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PENTAGRAM
+	Enemy.EnemyType.KILT_WESTON: Item.ItemID.PHASING_ORB
 }
 
 static var instance = null
