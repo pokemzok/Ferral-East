@@ -11,4 +11,4 @@ func spawn_trader(wave_index):
 	var parent  = get_parent()  #asumes that player has a Node2D parent
 	var trader_instance = trader.instantiate()
 	trader_instance.position = parent.position
-	add_child(trader_instance)
+	call_deferred("add_child", trader_instance)

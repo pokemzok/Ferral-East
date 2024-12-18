@@ -11,15 +11,15 @@ var item_actions = {
 }
 
 func _init(
-	invincible_frames: NumericAttribute,
-	stunned_timer: NumericAttribute,
-	reload_timer: NumericAttribute,
-	health_points: NumericAttribute
+	_invincible_frames: NumericAttribute,
+	_stunned_timer: NumericAttribute,
+	_reload_timer: NumericAttribute,
+	_health_points: NumericAttribute
 ):
-	self.invincible_frames = invincible_frames
-	self.stunned_timer = stunned_timer
-	self.reload_timer = reload_timer
-	self.health_points = health_points
+	self.invincible_frames = _invincible_frames
+	self.stunned_timer = _stunned_timer
+	self.reload_timer = _reload_timer
+	self.health_points = _health_points
 	self.projectiles_dmg_velocity = 250
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, increment_kill_count)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_CONSUMED_ITEM, apply_item)
@@ -43,7 +43,7 @@ func decrement_health():
 	health_points.decrement_by()
 	GlobalEventBus.player_hp_changed.emit(health_points.value)	
 
-func increment_kill_count(death_details):
+func increment_kill_count(_death_details):
 	kill_count += 1
 	if (!is_max_level()):
 		if( kill_count >=  level_threshoulds[current_level]):

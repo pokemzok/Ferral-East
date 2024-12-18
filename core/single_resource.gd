@@ -5,8 +5,8 @@ class_name SingleResource
 var resources_group: ResourcesGroup
 var resource_key
 
-func _init(resource_key, resource_dictionary):
-	self.resource_key = resource_key
+func _init(_resource_key, resource_dictionary):
+	self.resource_key = _resource_key
 	resources_group = ResourcesGroup.new([resource_key], resource_dictionary)
 
 func load_resource():

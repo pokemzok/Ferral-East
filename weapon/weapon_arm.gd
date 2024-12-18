@@ -4,16 +4,16 @@ var weapon: Node2D
 var owner: CharacterBody2D
 var root_node: Node2D
 
-func _init(weapon: Node2D, owner: CharacterBody2D, root_node: Node2D):
-	self.root_node = root_node
-	self.owner = owner
-	change_weapon(weapon)
+func _init(_weapon: Node2D, _owner: CharacterBody2D, _root_node: Node2D):
+	self.root_node = _root_node
+	self.owner = _owner
+	change_weapon(_weapon)
 	
-func change_weapon(weapon: Node2D):
+func change_weapon(_weapon: Node2D):
 	if (self.weapon != null):
 		root_node.remove_child(self.weapon)
 	
-	self.weapon = weapon
+	self.weapon = _weapon
 	self.weapon.add_owner(owner)
 	root_node.add_child(self.weapon)	
 	

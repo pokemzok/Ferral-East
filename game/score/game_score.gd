@@ -19,7 +19,7 @@ func on_player_damaged():
 	score_multiplier = 1
 	increment_score(-40)
 
-func on_enemy_damaged(type, score):
+func on_enemy_damaged(_type, score):
 	increment_score(score)
 
 func on_enemy_death(death_details: EnemyDeathDetails):

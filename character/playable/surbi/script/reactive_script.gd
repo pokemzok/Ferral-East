@@ -38,7 +38,6 @@ func second_wave_monolog():
 
 func fourth_wave_monolog():
 	GlobalEventBus.player_monolog.emit(tr("SURBI_WAVE4_MONOLOG"))
-	sixth_wave_monolog
 	
 func sixth_wave_monolog():
 	GlobalEventBus.player_monolog.emit(tr("SURBI_WAVE6_MONOLOG"))			

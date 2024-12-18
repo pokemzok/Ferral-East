@@ -218,8 +218,8 @@ func determine_action(delta, distance_to_player):
 func charge():
 	move_to(player.global_position)
 
-func move_to(position):
-	navigation_agent.target_position = position
+func move_to(_position):
+	navigation_agent.target_position = _position
 	var direction = navigation_agent.get_next_path_position() - global_position
 	direction = direction.normalized()
 	velocity = direction * stats.speed.value
@@ -262,7 +262,7 @@ func teleport():
 func clear_teleporting_state():
 	stats.remove_state(CharacterState.State.TELEPORTING)
 
-func on_start_interaction_with(npc_name: String):
+func on_start_interaction_with(_npc_name: String):
 	pausable.set_pause(true)
 	on_idle()
 
@@ -371,7 +371,7 @@ func attack(delta):
 	else:
 		stats.attack_cooldown.decrement_by(delta)			
 
-func secondary_attack(delta):
+func secondary_attack(_delta):
 	if(stats.secondary_attack_cooldown.value <= 0):
 		left_arm.attack()
 		stats.secondary_attack_cooldown.assign_max_value()

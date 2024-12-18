@@ -1,11 +1,13 @@
 
 TODO 0
-# 0. Teleportation effects - maybe I can show some magic shit on the teleportation position.
+# -2. Fix  evil hand (it crashes the game on  kill). 
 # 1. I would like to extract revolver same way I extracted hand, so I can have different one handed gun.
-# 2. Some limited way to bail when surrounded
+# 2. Some limited way to bail when surrounded, maybe default action on right click?
 
 TODO 1
 # 1. Make Sharik in Blender, so I can try generating resources from it.
+# 2. Generally this is where experiments with art starts, I need to find or learn the way to produce cool assets, so I should experiment with tools and ways of work.
+
 
 TODO 2
 # 5. I might need to rework my SurvivalGameMode to extract spawning algorithm.

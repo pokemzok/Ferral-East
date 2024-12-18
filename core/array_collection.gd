@@ -3,9 +3,9 @@ extends Node
 
 var collection: Array
 
-func _init(collection: Array):
+func _init(_collection: Array):
 	randomize()	
-	self.collection = collection
+	self.collection = _collection
 
 func append(element):
 	self.collection.append(element)

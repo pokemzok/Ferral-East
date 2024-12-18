@@ -4,7 +4,7 @@ var score
 var enemy_value: int
 var score_multiplier: int
 
-func _init(score, enemy_value, score_multiplier):
-	self.score = score
-	self.enemy_value = enemy_value
-	self.score_multiplier = score_multiplier
+func _init(_score, _enemy_value, _score_multiplier):
+	self.score = _score
+	self.enemy_value = _enemy_value
+	self.score_multiplier = _score_multiplier

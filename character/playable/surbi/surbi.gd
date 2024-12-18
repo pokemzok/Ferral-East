@@ -47,7 +47,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PAINFUL_INTERACTION, on_painful_interaction)
 	GlobalEventBus.connect(GlobalEventBus.DAY_TIME, on_day_time_change)
 
-func on_new_level(level: LevelManager.Levels):
+func on_new_level(_level: LevelManager.Levels):
 	stats.emit_information()
 	wallet.emit_coins_nr()
 	GlobalEventBus.player_consumables.emit(consumables_inventory)
@@ -99,14 +99,14 @@ func on_staggered(delta):
 	if(stats.staggered_timer.is_lte_zero()):
 		stats.reset_stagger()
 
-func on_start_interaction_with(npc_name: String):
+func on_start_interaction_with(_npc_name: String):
 	pausable.set_pause(true)
 	on_idle()
 
 func on_finish_interaction():
 	pausable.set_pause(false)
 
-func on_player_enters_shop(shop_level):
+func on_player_enters_shop(_shop_level):
 	animations.play("teleporting")
 	stats.assign_state(CharacterState.State.TELEPORTING)
 	audio_pool.play_sound_effect(teleport_audio)
@@ -179,7 +179,7 @@ func on_reload(delta):
 			weapon.reload_with(self)
 			reloading = false			
 
-func on_player_actions(delta):
+func on_player_actions(_delta):
 	look_at(get_global_mouse_position())	
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = direction * stats.speed.value

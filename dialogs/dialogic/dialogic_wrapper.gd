@@ -12,7 +12,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_enered_shop)
 	Dialogic.signal_event.connect(_on_dialogic_signal)
 
-func on_trader_damaged(trader_name: String):
+func on_trader_damaged(_trader_name: String):
 	Dialogic.VAR.player.attacked_trader_count += 1
 
 func on_enered_shop(character_name: String):

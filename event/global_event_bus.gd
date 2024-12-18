@@ -119,11 +119,11 @@ signal day_time
 const DAY_TIME = "day_time"
 
 func emit_signal_for(signal_name: String, param: Variant = null):
-	var name = signal_name.to_lower()
-	if has_signal(name):
+	var _name = signal_name.to_lower()
+	if has_signal(_name):
 		if (param != null):
-			call_deferred("emit_signal", name, param)
+			call_deferred("emit_signal", _name, param)
 		else:	
-			call_deferred("emit_signal", name)
+			call_deferred("emit_signal", _name)
 	else:
 		print("No such signal")

@@ -133,5 +133,5 @@ func on_painful_interaction():
 	flash_effect_tween.tween_property(painful_color_rect, "modulate:a", 0, 3)
 	flash_effect_tween.tween_callback(painful_color_rect.hide)
 
-func on_player_destroyed_item(arg):
+func on_player_destroyed_item(_arg):
 	sound_manager.play_inerrupt_sound(player_destroyed_item, effects_audio_player)

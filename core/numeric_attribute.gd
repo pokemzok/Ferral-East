@@ -4,9 +4,9 @@ extends Node
 var value: float 
 var max_value: float
 
-func _init(value: float, max_value: float):
-	self.value = value
-	self.max_value = max_value
+func _init(_value: float, _max_value: float):
+	self.value = _value
+	self.max_value = _max_value
 
 func increment_by(delta: float = 1) -> NumericAttribute:
 	if(self.value < self.max_value):
@@ -42,8 +42,8 @@ func randomize_value() -> NumericAttribute:
 	self.value = randf_range(value, max_value)
 	return self
 
-func new_value(value:  float) -> NumericAttribute:
-	self.value = value
+func new_value(_value:  float) -> NumericAttribute:
+	self.value = _value
 	return self
 
 func assign_zero() -> NumericAttribute:
@@ -60,8 +60,8 @@ func assign_max_on_more_then_zero() -> NumericAttribute:
 		assign_max_value()
 	return self		
 
-func randomize_max_value_in_range(min_value: float, max_value: float):
-	return randf_range(min_value, max_value)
+func randomize_max_value_in_range(_min_value: float, _max_value: float):
+	return randf_range(_min_value, _max_value)
 
 func is_max_value():
 	return value == max_value

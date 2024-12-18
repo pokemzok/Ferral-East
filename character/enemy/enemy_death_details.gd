@@ -5,8 +5,8 @@ var score: int
 var death_position: Vector2
 var enemy: CharacterBody2D
 
-func _init(enemy: CharacterBody2D):
-	self.enemy_type = enemy.stats.type
-	self.score = enemy.stats.death_score
-	self.death_position = enemy.global_position
-	self.enemy = enemy
+func _init(_enemy: CharacterBody2D):
+	self.enemy_type = _enemy.stats.type
+	self.score = _enemy.stats.death_score
+	self.death_position = _enemy.global_position
+	self.enemy = _enemy
