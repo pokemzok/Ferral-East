@@ -51,8 +51,8 @@ func on_enemy_death(enemy_death_details: EnemyDeathDetails):
 		if(drop_chance_increase < 0.15):
 			drop_chance_increase += 0.015	
 
-func on_enemy_heal(position: Vector2):
-	drop_position = position
+func on_enemy_heal(_position: Vector2):
+	drop_position = _position
 	drop_item(Item.ItemID.PENTAGRAM)
 
 func calculate_score_factor(score: int) -> float:

@@ -19,8 +19,8 @@ func hide_hud(arg: String = ""):
 func conditional_show_hud():
 	show_hud(conversation_in_progress)
 
-func show_hud(conversation_in_progress: bool = false):
-	if(!conversation_in_progress):
+func show_hud(_conversation_in_progress: bool = false):
+	if(!_conversation_in_progress):
 		pausable.set_pause(false)
 		show()
 		self.conversation_in_progress = false	

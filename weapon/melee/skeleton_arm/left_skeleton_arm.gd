@@ -11,8 +11,8 @@ func _ready():
 	animations.connect("animation_looped", on_animation_finished)
 	animations.connect("animation_finished", on_animation_finished)
 
-func add_owner(arm_owner: Node2D):
-	self.arm_owner = arm_owner
+func add_owner(_arm_owner: Node2D):
+	self.arm_owner = _arm_owner
 
 func attack():
 	animations.play("materialize_hand")

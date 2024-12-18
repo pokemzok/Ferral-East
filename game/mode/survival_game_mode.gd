@@ -13,12 +13,12 @@ var enemies_to_spawn = 0
 var spawn_enemies_nr = NumericAttribute.new(1, 3)
 var pause = false
 
-func _init(spawn_points: ArrayCollection, music: SurvivalModeMusic, enemies: SurvivalModeEnemies):
-	self.spawn_points = spawn_points
-	self.music = music
-	self.enemies = enemies
-	self.enemies_to_kill = enemies.nr_enemies_per_wave[wave_index]
-	self.enemies_to_spawn = enemies.nr_enemies_per_wave[wave_index]
+func _init(_spawn_points: ArrayCollection, _music: SurvivalModeMusic, _enemies: SurvivalModeEnemies):
+	self.spawn_points = _spawn_points
+	self.music = _music
+	self.enemies = _enemies
+	self.enemies_to_kill = _enemies.nr_enemies_per_wave[wave_index]
+	self.enemies_to_spawn = _enemies.nr_enemies_per_wave[wave_index]
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 	GlobalEventBus.wave_started.emit(wave_index+1, enemies_to_kill)	
 	GlobalEventBus.connect(GlobalEventBus.START_INTERACTION_WITH, on_start_interaction_with)
@@ -65,7 +65,7 @@ func spawn_enemies(delta):
 			spawner.add_child(enemy.instantiate())
 			enemies_to_spawn -= 1		
 
-func on_enemy_death(death_details: EnemyDeathDetails):
+func on_enemy_death(_death_details: EnemyDeathDetails):
 	enemies_to_kill -= 1
 
 	if (enemies_to_kill <= 0):
@@ -97,7 +97,7 @@ func increase_difficulty():
 		spawn_time.decrement_max_value()
 		return
 	
-func on_start_interaction_with(npc_name: String):
+func on_start_interaction_with(_npc_name: String):
 	pause = true
 	
 func on_finish_interaction():

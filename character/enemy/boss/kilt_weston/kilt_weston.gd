@@ -70,8 +70,8 @@ func on_animation_finished():
 	elif animations.animation == "stomp":
 		after_stomp()
 
-func on_heal_item_ready(position: Vector2):
-	healing_item_position = position
+func on_heal_item_ready(_position: Vector2):
+	healing_item_position = _position
 	healing_delay.assign_max_on_less_or_zero()
 	
 func _physics_process(delta):
@@ -154,7 +154,7 @@ func level_3_movement(distance_to_player):
 	else:
 		charge()
 
-func level_2_movement(distance_to_player):
+func level_2_movement(_distance_to_player):
 	if(phase != BossesMetadata.BossPhase.PHASE_1):
 		move_sideways()
 	else:

@@ -20,11 +20,11 @@ func handle_events():
 	GlobalEventBus.connect(GlobalEventBus.WAVE_COMPLETED, on_wave_completed)
 	GlobalEventBus.connect(GlobalEventBus.ENEMY_DEATH, on_enemy_death)
 
-func on_wave_started(wave_nr, enemies_left):
+func on_wave_started(wave_nr, _enemies_left):
 	if(wave_info_tween != null):
 		wave_info_tween.stop()
 		wave_info_tween.kill()
-	self.enemies_left = enemies_left
+	self.enemies_left = _enemies_left
 	if (enemies_left == 1):
 		enemies_left_label.hide() # hide cause it is a boss fights
 	else:
@@ -50,7 +50,7 @@ func show_get_ready_message(wave_nr):
 		wave_info_label.text = rich_text_behaviour.outline_text(tr("HUD_GET_READY"))
 	tween_behaviour.fade_in_out_component(wave_info_label, wave_info_tween)
 
-func on_enemy_death(death_details: EnemyDeathDetails):
+func on_enemy_death(_death_details: EnemyDeathDetails):
 	if (enemies_left  > 0 ): 
 		enemies_left -= 1
 		update_enemies_left_label_text()

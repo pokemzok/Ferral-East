@@ -90,10 +90,10 @@ func pause(node: Node = self):
 func resume(node: Node = self):
 	set_pause(node, false)		
 
-func set_pause(node: Node, pause: bool):
+func set_pause(node: Node, _pause: bool):
 	if(node == self || node.is_in_group("character")):
-		node.set_process(!pause)
-		node.set_physics_process(!pause)
+		node.set_process(!_pause)
+		node.set_physics_process(!_pause)
 	
 	for child in node.get_children():
-		set_pause(child, pause)			
+		set_pause(child, _pause)			

@@ -23,6 +23,7 @@ func on_player_left_shop():
 	current_location = new_level
 	format_log() 
 
+@warning_ignore("integer_division") 
 func format_log():
 	if (visited_locations.size() > log_capacity):
 		visited_locations = visited_locations.slice(log_capacity/2, visited_locations.size())

@@ -108,10 +108,10 @@ func on_walk():
 	sprite.play("walk")
 	sound_manager.play_sound(run_audio, walking_audio_player)
 
-func nav_agent_pathfinding(player, delta):
+func nav_agent_pathfinding(_player, delta):
 	var direction = Vector2()
-	var distance = global_position.distance_to(player.global_position)
-	navigation_agent.target_position = player.global_position
+	var distance = global_position.distance_to(_player.global_position)
+	navigation_agent.target_position = _player.global_position
 	direction = navigation_agent.get_next_path_position() - global_position
 	direction = direction.normalized()
 	stats.speed.new_value(stats.speed.value + (distance * stats.speed_increase_factor))
@@ -128,13 +128,13 @@ func on_collision(collision):
 		var avoidance_strength = 100.0
 		velocity += repulsion_vector.normalized() * avoidance_strength
 
-func dumb_path_finding_collide(player, delta):
-	global_position += dumb_path_finding(player, delta)
+func dumb_path_finding_collide(_player, delta):
+	global_position += dumb_path_finding(_player, delta)
 	move_and_collide(motion)
 
-func dumb_path_finding(player, delta) -> Vector2:
-	var direction = (player.global_position - global_position).normalized()
-	var distance = global_position.distance_to(player.global_position)
+func dumb_path_finding(_player, delta) -> Vector2:
+	var direction = (_player.global_position - global_position).normalized()
+	var distance = global_position.distance_to(_player.global_position)
 	stats.speed.new_value(stats.speed.value + (distance * stats.speed_increase_factor))
 	stats.speed.new_value(min(stats.speed.value, stats.speed.max_value))
 	return direction * stats.speed.value * delta

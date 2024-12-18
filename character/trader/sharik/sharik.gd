@@ -18,7 +18,7 @@ func _ready():
 	GlobalEventBus.connect(GlobalEventBus.FINISH_INTERACTION, conversation_ended)
 	GlobalEventBus.connect(GlobalEventBus.PLAYER_ENTERS_SHOP, on_player_enters_shop)
 	
-func _process(delta):
+func _process(_delta):
 	interaction_behaviour.process_interaction(character_name)
 
 func _physics_process(delta):
@@ -42,7 +42,7 @@ func on_player_actions(delta):
 func on_phasing_into():
 	animations.play("phasing_into")	
 
-func on_player_enters_shop(shop_level):
+func on_player_enters_shop(_shop_level):
 	animations.play("phase_out")
 	
 func on_teleporting():
@@ -62,7 +62,7 @@ func on_idle(delta):
 		animations.play("phasing_idle")
 		phasing_period.decrement_by(delta)
 
-func on_wave_started(wave_nr, enemies_left):
+func on_wave_started(_wave_nr, _enemies_left):
 	start_teleporting()
 
 func start_teleporting():
@@ -85,7 +85,7 @@ func on_hurtbox_entered(body):
 		phasing_period.assign_max_on_less_or_zero()
 		body.queue_free()
 
-func conversation_started(npc_name: String):
+func conversation_started(_npc_name: String):
 	pausable.set_pause(true)
 	on_idle(0)
 

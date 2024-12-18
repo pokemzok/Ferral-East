@@ -3,7 +3,6 @@ class_name ZombieStatsFactory
 
 
 static func create(type: Enemy.EnemyType) -> EnemyStats:
-	var health_points = NumericAttribute.new(2, 6)
 	return EnemyStats.new(type, health_from(type), speed_from(type), reanimating_times_from(type), path_finding_from(type)) 
 
 

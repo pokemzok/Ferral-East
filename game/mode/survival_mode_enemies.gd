@@ -11,10 +11,10 @@ var base_total_weight = 0.0
 var max_first_weight = 0.9
 var min_first_weight = 0.3
 
-func _init(regular_enemies: ArrayCollection, bosses: ArrayCollection, nr_enemies_per_wave: Array):
-	self.regular_enemies = regular_enemies
-	self.bosses = bosses
-	self.nr_enemies_per_wave = nr_enemies_per_wave
+func _init(_regular_enemies: ArrayCollection, _bosses: ArrayCollection, _nr_enemies_per_wave: Array):
+	self.regular_enemies = _regular_enemies
+	self.bosses = _bosses
+	self.nr_enemies_per_wave = _nr_enemies_per_wave
 	enemies_precondition()
 	calculate_base_probabilities()	
 

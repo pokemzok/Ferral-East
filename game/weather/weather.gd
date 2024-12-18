@@ -9,7 +9,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func turn_off_clouds():
@@ -19,6 +19,6 @@ func turn_on_clouds():
 	clouds.show()
 	#clouds.modulate.a = 1
 
-func turn_on_fog(delta):
+func turn_on_fog(_delta):
 	fog.show()
 	#fog.modulate.a = 1

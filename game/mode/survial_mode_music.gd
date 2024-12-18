@@ -7,15 +7,15 @@ var music_for_waves: ArrayCollection
 var victory_music: ArrayCollection
 
 func _init(
-	music_for_waves: ArrayCollection, 
-	waves_music_player: AudioStreamPlayer,
-	victory_music: ArrayCollection,
-	victory_music_player: AudioStreamPlayer):
-	self.music_for_waves = music_for_waves
-	self.victory_music = victory_music
-	self.waves_music_player = waves_music_player
-	victory_music_player.autoplay = false
-	self.victory_music_player = victory_music_player
+	_music_for_waves: ArrayCollection, 
+	_waves_music_player: AudioStreamPlayer,
+	_victory_music: ArrayCollection,
+	_victory_music_player: AudioStreamPlayer):
+	self.music_for_waves = _music_for_waves
+	self.victory_music = _victory_music
+	self.waves_music_player = _waves_music_player
+	_victory_music_player.autoplay = false
+	self.victory_music_player = _victory_music_player
 
 func play_on_wave(wave_index):
 	if (!waves_music_player.is_playing()):

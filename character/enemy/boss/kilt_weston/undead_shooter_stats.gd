@@ -9,21 +9,21 @@ var item_actions = {
 }
 
 func _init(
-	type: Enemy.EnemyType,
-	invincible_frames: NumericAttribute,
-	stunned_timer: NumericAttribute,
-	reload_timer: NumericAttribute,
-	staggered_timer: NumericAttribute,
-	health_points: NumericAttribute,
-	speed: NumericAttribute
+	_type: Enemy.EnemyType,
+	_invincible_frames: NumericAttribute,
+	_stunned_timer: NumericAttribute,
+	_reload_timer: NumericAttribute,
+	_staggered_timer: NumericAttribute,
+	_health_points: NumericAttribute,
+	_speed: NumericAttribute
 ):
-	self.type = type
-	self.invincible_frames = invincible_frames
-	self.stunned_timer = stunned_timer
-	self.reload_timer = reload_timer
-	self.staggered_timer = staggered_timer
-	self.health_points = health_points
-	self.speed = speed
+	self.type = _type
+	self.invincible_frames = _invincible_frames
+	self.stunned_timer = _stunned_timer
+	self.reload_timer = _reload_timer
+	self.staggered_timer = _staggered_timer
+	self.health_points = _health_points
+	self.speed = _speed
 	emit_hp_information()
 
 func emit_hp_information():

@@ -23,13 +23,13 @@ func _ready():
 func _process(delta):
 	handle_inputs(delta)
 
-func on_conversation_started(arg: String = ""):
+func on_conversation_started(_arg: String = ""):
 	pausable.set_pause(true)
 
 func on_conversation_finnished():	
 	pausable.set_pause(false)
 	
-func handle_inputs(delta):
+func handle_inputs(_delta):
 	if Input.is_action_just_pressed("rotate_hotbar_left"):
 		rotate_quick_access_index(-1)
 	if Input.is_action_just_pressed("rotate_hotbar_right"):
@@ -47,10 +47,10 @@ func on_player_consumables(consumables: PlayerInventory):
 	player_consumables = consumables
 	assign_items_to_pockets()
 
-func on_consumed_item(item):
+func on_consumed_item(_item):
 	assign_items_to_pockets()
 
-func on_new_item(item):
+func on_new_item(_item):
 	assign_items_to_pockets()
 	
 func assign_items_to_pockets():

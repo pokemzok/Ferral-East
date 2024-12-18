@@ -1,7 +1,5 @@
 extends Node
 
-var json_parser = JSON.new()
-
 static var warp_locations = {
 	LevelManager.Levels.SHARIK_SHOP: GlobalEventBus.player_enters_shop
 }
@@ -65,7 +63,7 @@ func _on_dialogic_signal(arg: String):
 		process_signal(arg)
 	
 func process_json_signal(json: String):
-	var data = json_parser.parse_string(json)
+	var data = JSON.parse_string(json)
 	process_signal(data.signal_name, data.interaction_name)
 
 func process_signal(arg: String, param: Variant = null):	
