@@ -42,7 +42,7 @@ func calculate_base_probabilities():
 
 	var first_weight_substraction = 0.0
 	if (num_enemies  > 3):
-		first_weight_substraction = (num_enemies - 3)/10
+		first_weight_substraction = float(num_enemies - 3)/10
 	var first_weight = max_first_weight - first_weight_substraction
 	first_weight = clamp(first_weight, min_first_weight, max_first_weight)  # Ensure it's within the bounds
 	

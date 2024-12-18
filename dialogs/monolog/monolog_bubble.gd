@@ -39,8 +39,12 @@ func clear():
 		print_timer.stop()
 	if(!close_timer.is_stopped()):
 		close_timer.stop()		
-	print_timer.disconnect("timefout", print_text_into_bubble)
-	close_timer.disconnect("timeout", hide_bubble)		
+	
+	if(print_timer.is_connected("timeout", print_text_into_bubble)):	
+		print_timer.disconnect("timeout", print_text_into_bubble)
+	
+	if(close_timer.is_connected("timeout", hide_bubble)):
+		close_timer.disconnect("timeout", hide_bubble)		
 	print_timer.wait_time = 0.05
 	
 func start_print_timer(text: String):
