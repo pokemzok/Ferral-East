@@ -388,11 +388,11 @@ func on_hurtbox_entered(body):
 			stun_processing()
 			body.queue_free()
 	elif body.is_in_group("melee"):
+		dmg_processing(body)
 		if(body.get_knockback_force() > 0):
 			knockback_from(body)
 		else:
 			stun_processing()	
-		dmg_processing(body)
 	elif body.is_in_group("item"):
 		on_picked_item(body)		
 	elif body.is_in_group("player") || body.is_in_group("enemy"):
@@ -418,7 +418,7 @@ func on_character_collision(body):
 			staggered()	
 
 func knockback_from(body):
-	if(!stats.is_dead()):
+	if(!stats.is_dying()):
 		var knockback_direction = (global_position - body.global_position).normalized()
 		var knockback_force = body.get_knockback_force()
 		stats.assign_character_knockback_force(knockback_force/2)
@@ -431,7 +431,7 @@ func staggered():
 		stats.assign_state(CharacterState.State.STAGGERED)
 
 func dmg_processing(body):
-	if(stats.invincible_frames.value  <= 0):
+	if(stats.invincible_frames.value <= 0):
 		take_dmg(body.damage)
 		
 func stun_processing():	

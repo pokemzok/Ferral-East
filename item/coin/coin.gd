@@ -7,5 +7,5 @@ func _ready():
 	id = ItemID.COIN
 	price = 1
 	
-func _process(delta):
+func _process(_delta):
 	animation.play("glow")	

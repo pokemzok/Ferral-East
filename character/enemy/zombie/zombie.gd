@@ -32,6 +32,7 @@ func _process(delta):
 	growl_on(delta)
 	
 func _physics_process(delta):
+	stats.invincible_frames.decrement_if_not_zero_by()
 	match(stats.state):
 		CharacterState.State.DYING:
 			on_dying(delta)
@@ -148,11 +149,11 @@ func on_hurtbox_entered(body):
 	elif body.is_in_group("enemy") || body.is_in_group("boss"):
 		on_character_colision(body)
 	elif body.is_in_group("melee"):
+		take_dmg(body.damage)		
 		if(body.get_knockback_force() > 0):
 			knockback_from(body)
 		else:
 			stun()		
-		take_dmg(body.damage)		
 	elif body.is_in_group("player"):
 		on_character_colision(body)
 		attack()						
@@ -162,7 +163,7 @@ func on_character_colision(body):
 		knockback_from(body)
 
 func stun():
-	if (!stats.is_stunned()):
+	if (!stats.is_stunned() && !stats.is_dying()):
 		stats.apply_stun()
 
 func attack():
@@ -170,28 +171,29 @@ func attack():
 		stats.attack_timer.assign_max_value()
 
 func knockback_from(body):
-	if(!stats.is_dead() && !stats.has_knockback()):
+	if(!stats.is_dying() && !stats.has_knockback()):
 		var knockback_direction = (global_position - body.global_position).normalized()
 		var knockback_force = body.get_knockback_force()
 		stats.assign_character_knockback_force(knockback_force/2)
 		stats.apply_knockback(knockback_direction * knockback_force)
 
 func take_dmg(dmg: float):
-	audio_pool.play_sound_effect(bullet_hit_audio)	
-	stats.health_points.decrement_till_zero_by(dmg)
-	GlobalEventBus.enemy_damaged.emit(stats.type, stats.dmg_score)
-	if stats.health_points.value <= 0:
-		dying()
+	if(stats.invincible_frames.is_lte_zero() && !stats.is_dying()):
+		audio_pool.play_sound_effect(bullet_hit_audio)	
+		stats.health_points.decrement_till_zero_by(dmg)
+		GlobalEventBus.enemy_damaged.emit(stats.type, stats.dmg_score)
+		if stats.health_points.value <= 0:
+			dying()
 	
 func dying():
 	if (!stats.is_dying()):
-		if (!stats.can_reanimate()):
-			var death_details = EnemyDeathDetails.new(self)
-			GlobalEventBus.enemy_death.emit(death_details)
 		play_death_sound()	
 		stats.dying()
 		$CollisionShape2D.set_deferred("disabled",  true)
 		$HurtboxArea2D/CollisionShape2D.set_deferred("disabled",  true)
+		if (!stats.can_reanimate()):
+			var death_details = EnemyDeathDetails.new(self)
+			GlobalEventBus.enemy_death.emit(death_details)
 
 func play_death_sound():
 	voice_audio_player.stop()

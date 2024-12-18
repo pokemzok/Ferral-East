@@ -8,5 +8,5 @@ func _ready():
 	inventory_texture_path = "res://item/cylinder/cylinder_inventory.png"
 	price = 10
 
-func _process(delta):
+func _process(_delta):
 	animation.play("glow")	
